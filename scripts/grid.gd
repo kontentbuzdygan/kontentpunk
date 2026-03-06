@@ -1,39 +1,31 @@
-@tool
 class_name Grid
-extends TextureRect
+extends TileMapLayer
 
-@export var dimensions: Vector2i = Vector2i(12, 12)
-var active_tile: Vector2i = Vector2i.ZERO
+@export var empty_tile_source_id: int = 0
+@export var highlighted_tile_source_id: int = 1
+
+var active_cell: Vector2i = Vector2i.ZERO
 
 signal tile_clicked(tile: Vector2i)
 
 
-func _ready() -> void:
-	$HighlightedTile.visible = false
-	_update_size()
-
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
-
-
 func _process(_delta: float) -> void:
-	if Engine.is_editor_hint():
-		_update_size()
-	else:
-		active_tile = Vector2i(get_local_mouse_position() / texture.get_size())
-		$HighlightedTile.position = Vector2(active_tile) * texture.get_size()
+	active_cell = local_to_map(get_local_mouse_position())
 
-		var enabled = not State.is_combat_in_progress()
-		$HighlightedTile.visible = enabled
-		mouse_default_cursor_shape = CURSOR_POINTING_HAND if enabled else CURSOR_ARROW
+	for cell in get_used_cells_by_id(highlighted_tile_source_id):
+		set_cell(cell, empty_tile_source_id, Vector2i.ZERO)
+
+	if not State.is_combat_in_progress():
+		if get_cell_tile_data(active_cell):
+			set_cell(active_cell, highlighted_tile_source_id, Vector2i.ZERO)
 
 
 func _input(event: InputEvent) -> void:
 	if State.is_combat_in_progress():
 		return
 
-	if event.is_action_pressed("2d_select") and $HighlightedTile.visible:
-		tile_clicked.emit(active_tile)
+	if event.is_action_pressed("2d_select"):
+		tile_clicked.emit(active_cell)
 
 
 func _on_mouse_entered() -> void:
@@ -44,21 +36,13 @@ func _on_mouse_exited() -> void:
 	$HighlightedTile.visible = false
 
 
-func _update_size() -> void:
-	size = Vector2(dimensions) * texture.get_size()
-
-
-func get_tile_position(tile: Vector2i) -> Vector2:
-	return Vector2(tile) * texture.get_size()
-
-
-func get_nodes_on_tile(tile: Vector2i) -> Array[Control]:
-	var found: Array[Control] = []
+func get_nodes_on_tile(tile: Vector2i) -> Array[Node2D]:
+	var found: Array[Node2D] = []
 
 	for node in get_tree().get_nodes_in_group("occupies_tile"):
-		if node is Control and is_ancestor_of(node):
-			var relative_position := (node as Control).global_position - global_position
-			var node_tile := Vector2i(relative_position / texture.get_size())
+		if node is Node2D and is_ancestor_of(node):
+			var relative_position := (node as Node2D).global_position - global_position
+			var node_tile := local_to_map(relative_position)
 
 			if node_tile == tile:
 				found.append(node)

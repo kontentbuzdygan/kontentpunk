@@ -1,5 +1,5 @@
 class_name Actor
-extends Control
+extends Node2D
 
 @onready var grid: Grid = find_parent("Grid")
 @onready var grid_animation_player: GridAnimationPlayer = find_children("", "GridAnimationPlayer")[0]

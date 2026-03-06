@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://xg21cbkya8lx"]
+
+[ext_resource type="Texture2D" uid="uid://c20xhdqaccteh" path="res://textures/heart_spritesheet.png" id="1_bnquk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7de1"]
+atlas = ExtResource("1_bnquk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvywn"]
+atlas = ExtResource("1_bnquk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojrio"]
+atlas = ExtResource("1_bnquk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4iu2"]
+atlas = ExtResource("1_bnquk")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7de1")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_tvywn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojrio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4iu2")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}]

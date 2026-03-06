@@ -7,7 +7,4 @@ func _ready() -> void:
 
 func _on_combat_action_ended(action: CombatAction) -> void:
 	if action.actor is Player:
-		move_to(Vector2i(
-			randi_range(0, grid.dimensions.x - 1),
-			randi_range(0, grid.dimensions.y - 1)
-		))
+		move_to(Vector2i(randi_range(-6, 5), randi_range(-6, 5)))

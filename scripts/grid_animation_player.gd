@@ -5,7 +5,7 @@ extends AnimationPlayer
 
 
 func move_to(tile: Vector2i, then: Callable) -> void:
-	var target_position := grid.get_tile_position(tile)
+	var target_position := grid.map_to_local(tile)
 
 	var animation := get_animation(&"move")
 	var track_idx := animation.find_track(".:position", Animation.TYPE_VALUE)
