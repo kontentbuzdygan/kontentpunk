@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://d1du63mn2lfdb"]
+
+[ext_resource type="Script" uid="uid://b1td35s4vyl2j" path="res://scripts/resource_bar.gd" id="1_lpuri"]
+[ext_resource type="SpriteFrames" uid="uid://xg21cbkya8lx" path="res://textures/heart.tres" id="2_v3qj3"]
+
+[node name="HealthBar" type="HFlowContainer" unique_id=1423697478]
+custom_minimum_size = Vector2(80, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+script = ExtResource("1_lpuri")
+
+[node name="Icon" type="Control" parent="." unique_id=440035135]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Icon" unique_id=772610324]
+sprite_frames = ExtResource("2_v3qj3")
+animation = &"full"
+autoplay = "full"
+frame = 5
+centered = false

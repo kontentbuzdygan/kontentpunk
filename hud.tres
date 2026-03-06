@@ -1,0 +1,19 @@
+[gd_resource type="Theme" format=3 uid="uid://d2l5ex4qfxue4"]
+
+[ext_resource type="FontFile" uid="uid://du80o0ru75gy3" path="res://fonts/Vermin Vibes 1989.ttf" id="1_bj5e1"]
+[ext_resource type="Texture2D" uid="uid://cm2q1td7y2bqo" path="res://textures/panel.png" id="1_dyvt5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cwy62"]
+texture = ExtResource("1_dyvt5")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[resource]
+default_font = ExtResource("1_bj5e1")
+default_font_size = 16
+Label/colors/font_color = Color(0.1882353, 0.1764706, 0.41568628, 1)
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_cwy62")
