@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://5o51t1yfbub3"]
+
+[ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="1_2262g"]
+
+[node name="Main" type="Node2D" unique_id=1105138352]
+
+[node name="FingerGun" type="Sprite2D" parent="." unique_id=1083984646]
+position = Vector2(181, 138)
+texture = ExtResource("1_2262g")
