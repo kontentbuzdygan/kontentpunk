@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://cxfyik5hes2nj"
+path="res://.godot/imported/cursor_arrow.png-d685630aa52abbb58af7e859b5a2427d.image"
+
+[deps]
+
+source_file="res://textures/cursor_arrow.png"
+dest_files=["res://.godot/imported/cursor_arrow.png-d685630aa52abbb58af7e859b5a2427d.image"]
+
+[params]
+

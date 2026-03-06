@@ -11,13 +11,13 @@ signal tile_clicked(tile: Vector2i)
 
 func _process(_delta: float) -> void:
 	active_cell = local_to_map(get_local_mouse_position())
+	var is_valid_cell := get_cell_tile_data(active_cell)
 
 	for cell in get_used_cells_by_id(highlighted_tile_source_id):
 		set_cell(cell, empty_tile_source_id, Vector2i.ZERO)
 
-	if not CombatState.is_in_progress():
-		if get_cell_tile_data(active_cell):
-			set_cell(active_cell, highlighted_tile_source_id, Vector2i.ZERO)
+	if is_valid_cell and not CombatState.is_in_progress():
+		set_cell(active_cell, highlighted_tile_source_id, Vector2i.ZERO)
 
 
 func _input(event: InputEvent) -> void:

@@ -3,15 +3,18 @@
 [ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_1fput"]
 [ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="1_6yxbg"]
 [ext_resource type="Texture2D" uid="uid://dodc5wdbxfsks" path="res://textures/background.png" id="1_2262g"]
+[ext_resource type="Script" uid="uid://cdt6q54o6d7c6" path="res://scripts/initializer.gd" id="1_s07ge"]
 [ext_resource type="Texture2D" uid="uid://cbswyylqroicg" path="res://textures/empty_tile.png" id="2_wdj6m"]
 [ext_resource type="PackedScene" uid="uid://d1du63mn2lfdb" path="res://objects/ui/resource_bar.tscn" id="3_1fput"]
 [ext_resource type="SpriteFrames" uid="uid://daxheke484d54" path="res://textures/coin.tres" id="3_c7dyn"]
+[ext_resource type="Image" uid="uid://cyral5kj7pomf" path="res://textures/cursor_pointer.png" id="3_iwo8l"]
 [ext_resource type="Texture2D" uid="uid://bkfnk7qh7x1qu" path="res://textures/highlighted_tile.png" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://dd1fxp22x7nbq" path="res://scripts/grid.gd" id="3_m1504"]
 [ext_resource type="SpriteFrames" uid="uid://c6jsi8fbkxte" path="res://textures/circuit.tres" id="4_6yxbg"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Texture2D" uid="uid://cyqh7wus6nh8r" path="res://textures/character_placeholder.png" id="5_ifaiv"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
+[ext_resource type="Image" uid="uid://cxfyik5hes2nj" path="res://textures/cursor_arrow.png" id="7_4fc0e"]
 [ext_resource type="Texture2D" uid="uid://ieg3xl21k6mw" path="res://textures/enemy_placeholder.png" id="7_qy63d"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
 
@@ -55,6 +58,12 @@ _data = {
 }
 
 [node name="Main" type="Node2D" unique_id=1086544296]
+
+[node name="Config" type="Node" parent="." unique_id=175402400]
+script = ExtResource("1_s07ge")
+cursor_arrow_image = ExtResource("7_4fc0e")
+cursor_pointer_image = ExtResource("3_iwo8l")
+cursor_pointer_hotspot = Vector2i(6, 0)
 
 [node name="State" type="Node" parent="." unique_id=1366070852]
 
