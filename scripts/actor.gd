@@ -5,6 +5,10 @@ extends Node2D
 @onready var grid_animation_player: GridAnimationPlayer = find_children("", "GridAnimationPlayer")[0]
 
 
+func get_current_tile() -> Vector2i:
+	return grid.get_node_tile(self)
+
+
 func move_to(tile: Vector2i) -> void:
 	if grid.get_nodes_on_tile(tile).is_empty():
 		CombatState.queue_action(CombatAction.Move.new(self, tile))

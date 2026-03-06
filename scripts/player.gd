@@ -5,6 +5,13 @@ extends Actor
 
 
 func move_to(tile: Vector2i) -> void:
-	if mana.current > 0:
-		mana.current -= 1
-		super.move_to(tile)
+	var current_tile := get_current_tile()
+
+	if current_tile.x != tile.x and current_tile.y != tile.y:
+		return
+
+	if mana.current < 1:
+		return
+
+	mana.current -= 1
+	super.move_to(tile)

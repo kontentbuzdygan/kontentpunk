@@ -36,15 +36,16 @@ func _on_mouse_exited() -> void:
 	$HighlightedTile.visible = false
 
 
+func get_node_tile(node: Node2D) -> Vector2i:
+	var relative_position := node.global_position - global_position
+	return local_to_map(relative_position)
+
+
 func get_nodes_on_tile(tile: Vector2i) -> Array[Node2D]:
 	var found: Array[Node2D] = []
 
 	for node in get_tree().get_nodes_in_group("occupies_tile"):
-		if node is Node2D and is_ancestor_of(node):
-			var relative_position := (node as Node2D).global_position - global_position
-			var node_tile := local_to_map(relative_position)
-
-			if node_tile == tile:
-				found.append(node)
+		if node is Node2D and is_ancestor_of(node) and get_node_tile(node) == tile:
+			found.append(node)
 
 	return found
