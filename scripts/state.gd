@@ -1,17 +1,29 @@
 extends Node
 
-var _input_locks: Array[Object] = []
+signal combat_action_ended(action: CombatAction)
+
+var _combat_queue: Array[Object] = []
+var _current_combat_action: CombatAction = null
 
 
-## Registers the given object as locking user input.
-## Input will be unlocked once `unlock_input` is called with the same object.
-func lock_input(lock: Object) -> void:
-	_input_locks.append(lock)
+func queue_combat_action(action: CombatAction) -> void:
+	_combat_queue.append(action)
+
+	if _current_combat_action == null:
+		next_combat_action()
 
 
-func unlock_input(lock: Object) -> void:
-	_input_locks.erase(lock)
+func next_combat_action() -> void:
+	if not _combat_queue.is_empty():
+		_current_combat_action = _combat_queue.pop_front()
+		_current_combat_action.actor.execute(_current_combat_action, _end_combat_action)
 
 
-func is_input_locked() -> bool:
-	return not _input_locks.is_empty()
+func is_combat_in_progress() -> bool:
+	return not _combat_queue.is_empty() or _current_combat_action
+
+
+func _end_combat_action() -> void:
+	combat_action_ended.emit(_current_combat_action)
+	_current_combat_action = null
+	next_combat_action()

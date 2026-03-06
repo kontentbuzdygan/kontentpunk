@@ -4,8 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://cbswyylqroicg" path="res://textures/empty_tile.png" id="2_wdj6m"]
 [ext_resource type="Texture2D" uid="uid://bkfnk7qh7x1qu" path="res://textures/highlighted_tile.png" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://dd1fxp22x7nbq" path="res://scripts/grid.gd" id="3_m1504"]
+[ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Texture2D" uid="uid://cyqh7wus6nh8r" path="res://textures/character_placeholder.png" id="5_ifaiv"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
+[ext_resource type="Texture2D" uid="uid://ieg3xl21k6mw" path="res://textures/enemy_placeholder.png" id="7_qy63d"]
+[ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
 
 [sub_resource type="Animation" id="Animation_5k4jt"]
 resource_name = "move"
@@ -70,16 +73,63 @@ offset_bottom = 32.0
 texture = ExtResource("3_l8qe7")
 stretch_mode = 2
 
-[node name="Player" type="TextureRect" parent="Grid" unique_id=21280571]
-layout_mode = 0
+[node name="Player" type="Control" parent="Grid" unique_id=811964472 groups=["occupies_tile"]]
+anchors_preset = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("5_ifaiv")
-stretch_mode = 2
+mouse_filter = 1
+script = ExtResource("5_etqu2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Player" unique_id=938099669]
 reset_on_save = false
 libraries/ = SubResource("AnimationLibrary_qy63d")
 script = ExtResource("6_5k4jt")
 
-[connection signal="tile_clicked" from="Grid" to="Grid/Player/AnimationPlayer" method="move_to"]
+[node name="TextureRect" type="TextureRect" parent="Grid/Player" unique_id=1985406768]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("5_ifaiv")
+stretch_mode = 2
+
+[node name="Enemy_1" type="Control" parent="Grid" unique_id=1861691662 groups=["occupies_tile"]]
+anchors_preset = 0
+offset_left = 32.0
+offset_right = 64.0
+offset_bottom = 32.0
+mouse_filter = 1
+script = ExtResource("8_jw1n3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Enemy_1" unique_id=236931143]
+reset_on_save = false
+libraries/ = SubResource("AnimationLibrary_qy63d")
+script = ExtResource("6_5k4jt")
+
+[node name="TextureRect" type="TextureRect" parent="Grid/Enemy_1" unique_id=1255251507]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("7_qy63d")
+stretch_mode = 2
+
+[node name="Enemy_2" type="Control" parent="Grid" unique_id=731234146 groups=["occupies_tile"]]
+anchors_preset = 0
+offset_left = 64.0
+offset_right = 96.0
+offset_bottom = 32.0
+mouse_filter = 1
+script = ExtResource("8_jw1n3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Enemy_2" unique_id=1017275441]
+reset_on_save = false
+libraries/ = SubResource("AnimationLibrary_qy63d")
+script = ExtResource("6_5k4jt")
+
+[node name="TextureRect" type="TextureRect" parent="Grid/Enemy_2" unique_id=685340581]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("7_qy63d")
+stretch_mode = 2
+
+[connection signal="tile_clicked" from="Grid" to="Grid/Player" method="move_to"]
