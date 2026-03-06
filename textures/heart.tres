@@ -29,7 +29,19 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 5.0,
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvywn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvywn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvywn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvywn")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_tvywn")
 }, {
 "duration": 1.0,
@@ -40,5 +52,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"full",
-"speed": 5.0
+"speed": 12.0
 }]
