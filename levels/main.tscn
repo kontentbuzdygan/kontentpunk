@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://5o51t1yfbub3"]
 
 [ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_1fput"]
+[ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="1_6yxbg"]
 [ext_resource type="Texture2D" uid="uid://dodc5wdbxfsks" path="res://textures/background.png" id="1_2262g"]
 [ext_resource type="Texture2D" uid="uid://cbswyylqroicg" path="res://textures/empty_tile.png" id="2_wdj6m"]
 [ext_resource type="PackedScene" uid="uid://d1du63mn2lfdb" path="res://objects/ui/resource_bar.tscn" id="3_1fput"]
@@ -55,6 +56,18 @@ _data = {
 
 [node name="Main" type="Node2D" unique_id=1086544296]
 
+[node name="State" type="Node" parent="." unique_id=1366070852]
+
+[node name="Health" type="Node" parent="State" unique_id=965145495]
+script = ExtResource("1_6yxbg")
+current = 4
+metadata/_custom_type_script = "uid://dywwjhmsu8rif"
+
+[node name="Mana" type="Node" parent="State" unique_id=275217615]
+script = ExtResource("1_6yxbg")
+current = 3
+metadata/_custom_type_script = "uid://dywwjhmsu8rif"
+
 [node name="Layer_HUD" type="CanvasLayer" parent="." unique_id=484654902]
 
 [node name="MarginContainer" type="MarginContainer" parent="Layer_HUD" unique_id=602176283]
@@ -101,13 +114,13 @@ size_flags_horizontal = 4
 text = "124 213"
 horizontal_alignment = 1
 
-[node name="HealthBar" parent="Layer_HUD/MarginContainer/PanelContainer/HUD" unique_id=1423697478 instance=ExtResource("3_1fput")]
+[node name="HealthBar" parent="Layer_HUD/MarginContainer/PanelContainer/HUD" unique_id=1423697478 node_paths=PackedStringArray("resource") instance=ExtResource("3_1fput")]
 layout_mode = 2
-current = 4
+resource = NodePath("../../../../../State/Health")
 
-[node name="ManaBar" parent="Layer_HUD/MarginContainer/PanelContainer/HUD" unique_id=1982952910 instance=ExtResource("3_1fput")]
+[node name="ManaBar" parent="Layer_HUD/MarginContainer/PanelContainer/HUD" unique_id=1982952910 node_paths=PackedStringArray("resource") instance=ExtResource("3_1fput")]
 layout_mode = 2
-current = 3
+resource = NodePath("../../../../../State/Mana")
 
 [node name="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/PanelContainer/HUD/ManaBar/Icon" parent_id_path=PackedInt32Array(1982952910, 440035135) index="0" unique_id=772610324]
 sprite_frames = ExtResource("4_6yxbg")
@@ -131,9 +144,10 @@ tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAA
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
 
-[node name="Player" type="Node2D" parent="Grid" unique_id=510566155 groups=["occupies_tile"]]
+[node name="Player" type="Node2D" parent="Grid" unique_id=510566155 node_paths=PackedStringArray("mana") groups=["occupies_tile"]]
 position = Vector2(-176, -176)
 script = ExtResource("5_etqu2")
+mana = NodePath("../../State/Mana")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Player" unique_id=938099669]
 reset_on_save = false

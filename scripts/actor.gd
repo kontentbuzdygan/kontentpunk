@@ -7,7 +7,7 @@ extends Node2D
 
 func move_to(tile: Vector2i) -> void:
 	if grid.get_nodes_on_tile(tile).is_empty():
-		State.queue_combat_action(CombatAction.Move.new(self, tile))
+		CombatState.queue_action(CombatAction.Move.new(self, tile))
 
 
 func execute(action: CombatAction, then: Callable) -> void:

@@ -15,13 +15,13 @@ func _process(_delta: float) -> void:
 	for cell in get_used_cells_by_id(highlighted_tile_source_id):
 		set_cell(cell, empty_tile_source_id, Vector2i.ZERO)
 
-	if not State.is_combat_in_progress():
+	if not CombatState.is_in_progress():
 		if get_cell_tile_data(active_cell):
 			set_cell(active_cell, highlighted_tile_source_id, Vector2i.ZERO)
 
 
 func _input(event: InputEvent) -> void:
-	if State.is_combat_in_progress():
+	if CombatState.is_in_progress():
 		return
 
 	if event.is_action_pressed("2d_select"):
