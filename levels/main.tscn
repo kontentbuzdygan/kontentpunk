@@ -16,6 +16,9 @@
 [ext_resource type="Image" uid="uid://cxfyik5hes2nj" path="res://textures/cursor_arrow.png" id="7_4fc0e"]
 [ext_resource type="Texture2D" uid="uid://ieg3xl21k6mw" path="res://textures/enemy_placeholder.png" id="7_qy63d"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
+[ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="9_nljbn"]
+[ext_resource type="Texture2D" uid="uid://xq4ofhus6c2l" path="res://textures/spring_legs.png" id="10_w23s1"]
+[ext_resource type="Texture2D" uid="uid://bu0tirn8lubi4" path="res://textures/heart.png" id="11_n1xy8"]
 [ext_resource type="AnimationLibrary" uid="uid://cyoxtcn08i3rn" path="res://animations/player.res" id="14_j7211"]
 [ext_resource type="SpriteFrames" uid="uid://dkjqjo2lu0tt7" path="res://textures/girl.tres" id="15_s07ge"]
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
@@ -72,48 +75,72 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="PanelContainer" type="PanelContainer" parent="Layer_HUD/MarginContainer" unique_id=360050119]
-custom_minimum_size = Vector2(100, 0)
+[node name="LeftPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer" unique_id=360050119]
+custom_minimum_size = Vector2(148, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="HUD" type="VBoxContainer" parent="Layer_HUD/MarginContainer/PanelContainer" unique_id=2036366227]
+[node name="HUD" type="VBoxContainer" parent="Layer_HUD/MarginContainer/LeftPanel" unique_id=2036366227]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="MoneyDisplay" type="VBoxContainer" parent="Layer_HUD/MarginContainer/PanelContainer/HUD" unique_id=1315845388]
+[node name="MoneyDisplay" type="VBoxContainer" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1315845388]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Coin" type="Control" parent="Layer_HUD/MarginContainer/PanelContainer/HUD/MoneyDisplay" unique_id=469727718]
+[node name="Coin" type="Control" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/MoneyDisplay" unique_id=469727718]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/PanelContainer/HUD/MoneyDisplay/Coin" unique_id=861951769]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/MoneyDisplay/Coin" unique_id=861951769]
 sprite_frames = ExtResource("3_c7dyn")
 autoplay = "default"
 centered = false
 
-[node name="Label" type="Label" parent="Layer_HUD/MarginContainer/PanelContainer/HUD/MoneyDisplay" unique_id=2052029344]
+[node name="Label" type="Label" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/MoneyDisplay" unique_id=2052029344]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "124 213"
 horizontal_alignment = 1
 
-[node name="HealthBar" parent="Layer_HUD/MarginContainer/PanelContainer/HUD" unique_id=1423697478 node_paths=PackedStringArray("resource") instance=ExtResource("3_1fput")]
+[node name="HealthBar" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1423697478 node_paths=PackedStringArray("resource") instance=ExtResource("3_1fput")]
 layout_mode = 2
 resource = NodePath("../../../../../State/Health")
 
-[node name="ManaBar" parent="Layer_HUD/MarginContainer/PanelContainer/HUD" unique_id=1982952910 node_paths=PackedStringArray("resource") instance=ExtResource("3_1fput")]
+[node name="ManaBar" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1982952910 node_paths=PackedStringArray("resource") instance=ExtResource("3_1fput")]
 layout_mode = 2
 resource = NodePath("../../../../../State/Mana")
 
-[node name="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/PanelContainer/HUD/ManaBar/Icon" parent_id_path=PackedInt32Array(1982952910, 440035135) index="0" unique_id=772610324]
+[node name="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/ManaBar/Icon" parent_id_path=PackedInt32Array(1982952910, 440035135) index="0" unique_id=772610324]
 sprite_frames = ExtResource("4_6yxbg")
+
+[node name="BottomPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer" unique_id=271568282]
+custom_minimum_size = Vector2(446, 72)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Abilities" type="HBoxContainer" parent="Layer_HUD/MarginContainer/BottomPanel" unique_id=1221871278]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="AbilityButton_1" type="Button" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=1147636251]
+layout_mode = 2
+icon = ExtResource("9_nljbn")
+
+[node name="AbilityButton_2" type="Button" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=2057141736]
+layout_mode = 2
+icon = ExtResource("10_w23s1")
+
+[node name="AbilityButton_3" type="Button" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=180724691]
+layout_mode = 2
+icon = ExtResource("11_n1xy8")
 
 [node name="Layer_Background" type="CanvasLayer" parent="." unique_id=1978189837]
 layer = -1
@@ -129,13 +156,13 @@ stretch_mode = 2
 
 [node name="Grid" type="TileMapLayer" parent="." unique_id=434431019]
 texture_repeat = 2
-position = Vector2(390, 240)
-tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAD///7/AAAAAAAAAAD+//7/AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD8//3/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAADAPz/AAAAAAAAAAACAPz/AAAAAAAAAAABAPz/AAAAAAAAAAAAAPz/AAAAAAAAAAD///z/AAAAAAAAAAD+//z/AAAAAAAAAAD9//z/AAAAAAAAAAD8//z/AAAAAAAAAAD7//v/AAAAAAAAAAD7//z/AAAAAAAAAAD7//3/AAAAAAAAAAD7//7/AAAAAAAAAAD7////AAAAAAAAAAD7/wAAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wMAAAAAAAAAAAD6/wQAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wUAAAAAAAAAAAD7/wMAAAAAAAAAAAD6/wUAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD9/wUAAAAAAAAAAAD+/wUAAAAAAAAAAAD+/wQAAAAAAAAAAAD9/wQAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAPv/AAAAAAAAAAD6/wEAAAAAAAAAAAD6/wAAAAAAAAAAAAD6////AAAAAAAAAAD6//7/AAAAAAAAAAD6//3/AAAAAAAAAAD6//z/AAAAAAAAAAD6//v/AAAAAAAAAAD6//r/AAAAAAAAAAD7//r/AAAAAAAAAAD8//r/AAAAAAAAAAD8//v/AAAAAAAAAAD9//r/AAAAAAAAAAD+//r/AAAAAAAAAAD///r/AAAAAAAAAAAAAPr/AAAAAAAAAAABAPr/AAAAAAAAAAACAPr/AAAAAAAAAAADAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAADAPv/AAAAAAAAAAACAPv/AAAAAAAAAAABAPv/AAAAAAAAAAAAAPv/AAAAAAAAAAD///v/AAAAAAAAAAD+//v/AAAAAAAAAAD9//v/AAAAAAAAAAAFAPr/AAAAAAAAAAAFAPv/AAAAAAAAAAAFAPz/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAA=")
+position = Vector2(400, 196)
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAD///7/AAAAAAAAAAD+//7/AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD8//3/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAADAPz/AAAAAAAAAAACAPz/AAAAAAAAAAABAPz/AAAAAAAAAAAAAPz/AAAAAAAAAAD///z/AAAAAAAAAAD+//z/AAAAAAAAAAD9//z/AAAAAAAAAAD8//z/AAAAAAAAAAD7//v/AAAAAAAAAAD7//z/AAAAAAAAAAD7//3/AAAAAAAAAAD7//7/AAAAAAAAAAD7////AAAAAAAAAAD7/wAAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD9/wQAAAAAAAAAAAD//wQAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAPv/AAAAAAAAAAD8//v/AAAAAAAAAAADAPv/AAAAAAAAAAACAPv/AAAAAAAAAAABAPv/AAAAAAAAAAAAAPv/AAAAAAAAAAD///v/AAAAAAAAAAD+//v/AAAAAAAAAAD9//v/AAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
 
 [node name="Player" type="Node2D" parent="Grid" unique_id=510566155 node_paths=PackedStringArray("mana") groups=["occupies_tile"]]
-position = Vector2(-176, -176)
+position = Vector2(-144, -144)
 script = ExtResource("5_etqu2")
 mana = NodePath("../../State/Mana")
 
@@ -149,10 +176,9 @@ position = Vector2(0, -5)
 sprite_frames = ExtResource("15_s07ge")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.2483239
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
-position = Vector2(-144, -176)
+position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Enemy_1" unique_id=236931143]
@@ -164,7 +190,7 @@ script = ExtResource("6_5k4jt")
 texture = ExtResource("7_qy63d")
 
 [node name="Enemy_2" type="Node2D" parent="Grid" unique_id=1444192590 groups=["occupies_tile"]]
-position = Vector2(-112, -176)
+position = Vector2(-80, -144)
 script = ExtResource("8_jw1n3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Enemy_2" unique_id=1017275441]
@@ -177,4 +203,4 @@ texture = ExtResource("7_qy63d")
 
 [connection signal="tile_clicked" from="Grid" to="Grid/Player" method="move_to"]
 
-[editable path="Layer_HUD/MarginContainer/PanelContainer/HUD/ManaBar"]
+[editable path="Layer_HUD/MarginContainer/LeftPanel/HUD/ManaBar"]
