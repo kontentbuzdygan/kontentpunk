@@ -9,9 +9,12 @@ func get_current_tile() -> Vector2i:
 	return grid.get_node_tile(self)
 
 
-func move_to(tile: Vector2i) -> void:
+func move_to(tile: Vector2i) -> bool:
 	if grid.get_nodes_on_tile(tile).is_empty():
 		CombatState.queue_action(CombatAction.Move.new(self, tile))
+		return true
+
+	return false
 
 
 func execute(action: CombatAction, then: Callable) -> void:

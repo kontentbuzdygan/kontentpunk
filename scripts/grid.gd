@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 	if CombatState.is_in_progress():
 		return
 
-	if event.is_action_pressed("2d_select"):
+	if event.is_action_pressed("2d_select") and get_cell_tile_data(active_cell):
 		tile_clicked.emit(active_cell)
 
 
@@ -49,3 +49,7 @@ func get_nodes_on_tile(tile: Vector2i) -> Array[Node2D]:
 			found.append(node)
 
 	return found
+
+
+func get_random_tile() -> Vector2i:
+	return get_used_cells().pick_random()

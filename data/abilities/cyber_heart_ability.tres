@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://cti48yfdi8rxc"]
+
+[ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_ae765"]
+[ext_resource type="Texture2D" uid="uid://bu0tirn8lubi4" path="res://textures/heart.png" id="1_whja6"]
+
+[resource]
+script = ExtResource("1_ae765")
+icon = ExtResource("1_whja6")
+metadata/_custom_type_script = "uid://b1dxrqdiivtev"

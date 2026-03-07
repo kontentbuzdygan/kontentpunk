@@ -1,14 +1,40 @@
 [gd_resource type="Theme" format=3 uid="uid://d2l5ex4qfxue4"]
 
 [ext_resource type="FontFile" uid="uid://du80o0ru75gy3" path="res://fonts/Vermin Vibes 1989.ttf" id="1_bj5e1"]
+[ext_resource type="Texture2D" uid="uid://c0fpti7qx6iid" path="res://textures/button.png" id="1_cwy62"]
 [ext_resource type="Texture2D" uid="uid://cm2q1td7y2bqo" path="res://textures/panel.png" id="1_dyvt5"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dyvt5"]
-texture = ExtResource("1_dyvt5")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6el0c"]
+texture = ExtResource("1_cwy62")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
 texture_margin_bottom = 8.0
+region_rect = Rect2(48, 0, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ith88"]
+texture = ExtResource("1_cwy62")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(48, 48, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dyvt5"]
+texture = ExtResource("1_cwy62")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0, 0, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_th6a1"]
+texture = ExtResource("1_cwy62")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(96, 0, 48, 48)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cwy62"]
 texture = ExtResource("1_dyvt5")
@@ -22,6 +48,12 @@ axis_stretch_vertical = 1
 [resource]
 default_font = ExtResource("1_bj5e1")
 default_font_size = 16
+Button/colors/font_color = Color(0.5294118, 0.10980392, 0.24313726, 1)
+Button/colors/font_hover_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
+Button/colors/font_pressed_color = Color(0.1882353, 0.1764706, 0.41568628, 1)
+Button/styles/hover = SubResource("StyleBoxTexture_6el0c")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_ith88")
 Button/styles/normal = SubResource("StyleBoxTexture_dyvt5")
+Button/styles/pressed = SubResource("StyleBoxTexture_th6a1")
 Label/colors/font_color = Color(0.1882353, 0.1764706, 0.41568628, 1)
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_cwy62")

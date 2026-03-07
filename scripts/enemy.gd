@@ -7,4 +7,4 @@ func _ready() -> void:
 
 func _on_combat_action_ended(action: CombatAction) -> void:
 	if action.actor is Player:
-		move_to(Vector2i(randi_range(-6, 5), randi_range(-6, 5)))
+		move_to(grid.get_random_tile())
