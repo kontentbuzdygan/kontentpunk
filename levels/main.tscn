@@ -16,7 +16,9 @@
 [ext_resource type="Image" uid="uid://cxfyik5hes2nj" path="res://textures/cursor_arrow.png" id="7_4fc0e"]
 [ext_resource type="Texture2D" uid="uid://ieg3xl21k6mw" path="res://textures/enemy_placeholder.png" id="7_qy63d"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
+[ext_resource type="AnimationLibrary" uid="uid://cyoxtcn08i3rn" path="res://animations/player.res" id="14_j7211"]
 [ext_resource type="SpriteFrames" uid="uid://dkjqjo2lu0tt7" path="res://textures/girl.tres" id="15_s07ge"]
+[ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6et1j"]
 resource_name = "empty"
@@ -36,67 +38,6 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6et1j")
 sources/1 = SubResource("TileSetAtlasSource_etqu2")
 
-[sub_resource type="Animation" id="Animation_21ko3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-176, -176)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle"]
-}
-
-[sub_resource type="Animation" id="Animation_5k4jt"]
-resource_name = "move"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.4, 1),
-"update": 0,
-"values": [Vector2(-176, -176), Vector2(-144, -176)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [&"run", &"idle"]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qy63d"]
-_data = {
-&"RESET": SubResource("Animation_21ko3"),
-&"move": SubResource("Animation_5k4jt")
-}
-
 [node name="Main" type="Node2D" unique_id=1086544296]
 
 [node name="Config" type="Node" parent="." unique_id=175402400]
@@ -104,8 +45,6 @@ script = ExtResource("1_s07ge")
 cursor_arrow_image = ExtResource("7_4fc0e")
 cursor_pointer_image = ExtResource("3_iwo8l")
 cursor_pointer_hotspot = Vector2i(6, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Config" unique_id=206586425]
 
 [node name="State" type="Node" parent="." unique_id=1366070852]
 
@@ -201,7 +140,8 @@ script = ExtResource("5_etqu2")
 mana = NodePath("../../State/Mana")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Player" unique_id=938099669]
-libraries/ = SubResource("AnimationLibrary_qy63d")
+reset_on_save = false
+libraries/ = ExtResource("14_j7211")
 script = ExtResource("6_5k4jt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Player" unique_id=1209261837]
@@ -209,15 +149,15 @@ position = Vector2(0, -5)
 sprite_frames = ExtResource("15_s07ge")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.31242377
+frame_progress = 0.2483239
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
-position = Vector2(-176, -176)
+position = Vector2(-144, -176)
 script = ExtResource("8_jw1n3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Enemy_1" unique_id=236931143]
 reset_on_save = false
-libraries/ = SubResource("AnimationLibrary_qy63d")
+libraries/ = ExtResource("18_fd7wu")
 script = ExtResource("6_5k4jt")
 
 [node name="Sprite2D" type="Sprite2D" parent="Grid/Enemy_1" unique_id=57116005]
@@ -229,7 +169,7 @@ script = ExtResource("8_jw1n3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Enemy_2" unique_id=1017275441]
 reset_on_save = false
-libraries/ = SubResource("AnimationLibrary_qy63d")
+libraries/ = ExtResource("18_fd7wu")
 script = ExtResource("6_5k4jt")
 
 [node name="Sprite2D" type="Sprite2D" parent="Grid/Enemy_2" unique_id=2056853561]
