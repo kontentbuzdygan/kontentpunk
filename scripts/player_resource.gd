@@ -1,13 +1,17 @@
 class_name PlayerResource
 extends Resource
 
-enum Type { HEALTH, MANA }
+enum Type { HEALTH, MANA, MONEY }
 
 @export var current: int = 5:
 	get:
 		return _current
 	set(value):
-		_current = clamp(value, 0, _maximum)
+		if _maximum >= 0:
+			_current = clamp(value, 0, _maximum)
+		else:
+			_current = max(value, 0)
+
 		current_changed.emit(_current)
 
 @export var maximum: int = 5:
@@ -17,7 +21,7 @@ enum Type { HEALTH, MANA }
 		_maximum = max(0, value)
 		maximum_changed.emit(_maximum)
 
-		if _maximum < _current:
+		if _maximum >= 0 and _maximum < _current:
 			current = _maximum
 
 signal current_changed(value: int)
@@ -27,9 +31,9 @@ var _current: int = 5
 var _maximum: int = 5
 
 
-func _init(maximum_: int) -> void:
+func _init(maximum_: int, current_: int = maximum_) -> void:
 	_maximum = maximum_
-	_current = maximum_
+	_current = current_
 
 
 func refill() -> void:

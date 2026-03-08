@@ -3,6 +3,7 @@ extends Node
 var _resources: Dictionary[PlayerResource.Type, PlayerResource] = {
 	PlayerResource.Type.HEALTH: PlayerResource.new(5),
 	PlayerResource.Type.MANA: PlayerResource.new(5),
+	PlayerResource.Type.MONEY: PlayerResource.new(-1, 100),
 }
 var _at_turn_end: bool = false
 

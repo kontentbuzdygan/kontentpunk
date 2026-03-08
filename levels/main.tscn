@@ -18,6 +18,7 @@
 [ext_resource type="Image" uid="uid://cxfyik5hes2nj" path="res://textures/cursor_arrow.png" id="7_4fc0e"]
 [ext_resource type="AudioStream" uid="uid://d36wwav7sxy74" path="res://sounds/music_001.ogg" id="7_m6gxc"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
+[ext_resource type="Script" uid="uid://b5hn6p1wy7fqb" path="res://scripts/money_display.gd" id="9_f1mgo"]
 [ext_resource type="ButtonGroup" uid="uid://dka7w7xrbpiki" path="res://objects/ui/abilities_button_group.tres" id="9_w23s1"]
 [ext_resource type="PackedScene" uid="uid://duar8b2qxma3q" path="res://objects/ui/ability_selector.tscn" id="9_woytj"]
 [ext_resource type="Resource" uid="uid://bhttik14ccisc" path="res://data/abilities/finger_gun_ability.tres" id="12_woytj"]
@@ -111,6 +112,7 @@ custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+script = ExtResource("9_f1mgo")
 
 [node name="Coin" type="Control" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/MoneyDisplay" unique_id=469727718]
 custom_minimum_size = Vector2(32, 32)
