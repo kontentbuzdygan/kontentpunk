@@ -57,21 +57,18 @@ func _on_button_end_turn_pressed() -> void:
 	CombatState.queue_action(CombatAction.EndTurn.new(self))
 
 
-func execute(action: CombatAction, then: Callable) -> void:
+func execute(action: CombatAction) -> void:
 	if action is CombatAction.EndTurn:
-		get_tree().create_timer(end_turn_delay_seconds).timeout.connect(then)
+		await get_tree().create_timer(end_turn_delay_seconds).timeout
 		return
 
-	super.execute(action, then)
+	await super.execute(action)
 
 
-func take_damage(value: int, then: Callable) -> void:
-	super.take_damage(
-		value,
-		func():
-			health.current -= value
-			grid_animation_player.play_and_then(&"hurt", then)
-	)
+func take_damage(value: int) -> void:
+	super.take_damage(value)
+	health.current -= value
+	await grid_animation_player.play_and_wait(&"hurt")
 
 
 func get_selected_ability() -> Ability:
