@@ -33,13 +33,12 @@ func update_children() -> void:
 	if _ability:
 		%Button.icon = _ability.icon
 		%ManaCostLabel.text = str(_ability.base_mana_cost)
-		update_label_colors()
 	else:
 		%Button.icon = null
 		%ManaCostLabel.text = "0"
 
 
-func update_label_colors() -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
@@ -51,7 +50,7 @@ func update_label_colors() -> void:
 			&"font_color", %ManaCostLabel.get_theme_color(&"font_color_disabled")
 		)
 	else:
-		%Button.disabled = false
+		%Button.disabled = CombatState.is_in_progress()
 		%ManaCostLabel.add_theme_color_override(
 			&"font_color", %ManaCostLabel.get_theme_color(&"font_color_active")
 		)
