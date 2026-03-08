@@ -30,3 +30,7 @@ var _maximum: int = 5
 func _init(maximum_: int) -> void:
 	_maximum = maximum_
 	_current = maximum_
+
+
+func refill() -> void:
+	current = _maximum

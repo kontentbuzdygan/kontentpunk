@@ -1,4 +1,3 @@
-@tool
 extends HFlowContainer
 
 @export var resource_type: PlayerResource.Type
@@ -24,9 +23,6 @@ func _on_maximum_changed(_value: int) -> void:
 
 
 func regenerate_icons() -> void:
-	if not icon:
-		return
-
 	for child in get_children(true).slice(resource.maximum):
 		if child != icon:
 			child.queue_free()
@@ -39,9 +35,6 @@ func regenerate_icons() -> void:
 
 
 func update_icons() -> void:
-	if not icon:
-		return
-
 	var children := get_children(true)
 
 	for i in range(len(children)):

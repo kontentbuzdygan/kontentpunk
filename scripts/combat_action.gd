@@ -18,3 +18,10 @@ class Move:
 
 	func _to_string() -> String:
 		return "<move to %s>" % target_tile
+
+
+class EndTurn:
+	extends CombatAction
+
+	func _to_string() -> String:
+		return "<end turn>"

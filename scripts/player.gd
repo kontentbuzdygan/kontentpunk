@@ -4,20 +4,13 @@ extends Actor
 @export var end_turn_delay_seconds: float = 0.5
 
 
-class EndTurn:
-	extends CombatAction
-
-	func _to_string() -> String:
-		return "<end turn>"
-
-
 @export var abilities_button_group: ButtonGroup
 
 @onready var mana: PlayerResource = PlayerState.get_resource(PlayerResource.Type.MANA)
 
 
 func execute(action: CombatAction, then: Callable) -> void:
-	if action is EndTurn:
+	if action is CombatAction.EndTurn:
 		get_tree().create_timer(end_turn_delay_seconds).timeout.connect(then)
 		return
 
@@ -46,7 +39,7 @@ func _on_tile_selected(tile: Vector2i) -> void:
 
 func _on_button_end_turn_pressed() -> void:
 	clear_selected_ability()
-	CombatState.queue_action(EndTurn.new(self))
+	CombatState.queue_action(CombatAction.EndTurn.new(self))
 
 
 func get_selected_ability() -> Ability:

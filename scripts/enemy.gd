@@ -7,5 +7,5 @@ func _ready() -> void:
 
 
 func _on_combat_action_ended(action: CombatAction) -> void:
-	if action.actor is Player:
+	if action is CombatAction.EndTurn:
 		move_to(grid.get_random_tile())

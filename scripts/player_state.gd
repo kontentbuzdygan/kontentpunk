@@ -4,6 +4,24 @@ var _resources: Dictionary[PlayerResource.Type, PlayerResource] = {
 	PlayerResource.Type.HEALTH: PlayerResource.new(5),
 	PlayerResource.Type.MANA: PlayerResource.new(5),
 }
+var _at_turn_end: bool = false
+
+
+func _ready() -> void:
+	CombatState.action_ended.connect(_on_action_ended)
+	CombatState.queue_emptied.connect(_on_queue_emptied)
+
 
 func get_resource(type: PlayerResource.Type) -> PlayerResource:
 	return _resources[type]
+
+
+func _on_action_ended(action: CombatAction) -> void:
+	if action is CombatAction.EndTurn:
+		_at_turn_end = true
+
+
+func _on_queue_emptied() -> void:
+	if _at_turn_end:
+		_at_turn_end = false
+		_resources[PlayerResource.Type.MANA].refill()
