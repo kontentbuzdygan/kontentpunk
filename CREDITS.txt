@@ -6,6 +6,8 @@ Creative Commons 0   https://creativecommons.org/publicdomain/zero/1.0/
 	https://freesound.org/people/Nbs%20Dark/sounds/91898/
 	https://freesound.org/people/Sky_Motion/sounds/416777/
 	https://freesound.org/people/Sky_Motion/sounds/511418/
+	https://freesound.org/people/Pablobd/sounds/511194/
+	https://freesound.org/people/sbda/sounds/271984/
 
 Attribution 3.0      https://creativecommons.org/licenses/by/3.0/
 	https://freesound.org/people/JasonElrod/sounds/85429/
@@ -18,3 +20,4 @@ Attribution 4.0      https://creativecommons.org/licenses/by/4.0/
 	https://freesound.org/people/SonoFxAudio/sounds/649360/
 	https://freesound.org/people/newlocknew/sounds/693381/
 	https://freesound.org/people/drotzruhn/sounds/405328/
+	https://freesound.org/people/duckduckpony/sounds/204041/
