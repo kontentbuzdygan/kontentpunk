@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
 [ext_resource type="Image" uid="uid://cxfyik5hes2nj" path="res://textures/cursor_arrow.png" id="7_4fc0e"]
-[ext_resource type="Texture2D" uid="uid://ieg3xl21k6mw" path="res://textures/enemy_placeholder.png" id="7_qy63d"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
 [ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="9_nljbn"]
 [ext_resource type="ButtonGroup" uid="uid://dka7w7xrbpiki" path="res://objects/ui/abilities_button_group.tres" id="9_w23s1"]
@@ -27,6 +26,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dkjqjo2lu0tt7" path="res://textures/girl.tres" id="15_s07ge"]
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
+[ext_resource type="SpriteFrames" uid="uid://ds56y1m3mp6xh" path="res://textures/robot.tres" id="27_o6dmv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6et1j"]
 resource_name = "empty"
@@ -207,8 +207,11 @@ reset_on_save = false
 libraries/ = ExtResource("18_fd7wu")
 script = ExtResource("6_5k4jt")
 
-[node name="Sprite2D" type="Sprite2D" parent="Grid/Enemy_1" unique_id=57116005]
-texture = ExtResource("7_qy63d")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_1" unique_id=789686885]
+position = Vector2(0, -5)
+sprite_frames = ExtResource("27_o6dmv")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Enemy_2" type="Node2D" parent="Grid" unique_id=1444192590 groups=["occupies_tile"]]
 position = Vector2(-80, -144)
@@ -219,8 +222,11 @@ reset_on_save = false
 libraries/ = ExtResource("18_fd7wu")
 script = ExtResource("6_5k4jt")
 
-[node name="Sprite2D" type="Sprite2D" parent="Grid/Enemy_2" unique_id=2056853561]
-texture = ExtResource("7_qy63d")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_2" unique_id=1279276901]
+position = Vector2(0, -5)
+sprite_frames = ExtResource("27_o6dmv")
+animation = &"idle"
+autoplay = "idle"
 
 [connection signal="tile_clicked" from="Grid" to="Grid/Player" method="_on_tile_selected"]
 
