@@ -8,27 +8,31 @@ const MANA_COST_NOT_ALLOWED: int = -1
 
 @onready var mana: PlayerResource = PlayerState.get_resource(PlayerResource.Type.MANA)
 
+var _move_predicate: TilePredicate
+
 
 func _ready() -> void:
 	super._ready()
 	grid.tile_clicked.connect(_on_tile_clicked)
 	grid.tile_hovered.connect(_on_tile_hovered)
 
+	_move_predicate = AxisAlignedTilePredicate.new()
+
 
 func _on_tile_clicked(tile: Vector2i) -> void:
+	var relative_tile := tile - get_current_tile()
 	var ability := get_selected_ability()
 
 	if ability:
-		if mana.current >= ability.base_mana_cost:
-			grid.hide_mana_cost()
-			mana.current -= ability.base_mana_cost
-			print("perform %s on %s" % [ability, tile])
-			clear_selected_ability()
+		if ability.is_valid_tile(relative_tile):
+			if mana.current >= ability.base_mana_cost:
+				grid.hide_mana_cost()
+				mana.current -= ability.base_mana_cost
+				print("perform %s on %s" % [ability, tile])
+				clear_selected_ability()
 	else:
-		var current_tile := get_current_tile()
-
-		if Utils.is_valid_axis_aligned_move(current_tile, tile):
-			var distance := Utils.manhattan_distance(current_tile, tile)
+		if _move_predicate.matches(relative_tile):
+			var distance := Utils.manhattan_length(relative_tile)
 
 			if mana.current >= distance and move_to(tile):
 				grid.hide_mana_cost()
@@ -36,15 +40,15 @@ func _on_tile_clicked(tile: Vector2i) -> void:
 
 
 func _on_tile_hovered(tile: Vector2i) -> void:
+	var relative_tile := tile - get_current_tile()
 	var ability := get_selected_ability()
 
 	if ability:
-		grid.show_mana_cost(ability.base_mana_cost)
+		if ability.is_valid_tile(relative_tile):
+			grid.show_mana_cost(ability.base_mana_cost)
 	else:
-		var current_tile := get_current_tile()
-
-		if Utils.is_valid_axis_aligned_move(current_tile, tile):
-			grid.show_mana_cost(Utils.manhattan_distance(current_tile, tile))
+		if _move_predicate.matches(relative_tile):
+			grid.show_mana_cost(Utils.manhattan_length(relative_tile))
 
 
 func _on_button_end_turn_pressed() -> void:
