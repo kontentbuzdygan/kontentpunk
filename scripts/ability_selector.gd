@@ -31,11 +31,11 @@ func _ready() -> void:
 
 func update_children() -> void:
 	if _ability:
-		%Button.icon = _ability.icon
-		%ManaCostLabel.text = str(_ability.base_mana_cost)
+		$Button.icon = _ability.icon
+		$ManaCostDisplay.cost = _ability.base_mana_cost
 	else:
-		%Button.icon = null
-		%ManaCostLabel.text = "0"
+		$Button.icon = null
+		$ManaCostDisplay.cost = 0
 
 
 func _process(_delta: float) -> void:
@@ -45,12 +45,6 @@ func _process(_delta: float) -> void:
 	var mana := PlayerState.get_resource(PlayerResource.Type.MANA).current
 
 	if mana < _ability.base_mana_cost:
-		%Button.disabled = true
-		%ManaCostLabel.add_theme_color_override(
-			&"font_color", %ManaCostLabel.get_theme_color(&"font_color_disabled")
-		)
+		$Button.disabled = true
 	else:
-		%Button.disabled = CombatState.is_in_progress()
-		%ManaCostLabel.add_theme_color_override(
-			&"font_color", %ManaCostLabel.get_theme_color(&"font_color_active")
-		)
+		$Button.disabled = CombatState.is_in_progress()

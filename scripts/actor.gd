@@ -25,6 +25,7 @@ func move_to(tile: Vector2i) -> bool:
 
 	return false
 
+
 func execute(action: CombatAction, then: Callable) -> void:
 	if action is CombatAction.Move:
 		_audio_stream_player.stream = move_sound

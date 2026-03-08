@@ -1,32 +1,38 @@
 class_name Grid
 extends TileMapLayer
 
-var _last_active_cell: Vector2i = Vector2i.ZERO
-var active_cell: Vector2i = Vector2i.ZERO
+var _last_active_tile: Vector2i = Vector2i.ZERO
+var active_tile: Vector2i = Vector2i.ZERO
 
+signal tile_hovered(tile: Vector2i)
 signal tile_clicked(tile: Vector2i)
+
+@onready var player: Player = find_children("", "Player")[0]
 
 
 func _process(_delta: float) -> void:
-	active_cell = local_to_map(get_local_mouse_position())
+	active_tile = local_to_map(get_local_mouse_position())
 
-	if get_cell_tile_data(active_cell):
-		$Highlight.position = map_to_local(active_cell)
+	if get_cell_tile_data(active_tile):
+		$Highlight.position = map_to_local(active_tile)
 		$Highlight.visible = true
-		if active_cell != _last_active_cell:
+
+		if active_tile != _last_active_tile:
 			$Highlight/AnimatedSprite2D.frame = 0
+			hide_mana_cost()
+			tile_hovered.emit(active_tile)
 	else:
 		$Highlight.visible = false
 
-	_last_active_cell = active_cell
+	_last_active_tile = active_tile
 
 
 func _input(event: InputEvent) -> void:
 	if CombatState.is_in_progress():
 		return
 
-	if event.is_action_pressed("2d_select") and get_cell_tile_data(active_cell):
-		tile_clicked.emit(active_cell)
+	if event.is_action_pressed("2d_select") and get_cell_tile_data(active_tile):
+		tile_clicked.emit(active_tile)
 
 
 func get_node_tile(node: Node2D) -> Vector2i:
@@ -46,3 +52,12 @@ func get_nodes_on_tile(tile: Vector2i) -> Array[Node2D]:
 
 func get_random_tile() -> Vector2i:
 	return get_used_cells().pick_random()
+
+
+func show_mana_cost(cost: int) -> void:
+	$Highlight/ManaCostDisplay.cost = cost
+	$Highlight/ManaCostDisplay.visible = true
+
+
+func hide_mana_cost() -> void:
+	$Highlight/ManaCostDisplay.visible = false

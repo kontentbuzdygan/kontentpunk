@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://2r3ptrk3sdjf"]
+
+[ext_resource type="Texture2D" uid="uid://hmmufp55o6er" path="res://textures/circuit_spritesheet.png" id="1_3vg7n"]
+
+[resource]
+atlas = ExtResource("1_3vg7n")
+region = Rect2(16, 0, 16, 16)

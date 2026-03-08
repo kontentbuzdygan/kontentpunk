@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b30mpyeohpbge"]
+
+[ext_resource type="Texture2D" uid="uid://hmmufp55o6er" path="res://textures/circuit_spritesheet.png" id="1_rbg8e"]
+[ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_sixdg"]
+[ext_resource type="Script" uid="uid://l6hwj8wyo5o7" path="res://scripts/cost_display.gd" id="2_nfqef"]
+[ext_resource type="Texture2D" uid="uid://2r3ptrk3sdjf" path="res://textures/circuit_enabled.tres" id="3_jyylt"]
+[ext_resource type="Texture2D" uid="uid://dve7qa62pxy5b" path="res://textures/circuit_disabled.tres" id="4_bt6o7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kabsk"]
+atlas = ExtResource("1_rbg8e")
+region = Rect2(16, 0, 16, 16)
+
+[node name="CostDisplay" type="HBoxContainer" unique_id=1361968476]
+size_flags_horizontal = 4
+theme = ExtResource("1_sixdg")
+script = ExtResource("2_nfqef")
+resource_type = 1
+icon_enabled = ExtResource("3_jyylt")
+icon_disabled = ExtResource("4_bt6o7")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1397426775]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kabsk")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="." unique_id=671015692]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "1"
+vertical_alignment = 1
