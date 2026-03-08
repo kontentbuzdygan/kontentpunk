@@ -1,9 +1,7 @@
 class_name Grid
 extends TileMapLayer
 
-@export var empty_tile_source_id: int = 0
-@export var highlighted_tile_source_id: int = 1
-
+var _last_active_cell: Vector2i = Vector2i.ZERO
 var active_cell: Vector2i = Vector2i.ZERO
 
 signal tile_clicked(tile: Vector2i)
@@ -11,13 +9,16 @@ signal tile_clicked(tile: Vector2i)
 
 func _process(_delta: float) -> void:
 	active_cell = local_to_map(get_local_mouse_position())
-	var is_valid_cell := get_cell_tile_data(active_cell)
 
-	for cell in get_used_cells_by_id(highlighted_tile_source_id):
-		set_cell(cell, empty_tile_source_id, Vector2i.ZERO)
+	if get_cell_tile_data(active_cell):
+		$Highlight.position = map_to_local(active_cell)
+		$Highlight.visible = true
+		if active_cell != _last_active_cell:
+			$Highlight/AnimatedSprite2D.frame = 0
+	else:
+		$Highlight.visible = false
 
-	if is_valid_cell and not CombatState.is_in_progress():
-		set_cell(active_cell, highlighted_tile_source_id, Vector2i.ZERO)
+	_last_active_cell = active_cell
 
 
 func _input(event: InputEvent) -> void:
@@ -26,14 +27,6 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("2d_select") and get_cell_tile_data(active_cell):
 		tile_clicked.emit(active_cell)
-
-
-func _on_mouse_entered() -> void:
-	$HighlightedTile.visible = true
-
-
-func _on_mouse_exited() -> void:
-	$HighlightedTile.visible = false
 
 
 func get_node_tile(node: Node2D) -> Vector2i:

@@ -26,7 +26,11 @@
 [ext_resource type="SpriteFrames" uid="uid://dkjqjo2lu0tt7" path="res://textures/girl.tres" id="15_s07ge"]
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
+[ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
+[ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
 [ext_resource type="SpriteFrames" uid="uid://ds56y1m3mp6xh" path="res://textures/robot.tres" id="27_o6dmv"]
+[ext_resource type="SpriteFrames" uid="uid://cvbnmbat1kymb" path="res://textures/robot2.tres" id="28_o6dmv"]
+[ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6et1j"]
 resource_name = "empty"
@@ -41,10 +45,22 @@ texture = ExtResource("3_l8qe7")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vpyym"]
+texture = ExtResource("20_wk3pi")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_etqu2"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6et1j")
 sources/1 = SubResource("TileSetAtlasSource_etqu2")
+sources/2 = SubResource("TileSetAtlasSource_vpyym")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3naf"]
+atlas = ExtResource("20_wk3pi")
+region = Rect2(96, 0, 32, 32)
 
 [node name="Main" type="Node2D" unique_id=1086544296]
 
@@ -177,9 +193,17 @@ stretch_mode = 2
 [node name="Grid" type="TileMapLayer" parent="." unique_id=434431019]
 texture_repeat = 2
 position = Vector2(400, 196)
-tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAD///7/AAAAAAAAAAD+//7/AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD8//3/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAADAPz/AAAAAAAAAAACAPz/AAAAAAAAAAABAPz/AAAAAAAAAAAAAPz/AAAAAAAAAAD///z/AAAAAAAAAAD+//z/AAAAAAAAAAD9//z/AAAAAAAAAAD8//z/AAAAAAAAAAD7//v/AAAAAAAAAAD7//z/AAAAAAAAAAD7//3/AAAAAAAAAAD7//7/AAAAAAAAAAD7////AAAAAAAAAAD7/wAAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD9/wQAAAAAAAAAAAD//wQAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAPv/AAAAAAAAAAD8//v/AAAAAAAAAAADAPv/AAAAAAAAAAACAPv/AAAAAAAAAAABAPv/AAAAAAAAAAAAAPv/AAAAAAAAAAD///v/AAAAAAAAAAD+//v/AAAAAAAAAAD9//v/AAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD/////AgACAAAAAAD//wAAAgACAAAAAAAAAAAAAgACAAAAAAAAAP//AgACAAAAAAAAAP7/AgACAAAAAAD///7/AgACAAAAAAD+//7/AgACAAAAAAD+////AgACAAAAAAD+/wAAAgACAAAAAAD+/wEAAgACAAAAAAD//wEAAgACAAAAAAAAAAEAAgACAAAAAAABAAEAAgACAAAAAAABAAAAAgACAAAAAAABAP//AgACAAAAAAABAP7/AgACAAAAAAD9//3/AgAAAAAAAAD+//3/AgAAAAAAAAD///3/AgAAAAAAAAAAAP3/AgAAAAAAAAABAP3/AgAAAAAAAAACAP3/AgAAAAAAAAACAP7/AgAAAAAAAAACAP//AgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAACAAIAAgAAAAAAAAABAAIAAgAAAAAAAAAAAAIAAgAAAAAAAAD//wIAAgAAAAAAAAD9/wEAAgAAAAAAAAD9/wAAAgAAAAAAAAD9////AgAAAAAAAAD9//7/AgAAAAAAAAD8//3/AgABAAAAAAD8//7/AgABAAAAAAD8////AgABAAAAAAD8/wAAAgABAAAAAAD8/wEAAgABAAAAAAD8/wIAAgABAAAAAAD8/wMAAgABAAAAAAD9/wMAAgABAAAAAAD+/wMAAgABAAAAAAD//wMAAgABAAAAAAAAAAMAAgABAAAAAAABAAMAAgABAAAAAAACAAMAAgABAAAAAAADAAMAAgABAAAAAAADAAIAAgABAAAAAAADAAEAAgABAAAAAAADAAAAAgABAAAAAAADAP//AgABAAAAAAADAP7/AgABAAAAAAADAP3/AgABAAAAAAADAPz/AgABAAAAAAACAPz/AgABAAAAAAABAPz/AgABAAAAAAAAAPz/AgABAAAAAAD///z/AgABAAAAAAD+//z/AgABAAAAAAD9//z/AgABAAAAAAD8//z/AgABAAAAAAD7//v/AgABAAAAAAD7//z/AgABAAAAAAD7//3/AgABAAAAAAD7//7/AgABAAAAAAD7////AgABAAAAAAD7/wAAAgABAAAAAAD7/wEAAgABAAAAAAD7/wIAAgABAAAAAAD7/wQAAgABAAAAAAD7/wMAAgABAAAAAAD8/wQAAgABAAAAAAD+/wQAAgABAAAAAAD9/wQAAgABAAAAAAD//wQAAgABAAAAAAAAAAQAAgABAAAAAAABAAQAAgABAAAAAAACAAQAAgABAAAAAAADAAQAAgABAAAAAAAEAAQAAgABAAAAAAAEAAMAAgABAAAAAAAEAAIAAgABAAAAAAAEAAEAAgABAAAAAAAEAAAAAgABAAAAAAAEAP//AgABAAAAAAAEAP7/AgABAAAAAAAEAP3/AgABAAAAAAAEAPz/AgABAAAAAAAEAPv/AgABAAAAAAD8//v/AgABAAAAAAADAPv/AgABAAAAAAACAPv/AgABAAAAAAABAPv/AgABAAAAAAAAAPv/AgABAAAAAAD///v/AgABAAAAAAD+//v/AgABAAAAAAD9//v/AgABAAAAAAD+/wIAAgAAAAAAAAD9/wIAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
+
+[node name="Highlight" type="Node2D" parent="Grid" unique_id=756878567]
+position = Vector2(16, -16)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Highlight" unique_id=256719803]
+sprite_frames = ExtResource("22_i3naf")
+autoplay = "default"
+frame_progress = 0.59412354
 
 [node name="Player" type="Node2D" parent="Grid" unique_id=510566155 node_paths=PackedStringArray("mana") groups=["occupies_tile"]]
 position = Vector2(-144, -144)
@@ -224,9 +248,28 @@ script = ExtResource("6_5k4jt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_2" unique_id=1279276901]
 position = Vector2(0, -5)
-sprite_frames = ExtResource("27_o6dmv")
+sprite_frames = ExtResource("28_o6dmv")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="Obstacle_1" type="Node2D" parent="Grid" unique_id=1907316796 groups=["occupies_tile"]]
+position = Vector2(-16, -112)
+
+[node name="Sprite2D" type="Sprite2D" parent="Grid/Obstacle_1" unique_id=1426231727]
+texture = SubResource("AtlasTexture_i3naf")
+
+[node name="Obstacle_2" type="Node2D" parent="Grid" unique_id=1416372504 groups=["occupies_tile"]]
+position = Vector2(16, -144)
+
+[node name="Sprite2D" type="Sprite2D" parent="Grid/Obstacle_2" unique_id=51411066]
+texture = SubResource("AtlasTexture_i3naf")
+
+[node name="Obstacle_3" type="Node2D" parent="Grid" unique_id=1158411526 groups=["occupies_tile"]]
+position = Vector2(-48, -48)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Obstacle_3" unique_id=1889171506]
+sprite_frames = ExtResource("30_vpyym")
+autoplay = "default"
 
 [connection signal="tile_clicked" from="Grid" to="Grid/Player" method="_on_tile_selected"]
 
