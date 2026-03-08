@@ -1,5 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://d2l5ex4qfxue4"]
 
+[ext_resource type="FontFile" uid="uid://donruuw7efkyt" path="res://fonts/slkscr.ttf" id="1_6el0c"]
 [ext_resource type="FontFile" uid="uid://du80o0ru75gy3" path="res://fonts/Vermin Vibes 1989.ttf" id="1_bj5e1"]
 [ext_resource type="Texture2D" uid="uid://c0fpti7qx6iid" path="res://textures/button.png" id="1_cwy62"]
 [ext_resource type="Texture2D" uid="uid://cm2q1td7y2bqo" path="res://textures/panel.png" id="1_dyvt5"]
@@ -51,6 +52,8 @@ default_font_size = 16
 Button/colors/font_color = Color(0.5294118, 0.10980392, 0.24313726, 1)
 Button/colors/font_hover_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
 Button/colors/font_pressed_color = Color(0.1882353, 0.1764706, 0.41568628, 1)
+Button/font_sizes/font_size = 8
+Button/fonts/font = ExtResource("1_6el0c")
 Button/styles/hover = SubResource("StyleBoxTexture_6el0c")
 Button/styles/hover_pressed = SubResource("StyleBoxTexture_ith88")
 Button/styles/normal = SubResource("StyleBoxTexture_dyvt5")

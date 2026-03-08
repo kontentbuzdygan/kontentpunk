@@ -1,8 +1,24 @@
 class_name Player
 extends Actor
 
+
+class EndTurn:
+	extends CombatAction
+
+	func _to_string() -> String:
+		return "<end turn>"
+
+
 @export var abilities_button_group: ButtonGroup
-@export var mana: PlayerResource
+
+@onready var mana: PlayerResource = PlayerState.get_resource(PlayerResource.Type.MANA)
+
+
+func execute(action: CombatAction, then: Callable) -> void:
+	if action is EndTurn:
+		return then.call()
+
+	super.execute(action, then)
 
 
 func _on_tile_selected(tile: Vector2i) -> void:
@@ -23,11 +39,15 @@ func _on_tile_selected(tile: Vector2i) -> void:
 			mana.current -= 1
 
 
+func _on_button_end_turn_pressed() -> void:
+	CombatState.queue_action(EndTurn.new(self))
+
+
 func get_selected_ability() -> Ability:
 	var button := abilities_button_group.get_pressed_button()
 
-	if button is AbilitySelector:
-		return button.ability
+	if button and button.owner is AbilitySelector:
+		return button.owner.ability
 	else:
 		return null
 

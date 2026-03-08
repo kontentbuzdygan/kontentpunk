@@ -7,6 +7,7 @@ var _current_action: CombatAction = null
 
 
 func queue_action(action: CombatAction) -> void:
+	print(action.actor, " queued ", action)
 	_queue.append(action)
 
 	if _current_action == null:

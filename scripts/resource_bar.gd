@@ -1,11 +1,10 @@
 @tool
 extends HFlowContainer
 
-@export var resource: PlayerResource
+@export var resource_type: PlayerResource.Type
 
 @onready var icon: Node = $Icon
-@onready var _current: int = resource.current
-@onready var _maximum: int = resource.maximum
+@onready var resource: PlayerResource = PlayerState.get_resource(resource_type)
 
 
 func _ready() -> void:
@@ -16,13 +15,11 @@ func _ready() -> void:
 	update_icons()
 
 
-func _on_current_changed(value: int) -> void:
-	_current = value
+func _on_current_changed(_value: int) -> void:
 	update_icons()
 
 
-func _on_maximum_changed(value: int) -> void:
-	_maximum = value
+func _on_maximum_changed(_value: int) -> void:
 	regenerate_icons()
 
 
@@ -30,11 +27,11 @@ func regenerate_icons() -> void:
 	if not icon:
 		return
 
-	for child in get_children(true).slice(_maximum):
+	for child in get_children(true).slice(resource.maximum):
 		if child != icon:
 			child.queue_free()
 
-	for i in range(len(get_children(true)), _maximum):
+	for i in range(len(get_children(true)), resource.maximum):
 		var new_icon := icon.duplicate()
 		add_child(new_icon, INTERNAL_MODE_BACK)
 
@@ -49,5 +46,5 @@ func update_icons() -> void:
 
 	for i in range(len(children)):
 		var sprite := children[i].get_node(^"AnimatedSprite2D") as AnimatedSprite2D
-		sprite.animation = &"empty" if i >= _current else &"full"
-		sprite.frame = (_maximum - i) % sprite.sprite_frames.get_frame_count(&"full")
+		sprite.animation = &"empty" if i >= resource.current else &"full"
+		sprite.frame = (resource.maximum - i) % sprite.sprite_frames.get_frame_count(&"full")

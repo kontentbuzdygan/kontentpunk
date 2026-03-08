@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://5o51t1yfbub3"]
 
 [ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_1fput"]
-[ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="1_6yxbg"]
 [ext_resource type="Texture2D" uid="uid://dodc5wdbxfsks" path="res://textures/background.png" id="1_2262g"]
 [ext_resource type="Script" uid="uid://cdt6q54o6d7c6" path="res://scripts/initializer.gd" id="1_s07ge"]
 [ext_resource type="Texture2D" uid="uid://cbswyylqroicg" path="res://textures/empty_tile.png" id="2_wdj6m"]
@@ -15,11 +14,8 @@
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
 [ext_resource type="Image" uid="uid://cxfyik5hes2nj" path="res://textures/cursor_arrow.png" id="7_4fc0e"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
-[ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="9_nljbn"]
 [ext_resource type="ButtonGroup" uid="uid://dka7w7xrbpiki" path="res://objects/ui/abilities_button_group.tres" id="9_w23s1"]
-[ext_resource type="Texture2D" uid="uid://xq4ofhus6c2l" path="res://textures/spring_legs.png" id="10_w23s1"]
-[ext_resource type="Script" uid="uid://c68rtarfdi0ar" path="res://scripts/ability_selector.gd" id="11_3yxmn"]
-[ext_resource type="Texture2D" uid="uid://bu0tirn8lubi4" path="res://textures/heart.png" id="11_n1xy8"]
+[ext_resource type="PackedScene" uid="uid://duar8b2qxma3q" path="res://objects/ui/ability_selector.tscn" id="9_woytj"]
 [ext_resource type="Resource" uid="uid://bhttik14ccisc" path="res://data/abilities/finger_gun_ability.tres" id="12_woytj"]
 [ext_resource type="AnimationLibrary" uid="uid://cyoxtcn08i3rn" path="res://animations/player.res" id="14_j7211"]
 [ext_resource type="Resource" uid="uid://cti48yfdi8rxc" path="res://data/abilities/cyber_heart_ability.tres" id="14_o6dmv"]
@@ -70,18 +66,6 @@ cursor_arrow_image = ExtResource("7_4fc0e")
 cursor_pointer_image = ExtResource("3_iwo8l")
 cursor_pointer_hotspot = Vector2i(6, 0)
 
-[node name="State" type="Node" parent="." unique_id=1366070852]
-
-[node name="Health" type="Node" parent="State" unique_id=965145495]
-script = ExtResource("1_6yxbg")
-current = 4
-metadata/_custom_type_script = "uid://dywwjhmsu8rif"
-
-[node name="Mana" type="Node" parent="State" unique_id=275217615]
-script = ExtResource("1_6yxbg")
-current = 3
-metadata/_custom_type_script = "uid://dywwjhmsu8rif"
-
 [node name="Layer_HUD" type="CanvasLayer" parent="." unique_id=484654902]
 
 [node name="MarginContainer" type="MarginContainer" parent="Layer_HUD" unique_id=602176283]
@@ -128,13 +112,12 @@ size_flags_horizontal = 4
 text = "124 213"
 horizontal_alignment = 1
 
-[node name="HealthBar" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1423697478 node_paths=PackedStringArray("resource") instance=ExtResource("3_1fput")]
+[node name="HealthBar" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1423697478 instance=ExtResource("3_1fput")]
 layout_mode = 2
-resource = NodePath("../../../../../State/Health")
 
-[node name="ManaBar" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1982952910 node_paths=PackedStringArray("resource") instance=ExtResource("3_1fput")]
+[node name="ManaBar" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1982952910 instance=ExtResource("3_1fput")]
 layout_mode = 2
-resource = NodePath("../../../../../State/Mana")
+resource_type = 1
 
 [node name="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/ManaBar/Icon" parent_id_path=PackedInt32Array(1982952910, 440035135) index="0" unique_id=772610324]
 sprite_frames = ExtResource("4_6yxbg")
@@ -151,32 +134,24 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 8
 
-[node name="AbilityButton_1" type="Button" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=1147636251]
+[node name="AbilitySelector_1" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=106455227 instance=ExtResource("9_woytj")]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-toggle_mode = true
-button_group = ExtResource("9_w23s1")
-icon = ExtResource("9_nljbn")
-script = ExtResource("11_3yxmn")
 ability = ExtResource("12_woytj")
 
-[node name="AbilityButton_2" type="Button" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=1290085223]
+[node name="AbilitySelector_2" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=1966105471 instance=ExtResource("9_woytj")]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-toggle_mode = true
-button_group = ExtResource("9_w23s1")
-icon = ExtResource("11_n1xy8")
-script = ExtResource("11_3yxmn")
+ability = ExtResource("16_wk3pi")
+
+[node name="AbilitySelector_3" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=57214738 instance=ExtResource("9_woytj")]
+layout_mode = 2
 ability = ExtResource("14_o6dmv")
 
-[node name="AbilityButton_3" type="Button" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=1722270218]
+[node name="Button_EndTurn" type="Button" parent="Layer_HUD/MarginContainer/BottomPanel" unique_id=1904212448]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 mouse_default_cursor_shape = 2
-toggle_mode = true
-button_group = ExtResource("9_w23s1")
-icon = ExtResource("10_w23s1")
-script = ExtResource("11_3yxmn")
-ability = ExtResource("16_wk3pi")
+text = "end turn"
 
 [node name="Layer_Background" type="CanvasLayer" parent="." unique_id=1978189837]
 layer = -1
@@ -205,11 +180,10 @@ sprite_frames = ExtResource("22_i3naf")
 autoplay = "default"
 frame_progress = 0.59412354
 
-[node name="Player" type="Node2D" parent="Grid" unique_id=510566155 node_paths=PackedStringArray("mana") groups=["occupies_tile"]]
+[node name="Player" type="Node2D" parent="Grid" unique_id=510566155 groups=["occupies_tile"]]
 position = Vector2(-144, -144)
 script = ExtResource("5_etqu2")
 abilities_button_group = ExtResource("9_w23s1")
-mana = NodePath("../../State/Mana")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Player" unique_id=938099669]
 reset_on_save = false
@@ -232,6 +206,7 @@ libraries/ = ExtResource("18_fd7wu")
 script = ExtResource("6_5k4jt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_1" unique_id=789686885]
+y_sort_enabled = true
 position = Vector2(0, -5)
 sprite_frames = ExtResource("27_o6dmv")
 animation = &"idle"
@@ -247,6 +222,7 @@ libraries/ = ExtResource("18_fd7wu")
 script = ExtResource("6_5k4jt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_2" unique_id=1279276901]
+y_sort_enabled = true
 position = Vector2(0, -5)
 sprite_frames = ExtResource("28_o6dmv")
 animation = &"idle"
@@ -271,6 +247,7 @@ position = Vector2(-48, -48)
 sprite_frames = ExtResource("30_vpyym")
 autoplay = "default"
 
+[connection signal="pressed" from="Layer_HUD/MarginContainer/BottomPanel/Button_EndTurn" to="Grid/Player" method="_on_button_end_turn_pressed"]
 [connection signal="tile_clicked" from="Grid" to="Grid/Player" method="_on_tile_selected"]
 
 [editable path="Layer_HUD/MarginContainer/LeftPanel/HUD/ManaBar"]

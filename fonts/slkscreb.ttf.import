@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://du80o0ru75gy3"
-path="res://.godot/imported/Vermin Vibes 1989.ttf-eec971a78b4895495ea73a57b27f657f.fontdata"
+uid="uid://d8nqjhmfor5y"
+path="res://.godot/imported/slkscreb.ttf-c6cf01f8a29a942e6eacfa8cd569309d.fontdata"
 
 [deps]
 
-source_file="res://fonts/Vermin Vibes 1989.ttf"
-dest_files=["res://.godot/imported/Vermin Vibes 1989.ttf-eec971a78b4895495ea73a57b27f657f.fontdata"]
+source_file="res://fonts/slkscreb.ttf"
+dest_files=["res://.godot/imported/slkscreb.ttf-c6cf01f8a29a942e6eacfa8cd569309d.fontdata"]
 
 [params]
 

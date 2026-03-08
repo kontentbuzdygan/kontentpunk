@@ -16,7 +16,9 @@ func move_to(tile: Vector2i) -> bool:
 
 	return false
 
-
 func execute(action: CombatAction, then: Callable) -> void:
 	if action is CombatAction.Move:
 		grid_animation_player.move_to(action.target_tile, then)
+		return
+
+	assert(false, "invalid action %s for %s" % [action, self])

@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 CombatState="*uid://2lr25mdy7cty"
+PlayerState="*uid://cn4ynus2a4xwg"
 
 [display]
 

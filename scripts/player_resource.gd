@@ -1,6 +1,7 @@
-@tool
 class_name PlayerResource
-extends Node
+extends Resource
+
+enum Type { HEALTH, MANA }
 
 @export var current: int = 5:
 	get:
@@ -24,3 +25,8 @@ signal maximum_changed(value: int)
 
 var _current: int = 5
 var _maximum: int = 5
+
+
+func _init(maximum_: int) -> void:
+	_maximum = maximum_
+	_current = maximum_

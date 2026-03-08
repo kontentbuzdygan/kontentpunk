@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://duar8b2qxma3q"]
+
+[ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_78sj1"]
+[ext_resource type="Texture2D" uid="uid://hmmufp55o6er" path="res://textures/circuit_spritesheet.png" id="1_fawlv"]
+[ext_resource type="ButtonGroup" uid="uid://dka7w7xrbpiki" path="res://objects/ui/abilities_button_group.tres" id="2_b2xr8"]
+[ext_resource type="Script" uid="uid://c68rtarfdi0ar" path="res://scripts/ability_selector.gd" id="2_kabsk"]
+[ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="3_78sj1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kabsk"]
+atlas = ExtResource("1_fawlv")
+region = Rect2(16, 0, 16, 16)
+
+[node name="AbilitySelector" type="VBoxContainer" unique_id=106455227]
+theme = ExtResource("1_78sj1")
+theme_override_constants/separation = 2
+script = ExtResource("2_kabsk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=731970053]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=643244486]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kabsk")
+stretch_mode = 3
+
+[node name="ManaCostLabel" type="Label" parent="HBoxContainer" unique_id=187983332]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "1"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=780142691]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = ExtResource("2_b2xr8")
+icon = ExtResource("3_78sj1")
