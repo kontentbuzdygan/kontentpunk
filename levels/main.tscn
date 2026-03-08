@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://3dpfbm41ua87" path="res://sounds/synth_010.ogg" id="5_vpyym"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
 [ext_resource type="Image" uid="uid://cxfyik5hes2nj" path="res://textures/cursor_arrow.png" id="7_4fc0e"]
+[ext_resource type="AudioStream" uid="uid://d36wwav7sxy74" path="res://sounds/music_001.ogg" id="7_m6gxc"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
 [ext_resource type="ButtonGroup" uid="uid://dka7w7xrbpiki" path="res://objects/ui/abilities_button_group.tres" id="9_w23s1"]
 [ext_resource type="PackedScene" uid="uid://duar8b2qxma3q" path="res://objects/ui/ability_selector.tscn" id="9_woytj"]
@@ -75,6 +76,11 @@ ui_sound_toggle_off = ExtResource("5_vpyym")
 
 [node name="UISounds" type="AudioStreamPlayer" parent="Config" unique_id=1008984769]
 bus = &"UI"
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1527025478]
+stream = ExtResource("7_m6gxc")
+autoplay = true
+bus = &"Music"
 
 [node name="Layer_HUD" type="CanvasLayer" parent="." unique_id=484654902]
 
