@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://bhttik14ccisc"]
 
 [ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="1_2xa8f"]
+[ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_al7v3"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_u8012"]
 [ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/axis_aligned_tile_predicate.gd" id="3_d2yqq"]
 

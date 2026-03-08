@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://cti48yfdi8rxc"]
 
+[ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_3pc2p"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_ae765"]
 [ext_resource type="Texture2D" uid="uid://bu0tirn8lubi4" path="res://textures/heart.png" id="1_whja6"]
 [ext_resource type="Script" uid="uid://c60x3e0bisqh8" path="res://scripts/tile_predicate/same_tile_predicate.gd" id="3_k0u5y"]

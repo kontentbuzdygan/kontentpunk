@@ -28,7 +28,7 @@ func _on_tile_clicked(tile: Vector2i) -> void:
 			if mana.current >= ability.base_mana_cost:
 				grid.hide_mana_cost()
 				mana.current -= ability.base_mana_cost
-				print("perform %s on %s" % [ability, tile])
+				ability.perform(self, tile)
 				clear_selected_ability()
 	else:
 		if _move_predicate.matches(relative_tile):

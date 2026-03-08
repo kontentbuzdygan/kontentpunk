@@ -17,6 +17,7 @@ extends Resource
 		emit_changed()
 
 @export var valid_tiles: TilePredicate
+@export var effects: Array[AbilityEffect] = []
 
 var _icon: Texture2D
 var _base_mana_cost: int
@@ -26,3 +27,8 @@ var _base_mana_cost: int
 ## to the actor
 func is_valid_tile(tile: Vector2i) -> bool:
 	return not valid_tiles or valid_tiles.matches(tile)
+
+
+func perform(actor: Actor, target_tile: Vector2i) -> void:
+	for effect in effects:
+		effect.queue(actor, target_tile)
