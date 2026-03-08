@@ -14,6 +14,10 @@ config/name="kontentpunk"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cmus8icempn1a"
+
 [autoload]
 
 CombatState="*uid://2lr25mdy7cty"
