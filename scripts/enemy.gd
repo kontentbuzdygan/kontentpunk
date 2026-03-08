@@ -2,6 +2,7 @@ extends Actor
 
 
 func _ready() -> void:
+	super._ready()
 	CombatState.action_ended.connect(_on_combat_action_ended)
 
 

@@ -1,8 +1,17 @@
 class_name Actor
 extends Node2D
 
+@export var move_sound: AudioStream
+
 @onready var grid: Grid = find_parent("Grid")
 @onready var grid_animation_player: GridAnimationPlayer = find_children("", "GridAnimationPlayer")[0]
+
+var _audio_stream_player: AudioStreamPlayer
+
+
+func _ready() -> void:
+	_audio_stream_player = AudioStreamPlayer.new()
+	add_child(_audio_stream_player)
 
 
 func get_current_tile() -> Vector2i:
@@ -18,6 +27,9 @@ func move_to(tile: Vector2i) -> bool:
 
 func execute(action: CombatAction, then: Callable) -> void:
 	if action is CombatAction.Move:
+		_audio_stream_player.stream = move_sound
+		_audio_stream_player.play()
+
 		grid_animation_player.move_to(action.target_tile, then)
 		return
 

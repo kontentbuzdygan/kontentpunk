@@ -10,7 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://bkfnk7qh7x1qu" path="res://textures/highlighted_tile.png" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://dd1fxp22x7nbq" path="res://scripts/grid.gd" id="3_m1504"]
 [ext_resource type="SpriteFrames" uid="uid://c6jsi8fbkxte" path="res://textures/circuit.tres" id="4_6yxbg"]
+[ext_resource type="AudioStream" uid="uid://fwrlqcpsdivt" path="res://sounds/synth_008.ogg" id="4_vpyym"]
+[ext_resource type="AudioStream" uid="uid://x3nr2p33c4rb" path="res://sounds/synth_009.ogg" id="4_wk3pi"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
+[ext_resource type="AudioStream" uid="uid://3dpfbm41ua87" path="res://sounds/synth_010.ogg" id="5_vpyym"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
 [ext_resource type="Image" uid="uid://cxfyik5hes2nj" path="res://textures/cursor_arrow.png" id="7_4fc0e"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
@@ -24,6 +27,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
 [ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
+[ext_resource type="AudioStream" uid="uid://brnn2jvwo0pk" path="res://sounds/swoosh.ogg" id="23_i3naf"]
 [ext_resource type="SpriteFrames" uid="uid://ds56y1m3mp6xh" path="res://textures/robot.tres" id="27_o6dmv"]
 [ext_resource type="SpriteFrames" uid="uid://cvbnmbat1kymb" path="res://textures/robot2.tres" id="28_o6dmv"]
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
@@ -65,6 +69,12 @@ script = ExtResource("1_s07ge")
 cursor_arrow_image = ExtResource("7_4fc0e")
 cursor_pointer_image = ExtResource("3_iwo8l")
 cursor_pointer_hotspot = Vector2i(6, 0)
+ui_sound_click = ExtResource("4_vpyym")
+ui_sound_toggle_on = ExtResource("4_wk3pi")
+ui_sound_toggle_off = ExtResource("5_vpyym")
+
+[node name="UISounds" type="AudioStreamPlayer" parent="Config" unique_id=1008984769]
+bus = &"UI"
 
 [node name="Layer_HUD" type="CanvasLayer" parent="." unique_id=484654902]
 
@@ -184,6 +194,7 @@ frame_progress = 0.59412354
 position = Vector2(-144, -144)
 script = ExtResource("5_etqu2")
 abilities_button_group = ExtResource("9_w23s1")
+move_sound = ExtResource("23_i3naf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Player" unique_id=938099669]
 reset_on_save = false
@@ -199,6 +210,7 @@ autoplay = "idle"
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
 position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
+move_sound = ExtResource("23_i3naf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Enemy_1" unique_id=236931143]
 reset_on_save = false
@@ -215,6 +227,7 @@ autoplay = "idle"
 [node name="Enemy_2" type="Node2D" parent="Grid" unique_id=1444192590 groups=["occupies_tile"]]
 position = Vector2(-80, -144)
 script = ExtResource("8_jw1n3")
+move_sound = ExtResource("23_i3naf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Enemy_2" unique_id=1017275441]
 reset_on_save = false

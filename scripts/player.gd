@@ -1,6 +1,8 @@
 class_name Player
 extends Actor
 
+@export var end_turn_delay_seconds: float = 0.5
+
 
 class EndTurn:
 	extends CombatAction
@@ -16,7 +18,8 @@ class EndTurn:
 
 func execute(action: CombatAction, then: Callable) -> void:
 	if action is EndTurn:
-		return then.call()
+		get_tree().create_timer(end_turn_delay_seconds).timeout.connect(then)
+		return
 
 	super.execute(action, then)
 
@@ -40,6 +43,7 @@ func _on_tile_selected(tile: Vector2i) -> void:
 
 
 func _on_button_end_turn_pressed() -> void:
+	clear_selected_ability()
 	CombatState.queue_action(EndTurn.new(self))
 
 
