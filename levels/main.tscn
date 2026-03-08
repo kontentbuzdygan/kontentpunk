@@ -230,6 +230,7 @@ position = Vector2(0, -5)
 sprite_frames = ExtResource("15_s07ge")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.71303207
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
 position = Vector2(-112, -144)

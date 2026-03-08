@@ -12,5 +12,9 @@ func move_to(tile: Vector2i, then: Callable) -> void:
 	animation.track_set_key_value(track_idx, 0, get_parent().position)
 	animation.track_set_key_value(track_idx, 1, target_position)
 
+	play_and_then(&"move", then)
+
+
+func play_and_then(animation: StringName, then: Callable) -> void:
 	animation_finished.connect(then.unbind(1), CONNECT_ONE_SHOT)
-	play(&"move")
+	play(animation)

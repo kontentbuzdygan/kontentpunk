@@ -34,4 +34,15 @@ func execute(action: CombatAction, then: Callable) -> void:
 		grid_animation_player.move_to(action.target_tile, then)
 		return
 
+	if action is CombatAction.DealDamage:
+		for node in grid.get_nodes_on_tile(action.target_tile):
+			if node is Actor:
+				node.take_damage(action.value, then)
+		return
+
 	assert(false, "invalid action %s for %s" % [action, self])
+
+
+func take_damage(value: int, then: Callable) -> void:
+	print("%s took %d damage" % [self, value])
+	then.call()

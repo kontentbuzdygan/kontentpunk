@@ -54,6 +54,14 @@ func get_random_tile() -> Vector2i:
 	return get_used_cells().pick_random()
 
 
+func find_tile_with(node_type: Variant) -> Vector2i:
+	for node in get_tree().get_nodes_in_group("occupies_tile"):
+		if is_instance_of(node, node_type):
+			return get_node_tile(node)
+
+	return Vector2i(-1, -1)
+
+
 func show_mana_cost(cost: int) -> void:
 	$Highlight/ManaCostDisplay.cost = cost
 	$Highlight/ManaCostDisplay.visible = true

@@ -6,6 +6,7 @@ const MANA_COST_NOT_ALLOWED: int = -1
 @export var end_turn_delay_seconds: float = 0.5
 @export var abilities_button_group: ButtonGroup
 
+@onready var health: PlayerResource = PlayerState.get_resource(PlayerResource.Type.HEALTH)
 @onready var mana: PlayerResource = PlayerState.get_resource(PlayerResource.Type.MANA)
 
 var _move_predicate: TilePredicate
@@ -62,6 +63,15 @@ func execute(action: CombatAction, then: Callable) -> void:
 		return
 
 	super.execute(action, then)
+
+
+func take_damage(value: int, then: Callable) -> void:
+	super.take_damage(
+		value,
+		func():
+			health.current -= value
+			grid_animation_player.play_and_then(&"hurt", then)
+	)
 
 
 func get_selected_ability() -> Ability:
