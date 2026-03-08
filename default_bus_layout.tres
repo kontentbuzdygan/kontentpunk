@@ -1,5 +1,12 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://cmus8icempn1a"]
 
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
+room_size = 0.02
+damping = 0.2
+hipass = 0.5
+wet = 0.1
+
 [resource]
 bus/0/bypass_fx = true
 bus/1/name = &"UI"
@@ -12,5 +19,13 @@ bus/2/name = &"Music"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -11.951987
+bus/2/volume_db = -9.632782
 bus/2/send = &"Master"
+bus/3/name = &"Sound Effects"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -5.042245
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
+bus/3/effect/0/enabled = true

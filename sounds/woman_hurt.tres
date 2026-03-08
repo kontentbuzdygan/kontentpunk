@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cnmjyx7t0jb88"]
+
+[ext_resource type="AudioStream" uid="uid://c40qkd87cvorr" path="res://sounds/woman_hurt_001.ogg" id="1_am5h8"]
+[ext_resource type="AudioStream" uid="uid://n7ocrr5vi8n7" path="res://sounds/woman_hurt_002.ogg" id="2_mcgm2"]
+[ext_resource type="AudioStream" uid="uid://blrgdiyv5ra6m" path="res://sounds/woman_hurt_003.ogg" id="3_g25y3"]
+[ext_resource type="AudioStream" uid="uid://bpeygco46opog" path="res://sounds/woman_hurt_004.ogg" id="4_3bqc7"]
+[ext_resource type="AudioStream" uid="uid://cayucci3ct5st" path="res://sounds/woman_hurt_005.ogg" id="5_ono3x"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("1_am5h8")
+stream_1/stream = ExtResource("2_mcgm2")
+stream_2/stream = ExtResource("3_g25y3")
+stream_3/stream = ExtResource("4_3bqc7")
+stream_4/stream = ExtResource("5_ono3x")

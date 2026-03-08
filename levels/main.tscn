@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="22_8a5tp"]
 [ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
 [ext_resource type="AudioStream" uid="uid://brnn2jvwo0pk" path="res://sounds/swoosh.ogg" id="23_i3naf"]
+[ext_resource type="AudioStream" uid="uid://dnte3iopj5m20" path="res://sounds/woman_hurt_gore.tres" id="27_egc1g"]
 [ext_resource type="SpriteFrames" uid="uid://ds56y1m3mp6xh" path="res://textures/robot.tres" id="27_o6dmv"]
 [ext_resource type="SpriteFrames" uid="uid://cvbnmbat1kymb" path="res://textures/robot2.tres" id="28_o6dmv"]
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
@@ -220,6 +221,7 @@ position = Vector2(-144, -144)
 script = ExtResource("5_etqu2")
 abilities_button_group = ExtResource("9_w23s1")
 move_sound = ExtResource("23_i3naf")
+hurt_sound = ExtResource("27_egc1g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Player" unique_id=938099669]
 reset_on_save = false
@@ -231,7 +233,7 @@ position = Vector2(0, -5)
 sprite_frames = ExtResource("15_s07ge")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.28653926
+frame_progress = 0.30878973
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
 position = Vector2(-112, -144)

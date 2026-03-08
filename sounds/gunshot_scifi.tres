@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b48swpo6qhcti"]
+
+[ext_resource type="AudioStream" uid="uid://32s4x7qgap6s" path="res://sounds/gunshot_001.ogg" id="1_hcvef"]
+[ext_resource type="AudioStream" uid="uid://cylepks0ralnr" path="res://sounds/gunshot_002.ogg" id="2_ivwb8"]
+[ext_resource type="AudioStream" uid="uid://d3vdyopvdihly" path="res://sounds/gunshot_003.ogg" id="3_bjjp0"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_hcvef")
+stream_1/stream = ExtResource("2_ivwb8")
+stream_2/stream = ExtResource("3_bjjp0")

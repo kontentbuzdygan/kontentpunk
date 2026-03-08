@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cs0hqkhvcugwn"]
+
+[ext_resource type="AudioStream" uid="uid://jtnmpteuc57f" path="res://sounds/swap_001.ogg" id="1_6pwby"]
+[ext_resource type="AudioStream" uid="uid://d0ejjeviqle4" path="res://sounds/swap_002.ogg" id="2_10sa2"]
+[ext_resource type="AudioStream" uid="uid://kcqktrty6s2s" path="res://sounds/swap_003.ogg" id="3_wvsne"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_6pwby")
+stream_1/stream = ExtResource("2_10sa2")
+stream_2/stream = ExtResource("3_wvsne")
