@@ -38,8 +38,10 @@ func _on_tile_selected(tile: Vector2i) -> void:
 		if current_tile.x != tile.x and current_tile.y != tile.y:
 			return
 
-		if mana.current >= 1 and move_to(tile):
-			mana.current -= 1
+		var distance: int = abs(tile.x - current_tile.x) + abs(tile.y - current_tile.y)
+
+		if mana.current >= distance and move_to(tile):
+			mana.current -= distance
 
 
 func _on_button_end_turn_pressed() -> void:

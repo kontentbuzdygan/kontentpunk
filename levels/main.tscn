@@ -137,6 +137,7 @@ resource_type = 1
 
 [node name="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/ManaBar/Icon" parent_id_path=PackedInt32Array(1982952910, 440035135) index="0" unique_id=772610324]
 sprite_frames = ExtResource("4_6yxbg")
+frame = 0
 
 [node name="BottomPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer" unique_id=271568282]
 custom_minimum_size = Vector2(446, 72)

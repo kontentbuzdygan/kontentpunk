@@ -22,15 +22,16 @@ func _ready() -> void:
 
 	get_tree().node_added.connect(_on_node_added)
 	for button in get_tree().root.find_children("", "Button", true, false):
-		set_button_sounds(button)
+		update_button(button)
 
 
 func _on_node_added(node: Node) -> void:
 	if node is Button:
-		set_button_sounds(node)
+		update_button(node)
 
 
-func set_button_sounds(button: Button) -> void:
+func update_button(button: Button) -> void:
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	button.pressed.connect(_on_button_pressed.bind(button))
 	button.toggled.connect(_on_button_toggled.bind(button))
 
