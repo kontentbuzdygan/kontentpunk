@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bg74xf63v45np"]
+
+[ext_resource type="Script" uid="uid://byduw85nd6dcg" path="res://scripts/item_holder.gd" id="1_3a2tc"]
+[ext_resource type="Texture2D" uid="uid://crx7va0xo417w" path="res://textures/item_holder_empty.tres" id="1_tkgw5"]
+[ext_resource type="Texture2D" uid="uid://df3q7wscs2ysv" path="res://textures/item_holder_selected.tres" id="2_3a2tc"]
+[ext_resource type="Texture2D" uid="uid://c3jvgkcwu2rag" path="res://textures/item_holder_disabled.tres" id="4_7su2e"]
+
+[node name="ItemHolder" type="CenterContainer" unique_id=570677188]
+script = ExtResource("1_3a2tc")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1736370603]
+layout_mode = 2
+texture_normal = ExtResource("1_tkgw5")
+texture_pressed = ExtResource("2_3a2tc")
+texture_hover = ExtResource("2_3a2tc")
+texture_disabled = ExtResource("4_7su2e")
+
+[node name="ItemSlot" type="TextureRect" parent="." unique_id=719036387]
+layout_mode = 2

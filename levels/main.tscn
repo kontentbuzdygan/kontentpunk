@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://crx7va0xo417w" path="res://textures/item_holder_empty.tres" id="14_mig3l"]
 [ext_resource type="Resource" uid="uid://cti48yfdi8rxc" path="res://data/abilities/cyber_heart_ability.tres" id="14_o6dmv"]
 [ext_resource type="SpriteFrames" uid="uid://dkjqjo2lu0tt7" path="res://textures/girl.tres" id="15_s07ge"]
+[ext_resource type="Script" uid="uid://byduw85nd6dcg" path="res://scripts/item_holder.gd" id="15_xombn"]
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
@@ -159,6 +160,7 @@ offset_right = 101.0
 offset_bottom = 27.0
 texture = ExtResource("14_mig3l")
 stretch_mode = 2
+script = ExtResource("15_xombn")
 
 [node name="Heart" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1910729674]
 layout_mode = 0
