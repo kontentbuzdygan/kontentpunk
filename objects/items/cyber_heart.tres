@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://bkytu06rtkd5l"]
+
+[ext_resource type="Script" uid="uid://bbgc4dvto7fk6" path="res://scripts/item_resource.gd" id="1_ig33l"]
+[ext_resource type="Texture2D" uid="uid://bu0tirn8lubi4" path="res://textures/heart.png" id="1_p17no"]
+
+[resource]
+script = ExtResource("1_ig33l")
+name = "Cyber Heart"
+icon = ExtResource("1_p17no")
+item_type = 1
+metadata/_custom_type_script = "uid://bbgc4dvto7fk6"

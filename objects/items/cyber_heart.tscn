@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://s0dyaq6dq8hq"]
+
+[ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="1_84ec4"]
+[ext_resource type="Resource" uid="uid://bkytu06rtkd5l" path="res://objects/items/cyber_heart.tres" id="2_lq5gv"]
+[ext_resource type="Texture2D" uid="uid://bu0tirn8lubi4" path="res://textures/heart.png" id="3_ie582"]
+
+[node name="CyberHeart" type="CenterContainer" unique_id=818333794]
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("1_84ec4")
+_item_resource = ExtResource("2_lq5gv")
+metadata/_custom_type_script = "uid://disdpfm5m1k6t"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1340310942]
+layout_mode = 2
+texture = ExtResource("3_ie582")

@@ -52,3 +52,10 @@ enum ITEM_TYPE { NONE = -1, HEAD, HEART, ARM, SPINE, LEG }
     set(value):
         cooldown = value
         changed.emit()
+@export var tooltip: String:
+    get():
+        return tooltip
+    set(value):
+        tooltip = value
+        changed.emit()
+    

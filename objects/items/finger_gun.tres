@@ -7,8 +7,9 @@
 script = ExtResource("2_h4c41")
 name = "Finger Gun"
 icon = ExtResource("1_u2xd1")
-item_type = 3
+item_type = 2
 cost_per_turn = 2
 stamina = 3
 cooldown = 5
+tooltip = "Finger Gun"
 metadata/_custom_type_script = "uid://bbgc4dvto7fk6"

@@ -6,7 +6,7 @@
 [node name="ItemHolder" type="CenterContainer" unique_id=570677188]
 script = ExtResource("1_3a2tc")
 
-[node name="TextureButton" type="TextureRect" parent="." unique_id=1183278880]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1183278880]
 layout_mode = 2
 texture = ExtResource("1_tkgw5")
 

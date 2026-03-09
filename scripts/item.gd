@@ -20,20 +20,13 @@ extends CenterContainer
 
 
 func update_children() -> void:
-	if not is_node_ready():
+	if not Engine.is_editor_hint() and not is_node_ready():
 		await ready	
 
 	if _item_resource:
 		$TextureRect.texture = _item_resource.icon
 	else:
 		$TextureRect.texture = null
-
-
-func _get_drag_data(_at_position: Vector2) -> Item:
-	var icon = TextureRect.new()
-	icon.texture = _item_resource.icon
-	set_drag_preview(icon)
-	return self
 
 
 func get_item_resource() -> ItemResource:
