@@ -38,6 +38,8 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	var temp = _item_resource
 	_item_resource = item_holder._item_resource
 	item_holder._item_resource = temp
+	if item_type != ItemResource.ITEM_TYPE.NONE or item_type == ItemResource.ITEM_TYPE.NONE and item_holder.item_type != ItemResource.ITEM_TYPE.NONE:
+		$AudioStreamPlayer.play()
 	update_children()
 
 
