@@ -30,9 +30,14 @@ window/size/viewport_height=480
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/custom_resource_previews/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
+"res://addons/": "green",
 "res://source_assets/": "orange"
 }
 

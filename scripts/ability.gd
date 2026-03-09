@@ -32,3 +32,7 @@ func is_valid_tile(tile: Vector2i) -> bool:
 func perform(actor: Actor, target_tile: Vector2i) -> void:
 	for effect in effects:
 		effect.queue(actor, target_tile)
+
+
+func _get_custom_preview_texture() -> Texture2D:
+	return _icon
