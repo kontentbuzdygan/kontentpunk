@@ -1,6 +1,6 @@
 @tool
 class_name Item
-extends Node2D
+extends CenterContainer
 
 @export var _item_resource: ItemResource:
 	get():
@@ -9,19 +9,32 @@ extends Node2D
 		if _item_resource == value:
 			return
 
+		if _item_resource and _item_resource.changed.is_connected(update_children):
+			_item_resource.changed.disconnect(update_children)
+
 		_item_resource = value
+
+		if _item_resource:
+			_item_resource.changed.connect(update_children)
 		update_children()
 
 
 func update_children() -> void:
+	if not is_node_ready():
+		await ready	
+
 	if _item_resource:
-		$Sprite2D.texture = _item_resource.icon
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+		$TextureRect.texture = _item_resource.icon
+	else:
+		$TextureRect.texture = null
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _get_drag_data(_at_position: Vector2) -> Item:
+	var icon = TextureRect.new()
+	icon.texture = _item_resource.icon
+	set_drag_preview(icon)
+	return self
+
+
+func get_item_resource() -> ItemResource:
+	return _item_resource

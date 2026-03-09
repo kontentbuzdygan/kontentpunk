@@ -2,12 +2,53 @@
 class_name ItemResource
 extends Resource
 
-enum ITEM_TYPE { NONE, HEAD, HEART, ARM, SPINE, LEG }
+enum ITEM_TYPE { NONE = -1, HEAD, HEART, ARM, SPINE, LEG }
 
-@export var name: String
-@export var icon: Texture2D
-@export var item_type: ITEM_TYPE
-@export var ability: Ability
-@export var cost_per_turn: int
-@export var stamina: int
-@export var cooldown: int
+@export var name: String:
+    get():
+        return name
+    set(value):
+        name = value
+        changed.emit()
+
+@export var icon: Texture2D:
+    get():
+        return icon
+    set(value):
+        icon = value
+        changed.emit()
+
+@export var item_type: ITEM_TYPE:
+    get():
+        return item_type
+    set(value):
+        item_type = value
+        changed.emit()
+
+@export var ability: Ability:
+    get():
+        return ability
+    set(value):
+        ability = value
+        changed.emit()
+
+@export var cost_per_turn: int:
+    get():
+        return cost_per_turn
+    set(value):
+        cost_per_turn = value
+        changed.emit()
+
+@export var stamina: int:
+    get():
+        return stamina
+    set(value):
+        stamina = value
+        changed.emit()
+
+@export var cooldown: int:
+    get():
+        return cooldown
+    set(value):
+        cooldown = value
+        changed.emit()

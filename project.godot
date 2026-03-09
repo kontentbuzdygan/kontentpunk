@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="kontentpunk"
+run/main_scene="uid://5o51t1yfbub3"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

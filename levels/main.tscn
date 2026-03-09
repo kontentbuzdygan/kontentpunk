@@ -24,10 +24,9 @@
 [ext_resource type="Resource" uid="uid://bhttik14ccisc" path="res://data/abilities/finger_gun_ability.tres" id="12_woytj"]
 [ext_resource type="Texture2D" uid="uid://dqufku313tmlp" path="res://textures/woman.png" id="13_05fi1"]
 [ext_resource type="AnimationLibrary" uid="uid://cyoxtcn08i3rn" path="res://animations/player.res" id="14_j7211"]
-[ext_resource type="Texture2D" uid="uid://crx7va0xo417w" path="res://textures/item_holder_empty.tres" id="14_mig3l"]
 [ext_resource type="Resource" uid="uid://cti48yfdi8rxc" path="res://data/abilities/cyber_heart_ability.tres" id="14_o6dmv"]
+[ext_resource type="PackedScene" uid="uid://bg74xf63v45np" path="res://objects/ui/item_holder.tscn" id="14_xombn"]
 [ext_resource type="SpriteFrames" uid="uid://dkjqjo2lu0tt7" path="res://textures/girl.tres" id="15_s07ge"]
-[ext_resource type="Script" uid="uid://byduw85nd6dcg" path="res://scripts/item_holder.gd" id="15_xombn"]
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
@@ -40,6 +39,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
 [ext_resource type="AudioStream" uid="uid://nfkr7ik6cg2y" path="res://sounds/blade_001.ogg" id="31_duofn"]
 [ext_resource type="AudioStream" uid="uid://rlv7dfrqpx2i" path="res://sounds/blade_003.ogg" id="35_y60h0"]
+[ext_resource type="PackedScene" uid="uid://okmfcqgq6n74" path="res://objects/items/finger_gun.tscn" id="41_vydlj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6et1j"]
 resource_name = "empty"
@@ -145,6 +145,7 @@ layout_mode = 2
 resource_type = 1
 
 [node name="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/ManaBar/Icon" parent_id_path=PackedInt32Array(1982952910, 440035135) index="0" unique_id=772610324]
+position = Vector2(0, 1)
 sprite_frames = ExtResource("4_6yxbg")
 frame = 0
 
@@ -152,69 +153,67 @@ frame = 0
 layout_mode = 2
 texture = ExtResource("13_05fi1")
 
-[node name="Head" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1885258570]
+[node name="Head" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=570677188 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 59.0
-offset_top = -15.0
+offset_top = -11.0
 offset_right = 101.0
-offset_bottom = 27.0
-texture = ExtResource("14_mig3l")
-stretch_mode = 2
-script = ExtResource("15_xombn")
+offset_bottom = 31.0
+item_type = 1
 
-[node name="Heart" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1910729674]
+[node name="Heart" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1456337609 instance=ExtResource("14_xombn")]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 31.0
+offset_right = 100.0
+offset_bottom = 73.0
+item_type = 2
+
+[node name="LArm" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=48775684 instance=ExtResource("14_xombn")]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 30.0
+offset_right = 30.0
+offset_bottom = 72.0
+item_type = 3
+
+[node name="RArm" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=850361375 instance=ExtResource("14_xombn")]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 30.0
+offset_right = 167.0
+offset_bottom = 72.0
+item_type = 3
+
+[node name="Spine" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=65241761 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 59.0
-offset_top = 27.0
+offset_top = 74.0
 offset_right = 101.0
-offset_bottom = 69.0
-texture = ExtResource("14_mig3l")
-stretch_mode = 2
+offset_bottom = 116.0
+item_type = 4
 
-[node name="ArmLeft" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1555599612]
+[node name="LLeg" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1558327849 instance=ExtResource("14_xombn")]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 27.0
-offset_right = 163.0
-offset_bottom = 69.0
-texture = ExtResource("14_mig3l")
-stretch_mode = 2
+offset_left = 25.0
+offset_top = 126.0
+offset_right = 67.0
+offset_bottom = 168.0
+item_type = 5
 
-[node name="ArmRight" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1012088561]
+[node name="RLeg" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=312628004 instance=ExtResource("14_xombn")]
 layout_mode = 0
-offset_left = -4.0
-offset_top = 27.0
-offset_right = 38.0
-offset_bottom = 69.0
-texture = ExtResource("14_mig3l")
-stretch_mode = 2
+offset_left = 90.0
+offset_top = 126.0
+offset_right = 132.0
+offset_bottom = 168.0
+item_type = 5
 
-[node name="Spine" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1498828142]
-layout_mode = 0
-offset_left = 59.0
-offset_top = 69.0
-offset_right = 101.0
-offset_bottom = 111.0
-texture = ExtResource("14_mig3l")
-stretch_mode = 2
+[node name="HFlowContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1678796454]
+layout_mode = 2
 
-[node name="LegRight" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1627935089]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 122.0
-offset_right = 73.0
-offset_bottom = 164.0
-texture = ExtResource("14_mig3l")
-stretch_mode = 2
-
-[node name="LegLeft" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=201435590]
-layout_mode = 0
-offset_left = 89.0
-offset_top = 122.0
-offset_right = 131.0
-offset_bottom = 164.0
-texture = ExtResource("14_mig3l")
-stretch_mode = 2
+[node name="FingerGun" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/HFlowContainer" unique_id=355694343 instance=ExtResource("41_vydlj")]
+layout_mode = 2
 
 [node name="BottomPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer" unique_id=271568282]
 custom_minimum_size = Vector2(446, 72)
