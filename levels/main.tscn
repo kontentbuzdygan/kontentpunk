@@ -188,9 +188,9 @@ item_type = 2
 [node name="Spine" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=65241761 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 59.0
-offset_top = 74.0
+offset_top = 73.0
 offset_right = 101.0
-offset_bottom = 116.0
+offset_bottom = 115.0
 item_type = 3
 
 [node name="LLeg" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1558327849 instance=ExtResource("14_xombn")]

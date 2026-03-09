@@ -8,6 +8,9 @@ extends CenterContainer
 		return _item_resource
 	set(value):
 		print(value)
+		if not value and item_type == ItemResource.ITEM_TYPE.NONE:
+			queue_free()
+			return
 		if _item_resource == value:
 			return
 
