@@ -245,6 +245,7 @@ type = 1
 item_type = 4
 
 [node name="LootContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1678796454]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 8
@@ -304,20 +305,17 @@ tile_map_data = PackedByteArray("AAD/////AgACAAAAAAD//wAAAgACAAAAAAAAAAAAAgACAAA
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
 
-[node name="Lootbag" parent="Grid" unique_id=828126499 node_paths=PackedStringArray("loot_container") instance=ExtResource("42_2hoto")]
+[node name="Lootbag" parent="Grid" unique_id=828126499 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, -80)
 loot = Array[ExtResource("29_gusra")]([ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("16_vydlj")])
-loot_container = NodePath("../../Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer")
 
-[node name="Lootbag2" parent="Grid" unique_id=2099095446 node_paths=PackedStringArray("loot_container") instance=ExtResource("42_2hoto")]
+[node name="Lootbag2" parent="Grid" unique_id=2099095446 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, -16)
 loot = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj")])
-loot_container = NodePath("../../Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer")
 
-[node name="Lootbag3" parent="Grid" unique_id=229070522 node_paths=PackedStringArray("loot_container") instance=ExtResource("42_2hoto")]
+[node name="Lootbag3" parent="Grid" unique_id=229070522 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, 16)
 loot = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj")])
-loot_container = NodePath("../../Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer")
 
 [node name="Highlight" type="Node2D" parent="Grid" unique_id=756878567]
 z_index = 10

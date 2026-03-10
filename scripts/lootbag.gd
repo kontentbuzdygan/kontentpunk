@@ -2,10 +2,10 @@ class_name Lootbag
 extends Node2D
 
 @export var loot: Array[Item] = []
-@export var loot_container: LootContainer
 
 @onready var grid: Grid = find_parent("Grid")
 @onready var player: Player = get_parent().get_node("Player")
+@onready var loot_container: LootContainer = %LootContainer
 
 func _ready() -> void:
 	if not loot_container:
