@@ -4,16 +4,15 @@ extends HBoxContainer
 @export var resource_type: PlayerResource.Type
 @export var cost: int = 1:
 	get:
-		return _cost
+		return cost
 	set(value):
-		_cost = value
-		$Label.text = str(_cost)
+		cost = value
+		$Label.text = str(cost)
 		update()
 
 @export var icon_enabled: Texture2D
 @export var icon_disabled: Texture2D
 
-var _cost: int = 1
 var _resource: PlayerResource
 
 
@@ -26,7 +25,7 @@ func _ready() -> void:
 
 func update() -> void:
 	if _resource:
-		if _resource.current < _cost:
+		if _resource.current < cost:
 			$Icon.texture = icon_disabled
 			set_label_color($Label.get_theme_color(&"font_color_disabled"))
 		else:

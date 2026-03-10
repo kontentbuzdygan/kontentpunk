@@ -5,36 +5,33 @@ enum Type { HEALTH, MANA, MONEY }
 
 @export var current: int = 5:
 	get:
-		return _current
+		return current
 	set(value):
-		if _maximum >= 0:
-			_current = clamp(value, 0, _maximum)
+		if maximum >= 0:
+			current = clamp(value, 0, maximum)
 		else:
-			_current = max(value, 0)
+			current = max(value, 0)
 
-		current_changed.emit(_current)
+		current_changed.emit(current)
 
 @export var maximum: int = 5:
 	get:
-		return _maximum
+		return maximum
 	set(value):
-		_maximum = max(0, value)
-		maximum_changed.emit(_maximum)
+		maximum = max(0, value)
+		maximum_changed.emit(maximum)
 
-		if _maximum >= 0 and _maximum < _current:
-			current = _maximum
+		if maximum >= 0 and maximum < current:
+			current = maximum
 
 signal current_changed(value: int)
 signal maximum_changed(value: int)
 
-var _current: int = 5
-var _maximum: int = 5
-
 
 func _init(maximum_: int, current_: int = maximum_) -> void:
-	_maximum = maximum_
-	_current = current_
+	maximum = maximum_
+	current = current_
 
 
 func refill() -> void:
-	current = _maximum
+	current = maximum

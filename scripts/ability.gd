@@ -4,23 +4,20 @@ extends Resource
 
 @export var icon: Texture2D:
 	get:
-		return _icon
+		return icon
 	set(value):
-		_icon = value
+		icon = value
 		emit_changed()
 
 @export var base_mana_cost: int:
 	get:
-		return _base_mana_cost
+		return base_mana_cost
 	set(value):
-		_base_mana_cost = value
+		base_mana_cost = value
 		emit_changed()
 
 @export var valid_tiles: TilePredicate
 @export var effects: Array[AbilityEffect] = []
-
-var _icon: Texture2D
-var _base_mana_cost: int
 
 
 ## Tests if the ability can be performed on the given tile coordinates, relative
@@ -35,4 +32,4 @@ func perform(actor: Actor, target_tile: Vector2i) -> void:
 
 
 func _get_custom_preview_texture() -> Texture2D:
-	return _icon
+	return icon

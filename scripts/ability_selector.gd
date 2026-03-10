@@ -4,22 +4,20 @@ extends VBoxContainer
 
 @export var ability: Ability:
 	get:
-		return _ability
+		return ability
 	set(value):
-		if _ability == value:
+		if ability == value:
 			return
 
-		if _ability and _ability.changed.is_connected(update_children):
-			_ability.changed.disconnect(update_children)
+		if ability and ability.changed.is_connected(update_children):
+			ability.changed.disconnect(update_children)
 
-		_ability = value
+		ability = value
 
-		if _ability:
-			_ability.changed.connect(update_children)
+		if ability:
+			ability.changed.connect(update_children)
 
 		update_children()
-
-var _ability: Ability
 
 
 func _ready() -> void:
@@ -30,9 +28,9 @@ func _ready() -> void:
 
 
 func update_children() -> void:
-	if _ability:
-		$Button.icon = _ability.icon
-		$ManaCostDisplay.cost = _ability.base_mana_cost
+	if ability:
+		$Button.icon = ability.icon
+		$ManaCostDisplay.cost = ability.base_mana_cost
 	else:
 		$Button.icon = null
 		$ManaCostDisplay.cost = 0
@@ -44,7 +42,7 @@ func _process(_delta: float) -> void:
 
 	var mana := PlayerState.get_resource(PlayerResource.Type.MANA).current
 
-	if mana < _ability.base_mana_cost:
+	if mana < ability.base_mana_cost:
 		$Button.disabled = true
 	else:
 		$Button.disabled = CombatState.is_in_progress()
