@@ -58,11 +58,13 @@ func _on_action_ended(action: CombatAction) -> void:
 	if action is CombatAction.EndTurn:
 		_at_turn_end = true
 
-
-func _on_queue_emptied() -> void:
 	if health.current <= 0:
+		CombatState.get_instance().stop()
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://objects/ui/game_over.tscn")
-	elif _at_turn_end:
+
+
+func _on_queue_emptied() -> void:
+	if _at_turn_end:
 		_at_turn_end = false
 		mana.refill()

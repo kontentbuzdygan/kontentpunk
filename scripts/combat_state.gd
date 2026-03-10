@@ -6,6 +6,7 @@ signal queue_emptied
 
 var _queue: Array[Object] = []
 var _current_action: CombatAction = null
+var _stopped: bool = false
 
 static var _instance: CombatState
 
@@ -28,7 +29,7 @@ func queue_action(action: CombatAction) -> void:
 
 
 func process_queue() -> void:
-	while not _queue.is_empty():
+	while not _stopped and not _queue.is_empty():
 		_current_action = _queue.pop_front()
 		await _current_action.actor.execute(_current_action)
 
@@ -40,3 +41,7 @@ func process_queue() -> void:
 
 func is_in_progress() -> bool:
 	return not _queue.is_empty() or _current_action
+
+
+func stop() -> void:
+	_stopped = true
