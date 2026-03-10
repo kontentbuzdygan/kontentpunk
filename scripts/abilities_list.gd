@@ -18,8 +18,8 @@ func _on_items_changed(items: Array[Item]) -> void:
 			if not abilities.has(ability):
 				abilities.append(ability)
 
-	for ability in abilities:
-		add_ability(ability)
+	for i in range(len(abilities)):
+		add_ability(abilities[i], i)
 
 
 func clear_abilities() -> void:
@@ -27,7 +27,8 @@ func clear_abilities() -> void:
 		child.queue_free()
 
 
-func add_ability(ability: Ability) -> void:
+func add_ability(ability: Ability, index: int) -> void:
 	var selector: AbilitySelector = ability_selector_scene.instantiate()
 	selector.ability = ability
+	selector.set_index(index)
 	add_child(selector)

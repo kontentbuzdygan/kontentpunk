@@ -35,6 +35,15 @@ func update_children() -> void:
 		$ManaCostDisplay.cost = 0
 
 
+func set_index(index: int) -> void:
+	var shortcut := Shortcut.new()
+	var shortcut_event := InputEventKey.new()
+	shortcut_event.keycode = (KEY_1 + index) as Key
+	shortcut.events = [shortcut_event]
+	$Button.shortcut = shortcut
+	$Button/ShortcutLabel.text = shortcut.get_as_text()
+
+
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return

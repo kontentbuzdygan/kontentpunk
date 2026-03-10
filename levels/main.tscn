@@ -269,14 +269,17 @@ ability_selector_scene = ExtResource("9_woytj")
 [node name="AbilitySelector_1" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Abilities" unique_id=106455227 instance=ExtResource("9_woytj")]
 layout_mode = 2
 ability = ExtResource("12_woytj")
+index = null
 
 [node name="AbilitySelector_2" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Abilities" unique_id=1966105471 instance=ExtResource("9_woytj")]
 layout_mode = 2
 ability = ExtResource("16_wk3pi")
+index = null
 
 [node name="AbilitySelector_3" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Abilities" unique_id=57214738 instance=ExtResource("9_woytj")]
 layout_mode = 2
 ability = ExtResource("14_o6dmv")
+index = null
 
 [node name="Button_EndTurn" type="Button" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel" unique_id=1904212448]
 layout_mode = 2
