@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cs0hqkhvcugwn" path="res://sounds/swap.tres" id="4_7su2e"]
 
 [node name="ItemHolder" type="CenterContainer" unique_id=570677188]
+mouse_default_cursor_shape = 13
 script = ExtResource("1_3a2tc")
 
 [node name="TextureRect" type="TextureButton" parent="." unique_id=271092272]

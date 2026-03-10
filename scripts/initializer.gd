@@ -8,6 +8,18 @@ extends Node
 @export var cursor_pointer_image: Image
 @export var cursor_pointer_hotspot: Vector2i
 
+@export_group("Cursor Can Grab", "cursor_can_grab")
+@export var cursor_can_grab_image: Image
+@export var cursor_can_grab_hotspot: Vector2i
+
+@export_group("Cursor Grabbing", "cursor_grabbing")
+@export var cursor_grabbing_image: Image
+@export var cursor_grabbing_hotspot: Vector2i
+
+@export_group("Cursor Can't Drop", "cursor_cant_drop")
+@export var cursor_cant_drop_image: Image
+@export var cursor_cant_drop_hotspot: Vector2i
+
 @export_group("UI Sounds", "ui_sound")
 @export var ui_sound_click: AudioStream
 @export var ui_sound_toggle_on: AudioStream
@@ -18,6 +30,14 @@ func _ready() -> void:
 	Input.set_custom_mouse_cursor(cursor_arrow_image, Input.CURSOR_ARROW, cursor_arrow_hotspot)
 	Input.set_custom_mouse_cursor(
 		cursor_pointer_image, Input.CURSOR_POINTING_HAND, cursor_pointer_hotspot
+	)
+	Input.set_custom_mouse_cursor(cursor_can_grab_image, Input.CURSOR_MOVE, cursor_can_grab_hotspot)
+	Input.set_custom_mouse_cursor(cursor_grabbing_image, Input.CURSOR_DRAG, cursor_grabbing_hotspot)
+	Input.set_custom_mouse_cursor(
+		cursor_grabbing_image, Input.CURSOR_CAN_DROP, cursor_grabbing_hotspot
+	)
+	Input.set_custom_mouse_cursor(
+		cursor_cant_drop_image, Input.CURSOR_FORBIDDEN, cursor_cant_drop_hotspot
 	)
 
 	get_tree().node_added.connect(_on_node_added)

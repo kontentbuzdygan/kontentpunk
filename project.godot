@@ -46,6 +46,10 @@ folder_colors={
 
 occupies_tile=""
 
+[gui]
+
+common/drag_threshold=0
+
 [input]
 
 2d_select={

@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://bwb275fimm5ai"
+path="res://.godot/imported/cursor_can_grab.png-3b56f73451e54f20b7f09bf32fa5c29c.image"
+
+[deps]
+
+source_file="res://textures/cursor_can_grab.png"
+dest_files=["res://.godot/imported/cursor_can_grab.png-3b56f73451e54f20b7f09bf32fa5c29c.image"]
+
+[params]
+

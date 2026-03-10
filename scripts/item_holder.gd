@@ -33,7 +33,7 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	if _item_resource:
 		return item_holder._item_resource.item_type == _item_resource.item_type
 	else:
-		return item_holder._item_resource.item_type == item_type or item_type == ItemResource.ITEM_TYPE.NONE 
+		return item_holder._item_resource.item_type == item_type or item_type == ItemResource.ITEM_TYPE.NONE
 
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
@@ -57,13 +57,16 @@ func update_children():
 		$ItemSlot.texture = null
 
 
-func _get_drag_data(_at_position: Vector2) -> ItemHolder:
+func _get_drag_data(at_position: Vector2) -> ItemHolder:
 	if not _item_resource:
 		return
 
 	var icon = TextureRect.new()
 	icon.texture = _item_resource.icon
-	set_drag_preview(icon)
+	var wrapper = Control.new()
+	wrapper.add_child(icon)
+	icon.position = -at_position
+	set_drag_preview(wrapper)
 	return self
 
 
