@@ -105,153 +105,160 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="LeftPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer" unique_id=360050119]
+[node name="HBoxContainer" type="HBoxContainer" parent="Layer_HUD/MarginContainer" unique_id=142375879]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LeftPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer/HBoxContainer" unique_id=360050119]
 custom_minimum_size = Vector2(148, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="HUD" type="VBoxContainer" parent="Layer_HUD/MarginContainer/LeftPanel" unique_id=2036366227]
+[node name="HUD" type="VBoxContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel" unique_id=2036366227]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="MoneyDisplay" type="VBoxContainer" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1315845388]
+[node name="MoneyDisplay" type="VBoxContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1315845388]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 script = ExtResource("9_f1mgo")
 
-[node name="Coin" type="Control" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/MoneyDisplay" unique_id=469727718]
+[node name="Coin" type="Control" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay" unique_id=469727718]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/MoneyDisplay/Coin" unique_id=861951769]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay/Coin" unique_id=861951769]
 sprite_frames = ExtResource("3_c7dyn")
 autoplay = "default"
 centered = false
 
-[node name="Label" type="Label" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/MoneyDisplay" unique_id=2052029344]
+[node name="Label" type="Label" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay" unique_id=2052029344]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "124 213"
 horizontal_alignment = 1
 
-[node name="HealthBar" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1423697478 instance=ExtResource("3_1fput")]
+[node name="HealthBar" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1423697478 instance=ExtResource("3_1fput")]
 layout_mode = 2
 
-[node name="ManaBar" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1982952910 instance=ExtResource("3_1fput")]
+[node name="ManaBar" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1982952910 instance=ExtResource("3_1fput")]
 layout_mode = 2
 resource_type = 1
 
-[node name="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/ManaBar/Icon" parent_id_path=PackedInt32Array(1982952910, 440035135) index="0" unique_id=772610324]
+[node name="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/ManaBar/Icon" parent_id_path=PackedInt32Array(1982952910, 440035135) index="0" unique_id=772610324]
 position = Vector2(0, 1)
 sprite_frames = ExtResource("4_6yxbg")
 frame = 0
 
-[node name="Woman" type="TextureRect" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=49324645]
+[node name="Woman" type="TextureRect" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=49324645]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 texture = ExtResource("13_05fi1")
+stretch_mode = 3
 
-[node name="Head" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=570677188 instance=ExtResource("14_xombn")]
+[node name="Head" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=570677188 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 59.0
-offset_top = -11.0
+offset_top = 11.0
 offset_right = 101.0
-offset_bottom = 31.0
+offset_bottom = 53.0
 
-[node name="Heart" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1456337609 instance=ExtResource("14_xombn")]
+[node name="Heart" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=1456337609 instance=ExtResource("14_xombn")]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 31.0
-offset_right = 100.0
-offset_bottom = 73.0
+offset_left = 59.0
+offset_top = 56.0
+offset_right = 101.0
+offset_bottom = 98.0
 item_type = 1
 
-[node name="LArm" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=48775684 instance=ExtResource("14_xombn")]
+[node name="LArm" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=48775684 instance=ExtResource("14_xombn")]
 layout_mode = 0
-offset_left = -12.0
-offset_top = 30.0
-offset_right = 30.0
-offset_bottom = 72.0
+offset_left = -8.0
+offset_top = 52.0
+offset_right = 34.0
+offset_bottom = 94.0
 item_type = 2
 
-[node name="RArm" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=850361375 instance=ExtResource("14_xombn")]
+[node name="RArm" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=850361375 instance=ExtResource("14_xombn")]
 layout_mode = 0
-offset_left = 125.0
-offset_top = 30.0
-offset_right = 167.0
-offset_bottom = 72.0
+offset_left = 126.0
+offset_top = 52.0
+offset_right = 168.0
+offset_bottom = 94.0
 item_type = 2
 
-[node name="Spine" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=65241761 instance=ExtResource("14_xombn")]
+[node name="Spine" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=65241761 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 59.0
-offset_top = 73.0
+offset_top = 101.0
 offset_right = 101.0
-offset_bottom = 115.0
+offset_bottom = 143.0
 item_type = 3
 
-[node name="LLeg" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=1558327849 instance=ExtResource("14_xombn")]
+[node name="LLeg" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=1558327849 instance=ExtResource("14_xombn")]
 layout_mode = 0
-offset_left = 25.0
-offset_top = 126.0
-offset_right = 67.0
-offset_bottom = 168.0
+offset_left = 29.0
+offset_top = 148.0
+offset_right = 71.0
+offset_bottom = 190.0
 item_type = 4
 
-[node name="RLeg" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/Woman" unique_id=312628004 instance=ExtResource("14_xombn")]
+[node name="RLeg" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=312628004 instance=ExtResource("14_xombn")]
 layout_mode = 0
-offset_left = 90.0
-offset_top = 126.0
-offset_right = 132.0
-offset_bottom = 168.0
+offset_left = 89.0
+offset_top = 148.0
+offset_right = 131.0
+offset_bottom = 190.0
 item_type = 4
 
-[node name="HFlowContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/LeftPanel/HUD" unique_id=1678796454]
+[node name="HFlowContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1678796454]
 layout_mode = 2
+theme_override_constants/h_separation = 8
+alignment = 1
 
-[node name="ItemHolder" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/HFlowContainer" unique_id=1677176597 instance=ExtResource("14_xombn")]
+[node name="ItemHolder" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/HFlowContainer" unique_id=1677176597 instance=ExtResource("14_xombn")]
 layout_mode = 2
 item_type = -1
 _item_resource = ExtResource("15_xombn")
 
-[node name="ItemHolder2" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/HFlowContainer" unique_id=1873051877 instance=ExtResource("14_xombn")]
+[node name="ItemHolder2" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/HFlowContainer" unique_id=1873051877 instance=ExtResource("14_xombn")]
 layout_mode = 2
 item_type = -1
 _item_resource = ExtResource("16_vydlj")
 
-[node name="ItemHolder3" parent="Layer_HUD/MarginContainer/LeftPanel/HUD/HFlowContainer" unique_id=2071256132 instance=ExtResource("14_xombn")]
+[node name="ItemHolder3" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/HFlowContainer" unique_id=2071256132 instance=ExtResource("14_xombn")]
 layout_mode = 2
 item_type = -1
 _item_resource = ExtResource("15_xombn")
 
-[node name="BottomPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer" unique_id=271568282]
-custom_minimum_size = Vector2(446, 72)
+[node name="BottomPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer/HBoxContainer" unique_id=271568282]
+custom_minimum_size = Vector2(400, 72)
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="Abilities" type="HBoxContainer" parent="Layer_HUD/MarginContainer/BottomPanel" unique_id=1221871278]
+[node name="Abilities" type="HBoxContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel" unique_id=1221871278]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 8
 
-[node name="AbilitySelector_1" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=106455227 instance=ExtResource("9_woytj")]
+[node name="AbilitySelector_1" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Abilities" unique_id=106455227 instance=ExtResource("9_woytj")]
 layout_mode = 2
 ability = ExtResource("12_woytj")
 
-[node name="AbilitySelector_2" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=1966105471 instance=ExtResource("9_woytj")]
+[node name="AbilitySelector_2" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Abilities" unique_id=1966105471 instance=ExtResource("9_woytj")]
 layout_mode = 2
 ability = ExtResource("16_wk3pi")
 
-[node name="AbilitySelector_3" parent="Layer_HUD/MarginContainer/BottomPanel/Abilities" unique_id=57214738 instance=ExtResource("9_woytj")]
+[node name="AbilitySelector_3" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Abilities" unique_id=57214738 instance=ExtResource("9_woytj")]
 layout_mode = 2
 ability = ExtResource("14_o6dmv")
 
-[node name="Button_EndTurn" type="Button" parent="Layer_HUD/MarginContainer/BottomPanel" unique_id=1904212448]
+[node name="Button_EndTurn" type="Button" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel" unique_id=1904212448]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -272,7 +279,7 @@ stretch_mode = 2
 
 [node name="Grid" type="TileMapLayer" parent="." unique_id=434431019]
 texture_repeat = 2
-position = Vector2(400, 196)
+position = Vector2(423, 191)
 tile_map_data = PackedByteArray("AAD/////AgACAAAAAAD//wAAAgACAAAAAAAAAAAAAgACAAAAAAAAAP//AgACAAAAAAAAAP7/AgACAAAAAAD///7/AgACAAAAAAD+//7/AgACAAAAAAD+////AgACAAAAAAD+/wAAAgACAAAAAAD+/wEAAgACAAAAAAD//wEAAgACAAAAAAAAAAEAAgACAAAAAAABAAEAAgACAAAAAAABAAAAAgACAAAAAAABAP//AgACAAAAAAABAP7/AgACAAAAAAD9//3/AgAAAAAAAAD+//3/AgAAAAAAAAD///3/AgAAAAAAAAAAAP3/AgAAAAAAAAABAP3/AgAAAAAAAAACAP3/AgAAAAAAAAACAP7/AgAAAAAAAAACAP//AgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAACAAIAAgAAAAAAAAABAAIAAgAAAAAAAAAAAAIAAgAAAAAAAAD//wIAAgAAAAAAAAD9/wEAAgAAAAAAAAD9/wAAAgAAAAAAAAD9////AgAAAAAAAAD9//7/AgAAAAAAAAD8//3/AgABAAAAAAD8//7/AgABAAAAAAD8////AgABAAAAAAD8/wAAAgABAAAAAAD8/wEAAgABAAAAAAD8/wIAAgABAAAAAAD8/wMAAgABAAAAAAD9/wMAAgABAAAAAAD+/wMAAgABAAAAAAD//wMAAgABAAAAAAAAAAMAAgABAAAAAAABAAMAAgABAAAAAAACAAMAAgABAAAAAAADAAMAAgABAAAAAAADAAIAAgABAAAAAAADAAEAAgABAAAAAAADAAAAAgABAAAAAAADAP//AgABAAAAAAADAP7/AgABAAAAAAADAP3/AgABAAAAAAADAPz/AgABAAAAAAACAPz/AgABAAAAAAABAPz/AgABAAAAAAAAAPz/AgABAAAAAAD///z/AgABAAAAAAD+//z/AgABAAAAAAD9//z/AgABAAAAAAD8//z/AgABAAAAAAD7//v/AgABAAAAAAD7//z/AgABAAAAAAD7//3/AgABAAAAAAD7//7/AgABAAAAAAD7////AgABAAAAAAD7/wAAAgABAAAAAAD7/wEAAgABAAAAAAD7/wIAAgABAAAAAAD7/wQAAgABAAAAAAD7/wMAAgABAAAAAAD8/wQAAgABAAAAAAD+/wQAAgABAAAAAAD9/wQAAgABAAAAAAD//wQAAgABAAAAAAAAAAQAAgABAAAAAAABAAQAAgABAAAAAAACAAQAAgABAAAAAAADAAQAAgABAAAAAAAEAAQAAgABAAAAAAAEAAMAAgABAAAAAAAEAAIAAgABAAAAAAAEAAEAAgABAAAAAAAEAAAAAgABAAAAAAAEAP//AgABAAAAAAAEAP7/AgABAAAAAAAEAP3/AgABAAAAAAAEAPz/AgABAAAAAAAEAPv/AgABAAAAAAD8//v/AgABAAAAAAADAPv/AgABAAAAAAACAPv/AgABAAAAAAABAPv/AgABAAAAAAAAAPv/AgABAAAAAAD///v/AgABAAAAAAD+//v/AgABAAAAAAD9//v/AgABAAAAAAD+/wIAAgAAAAAAAAD9/wIAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
@@ -373,6 +380,6 @@ position = Vector2(-48, -48)
 sprite_frames = ExtResource("30_vpyym")
 autoplay = "default"
 
-[connection signal="pressed" from="Layer_HUD/MarginContainer/BottomPanel/Button_EndTurn" to="Grid/Player" method="_on_button_end_turn_pressed"]
+[connection signal="pressed" from="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Button_EndTurn" to="Grid/Player" method="_on_button_end_turn_pressed"]
 
-[editable path="Layer_HUD/MarginContainer/LeftPanel/HUD/ManaBar"]
+[editable path="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/ManaBar"]
