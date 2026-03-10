@@ -11,6 +11,7 @@ metadata/_custom_type_script = "uid://c60x3e0bisqh8"
 
 [resource]
 script = ExtResource("1_ae765")
+name = "Blood Pump Overclock"
 icon = ExtResource("1_whja6")
 base_mana_cost = 2
 valid_tiles = SubResource("Resource_k0u5y")

@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://bu4fo1hd2keea"
 
 [resource]
 script = ExtResource("1_u8012")
+name = "Hipfire"
 icon = ExtResource("1_2xa8f")
 base_mana_cost = 1
 valid_tiles = SubResource("Resource_al7v3")

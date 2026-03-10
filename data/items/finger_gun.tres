@@ -11,5 +11,4 @@ name = "Finger Gun"
 icon = ExtResource("1_u2xd1")
 type = 2
 abilities = Array[ExtResource("1_r6jme")]([ExtResource("2_1nhs3")])
-tooltip = "Finger Gun"
 metadata/_custom_type_script = "uid://bbgc4dvto7fk6"

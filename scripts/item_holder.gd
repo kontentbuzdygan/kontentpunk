@@ -34,8 +34,6 @@ enum Type { TEMPORARY, EQUIPMENT }
 
 		update_children()
 
-@export var tooltip_scene: PackedScene
-
 
 func _ready() -> void:
 	update_children()
@@ -99,16 +97,5 @@ func update_children():
 		$ItemSlot.texture = null
 
 
-func _make_custom_tooltip(for_text: String) -> Object:
-	if not item:
-		return null
-
-	var tooltip: ItemTooltip = tooltip_scene.instantiate()
-	tooltip.text = for_text
-	return tooltip
-
-
 func _get_tooltip(_at_position: Vector2) -> String:
-	if not item:
-		return "Missing item"
-	return item.name
+	return item.name if item else ""

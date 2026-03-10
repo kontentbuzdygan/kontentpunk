@@ -2,6 +2,13 @@
 class_name Ability
 extends Resource
 
+@export var name: String:
+	get:
+		return name
+	set(value):
+		name = value
+		emit_changed()
+
 @export var icon: Texture2D:
 	get:
 		return icon
@@ -16,6 +23,7 @@ extends Resource
 		base_mana_cost = value
 		emit_changed()
 
+## Matches all tiles if empty
 @export var valid_tiles: TilePredicate
 @export var effects: Array[AbilityEffect] = []
 

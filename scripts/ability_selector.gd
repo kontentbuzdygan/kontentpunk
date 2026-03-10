@@ -30,6 +30,7 @@ func _ready() -> void:
 func update_children() -> void:
 	if ability:
 		$Button.icon = ability.icon
+		$Button.tooltip_text = ability.name
 		$ManaCostDisplay.cost = ability.base_mana_cost
 	else:
 		$Button.icon = null

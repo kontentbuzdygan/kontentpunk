@@ -18,6 +18,7 @@ metadata/_custom_type_script = "uid://bu4fo1hd2keea"
 
 [resource]
 script = ExtResource("1_2syob")
+name = "Charged Leap"
 icon = ExtResource("1_dio6a")
 base_mana_cost = 2
 valid_tiles = SubResource("Resource_8aibj")
