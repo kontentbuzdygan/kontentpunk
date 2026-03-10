@@ -32,6 +32,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
 [ext_resource type="Script" uid="uid://h3ya5pngmnko" path="res://scripts/abilities_list.gd" id="19_en2ks"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
+[ext_resource type="Script" uid="uid://i47h4lyrxmuw" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
 [ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="22_8a5tp"]
 [ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
 [ext_resource type="AudioStream" uid="uid://brnn2jvwo0pk" path="res://sounds/swoosh.ogg" id="23_i3naf"]
@@ -47,12 +48,10 @@
 
 [sub_resource type="Resource" id="Resource_jjbqq"]
 script = ExtResource("4_en2ks")
-current = 3
 metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
 
 [sub_resource type="Resource" id="Resource_gusra"]
 script = ExtResource("4_en2ks")
-current = 4
 metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
 
 [sub_resource type="Resource" id="Resource_4c2mk"]
@@ -289,6 +288,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_default_cursor_shape = 2
 text = "end turn"
+script = ExtResource("21_4c2mk")
 
 [node name="Layer_Background" type="CanvasLayer" parent="." unique_id=1978189837]
 layer = -1
