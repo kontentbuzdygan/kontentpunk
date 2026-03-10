@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://d1ek4xbyaehd7"]
+
+[ext_resource type="AudioStream" uid="uid://bxhawk1lmxib5" path="res://sounds/robot_female_hurt_001.ogg" id="1_0i88y"]
+[ext_resource type="AudioStream" uid="uid://bqxucg78ruxvc" path="res://sounds/robot_female_hurt_002.ogg" id="2_ex04m"]
+[ext_resource type="AudioStream" uid="uid://b8b5sjuxxdy8f" path="res://sounds/robot_female_hurt_003.ogg" id="3_ivisv"]
+[ext_resource type="AudioStream" uid="uid://tnlc05wfrcm4" path="res://sounds/robot_female_hurt_004.ogg" id="4_h7f6j"]
+[ext_resource type="AudioStream" uid="uid://bi3fpbni6oj85" path="res://sounds/robot_female_hurt_005.ogg" id="5_fpk81"]
+[ext_resource type="AudioStream" uid="uid://or1ykcav6rw7" path="res://sounds/robot_female_hurt_006.ogg" id="6_cy5tn"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("1_0i88y")
+stream_1/stream = ExtResource("2_ex04m")
+stream_2/stream = ExtResource("3_ivisv")
+stream_3/stream = ExtResource("4_h7f6j")
+stream_4/stream = ExtResource("5_fpk81")
+stream_5/stream = ExtResource("6_cy5tn")

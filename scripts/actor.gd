@@ -46,7 +46,7 @@ func execute(action: CombatAction) -> void:
 
 func take_damage(value: int) -> void:
 	print("%s took %d damage" % [self, value])
-	play_sound(hurt_sound, 0.2)
+	play_sound(hurt_sound, 0.1)
 
 	if grid_animation_player.has_animation(&"hurt"):
 		await grid_animation_player.play_and_wait(&"hurt")

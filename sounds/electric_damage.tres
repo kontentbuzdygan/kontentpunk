@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://blmxxh1jbfo7w"]
+
+[ext_resource type="AudioStream" uid="uid://cqd76qpnhw0ow" path="res://sounds/electric_damage_001.ogg" id="1_ytlop"]
+[ext_resource type="AudioStream" uid="uid://d0o66ahevhsle" path="res://sounds/electric_damage_002.ogg" id="2_sj10a"]
+[ext_resource type="AudioStream" uid="uid://dujlc8o471ec3" path="res://sounds/electric_damage_003.ogg" id="3_1p5q1"]
+[ext_resource type="AudioStream" uid="uid://daeb506c1tnxh" path="res://sounds/electric_damage_004.ogg" id="4_c1n5a"]
+[ext_resource type="AudioStream" uid="uid://dahc8q8okpigi" path="res://sounds/electric_damage_005.ogg" id="5_6jo1k"]
+[ext_resource type="AudioStream" uid="uid://c48mtms7x6igh" path="res://sounds/electric_damage_006.ogg" id="6_nhmy8"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("1_ytlop")
+stream_1/stream = ExtResource("2_sj10a")
+stream_2/stream = ExtResource("3_1p5q1")
+stream_3/stream = ExtResource("4_c1n5a")
+stream_4/stream = ExtResource("5_6jo1k")
+stream_5/stream = ExtResource("6_nhmy8")
