@@ -62,6 +62,10 @@ func execute(action: CombatAction) -> void:
 		await get_tree().create_timer(end_turn_delay_seconds).timeout
 		return
 
+	if action is CombatAction.HealSelf:
+		health.current += action.value
+		return
+
 	await super.execute(action)
 
 

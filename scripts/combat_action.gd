@@ -40,3 +40,16 @@ class DealDamage:
 
 	func _to_string() -> String:
 		return "<deal %d damage to %s>" % [value, target_tile]
+
+
+class HealSelf:
+	extends CombatAction
+
+	var value: int
+
+	func _init(actor_: Actor, value_: int) -> void:
+		super._init(actor_)
+		value = value_
+
+	func _to_string() -> String:
+		return "<heal self by %d>" % value

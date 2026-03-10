@@ -1,6 +1,7 @@
 extends Actor
 
 @export var attack_sound: AudioStream
+@export var health: int = 8
 
 
 func _ready() -> void:
@@ -20,3 +21,11 @@ func execute(action: CombatAction) -> void:
 		play_sound(attack_sound)
 
 	await super.execute(action)
+
+
+func take_damage(value: int) -> void:
+	health = max(health - value, 0)
+	await super.take_damage(value)
+
+	if health <= 0:
+		queue_free()
