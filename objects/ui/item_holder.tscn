@@ -22,3 +22,4 @@ mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1750800561]
 stream = ExtResource("4_7su2e")
+bus = &"UI"
