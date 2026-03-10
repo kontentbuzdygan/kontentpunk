@@ -8,6 +8,8 @@ var _resources: Dictionary[PlayerResource.Type, PlayerResource] = {
 var _items: Array[Item] = []
 var _at_turn_end: bool = false
 
+signal items_changed(items: Array[Item])
+
 
 func _ready() -> void:
 	CombatState.action_ended.connect(_on_action_ended)
@@ -21,11 +23,13 @@ func get_resource(type: PlayerResource.Type) -> PlayerResource:
 func add_item(item: Item) -> void:
 	print("equipped ", item)
 	_items.append(item)
+	items_changed.emit(_items)
 
 
 func remove_item(item: Item) -> void:
 	print("unequipped ", item)
 	_items.erase(item)
+	items_changed.emit(_items)
 
 
 func _on_action_ended(action: CombatAction) -> void:

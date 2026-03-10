@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://cap856rdql0af"]
 
+[ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_r6jme"]
 [ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="1_u2xd1"]
+[ext_resource type="Resource" uid="uid://bhttik14ccisc" path="res://data/abilities/finger_gun_ability.tres" id="2_1nhs3"]
 [ext_resource type="Script" uid="uid://bbgc4dvto7fk6" path="res://scripts/item.gd" id="2_h4c41"]
 
 [resource]
 script = ExtResource("2_h4c41")
 name = "Finger Gun"
 icon = ExtResource("1_u2xd1")
-item_type = 2
-cost_per_turn = 2
-stamina = 3
-cooldown = 5
+type = 2
+abilities = Array[ExtResource("1_r6jme")]([ExtResource("2_1nhs3")])
 tooltip = "Finger Gun"
 metadata/_custom_type_script = "uid://bbgc4dvto7fk6"

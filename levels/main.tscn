@@ -33,6 +33,7 @@
 [ext_resource type="Resource" uid="uid://bkytu06rtkd5l" path="res://data/items/cyber_heart.tres" id="16_vydlj"]
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
+[ext_resource type="Script" uid="uid://h3ya5pngmnko" path="res://scripts/abilities_list.gd" id="19_en2ks"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
 [ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="22_8a5tp"]
 [ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
@@ -268,6 +269,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 8
+script = ExtResource("19_en2ks")
+ability_selector_scene = ExtResource("9_woytj")
 
 [node name="AbilitySelector_1" parent="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Abilities" unique_id=106455227 instance=ExtResource("9_woytj")]
 layout_mode = 2

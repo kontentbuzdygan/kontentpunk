@@ -17,8 +17,8 @@ enum Type { TEMPORARY, EQUIPMENT }
 			if type == Type.EQUIPMENT:
 				PlayerState.remove_item(item)
 
-			if item.changed.is_connected(update_children):
-				item.changed.disconnect(update_children)
+			if item.icon_changed.is_connected(update_children.unbind(1)):
+				item.icon_changed.disconnect(update_children.unbind(1))
 
 		item = value
 
@@ -26,7 +26,7 @@ enum Type { TEMPORARY, EQUIPMENT }
 			if type == Type.EQUIPMENT:
 				PlayerState.add_item(item)
 
-			item.changed.connect(update_children)
+			item.icon_changed.connect(update_children.unbind(1))
 
 		if not Engine.is_editor_hint() and not item and type == Type.TEMPORARY:
 			queue_free()
@@ -65,9 +65,9 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 
 	if item:
 		# swapping
-		return source.item.item_type == item.item_type
+		return item_type == source.item.type and source.item_type == item.type
 	else:
-		return source.item.item_type == item_type or item_type == Item.Type.NONE
+		return item_type == source.item.type or item_type == Item.Type.NONE
 
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
