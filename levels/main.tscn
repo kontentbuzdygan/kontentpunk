@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bkfnk7qh7x1qu" path="res://textures/highlighted_tile.png" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://dd1fxp22x7nbq" path="res://scripts/grid.gd" id="3_m1504"]
 [ext_resource type="SpriteFrames" uid="uid://c6jsi8fbkxte" path="res://textures/circuit.tres" id="4_6yxbg"]
-[ext_resource type="Script" uid="uid://d2fxnw70e2fsv" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
+[ext_resource type="Script" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
 [ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="4_l412s"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
@@ -33,14 +33,15 @@
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
 [ext_resource type="Script" uid="uid://h3ya5pngmnko" path="res://scripts/abilities_list.gd" id="19_en2ks"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
-[ext_resource type="Script" uid="uid://i47h4lyrxmuw" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
+[ext_resource type="Script" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
+[ext_resource type="Script" uid="uid://dcwdi8d5fb7y8" path="res://scripts/drop_area.gd" id="21_oe60c"]
 [ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="22_8a5tp"]
 [ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
 [ext_resource type="AudioStream" uid="uid://brnn2jvwo0pk" path="res://sounds/swoosh.ogg" id="23_i3naf"]
 [ext_resource type="AudioStream" uid="uid://dnte3iopj5m20" path="res://sounds/woman_hurt_gore.tres" id="27_egc1g"]
 [ext_resource type="SpriteFrames" uid="uid://ds56y1m3mp6xh" path="res://textures/robot.tres" id="27_o6dmv"]
 [ext_resource type="SpriteFrames" uid="uid://cvbnmbat1kymb" path="res://textures/robot2.tres" id="28_o6dmv"]
-[ext_resource type="Script" uid="uid://bbgc4dvto7fk6" path="res://scripts/item.gd" id="29_gusra"]
+[ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="29_gusra"]
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
 [ext_resource type="AudioStream" uid="uid://nfkr7ik6cg2y" path="res://sounds/blade_001.ogg" id="31_duofn"]
 [ext_resource type="AudioStream" uid="uid://rlv7dfrqpx2i" path="res://sounds/blade_003.ogg" id="35_y60h0"]
@@ -60,6 +61,8 @@ metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
 script = ExtResource("4_l412s")
 current = 100
 metadata/_custom_type_script = "uid://dywwjhmsu8rif"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gusra"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6et1j"]
 resource_name = "empty"
@@ -286,6 +289,16 @@ mouse_default_cursor_shape = 2
 text = "end turn"
 script = ExtResource("21_4c2mk")
 
+[node name="DropArea" type="Panel" parent="Layer_HUD" unique_id=1490143733 node_paths=PackedStringArray("grid")]
+offset_left = 212.0
+offset_top = 1.0
+offset_right = 637.0
+offset_bottom = 367.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gusra")
+script = ExtResource("21_oe60c")
+grid = NodePath("../../Grid")
+lootbag_scene = ExtResource("42_2hoto")
+
 [node name="Layer_Background" type="CanvasLayer" parent="." unique_id=1978189837]
 layer = -1
 
@@ -340,6 +353,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" type="Node2D" parent="Grid" unique_id=510566155 groups=["occupies_tile"]]
+z_index = 999
 position = Vector2(-144, -144)
 script = ExtResource("5_etqu2")
 abilities_button_group = ExtResource("9_w23s1")

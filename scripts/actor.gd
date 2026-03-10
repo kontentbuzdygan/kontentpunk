@@ -10,6 +10,8 @@ extends Node2D
 
 var _audio_stream_player: AudioStreamPlayer
 
+signal moved_to(tile: Vector2i)
+
 
 func _ready() -> void:
 	_audio_stream_player = AudioStreamPlayer.new()
@@ -33,6 +35,7 @@ func execute(action: CombatAction) -> void:
 	if action is CombatAction.Move:
 		play_sound(move_sound)
 		await grid_animation_player.move_to(action.target_tile)
+		moved_to.emit(action.target_tile)
 		return
 
 	if action is CombatAction.DealDamage:

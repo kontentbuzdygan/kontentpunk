@@ -11,7 +11,7 @@ enum Type { TEMPORARY, EQUIPMENT }
 		return item
 	set(value):
 		if not value:
-			update_lootbag()
+			take_item()
 
 		if item == value:
 			return
@@ -105,6 +105,8 @@ func _get_tooltip(_at_position: Vector2) -> String:
 	return item.name if item else ""
 
 
-func update_lootbag():
+func take_item():
+	if type == Type.EQUIPMENT:
+		return
 	var loot_container: LootContainer = get_parent()
-	loot_container.on_lootbag_update(item)
+	loot_container.on_take_item(item)

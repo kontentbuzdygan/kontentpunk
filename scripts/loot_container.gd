@@ -9,6 +9,9 @@ var current_lootbag: Lootbag:
 	set(value):
 		clear_ui()
 
+		if not value:
+			return
+
 		current_lootbag = value
 		for item in current_lootbag.loot:
 			print("Creating item holder")
@@ -37,7 +40,7 @@ func _process(_delta: float) -> void:
 		self.visible = false
 
 
-func on_lootbag_update(item: Item):
+func on_take_item(item: Item):
 	if not current_lootbag:
 		return
 

@@ -40,11 +40,11 @@ func get_node_tile(node: Node2D) -> Vector2i:
 	return local_to_map(relative_position)
 
 
-func get_nodes_on_tile(tile: Vector2i) -> Array[Node2D]:
+func get_nodes_on_tile(tile: Vector2i, type: Variant = null) -> Array[Node2D]:
 	var found: Array[Node2D] = []
 
 	for node in get_children():
-		if node is Node2D and get_node_tile(node) == tile:
+		if node is Node2D and get_node_tile(node) == tile and (type == null or is_instance_of(node, type)):
 			found.append(node)
 
 	return found
@@ -77,3 +77,8 @@ func show_mana_cost(cost: int) -> void:
 
 func hide_mana_cost() -> void:
 	$Highlight/ManaCostDisplay.visible = false
+
+
+func add_child_on_tile(node: Node2D, tile: Vector2i):
+	self.add_child(node)
+	node.position = map_to_local(tile)
