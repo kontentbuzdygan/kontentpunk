@@ -16,6 +16,8 @@ extends Resource
 		icon = value
 		emit_changed()
 
+@export var sound_effect: AudioStream
+
 @export var base_mana_cost: int:
 	get:
 		return base_mana_cost
@@ -35,6 +37,9 @@ func is_valid_tile(tile: Vector2i) -> bool:
 
 
 func perform(actor: Actor, target_tile: Vector2i) -> void:
+	if sound_effect:
+		actor.play_sound(sound_effect)
+
 	for effect in effects:
 		effect.queue(actor, target_tile)
 

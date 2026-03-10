@@ -1,6 +1,15 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://ds56y1m3mp6xh"]
 
+[ext_resource type="Texture2D" uid="uid://b5xmtha4oilcw" path="res://textures/robot_hurt.png" id="1_816tb"]
 [ext_resource type="Texture2D" uid="uid://dx68tsd4gapvj" path="res://textures/robot_idle.png" id="1_dcr1y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uhaj"]
+atlas = ExtResource("1_816tb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kl68"]
+atlas = ExtResource("1_816tb")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_816tb"]
 atlas = ExtResource("1_dcr1y")
@@ -12,6 +21,17 @@ region = Rect2(32, 0, 32, 32)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uhaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kl68")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_816tb")

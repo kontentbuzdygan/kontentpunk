@@ -66,9 +66,8 @@ func execute(action: CombatAction) -> void:
 
 
 func take_damage(value: int) -> void:
-	super.take_damage(value)
 	health.current -= value
-	await grid_animation_player.play_and_wait(&"hurt")
+	await super.take_damage(value)
 
 
 func get_selected_ability() -> Ability:
