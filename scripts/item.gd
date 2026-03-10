@@ -1,33 +1,69 @@
 @tool
 class_name Item
-extends CenterContainer
+extends Resource
 
-@export var _item_resource: ItemResource:
-	get():
-		return _item_resource
+enum Type { NONE = -1, HEAD, HEART, ARM, SPINE, LEG }
+
+@export var name: String:
+	get:
+		return name
 	set(value):
-		if _item_resource == value:
-			return
+		name = value
+		changed.emit()
 
-		if _item_resource and _item_resource.changed.is_connected(update_children):
-			_item_resource.changed.disconnect(update_children)
+@export var icon: Texture2D:
+	get:
+		return icon
+	set(value):
+		icon = value
+		changed.emit()
 
-		_item_resource = value
+@export var item_type: Type:
+	get:
+		return item_type
+	set(value):
+		item_type = value
+		changed.emit()
 
-		if _item_resource:
-			_item_resource.changed.connect(update_children)
-		update_children()
+@export var ability: Ability:
+	get:
+		return ability
+	set(value):
+		ability = value
+		changed.emit()
+
+@export var cost_per_turn: int:
+	get:
+		return cost_per_turn
+	set(value):
+		cost_per_turn = value
+		changed.emit()
+
+@export var stamina: int:
+	get:
+		return stamina
+	set(value):
+		stamina = value
+		changed.emit()
+
+@export var cooldown: int:
+	get:
+		return cooldown
+	set(value):
+		cooldown = value
+		changed.emit()
+
+@export var tooltip: String:
+	get:
+		return tooltip
+	set(value):
+		tooltip = value
+		changed.emit()
 
 
-func update_children() -> void:
-	if not Engine.is_editor_hint() and not is_node_ready():
-		await ready	
-
-	if _item_resource:
-		$TextureRect.texture = _item_resource.icon
-	else:
-		$TextureRect.texture = null
+func _to_string() -> String:
+	return name
 
 
-func get_item_resource() -> ItemResource:
-	return _item_resource
+func _get_custom_preview_texture() -> Texture2D:
+	return icon

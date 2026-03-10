@@ -5,8 +5,8 @@ extends CenterContainer
 enum Type { TEMPORARY, EQUIPMENT }
 
 @export var type: Type = Type.TEMPORARY
-@export var item_type: ItemResource.Type = ItemResource.Type.NONE
-@export var item: ItemResource:
+@export var item_type: Item.Type = Item.Type.NONE
+@export var item: Item:
 	get:
 		return item
 	set(value):
@@ -67,7 +67,7 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 		# swapping
 		return source.item.item_type == item.item_type
 	else:
-		return source.item.item_type == item_type or item_type == ItemResource.Type.NONE
+		return source.item.item_type == item_type or item_type == Item.Type.NONE
 
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:

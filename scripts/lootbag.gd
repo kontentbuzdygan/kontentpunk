@@ -3,9 +3,9 @@ extends Node2D
 @onready var grid: Grid = find_parent("Grid")
 @onready var player: Player = get_parent().get_node("Player")
 
-signal _lootbag_state_changed(open: bool, loot: Array[ItemResource])
+signal _lootbag_state_changed(open: bool, loot: Array[Item])
 
-var _loot: Array[ItemResource] = []
+var _loot: Array[Item] = []
 var _is_lootbag_opened = false
 
 func _ready() -> void:
