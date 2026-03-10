@@ -43,11 +43,19 @@ func get_node_tile(node: Node2D) -> Vector2i:
 func get_nodes_on_tile(tile: Vector2i) -> Array[Node2D]:
 	var found: Array[Node2D] = []
 
-	for node in get_tree().get_nodes_in_group("occupies_tile"):
-		if node is Node2D and is_ancestor_of(node) and get_node_tile(node) == tile:
+	for node in get_children():
+		if node is Node2D and get_node_tile(node) == tile:
 			found.append(node)
 
 	return found
+
+
+func is_tile_occupied(tile: Vector2i) -> bool:
+	for node in get_nodes_on_tile(tile):
+		if node.is_in_group(&"occupies_tile"):
+			return true
+
+	return false
 
 
 func get_random_tile() -> Vector2i:
@@ -55,7 +63,7 @@ func get_random_tile() -> Vector2i:
 
 
 func find_tile_with(node_type: Variant) -> Vector2i:
-	for node in get_tree().get_nodes_in_group("occupies_tile"):
+	for node in get_children():
 		if is_instance_of(node, node_type):
 			return get_node_tile(node)
 
