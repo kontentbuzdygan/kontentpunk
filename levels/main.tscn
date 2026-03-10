@@ -355,7 +355,7 @@ autoplay = "idle"
 frame_progress = 0.8695535
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
-position = Vector2(-176, -176)
+position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
 move_sound = ExtResource("23_i3naf")
