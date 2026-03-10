@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://baghb6cp68bp5"]
+
+[ext_resource type="Texture2D" uid="uid://cjayaqh8w4gbv" path="res://textures/lootbox.png" id="1_212pc"]
+[ext_resource type="Script" uid="uid://cyyq2tpwykb4x" path="res://scripts/lootbag.gd" id="1_j30dr"]
+
+[node name="Lootbag" type="Node2D" unique_id=828126499]
+script = ExtResource("1_j30dr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=212960354]
+texture = ExtResource("1_212pc")

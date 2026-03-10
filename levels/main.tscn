@@ -43,6 +43,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
 [ext_resource type="AudioStream" uid="uid://nfkr7ik6cg2y" path="res://sounds/blade_001.ogg" id="31_duofn"]
 [ext_resource type="AudioStream" uid="uid://rlv7dfrqpx2i" path="res://sounds/blade_003.ogg" id="35_y60h0"]
+[ext_resource type="PackedScene" uid="uid://baghb6cp68bp5" path="res://objects/game/lootbag.tscn" id="42_2hoto"]
 
 [sub_resource type="Image" id="Image_xombn"]
 data = {
@@ -232,22 +233,22 @@ offset_right = 131.0
 offset_bottom = 190.0
 item_type = 4
 
-[node name="HFlowContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1678796454]
+[node name="LootContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1678796454]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 alignment = 1
 
-[node name="ItemHolder" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/HFlowContainer" unique_id=1677176597 instance=ExtResource("14_xombn")]
+[node name="ItemHolder" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer" unique_id=1677176597 instance=ExtResource("14_xombn")]
 layout_mode = 2
 item_type = -1
 _item_resource = ExtResource("15_xombn")
 
-[node name="ItemHolder2" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/HFlowContainer" unique_id=1873051877 instance=ExtResource("14_xombn")]
+[node name="ItemHolder2" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer" unique_id=1873051877 instance=ExtResource("14_xombn")]
 layout_mode = 2
 item_type = -1
 _item_resource = ExtResource("16_vydlj")
 
-[node name="ItemHolder3" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/HFlowContainer" unique_id=2071256132 instance=ExtResource("14_xombn")]
+[node name="ItemHolder3" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer" unique_id=2071256132 instance=ExtResource("14_xombn")]
 layout_mode = 2
 item_type = -1
 _item_resource = ExtResource("15_xombn")
@@ -301,6 +302,9 @@ tile_map_data = PackedByteArray("AAD/////AgACAAAAAAD//wAAAgACAAAAAAAAAAAAAgACAAA
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
 
+[node name="Lootbag" parent="Grid" unique_id=828126499 instance=ExtResource("42_2hoto")]
+position = Vector2(-144, -80)
+
 [node name="Highlight" type="Node2D" parent="Grid" unique_id=756878567]
 z_index = 10
 position = Vector2(16, -16)
@@ -343,7 +347,7 @@ autoplay = "idle"
 frame_progress = 0.8695535
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
-position = Vector2(-112, -144)
+position = Vector2(-176, -176)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
 move_sound = ExtResource("23_i3naf")
