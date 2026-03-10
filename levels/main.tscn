@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bkfnk7qh7x1qu" path="res://textures/highlighted_tile.png" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://dd1fxp22x7nbq" path="res://scripts/grid.gd" id="3_m1504"]
 [ext_resource type="SpriteFrames" uid="uid://c6jsi8fbkxte" path="res://textures/circuit.tres" id="4_6yxbg"]
+[ext_resource type="Script" uid="uid://d2fxnw70e2fsv" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
+[ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="4_l412s"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
 [ext_resource type="AudioStream" uid="uid://d36wwav7sxy74" path="res://sounds/music_001.ogg" id="7_m6gxc"]
@@ -42,6 +44,21 @@
 [ext_resource type="AudioStream" uid="uid://d1ek4xbyaehd7" path="res://sounds/robot_female_hurt.tres" id="41_gusra"]
 [ext_resource type="PackedScene" uid="uid://baghb6cp68bp5" path="res://objects/game/lootbag.tscn" id="42_2hoto"]
 [ext_resource type="AudioStream" uid="uid://blmxxh1jbfo7w" path="res://sounds/electric_damage.tres" id="44_jjbqq"]
+
+[sub_resource type="Resource" id="Resource_jjbqq"]
+script = ExtResource("4_en2ks")
+current = 3
+metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
+
+[sub_resource type="Resource" id="Resource_gusra"]
+script = ExtResource("4_en2ks")
+current = 4
+metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
+
+[sub_resource type="Resource" id="Resource_4c2mk"]
+script = ExtResource("4_l412s")
+current = 100
+metadata/_custom_type_script = "uid://dywwjhmsu8rif"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6et1j"]
 resource_name = "empty"
@@ -80,8 +97,11 @@ region = Rect2(96, 0, 32, 32)
 [node name="CombatState" type="Node" parent="." unique_id=1113248432]
 script = ExtResource("2_l412s")
 
-[node name="PlayerState" type="Node" parent="." unique_id=985557431]
+[node name="PlayerState" type="Node" parent="." unique_id=634967753]
 script = ExtResource("3_en2ks")
+health = SubResource("Resource_jjbqq")
+mana = SubResource("Resource_gusra")
+money = SubResource("Resource_4c2mk")
 metadata/_custom_type_script = "uid://cn4ynus2a4xwg"
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1527025478]

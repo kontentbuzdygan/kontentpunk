@@ -1,11 +1,10 @@
 class_name PlayerState
 extends Node
 
-@export var _resources: Dictionary[PlayerResource.Type, PlayerResource] = {
-	PlayerResource.Type.HEALTH: PlayerResource.new(5),
-	PlayerResource.Type.MANA: PlayerResource.new(5),
-	PlayerResource.Type.MONEY: PlayerResource.new(-1, 100),
-}
+@export var health: PlayerResource
+@export var mana: PlayerResource
+@export var money: PlayerResource
+
 var _items: Array[Item] = []
 var _at_turn_end: bool = false
 
@@ -20,6 +19,9 @@ static func get_instance() -> PlayerState:
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+
 	_instance = self
 
 	var combat_state := CombatState.get_instance()
@@ -28,7 +30,16 @@ func _ready() -> void:
 
 
 func get_resource(type: PlayerResource.Type) -> PlayerResource:
-	return _resources[type]
+	match type:
+		PlayerResource.Type.HEALTH:
+			return health
+		PlayerResource.Type.MANA:
+			return mana
+		PlayerResource.Type.MONEY:
+			return money
+
+	assert(false, "missing player resource type")
+	return null
 
 
 func add_item(item: Item) -> void:
@@ -49,9 +60,9 @@ func _on_action_ended(action: CombatAction) -> void:
 
 
 func _on_queue_emptied() -> void:
-	if _resources[PlayerResource.Type.HEALTH].current <= 0:
+	if health.current <= 0:
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://objects/ui/game_over.tscn")
 	elif _at_turn_end:
 		_at_turn_end = false
-		_resources[PlayerResource.Type.MANA].refill()
+		mana.refill()

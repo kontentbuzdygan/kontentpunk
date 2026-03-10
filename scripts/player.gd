@@ -6,8 +6,8 @@ const MANA_COST_NOT_ALLOWED: int = -1
 @export var end_turn_delay_seconds: float = 0.5
 @export var abilities_button_group: ButtonGroup
 
-@onready var health: PlayerResource = PlayerState.get_instance().get_resource(PlayerResource.Type.HEALTH)
-@onready var mana: PlayerResource = PlayerState.get_instance().get_resource(PlayerResource.Type.MANA)
+@onready var health: PlayerResource = PlayerState.get_instance().health
+@onready var mana: PlayerResource = PlayerState.get_instance().mana
 
 var _move_predicate: TilePredicate
 

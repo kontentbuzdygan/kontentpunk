@@ -23,7 +23,6 @@ buses/default_bus_layout="uid://cmus8icempn1a"
 
 window/size/viewport_width=640
 window/size/viewport_height=480
-window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
