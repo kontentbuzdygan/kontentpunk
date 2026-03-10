@@ -6,31 +6,39 @@
 [ext_resource type="AudioStream" uid="uid://c8c2cddfslxgq" path="res://sounds/death.ogg" id="3_tpp0e"]
 [ext_resource type="AudioStream" uid="uid://bpj31kwbjlo7g" path="res://sounds/music_002.ogg" id="5_qdanl"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_tpp0e"]
+font_size = 48
+font_color = Color(0.1882353, 0.1764706, 0.41568628, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lmb55"]
+font_size = 64
+font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+
 [sub_resource type="Animation" id="Animation_lmb55"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label_Left:position")
+tracks/0/path = NodePath("Text/Label_Left:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(155, 222)]
+"values": [Vector2(-89.00012, -21.000061)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label_Right:position")
+tracks/1/path = NodePath("Text/Label_Right:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(340, 212)]
+"values": [Vector2(8, -28)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -50,26 +58,26 @@ resource_name = "appear"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label_Left:position")
+tracks/0/path = NodePath("Text/Label_Left:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(0.2, 0.2, 1),
 "update": 0,
-"values": [Vector2(27, 94), Vector2(155, 254), Vector2(155, 222)]
+"values": [Vector2(-313.00012, -245.00006), Vector2(-89.00012, 22.999939), Vector2(-89.00012, -21.000061)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label_Right:position")
+tracks/1/path = NodePath("Text/Label_Right:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(0.2, 0.2, 1),
 "update": 0,
-"values": [Vector2(468, 340), Vector2(340, 180), Vector2(340, 212)]
+"values": [Vector2(232, 196), Vector2(8, -72), Vector2(8, -28)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -90,14 +98,6 @@ _data = {
 &"appear": SubResource("Animation_tpp0e")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_tpp0e"]
-font_size = 48
-font_color = Color(0.1882353, 0.1764706, 0.41568628, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_lmb55"]
-font_size = 64
-font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
-
 [node name="GameOver" type="Control" unique_id=174267165]
 layout_mode = 3
 anchors_preset = 15
@@ -113,14 +113,12 @@ script = ExtResource("2_tpp0e")
 [node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1188386084]
 stream = ExtResource("3_tpp0e")
 autoplay = true
+bus = &"Sound Effects"
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1074004989]
 stream = ExtResource("5_qdanl")
 autoplay = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=570571316]
-libraries/ = SubResource("AnimationLibrary_lmb55")
-autoplay = &"appear"
+bus = &"Music"
 
 [node name="Background" type="ColorRect" parent="." unique_id=751796762]
 layout_mode = 1
@@ -131,39 +129,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.023529412, 0.07058824, 0.101960786, 1)
 
-[node name="Label_Left" type="Label" parent="." unique_id=2092316683]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -165.0
-offset_top = -18.0
-offset_right = 9.000244
-offset_bottom = 24.000122
-grow_horizontal = 2
-grow_vertical = 2
-text = "You are"
-label_settings = SubResource("LabelSettings_tpp0e")
-horizontal_alignment = 2
-
-[node name="Label_Right" type="Label" parent="." unique_id=1217260999]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = -28.0
-offset_right = 164.0
-offset_bottom = 28.000916
-grow_horizontal = 2
-grow_vertical = 2
-text = "dead"
-label_settings = SubResource("LabelSettings_lmb55")
-
 [node name="Button_NewGame" type="Button" parent="." unique_id=1574854935]
 layout_mode = 1
 anchors_preset = 8
@@ -172,11 +137,63 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -28.5
-offset_top = 116.5
+offset_top = 84.5
 offset_right = 28.5
-offset_bottom = 139.5
+offset_bottom = 107.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "New game"
+
+[node name="Text" type="Control" parent="." unique_id=555764205]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -7.0
+offset_right = -57.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Left" type="Label" parent="Text" unique_id=2092316683]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.00012
+offset_top = -21.000061
+offset_right = -8.000122
+offset_bottom = 20.999939
+grow_horizontal = 2
+grow_vertical = 2
+text = "Get"
+label_settings = SubResource("LabelSettings_tpp0e")
+horizontal_alignment = 2
+
+[node name="Label_Right" type="Label" parent="Text" unique_id=1217260999]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -28.0
+offset_right = 224.00002
+offset_bottom = 28.000153
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fucked"
+label_settings = SubResource("LabelSettings_lmb55")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Text" unique_id=570571316]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_lmb55")
+autoplay = &"appear"
 
 [connection signal="pressed" from="Button_NewGame" to="." method="_on_button_new_game_pressed"]
