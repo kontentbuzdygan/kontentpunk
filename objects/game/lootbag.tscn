@@ -3,8 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://cjayaqh8w4gbv" path="res://textures/lootbox.png" id="1_212pc"]
 [ext_resource type="Script" uid="uid://cyyq2tpwykb4x" path="res://scripts/lootbag.gd" id="1_j30dr"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_j30dr"]
+radius = 5.0
+
 [node name="Lootbag" type="Node2D" unique_id=828126499]
 script = ExtResource("1_j30dr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=212960354]
 texture = ExtResource("1_212pc")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=871950578]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1848819344]
+shape = SubResource("CircleShape2D_j30dr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

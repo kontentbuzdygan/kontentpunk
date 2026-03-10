@@ -10,6 +10,9 @@ enum Type { TEMPORARY, EQUIPMENT }
 	get:
 		return item
 	set(value):
+		if not value:
+			update_lootbag()
+
 		if item == value:
 			return
 
@@ -27,6 +30,7 @@ enum Type { TEMPORARY, EQUIPMENT }
 				PlayerState.get_instance().add_item(item)
 
 			item.icon_changed.connect(update_children.unbind(1))
+
 
 		if not Engine.is_editor_hint() and not item and type == Type.TEMPORARY:
 			queue_free()
@@ -99,3 +103,8 @@ func update_children():
 
 func _get_tooltip(_at_position: Vector2) -> String:
 	return item.name if item else ""
+
+
+func update_lootbag():
+	var loot_container: LootContainer = get_parent()
+	loot_container.on_lootbag_update(item)

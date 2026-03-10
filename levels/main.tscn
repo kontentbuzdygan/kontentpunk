@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bkfnk7qh7x1qu" path="res://textures/highlighted_tile.png" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://dd1fxp22x7nbq" path="res://scripts/grid.gd" id="3_m1504"]
 [ext_resource type="SpriteFrames" uid="uid://c6jsi8fbkxte" path="res://textures/circuit.tres" id="4_6yxbg"]
-[ext_resource type="Script" uid="uid://d2fxnw70e2fsv" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
+[ext_resource type="Script" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
 [ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="4_l412s"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
@@ -29,16 +29,18 @@
 [ext_resource type="Resource" uid="uid://cap856rdql0af" path="res://data/items/finger_gun.tres" id="15_xombn"]
 [ext_resource type="Resource" uid="uid://bkytu06rtkd5l" path="res://data/items/cyber_heart.tres" id="16_vydlj"]
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
+[ext_resource type="Script" uid="uid://gjbo4clvj5da" path="res://scripts/loot_container.gd" id="17_4c2mk"]
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
-[ext_resource type="Script" uid="uid://h3ya5pngmnko" path="res://scripts/abilities_list.gd" id="19_en2ks"]
+[ext_resource type="Script" path="res://scripts/abilities_list.gd" id="19_en2ks"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
-[ext_resource type="Script" uid="uid://i47h4lyrxmuw" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
+[ext_resource type="Script" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
 [ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="22_8a5tp"]
 [ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
 [ext_resource type="AudioStream" uid="uid://brnn2jvwo0pk" path="res://sounds/swoosh.ogg" id="23_i3naf"]
 [ext_resource type="AudioStream" uid="uid://dnte3iopj5m20" path="res://sounds/woman_hurt_gore.tres" id="27_egc1g"]
 [ext_resource type="SpriteFrames" uid="uid://ds56y1m3mp6xh" path="res://textures/robot.tres" id="27_o6dmv"]
 [ext_resource type="SpriteFrames" uid="uid://cvbnmbat1kymb" path="res://textures/robot2.tres" id="28_o6dmv"]
+[ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="29_gusra"]
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
 [ext_resource type="AudioStream" uid="uid://nfkr7ik6cg2y" path="res://sounds/blade_001.ogg" id="31_duofn"]
 [ext_resource type="AudioStream" uid="uid://rlv7dfrqpx2i" path="res://sounds/blade_003.ogg" id="35_y60h0"]
@@ -84,6 +86,8 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6et1j")
 sources/1 = SubResource("TileSetAtlasSource_etqu2")
 sources/2 = SubResource("TileSetAtlasSource_vpyym")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jjbqq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3naf"]
 atlas = ExtResource("20_wk3pi")
@@ -241,21 +245,12 @@ type = 1
 item_type = 4
 
 [node name="LootContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1678796454]
+visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 8
 alignment = 1
-
-[node name="ItemHolder" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer" unique_id=1677176597 instance=ExtResource("14_xombn")]
-layout_mode = 2
-item = ExtResource("15_xombn")
-
-[node name="ItemHolder2" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer" unique_id=1873051877 instance=ExtResource("14_xombn")]
-layout_mode = 2
-item = ExtResource("15_xombn")
-
-[node name="ItemHolder3" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer" unique_id=2071256132 instance=ExtResource("14_xombn")]
-layout_mode = 2
-item = ExtResource("16_vydlj")
+script = ExtResource("17_4c2mk")
+item_holder_scene = ExtResource("14_xombn")
 
 [node name="BottomPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer/HBoxContainer" unique_id=271568282]
 custom_minimum_size = Vector2(400, 72)
@@ -309,8 +304,20 @@ tile_map_data = PackedByteArray("AAD/////AgACAAAAAAD//wAAAgACAAAAAAAAAAAAAgACAAA
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
 
-[node name="Lootbag" parent="Grid" unique_id=828126499 instance=ExtResource("42_2hoto")]
+[node name="Lootbag" parent="Grid" unique_id=828126499 node_paths=PackedStringArray("loot_container") instance=ExtResource("42_2hoto")]
 position = Vector2(-144, -80)
+loot = Array[ExtResource("29_gusra")]([ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("16_vydlj")])
+loot_container = NodePath("../../Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer")
+
+[node name="Lootbag2" parent="Grid" unique_id=2099095446 node_paths=PackedStringArray("loot_container") instance=ExtResource("42_2hoto")]
+position = Vector2(-144, -16)
+loot = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj")])
+loot_container = NodePath("../../Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer")
+
+[node name="Lootbag3" parent="Grid" unique_id=229070522 node_paths=PackedStringArray("loot_container") instance=ExtResource("42_2hoto")]
+position = Vector2(-144, 16)
+loot = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj")])
+loot_container = NodePath("../../Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer")
 
 [node name="Highlight" type="Node2D" parent="Grid" unique_id=756878567]
 z_index = 10
@@ -351,6 +358,11 @@ position = Vector2(0, -5)
 sprite_frames = ExtResource("15_s07ge")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Grid/Player" unique_id=1067534706]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grid/Player/CharacterBody2D" unique_id=1250657990]
+shape = SubResource("CircleShape2D_jjbqq")
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
 position = Vector2(-112, -144)

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bg74xf63v45np"]
+
+[ext_resource type="Script" uid="uid://byduw85nd6dcg" path="res://scripts/item_holder.gd" id="1_3a2tc"]
+[ext_resource type="Texture2D" uid="uid://crx7va0xo417w" path="res://textures/item_holder_empty.tres" id="1_tkgw5"]
+[ext_resource type="Texture2D" uid="uid://df3q7wscs2ysv" path="res://textures/item_holder_selected.tres" id="3_3a2tc"]
+[ext_resource type="AudioStream" uid="uid://cs0hqkhvcugwn" path="res://sounds/swap.tres" id="4_7su2e"]
+
+[node name="ItemHolder" type="CenterContainer" unique_id=570677188]
+mouse_default_cursor_shape = 13
+script = ExtResource("1_3a2tc")
+type = null
+item_type = 0
+
+[node name="TextureRect" type="TextureButton" parent="." unique_id=271092272]
+layout_mode = 2
+mouse_filter = 1
+texture_normal = ExtResource("1_tkgw5")
+texture_pressed = ExtResource("1_tkgw5")
+texture_hover = ExtResource("3_3a2tc")
+
+[node name="ItemSlot" type="TextureRect" parent="." unique_id=719036387]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1750800561]
+stream = ExtResource("4_7su2e")
+bus = &"UI"
