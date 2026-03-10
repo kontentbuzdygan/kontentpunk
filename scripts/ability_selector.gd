@@ -22,7 +22,7 @@ extends VBoxContainer
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		PlayerState.get_resource(PlayerResource.Type.MANA).current_changed.connect(
+		PlayerState.get_instance().get_resource(PlayerResource.Type.MANA).current_changed.connect(
 			update_children.unbind(1)
 		)
 
@@ -41,9 +41,9 @@ func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
-	var mana := PlayerState.get_resource(PlayerResource.Type.MANA).current
+	var mana := PlayerState.get_instance().get_resource(PlayerResource.Type.MANA).current
 
 	if mana < ability.base_mana_cost:
 		$Button.disabled = true
 	else:
-		$Button.disabled = CombatState.is_in_progress()
+		$Button.disabled = CombatState.get_instance().is_in_progress()

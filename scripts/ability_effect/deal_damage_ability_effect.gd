@@ -6,4 +6,6 @@ extends AbilityEffect
 
 
 func queue(actor: Actor, target_tile: Vector2i) -> void:
-	CombatState.queue_action(CombatAction.DealDamage.new(actor, target_tile, base_value))
+	CombatState.get_instance().queue_action(
+		CombatAction.DealDamage.new(actor, target_tile, base_value)
+	)

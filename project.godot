@@ -19,15 +19,11 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout="uid://cmus8icempn1a"
 
-[autoload]
-
-CombatState="*uid://2lr25mdy7cty"
-PlayerState="*uid://cn4ynus2a4xwg"
-
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=480
+window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 

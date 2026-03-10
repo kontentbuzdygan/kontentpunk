@@ -4,4 +4,4 @@ extends AbilityEffect
 
 
 func queue(actor: Actor, target_tile: Vector2i) -> void:
-	CombatState.queue_action(CombatAction.Move.new(actor, target_tile))
+	CombatState.get_instance().queue_action(CombatAction.Move.new(actor, target_tile))

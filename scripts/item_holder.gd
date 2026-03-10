@@ -15,7 +15,7 @@ enum Type { TEMPORARY, EQUIPMENT }
 
 		if item:
 			if type == Type.EQUIPMENT:
-				PlayerState.remove_item(item)
+				PlayerState.get_instance().remove_item(item)
 
 			if item.icon_changed.is_connected(update_children.unbind(1)):
 				item.icon_changed.disconnect(update_children.unbind(1))
@@ -24,7 +24,7 @@ enum Type { TEMPORARY, EQUIPMENT }
 
 		if item:
 			if type == Type.EQUIPMENT:
-				PlayerState.add_item(item)
+				PlayerState.get_instance().add_item(item)
 
 			item.icon_changed.connect(update_children.unbind(1))
 

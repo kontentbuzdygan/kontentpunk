@@ -18,7 +18,7 @@ var _resource: PlayerResource
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		_resource = PlayerState.get_resource(resource_type)
+		_resource = PlayerState.get_instance().get_resource(resource_type)
 		_resource.current_changed.connect(update.unbind(1))
 		update()
 

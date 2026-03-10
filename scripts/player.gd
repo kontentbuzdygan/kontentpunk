@@ -6,8 +6,8 @@ const MANA_COST_NOT_ALLOWED: int = -1
 @export var end_turn_delay_seconds: float = 0.5
 @export var abilities_button_group: ButtonGroup
 
-@onready var health: PlayerResource = PlayerState.get_resource(PlayerResource.Type.HEALTH)
-@onready var mana: PlayerResource = PlayerState.get_resource(PlayerResource.Type.MANA)
+@onready var health: PlayerResource = PlayerState.get_instance().get_resource(PlayerResource.Type.HEALTH)
+@onready var mana: PlayerResource = PlayerState.get_instance().get_resource(PlayerResource.Type.MANA)
 
 var _move_predicate: TilePredicate
 
@@ -54,7 +54,7 @@ func _on_tile_hovered(tile: Vector2i) -> void:
 
 func _on_button_end_turn_pressed() -> void:
 	clear_selected_ability()
-	CombatState.queue_action(CombatAction.EndTurn.new(self))
+	CombatState.get_instance().queue_action(CombatAction.EndTurn.new(self))
 
 
 func execute(action: CombatAction) -> void:

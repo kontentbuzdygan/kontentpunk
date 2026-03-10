@@ -23,7 +23,7 @@ func get_current_tile() -> Vector2i:
 
 func move_to(tile: Vector2i) -> bool:
 	if grid.get_nodes_on_tile(tile).is_empty():
-		CombatState.queue_action(CombatAction.Move.new(self, tile))
+		CombatState.get_instance().queue_action(CombatAction.Move.new(self, tile))
 		return true
 
 	return false
@@ -50,7 +50,6 @@ func take_damage(value: int) -> void:
 
 	if grid_animation_player.has_animation(&"hurt"):
 		await grid_animation_player.play_and_wait(&"hurt")
-
 
 
 func play_sound(sound: AudioStream, delay: float = 0.0) -> void:

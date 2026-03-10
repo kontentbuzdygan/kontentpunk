@@ -57,12 +57,20 @@ func update_button(button: Button) -> void:
 
 
 func _on_button_pressed(button: Button) -> void:
+	# Handle removed buttons on scene changes
+	if not button.is_inside_tree():
+		return
+
 	if not button.toggle_mode:
 		$UISounds.stream = ui_sound_click
 		$UISounds.play()
 
 
 func _on_button_toggled(value: bool, button: Button) -> void:
+	# Handle removed buttons on scene changes
+	if not button.is_inside_tree():
+		return
+
 	if button.toggle_mode:
 		if value:
 			$UISounds.stream = ui_sound_toggle_on

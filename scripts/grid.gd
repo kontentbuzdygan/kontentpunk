@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if CombatState.is_in_progress():
+	if CombatState.get_instance().is_in_progress():
 		return
 
 	if event.is_action_pressed("2d_select") and get_cell_tile_data(active_tile):

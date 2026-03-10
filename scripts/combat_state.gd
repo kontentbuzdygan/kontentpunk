@@ -1,3 +1,4 @@
+class_name CombatState
 extends Node
 
 signal action_ended(action: CombatAction)
@@ -5,6 +6,17 @@ signal queue_emptied
 
 var _queue: Array[Object] = []
 var _current_action: CombatAction = null
+
+static var _instance: CombatState
+
+
+static func get_instance() -> CombatState:
+	assert(_instance != null, "CombatState not initialized")
+	return _instance
+
+
+func _ready() -> void:
+	_instance = self
 
 
 func queue_action(action: CombatAction) -> void:

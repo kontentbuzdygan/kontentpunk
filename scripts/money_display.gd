@@ -1,6 +1,7 @@
 extends VBoxContainer
 
-@onready var money: PlayerResource = PlayerState.get_resource(PlayerResource.Type.MONEY)
+@onready
+var money: PlayerResource = PlayerState.get_instance().get_resource(PlayerResource.Type.MONEY)
 
 
 func _ready() -> void:

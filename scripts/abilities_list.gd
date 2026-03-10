@@ -5,7 +5,7 @@ extends HBoxContainer
 
 func _ready() -> void:
 	clear_abilities()
-	PlayerState.items_changed.connect(_on_items_changed)
+	PlayerState.get_instance().items_changed.connect(_on_items_changed)
 
 
 func _on_items_changed(items: Array[Item]) -> void:
