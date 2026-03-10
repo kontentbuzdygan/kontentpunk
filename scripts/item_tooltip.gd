@@ -2,20 +2,15 @@
 class_name ItemTooltip
 extends Control
 
-var text: String = "":
-	get():
+@export var text: String:
+	get:
 		return text
 	set(value):
 		text = value
-		update_children()
+		if is_node_ready():
+			$Label.text = value
 
-@onready var label = $Label
 
-
-func update_children():
-	if not is_node_ready():
-		await ready
-	if text:
-		label.text = text
-	else:
-		label.text = ""
+func _ready() -> void:
+	if not Engine.is_editor_hint():
+		$Label.text = text

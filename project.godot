@@ -48,6 +48,7 @@ occupies_tile=""
 
 [gui]
 
+timers/tooltip_delay_sec=0.1
 common/drag_threshold=0
 
 [input]

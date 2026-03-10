@@ -5,6 +5,7 @@ var _resources: Dictionary[PlayerResource.Type, PlayerResource] = {
 	PlayerResource.Type.MANA: PlayerResource.new(5),
 	PlayerResource.Type.MONEY: PlayerResource.new(-1, 100),
 }
+var _items: Array[ItemResource] = []
 var _at_turn_end: bool = false
 
 
@@ -15,6 +16,16 @@ func _ready() -> void:
 
 func get_resource(type: PlayerResource.Type) -> PlayerResource:
 	return _resources[type]
+
+
+func add_item(item: ItemResource) -> void:
+	print("equipped ", item)
+	_items.append(item)
+
+
+func remove_item(item: ItemResource) -> void:
+	print("unequipped ", item)
+	_items.erase(item)
 
 
 func _on_action_ended(action: CombatAction) -> void:

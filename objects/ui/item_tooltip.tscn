@@ -1,17 +1,27 @@
 [gd_scene format=3 uid="uid://3uhffv441827"]
 
 [ext_resource type="Script" uid="uid://ch2sauvghulxq" path="res://scripts/item_tooltip.gd" id="1_7dl4u"]
+[ext_resource type="FontFile" uid="uid://donruuw7efkyt" path="res://fonts/slkscr.ttf" id="2_thkal"]
 
-[node name="ItemTooltip" type="Control" unique_id=761092615]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[sub_resource type="LabelSettings" id="LabelSettings_ue3cb"]
+font = ExtResource("2_thkal")
+font_size = 8
+font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+
+[node name="ItemTooltip" type="CenterContainer" unique_id=922075242]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_right = -271.0
+offset_bottom = 9.0
 grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_7dl4u")
+text = "Item label"
 
 [node name="Label" type="Label" parent="." unique_id=90938156]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 2
+text = "Item label"
+label_settings = SubResource("LabelSettings_ue3cb")
