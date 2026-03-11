@@ -2,7 +2,9 @@ extends Actor
 
 @export var attack_sound: AudioStream
 @export var health: int = 8
-
+@export var lootbag_scene: PackedScene
+@export var drops: Array[Item] = []
+@onready var loot_container = %LootContainer
 
 func _ready() -> void:
 	super._ready()
@@ -28,4 +30,19 @@ func take_damage(value: int) -> void:
 	await super.take_damage(value)
 
 	if health <= 0:
+		drop_loot()
 		queue_free()
+
+
+func drop_loot():
+	if drops.size() == 0:
+		return
+
+	var enemy_tile = get_current_tile()
+	var lootbag: Lootbag = grid.get_nodes_on_tile(enemy_tile, Lootbag).get(0)
+	if not lootbag:
+		lootbag = lootbag_scene.instantiate()
+		grid.add_child_on_tile(lootbag, enemy_tile)
+		lootbag.loot_container = loot_container
+
+	lootbag.loot.append(drops.pick_random())
