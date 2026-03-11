@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://bkytu06rtkd5l"]
 
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_bx071"]
-[ext_resource type="Script" uid="uid://bbgc4dvto7fk6" path="res://scripts/item.gd" id="1_ig33l"]
+[ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="1_ig33l"]
 [ext_resource type="Texture2D" uid="uid://bu0tirn8lubi4" path="res://textures/heart.png" id="1_p17no"]
 [ext_resource type="Resource" uid="uid://cti48yfdi8rxc" path="res://data/abilities/cyber_heart_ability.tres" id="2_gth4e"]
 
@@ -11,5 +11,3 @@ name = "Cyber Heart"
 icon = ExtResource("1_p17no")
 type = 1
 abilities = Array[ExtResource("1_bx071")]([ExtResource("2_gth4e")])
-tooltip = "Cyber Heart"
-metadata/_custom_type_script = "uid://bbgc4dvto7fk6"

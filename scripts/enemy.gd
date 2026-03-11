@@ -3,7 +3,7 @@ extends Actor
 @export var attack_sound: AudioStream
 @export var health: int = 8
 @export var lootbag_scene: PackedScene
-@export var drops: Dictionary[Item, int]
+@export var drops: Array[Item]
 @onready var loot_container = %LootContainer
 
 func _ready() -> void:
@@ -46,4 +46,6 @@ func drop_loot():
 		lootbag.loot_container = loot_container
 
 	var rng = RandomNumberGenerator.new()
-	lootbag.loot.append(drops.keys()[rng.rand_weighted(drops.values())])
+	var drop_chances: Array[float] = []
+	drop_chances.assign(drops.map(func (item: Item): return item.drop_chance))
+	lootbag.loot.append(drops[rng.rand_weighted(drop_chances)])

@@ -15,6 +15,11 @@ enum Type { NONE = -1, HEAD, HEART, ARM, SPINE, LEG }
 @export var type: Type = Type.NONE
 @export var abilities: Array[Ability] = []
 @export var money_cost: int = 1
+@export var drop_chance: float = 1:
+	get():
+		return drop_chance
+	set(value):
+		drop_chance = clamp(value, 0.0, 1.0)
 
 signal icon_changed(icon: Texture2D)
 
