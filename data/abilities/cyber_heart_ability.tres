@@ -3,7 +3,12 @@
 [ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_3pc2p"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_ae765"]
 [ext_resource type="Texture2D" uid="uid://bu0tirn8lubi4" path="res://textures/heart.png" id="1_whja6"]
+[ext_resource type="Script" path="res://scripts/ability_effect/heal_ability_effect.gd" id="2_5jdf0"]
 [ext_resource type="Script" uid="uid://c60x3e0bisqh8" path="res://scripts/tile_predicate/same_tile_predicate.gd" id="3_k0u5y"]
+
+[sub_resource type="Resource" id="Resource_akwuv"]
+script = ExtResource("2_5jdf0")
+base_value = 2
 
 [sub_resource type="Resource" id="Resource_k0u5y"]
 script = ExtResource("3_k0u5y")
@@ -15,4 +20,5 @@ name = "Blood Pump Overclock"
 icon = ExtResource("1_whja6")
 base_mana_cost = 2
 valid_tiles = SubResource("Resource_k0u5y")
+effects = Array[ExtResource("1_3pc2p")]([SubResource("Resource_akwuv")])
 metadata/_custom_type_script = "uid://b1dxrqdiivtev"

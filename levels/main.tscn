@@ -374,7 +374,10 @@ position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
 lootbag_scene = ExtResource("42_2hoto")
-drops = Array[ExtResource("29_gusra")]([ExtResource("15_xombn"), ExtResource("16_vydlj")])
+drops = Dictionary[ExtResource("29_gusra"), int]({
+ExtResource("16_vydlj"): 1,
+ExtResource("15_xombn"): 2
+})
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("41_gusra")
 
@@ -395,7 +398,9 @@ position = Vector2(-80, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("35_y60h0")
 lootbag_scene = ExtResource("42_2hoto")
-drops = Array[ExtResource("29_gusra")]([ExtResource("15_xombn")])
+drops = Dictionary[ExtResource("29_gusra"), int]({
+ExtResource("16_vydlj"): 1
+})
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("44_jjbqq")
 
