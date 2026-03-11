@@ -122,5 +122,5 @@ func _get_tooltip(_at_position: Vector2) -> String:
 
 func take_item():
 	if type == Type.TEMPORARY:
-		var loot_container: LootContainer = get_parent()
+		var loot_container: LootContainer = find_parent("LootContainer")
 		loot_container.on_take_item(item)

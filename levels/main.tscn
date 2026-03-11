@@ -24,12 +24,12 @@
 [ext_resource type="Texture2D" uid="uid://dqufku313tmlp" path="res://textures/woman.png" id="13_05fi1"]
 [ext_resource type="AnimationLibrary" uid="uid://cyoxtcn08i3rn" path="res://animations/player.res" id="14_j7211"]
 [ext_resource type="Resource" uid="uid://cti48yfdi8rxc" path="res://data/abilities/cyber_heart_ability.tres" id="14_o6dmv"]
+[ext_resource type="PackedScene" uid="uid://c0tgnw77kquxo" path="res://objects/ui/loot_container.tscn" id="14_oe60c"]
 [ext_resource type="PackedScene" uid="uid://bg74xf63v45np" path="res://objects/ui/item_holder.tscn" id="14_xombn"]
 [ext_resource type="SpriteFrames" uid="uid://dkjqjo2lu0tt7" path="res://textures/girl.tres" id="15_s07ge"]
 [ext_resource type="Resource" uid="uid://cap856rdql0af" path="res://data/items/finger_gun.tres" id="15_xombn"]
 [ext_resource type="Resource" uid="uid://bkytu06rtkd5l" path="res://data/items/cyber_heart.tres" id="16_vydlj"]
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
-[ext_resource type="Script" uid="uid://gjbo4clvj5da" path="res://scripts/loot_container.gd" id="17_4c2mk"]
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
 [ext_resource type="Script" uid="uid://h3ya5pngmnko" path="res://scripts/abilities_list.gd" id="19_en2ks"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
@@ -266,13 +266,10 @@ offset_bottom = 190.0
 type = 1
 item_type = 4
 
-[node name="LootContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1678796454]
+[node name="LootContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=244963229 instance=ExtResource("14_oe60c")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme_override_constants/h_separation = 8
-alignment = 1
-script = ExtResource("17_4c2mk")
 item_holder_scene = ExtResource("14_xombn")
 
 [node name="BottomPanel" type="PanelContainer" parent="Layer_HUD/MarginContainer/HBoxContainer" unique_id=271568282]

@@ -1,7 +1,8 @@
 class_name LootContainer
-extends HFlowContainer
+extends PanelContainer
 
 @export var item_holder_scene: PackedScene
+@onready var margin_container = %MarginContainer
 
 var current_lootbag: Lootbag:
 	get():
@@ -17,7 +18,7 @@ var current_lootbag: Lootbag:
 			print("Creating item holder")
 			var instance: ItemHolder = item_holder_scene.instantiate()
 			instance.item = item
-			self.add_child(instance)
+			margin_container.add_child(instance)
 
 
 func _ready() -> void:
@@ -26,10 +27,10 @@ func _ready() -> void:
 
 
 func clear_ui():
-	var children = self.get_children()
+	var children = margin_container.get_children()
 
 	for child in children:
-		self.remove_child(child)
+		margin_container.remove_child(child)
 		child.queue_free()
 
 
