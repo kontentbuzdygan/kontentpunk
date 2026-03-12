@@ -42,6 +42,10 @@ func get_resource(type: PlayerResource.Type) -> PlayerResource:
 	return null
 
 
+func get_items() -> Array[Item]:
+	return _items.duplicate()
+
+
 func add_item(item: Item) -> void:
 	print("equipped ", item)
 	_items.append(item)
@@ -67,4 +71,8 @@ func _on_action_ended(action: CombatAction) -> void:
 func _on_queue_emptied() -> void:
 	if _at_turn_end:
 		_at_turn_end = false
+
+		for item in _items:
+			money.current -= item.money_cost
+
 		mana.refill()

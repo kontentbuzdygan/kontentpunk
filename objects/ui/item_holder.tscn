@@ -3,22 +3,70 @@
 [ext_resource type="Script" uid="uid://byduw85nd6dcg" path="res://scripts/item_holder.gd" id="1_3a2tc"]
 [ext_resource type="Texture2D" uid="uid://crx7va0xo417w" path="res://textures/item_holder_empty.tres" id="1_tkgw5"]
 [ext_resource type="Texture2D" uid="uid://df3q7wscs2ysv" path="res://textures/item_holder_selected.tres" id="3_3a2tc"]
+[ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="3_ydspd"]
 [ext_resource type="AudioStream" uid="uid://cs0hqkhvcugwn" path="res://sounds/swap.tres" id="4_7su2e"]
+[ext_resource type="Texture2D" uid="uid://bbxog2bae8plq" path="res://textures/coin_small.png" id="4_cjyeq"]
 
-[node name="ItemHolder" type="CenterContainer" unique_id=570677188]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee4xc"]
+atlas = ExtResource("4_cjyeq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lugg0"]
+atlas = ExtResource("4_cjyeq")
+region = Rect2(16, 0, 16, 16)
+
+[node name="ItemHolder" type="Control" unique_id=1289869506]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 42.0
+offset_bottom = 42.0
 mouse_default_cursor_shape = 13
 script = ExtResource("1_3a2tc")
 
 [node name="TextureRect" type="TextureButton" parent="." unique_id=271092272]
-layout_mode = 2
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 0
+offset_right = 42.0
+offset_bottom = 42.0
 mouse_filter = 1
 texture_normal = ExtResource("1_tkgw5")
 texture_pressed = ExtResource("1_tkgw5")
 texture_hover = ExtResource("3_3a2tc")
 
 [node name="ItemSlot" type="TextureRect" parent="." unique_id=719036387]
-layout_mode = 2
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+
+[node name="MoneyCostDisplay" parent="." unique_id=1361968476 instance=ExtResource("3_ydspd")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = 1.0
+offset_right = 12.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 0
+resource_type = 2
+cost = 10
+icon_enabled = SubResource("AtlasTexture_ee4xc")
+icon_disabled = SubResource("AtlasTexture_lugg0")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1750800561]
 stream = ExtResource("4_7su2e")

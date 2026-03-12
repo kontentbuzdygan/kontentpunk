@@ -20,17 +20,19 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		_resource = PlayerState.get_instance().get_resource(resource_type)
 		_resource.current_changed.connect(update.unbind(1))
-		update()
+
+	update()
 
 
 func update() -> void:
-	if _resource:
-		if _resource.current < cost:
-			$Icon.texture = icon_disabled
-			set_label_color($Label.get_theme_color(&"font_color_disabled"))
-		else:
-			$Icon.texture = icon_enabled
-			set_label_color($Label.get_theme_color(&"font_color_active"))
+	var current := _resource.current if _resource else 0
+
+	if current < cost:
+		$Icon.texture = icon_disabled
+		set_label_color($Label.get_theme_color(&"font_color_disabled"))
+	else:
+		$Icon.texture = icon_enabled
+		set_label_color($Label.get_theme_color(&"font_color_active"))
 
 
 func set_label_color(color: Color) -> void:

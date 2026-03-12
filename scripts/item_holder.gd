@@ -1,6 +1,6 @@
 @tool
 class_name ItemHolder
-extends CenterContainer
+extends Control
 
 enum Type { TEMPORARY, EQUIPMENT }
 
@@ -17,30 +17,41 @@ enum Type { TEMPORARY, EQUIPMENT }
 			return
 
 		if item:
-			if type == Type.EQUIPMENT:
-				PlayerState.get_instance().remove_item(item)
+			if item.icon_changed.is_connected(_update_children.unbind(1)):
+				item.icon_changed.disconnect(_update_children.unbind(1))
 
-			if item.icon_changed.is_connected(update_children.unbind(1)):
-				item.icon_changed.disconnect(update_children.unbind(1))
+			_on_item_removed(item)
 
 		item = value
 
 		if item:
-			if type == Type.EQUIPMENT:
-				PlayerState.get_instance().add_item(item)
+			item.icon_changed.connect(_update_children.unbind(1))
 
-			item.icon_changed.connect(update_children.unbind(1))
+		_on_item_changed(item)
+		_update_children()
 
 
-		if not Engine.is_editor_hint() and not item and type == Type.TEMPORARY:
-			queue_free()
-			return
+func _on_item_removed(old_item: Item) -> void:
+	if Engine.is_editor_hint() or not is_node_ready():
+		return
 
-		update_children()
+	if type == Type.EQUIPMENT:
+		PlayerState.get_instance().remove_item(old_item)
+
+
+func _on_item_changed(new_item: Item) -> void:
+	if Engine.is_editor_hint() or not is_node_ready():
+		return
+
+	if new_item and type == Type.EQUIPMENT:
+		PlayerState.get_instance().add_item(new_item)
+	elif not new_item and type == Type.TEMPORARY:
+		queue_free()
+		return
 
 
 func _ready() -> void:
-	update_children()
+	_update_children()
 
 
 func _get_drag_data(at_position: Vector2) -> ItemHolder:
@@ -88,17 +99,21 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	if item:
 		$AudioStreamPlayer.play()
 
-	update_children()
+	_update_children()
 
 
-func update_children():
+func _update_children():
 	if not is_node_ready():
 		return
 
 	if item:
 		$ItemSlot.texture = item.icon
+		$MoneyCostDisplay.cost = item.money_cost
+		$MoneyCostDisplay.visible = true
 	else:
 		$ItemSlot.texture = null
+		if not Engine.is_editor_hint():
+			$MoneyCostDisplay.visible = false
 
 
 func _get_tooltip(_at_position: Vector2) -> String:
@@ -106,7 +121,6 @@ func _get_tooltip(_at_position: Vector2) -> String:
 
 
 func take_item():
-	if type == Type.EQUIPMENT:
-		return
-	var loot_container: LootContainer = get_parent()
-	loot_container.on_take_item(item)
+	if type == Type.TEMPORARY:
+		var loot_container: LootContainer = get_parent()
+		loot_container.on_take_item(item)

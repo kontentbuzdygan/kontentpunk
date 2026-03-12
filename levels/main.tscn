@@ -146,6 +146,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 script = ExtResource("9_f1mgo")
+changing_font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
 
 [node name="Coin" type="Control" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay" unique_id=469727718]
 custom_minimum_size = Vector2(32, 32)
@@ -176,13 +177,13 @@ position = Vector2(0, 1)
 sprite_frames = ExtResource("4_6yxbg")
 frame = 0
 
-[node name="Woman" type="TextureRect" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=49324645]
+[node name="Equipment" type="TextureRect" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=49324645]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 texture = ExtResource("13_05fi1")
 stretch_mode = 3
 
-[node name="Head" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=570677188 instance=ExtResource("14_xombn")]
+[node name="Head" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=570677188 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 59.0
 offset_top = 11.0
@@ -191,7 +192,13 @@ offset_bottom = 53.0
 type = 1
 item_type = 0
 
-[node name="Heart" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=1456337609 instance=ExtResource("14_xombn")]
+[node name="MoneyCostDisplay" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment/Head" index="2" unique_id=1361968476]
+offset_left = -12.0
+offset_top = -59.0
+offset_right = 11.0
+offset_bottom = -43.0
+
+[node name="Heart" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=1456337609 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 59.0
 offset_top = 56.0
@@ -200,7 +207,14 @@ offset_bottom = 98.0
 type = 1
 item_type = 1
 
-[node name="LArm" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=48775684 instance=ExtResource("14_xombn")]
+[node name="MoneyCostDisplay" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment/Heart" index="2" unique_id=1361968476]
+offset_left = 23.0
+offset_top = -3.0
+offset_right = 55.0
+offset_bottom = 13.0
+rotation = -1.5707964
+
+[node name="LArm" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=48775684 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 52.0
@@ -209,7 +223,7 @@ offset_bottom = 94.0
 type = 1
 item_type = 2
 
-[node name="RArm" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=850361375 instance=ExtResource("14_xombn")]
+[node name="RArm" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=850361375 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 126.0
 offset_top = 52.0
@@ -218,7 +232,7 @@ offset_bottom = 94.0
 type = 1
 item_type = 2
 
-[node name="Spine" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=65241761 instance=ExtResource("14_xombn")]
+[node name="Spine" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=65241761 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 59.0
 offset_top = 101.0
@@ -227,7 +241,14 @@ offset_bottom = 143.0
 type = 1
 item_type = 3
 
-[node name="LLeg" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=1558327849 instance=ExtResource("14_xombn")]
+[node name="MoneyCostDisplay" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment/Spine" index="2" unique_id=1361968476]
+offset_left = 23.0
+offset_top = -3.0000153
+offset_right = 55.0
+offset_bottom = 12.999985
+rotation = -1.5707964
+
+[node name="LLeg" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=1558327849 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 148.0
@@ -236,7 +257,7 @@ offset_bottom = 190.0
 type = 1
 item_type = 4
 
-[node name="RLeg" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Woman" unique_id=312628004 instance=ExtResource("14_xombn")]
+[node name="RLeg" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=312628004 instance=ExtResource("14_xombn")]
 layout_mode = 0
 offset_left = 89.0
 offset_top = 148.0
@@ -246,6 +267,7 @@ type = 1
 item_type = 4
 
 [node name="LootContainer" type="HFlowContainer" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=1678796454]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 8
@@ -336,7 +358,7 @@ sprite_frames = ExtResource("22_i3naf")
 autoplay = "default"
 frame_progress = 0.59412354
 
-[node name="ManaCostDisplay" parent="Grid/Highlight" unique_id=1361968476 instance=ExtResource("22_8a5tp")]
+[node name="ManaCostDisplay" parent="Grid/Highlight" unique_id=330290387 instance=ExtResource("22_8a5tp")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -435,3 +457,6 @@ autoplay = "default"
 [connection signal="pressed" from="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Button_EndTurn" to="Grid/Player" method="_on_button_end_turn_pressed"]
 
 [editable path="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/ManaBar"]
+[editable path="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment/Head"]
+[editable path="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment/Heart"]
+[editable path="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment/Spine"]

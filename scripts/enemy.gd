@@ -43,7 +43,6 @@ func drop_loot():
 	if not lootbag:
 		lootbag = lootbag_scene.instantiate()
 		grid.add_child_on_tile(lootbag, enemy_tile)
-		lootbag.loot_container = loot_container
 
 	var rng = RandomNumberGenerator.new()
 	var drop_chances: Array[float] = []
