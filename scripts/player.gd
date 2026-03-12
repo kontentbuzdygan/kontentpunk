@@ -5,6 +5,7 @@ const MANA_COST_NOT_ALLOWED: int = -1
 
 @export var end_turn_delay_seconds: float = 0.5
 @export var abilities_button_group: ButtonGroup
+@export var loot_container: LootContainer
 
 @onready var health: PlayerResource = PlayerState.get_instance().health
 @onready var mana: PlayerResource = PlayerState.get_instance().mana
@@ -16,6 +17,9 @@ func _ready() -> void:
 	super._ready()
 	grid.tile_clicked.connect(_on_tile_clicked)
 	grid.tile_hovered.connect(_on_tile_hovered)
+
+	left_tile.connect(_on_left_tile)
+	entered_tile.connect(_on_entered_tile)
 
 	_move_predicate = AxisAlignedTilePredicate.new()
 
@@ -55,6 +59,16 @@ func _on_tile_hovered(tile: Vector2i) -> void:
 func _on_button_end_turn_pressed() -> void:
 	clear_selected_ability()
 	CombatState.get_instance().queue_action(CombatAction.EndTurn.new(self))
+
+
+func _on_left_tile(_tile: Vector2i) -> void:
+	loot_container.current_lootbag = null
+
+
+func _on_entered_tile(tile: Vector2i) -> void:
+	for lootbag in grid.get_nodes_on_tile(tile, Lootbag):
+		loot_container.current_lootbag = lootbag
+		break
 
 
 func execute(action: CombatAction) -> void:
