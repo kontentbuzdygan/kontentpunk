@@ -12,6 +12,7 @@ var _audio_stream_player: AudioStreamPlayer
 
 signal left_tile(tile: Vector2i)
 signal entered_tile(tile: Vector2i)
+signal health_changed
 
 
 func _ready() -> void:
@@ -54,6 +55,7 @@ func take_damage(value: int) -> void:
 	play_sound(hurt_sound, 0.1)
 
 	if grid_animation_player.has_animation(&"hurt"):
+		health_changed.emit()
 		await grid_animation_player.play_and_wait(&"hurt")
 
 

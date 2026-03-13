@@ -1,3 +1,4 @@
+class_name Enemy
 extends Actor
 
 @export var attack_sound: AudioStream
