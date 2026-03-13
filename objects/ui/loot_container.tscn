@@ -33,26 +33,30 @@ script = ExtResource("3_um1mf")
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="TextureRect" parent="VBoxContainer" unique_id=2092105943]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=2092105943]
 custom_minimum_size = Vector2(32, 16)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = SubResource("AtlasTexture_in1eg")
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer" unique_id=549787490]
+[node name="Label" type="Label" parent="VBoxContainer/TextureRect" unique_id=549787490]
 layout_mode = 0
-offset_left = 4.0
+offset_left = 5.0
 offset_top = 1.0
-offset_right = 39.0
+offset_right = 40.0
 offset_bottom = 27.0
 theme_type_variation = &"PanelLabel"
 text = "Loot"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=376823251]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 7
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 7
 theme_override_constants/margin_bottom = 7
+
+[node name="ItemSlotContainer" type="GridContainer" parent="VBoxContainer/MarginContainer" unique_id=1102329163]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 3

@@ -122,10 +122,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_1fput")
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Layer_HUD/MarginContainer" unique_id=142375879]
 layout_mode = 2
@@ -336,11 +336,11 @@ script = ExtResource("3_m1504")
 
 [node name="Lootbag" parent="Grid" unique_id=828126499 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, -80)
-loot = Array[ExtResource("29_gusra")]([ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("16_vydlj")])
+loot = Array[ExtResource("29_gusra")]([ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("16_vydlj"), ExtResource("16_vydlj")])
 
 [node name="Lootbag2" parent="Grid" unique_id=2099095446 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, -16)
-loot = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj")])
+loot = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj"), ExtResource("15_xombn")])
 
 [node name="Lootbag3" parent="Grid" unique_id=229070522 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, 16)

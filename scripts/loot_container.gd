@@ -2,18 +2,18 @@ class_name LootContainer
 extends PanelContainer
 
 @export var item_holder_scene: PackedScene
-@onready var margin_container = %MarginContainer
+@onready var margin_container = %ItemSlotContainer
 
 var current_lootbag: Lootbag:
 	get():
 		return current_lootbag
 	set(value):
+		current_lootbag = value
 		clear_ui()
 
 		if not value:
 			return
 
-		current_lootbag = value
 		for item in current_lootbag.loot:
 			print("Creating item holder")
 			var instance: ItemHolder = item_holder_scene.instantiate()
@@ -27,6 +27,7 @@ func _ready() -> void:
 
 
 func clear_ui():
+	self.visible = false
 	var children = margin_container.get_children()
 
 	for child in children:
@@ -35,7 +36,7 @@ func clear_ui():
 
 
 func _process(_delta: float) -> void:
-	if not CombatState.get_instance().is_in_progress():
+	if not CombatState.get_instance().is_in_progress() and current_lootbag:
 		self.visible = true
 	else:
 		self.visible = false
@@ -52,3 +53,4 @@ func on_take_item(item: Item):
 	# Remove lootbag with no loot from the scene
 	if loot.size() == 0:
 		current_lootbag.queue_free()
+		current_lootbag = null

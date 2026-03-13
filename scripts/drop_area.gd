@@ -5,8 +5,11 @@ extends Panel
 @export var lootbag_scene: PackedScene
 @onready var loot_container: LootContainer = %LootContainer
 
-func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
-	return true
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
+	if is_instance_of(data, ItemHolder):
+		var item_holder = (data as ItemHolder)
+		return item_holder.type == ItemHolder.Type.EQUIPMENT
+	return false
 
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
