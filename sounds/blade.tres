@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://dvx2bh0ab6kdr"]
+
+[ext_resource type="AudioStream" uid="uid://nfkr7ik6cg2y" path="res://sounds/blade_001.ogg" id="1_8ighs"]
+[ext_resource type="AudioStream" uid="uid://cny7kbxn10art" path="res://sounds/blade_002.ogg" id="2_l16by"]
+[ext_resource type="AudioStream" uid="uid://rlv7dfrqpx2i" path="res://sounds/blade_003.ogg" id="3_o1jbk"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_8ighs")
+stream_1/stream = ExtResource("2_l16by")
+stream_2/stream = ExtResource("3_o1jbk")

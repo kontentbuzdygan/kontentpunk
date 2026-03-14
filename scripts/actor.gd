@@ -10,6 +10,9 @@ extends Node2D
 
 var _audio_stream_player: AudioStreamPlayer
 
+var passive_status_effects: Array[StatusEffect] = []
+var active_status_effects: Array[StatusEffect] = []
+
 signal left_tile(tile: Vector2i)
 signal entered_tile(tile: Vector2i)
 signal health_changed
@@ -34,6 +37,10 @@ func move_to(tile: Vector2i) -> bool:
 
 
 func execute(action: CombatAction) -> void:
+	## If enemy is already dead, don't wait on their action
+	if action.actor is Enemy and action.actor.health == 0:
+		return
+
 	if action is CombatAction.Move:
 		left_tile.emit(get_current_tile())
 		play_sound(move_sound)
@@ -45,6 +52,18 @@ func execute(action: CombatAction) -> void:
 		for node in grid.get_nodes_on_tile(action.target_tile):
 			if node is Actor:
 				await node.take_damage(action.value)
+		return
+
+	if action is CombatAction.ApplyStatusEffect:
+		for node in grid.get_nodes_on_tile(action.target_tile):
+			if node is Actor:
+				node.apply_status_effect(action.status_effect)
+		return
+
+	if action is CombatAction.Bleed:
+		var blood_emitter: GPUParticles2D = find_children("", "GPUParticles2D")[0]
+		blood_emitter.emitting = true
+		await action.actor.take_damage(action.value)
 		return
 
 	assert(false, "invalid action %s for %s" % [action, self])
@@ -65,3 +84,21 @@ func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
 
 	_audio_stream_player.stream = sound
 	_audio_stream_player.play()
+
+
+func apply_status_effect(status_effect: StatusEffect) -> void:
+	if status_effect.is_active:
+		if not status_effect in active_status_effects:
+			active_status_effects.append(status_effect)
+		else:
+			## If status effect is already applied to the actor, extend its duration
+			active_status_effects[active_status_effects.find(status_effect)].duration = status_effect.duration
+	else:
+		passive_status_effects.append(status_effect)
+
+
+func _process_status_effects():
+	for status_effect in active_status_effects:
+		status_effect.queue(self)
+		if status_effect.duration == 0:
+			active_status_effects.remove_at(active_status_effects.find(status_effect))

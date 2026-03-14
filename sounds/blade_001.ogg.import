@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/blade_001.ogg-31974efc1c7f82b6111feb6516453b6
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

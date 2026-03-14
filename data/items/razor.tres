@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://d54xbg1h4ayv"]
+
+[ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_ksl5w"]
+[ext_resource type="Resource" uid="uid://chy5lmonjjx6a" path="res://data/abilities/razor_ability.tres" id="2_lorv0"]
+[ext_resource type="Texture2D" uid="uid://dogvacbuvy5w6" path="res://textures/razor.png" id="2_lv5w3"]
+[ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="2_yhqai"]
+
+[resource]
+script = ExtResource("2_yhqai")
+icon = ExtResource("2_lv5w3")
+type = 2
+abilities = Array[ExtResource("1_ksl5w")]([ExtResource("2_lorv0")])
+metadata/_custom_type_script = "uid://disdpfm5m1k6t"
