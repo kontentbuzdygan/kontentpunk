@@ -110,7 +110,6 @@ metadata/_custom_type_script = "uid://cn4ynus2a4xwg"
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1527025478]
 stream = ExtResource("7_m6gxc")
-autoplay = true
 bus = &"Music"
 
 [node name="Layer_HUD" type="CanvasLayer" parent="." unique_id=484654902]
@@ -391,7 +390,6 @@ autoplay = "idle"
 position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
-health = 3
 lootbag_scene = ExtResource("42_2hoto")
 drops = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj"), ExtResource("15_xombn")])
 move_sound = ExtResource("23_i3naf")

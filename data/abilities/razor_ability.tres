@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://objects/particles/blood_particles.tscn" id="4_x8db1"]
 [ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/axis_aligned_tile_predicate.gd" id="5_0wq6l"]
 [ext_resource type="AudioStream" uid="uid://dvx2bh0ab6kdr" path="res://sounds/blade.tres" id="5_upf2f"]
+[ext_resource type="AudioStream" uid="uid://yutxxcly1yjl" path="res://sounds/blood.tres" id="6_x8db1"]
 
 [sub_resource type="Resource" id="Resource_g1mpa"]
 script = ExtResource("2_n8fu2")
@@ -18,6 +19,7 @@ script = ExtResource("4_m4oie")
 apply_chance = 1.0
 is_active = true
 particles = ExtResource("4_x8db1")
+sound_effect = ExtResource("6_x8db1")
 metadata/_custom_type_script = "uid://bg1l528adesin"
 
 [sub_resource type="Resource" id="Resource_cgd6q"]

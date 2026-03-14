@@ -11,6 +11,7 @@ extends Resource
 
 @export var is_active: bool = false
 @export var particles: PackedScene
+@export var sound_effect: AudioStream
 
 
 @abstract func queue(actor: Actor) -> void
