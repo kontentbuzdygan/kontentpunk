@@ -61,8 +61,7 @@ func execute(action: CombatAction) -> void:
 		return
 
 	if action is CombatAction.Bleed:
-		var blood_emitter: GPUParticles2D = find_children("", "GPUParticles2D")[0]
-		blood_emitter.emitting = true
+		_emit_status_effect_particles(action.particles)
 		await action.actor.take_damage(action.value)
 		return
 
@@ -102,3 +101,13 @@ func _process_status_effects():
 		status_effect.queue(self)
 		if status_effect.duration == 0:
 			active_status_effects.remove_at(active_status_effects.find(status_effect))
+
+
+func _emit_status_effect_particles(particles_scene: PackedScene) -> void:
+	var particles: GPUParticles2D = particles_scene.instantiate()
+	add_child(particles)
+	particles.emitting = true
+	particles.finished.connect(func():
+		remove_child(particles)
+		particles.queue_free()
+	)

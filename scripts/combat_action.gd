@@ -74,10 +74,12 @@ class Bleed:
 	extends CombatAction
 
 	var value: int
+	var particles: PackedScene
 
-	func _init(actor_: Actor, value_: int) -> void:
+	func _init(actor_: Actor, value_: int, particles_: PackedScene) -> void:
 		super._init(actor_)
 		value = value_
+		particles = particles_
 
 	func _to_string() -> String:
 		return "<bleed dealt %d damage>" % value

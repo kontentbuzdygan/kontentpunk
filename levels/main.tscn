@@ -49,16 +49,13 @@
 [ext_resource type="AudioStream" uid="uid://d1ek4xbyaehd7" path="res://sounds/robot_female_hurt.tres" id="41_gusra"]
 [ext_resource type="PackedScene" uid="uid://baghb6cp68bp5" path="res://objects/game/lootbag.tscn" id="42_2hoto"]
 [ext_resource type="AudioStream" uid="uid://blmxxh1jbfo7w" path="res://sounds/electric_damage.tres" id="44_jjbqq"]
-[ext_resource type="Texture2D" uid="uid://cqcqsdyyjksa4" path="res://textures/blood-particle.png" id="47_xlu2f"]
 [ext_resource type="PackedScene" uid="uid://bkv4l6mhxwm58" path="res://objects/ui/healthbar.tscn" id="48_eoee5"]
 
 [sub_resource type="Resource" id="Resource_jjbqq"]
 script = ExtResource("4_en2ks")
-metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
 
 [sub_resource type="Resource" id="Resource_gusra"]
 script = ExtResource("4_en2ks")
-metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
 
 [sub_resource type="Resource" id="Resource_4c2mk"]
 script = ExtResource("4_l412s")
@@ -92,24 +89,6 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6et1j")
 sources/1 = SubResource("TileSetAtlasSource_etqu2")
 sources/2 = SubResource("TileSetAtlasSource_vpyym")
-
-[sub_resource type="Curve" id="Curve_gutiw"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.41935486, 0.59550565), 0.0, 0.0, 0, 0, Vector2(1, 0.123595595), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_xlu2f"]
-curve = SubResource("Curve_gutiw")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gutiw"]
-particle_flag_disable_z = true
-inherit_velocity_ratio = 0.216
-spread = 180.0
-initial_velocity_min = 24.82
-initial_velocity_max = 100.909996
-gravity = Vector3(0, 98, 0)
-damping_min = 68.394005
-damping_max = 75.647
-scale_curve = SubResource("CurveTexture_xlu2f")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3naf"]
 atlas = ExtResource("20_wk3pi")
@@ -412,7 +391,7 @@ autoplay = "idle"
 position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
-health = 2
+health = 3
 lootbag_scene = ExtResource("42_2hoto")
 drops = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj"), ExtResource("15_xombn")])
 move_sound = ExtResource("23_i3naf")
@@ -432,15 +411,6 @@ autoplay = "idle"
 
 [node name="Healthbar" parent="Grid/Enemy_1" unique_id=1933015322 instance=ExtResource("48_eoee5")]
 value = 100.0
-
-[node name="BloodParticles" type="GPUParticles2D" parent="Grid/Enemy_1" unique_id=956278914]
-emitting = false
-amount = 20
-texture = ExtResource("47_xlu2f")
-lifetime = 0.35000000000000003
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_gutiw")
 
 [node name="Enemy_2" type="Node2D" parent="Grid" unique_id=1444192590 groups=["occupies_tile"]]
 position = Vector2(-80, -144)
@@ -465,16 +435,6 @@ autoplay = "idle"
 
 [node name="Healthbar" parent="Grid/Enemy_2" unique_id=491146892 instance=ExtResource("48_eoee5")]
 value = 100.0
-
-[node name="BloodParticles" type="GPUParticles2D" parent="Grid/Enemy_2" unique_id=623341509]
-position = Vector2(-32, 0)
-emitting = false
-amount = 20
-texture = ExtResource("47_xlu2f")
-lifetime = 0.35000000000000003
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_gutiw")
 
 [node name="Obstacle_1" type="Node2D" parent="Grid" unique_id=1907316796 groups=["occupies_tile"]]
 position = Vector2(-16, -112)

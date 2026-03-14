@@ -10,6 +10,7 @@ extends Resource
         apply_chance = clamp(value, 0.0, 1.0)
 
 @export var is_active: bool = false
+@export var particles: PackedScene
 
 
 @abstract func queue(actor: Actor) -> void

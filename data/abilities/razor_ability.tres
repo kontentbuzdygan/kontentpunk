@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://crbgb4yfv0dl0" path="res://scripts/ability_effect/apply_status_effect_ability_effect.gd" id="3_g1mpa"]
 [ext_resource type="Texture2D" uid="uid://dqt3ixn8fk67q" path="res://textures/wound.png" id="3_upf2f"]
 [ext_resource type="Script" uid="uid://bg1l528adesin" path="res://scripts/status_effect/bleed_status_effect.gd" id="4_m4oie"]
+[ext_resource type="PackedScene" path="res://objects/particles/blood_particles.tscn" id="4_x8db1"]
 [ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/axis_aligned_tile_predicate.gd" id="5_0wq6l"]
 [ext_resource type="AudioStream" uid="uid://dvx2bh0ab6kdr" path="res://sounds/blade.tres" id="5_upf2f"]
 
@@ -16,6 +17,7 @@ script = ExtResource("2_n8fu2")
 script = ExtResource("4_m4oie")
 apply_chance = 1.0
 is_active = true
+particles = ExtResource("4_x8db1")
 metadata/_custom_type_script = "uid://bg1l528adesin"
 
 [sub_resource type="Resource" id="Resource_cgd6q"]
