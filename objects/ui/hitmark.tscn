@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://ct0sa45hmid2m"]
+
+[ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_onwtm"]
+[ext_resource type="Script" uid="uid://dqadbka1quufx" path="res://scripts/hitmark.gd" id="2_1nrlv"]
+
+[sub_resource type="Animation" id="Animation_feipj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:theme_override_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.827451, 0.15686275, 0.21176471, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_phkwt"]
+resource_name = "appear"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-8, -32), Vector2(-10, -39)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ajeoh"]
+resource_name = "blink"
+length = 0.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.827451, 0.15686275, 0.21176471, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sovo5"]
+_data = {
+&"RESET": SubResource("Animation_feipj"),
+&"appear": SubResource("Animation_phkwt"),
+&"blink": SubResource("Animation_ajeoh")
+}
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_okdxq"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4shdf"]
+animation = &"blink"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1duhf"]
+animation = &"appear"
+advance_on_start = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5i307"]
+graph_offset = Vector2(-318.04498, -105.85158)
+nodes/output/position = Vector2(480, 60)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_1duhf")
+nodes/Animation/position = Vector2(38.669, 60)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_4shdf")
+"nodes/Animation 2/position" = Vector2(38.669, 320)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_okdxq")
+nodes/Add2/position = Vector2(258.669, 20)
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"Animation", &"Add2", 1, &"Animation 2"]
+
+[node name="Hitmark" type="Control" unique_id=1983136793]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.0
+offset_top = -28.0
+offset_right = -8.0
+offset_bottom = -28.0
+theme = ExtResource("1_onwtm")
+script = ExtResource("2_1nrlv")
+
+[node name="Label" type="Label" parent="." unique_id=155695597]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -32.0
+offset_right = 38.0
+offset_bottom = -9.0
+theme_override_colors/font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+text = "3"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1633345076]
+libraries/ = SubResource("AnimationLibrary_sovo5")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=224183050]
+tree_root = SubResource("AnimationNodeBlendTree_5i307")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0
+
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

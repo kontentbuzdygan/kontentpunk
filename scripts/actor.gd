@@ -4,6 +4,7 @@ extends Node2D
 @export var sound_effect_bus: StringName = &"Sound Effects"
 @export var move_sound: AudioStream
 @export var hurt_sound: AudioStream
+@export var hitmark_scene: PackedScene
 
 @onready var grid: Grid = find_parent("Grid")
 @onready var grid_animation_player: GridAnimationPlayer = find_children("", "GridAnimationPlayer")[0]
@@ -73,6 +74,7 @@ func execute(action: CombatAction) -> void:
 func take_damage(value: int) -> void:
 	print("%s took %d damage" % [self, value])
 	play_sound(hurt_sound, 0.1)
+	_show_hitmark(value)
 
 	if grid_animation_player.has_animation(&"hurt"):
 		health_changed.emit()
@@ -117,3 +119,9 @@ func _emit_status_effect_particles(particles_scene: PackedScene) -> void:
 		remove_child(particles)
 		particles.queue_free()
 	)
+
+
+func _show_hitmark(value: int):
+	var hitmark: Hitmark = hitmark_scene.duplicate().instantiate()
+	grid.add_child_on_tile(hitmark, self.get_current_tile())
+	hitmark.label.text = str(value)

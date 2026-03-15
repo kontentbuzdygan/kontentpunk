@@ -17,7 +17,7 @@ func _on_combat_action_ended(action: CombatAction) -> void:
 		_process_status_effects()
 		move_to(grid.get_random_tile())
 		var player_tile := grid.find_tile_with(Player)
-		CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, 1))
+		CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
 
 
 func execute(action: CombatAction) -> void:
