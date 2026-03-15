@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var grid: Grid = find_parent("Grid")
 @onready var grid_animation_player: GridAnimationPlayer = find_children("", "GridAnimationPlayer")[0]
+@onready var status_bar: StatusBar = find_children("StatusBar", "HFlowContainer")[0]
 
 var _audio_stream_player: AudioStreamPlayer
 
@@ -88,8 +89,11 @@ func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
 
 func apply_status_effect(status_effect: StatusEffect) -> void:
 	if status_effect.is_active:
-		if not status_effect in active_status_effects:
+		var existing_status_effect: Array[StatusEffect] = []
+		existing_status_effect.assign(active_status_effects.filter(func (active_status): return active_status.name == status_effect.name))
+		if not existing_status_effect.size():
 			active_status_effects.append(status_effect)
+			status_bar.add_status(status_effect.icon)
 		else:
 			## If status effect is already applied to the actor, extend its duration
 			active_status_effects[active_status_effects.find(status_effect)].duration = status_effect.duration
@@ -102,6 +106,7 @@ func _process_status_effects():
 		status_effect.queue(self)
 		if status_effect.duration == 0:
 			active_status_effects.remove_at(active_status_effects.find(status_effect))
+			status_bar.remove_status(status_effect.icon)
 
 
 func _emit_status_effect_particles(particles_scene: PackedScene) -> void:

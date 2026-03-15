@@ -2,6 +2,7 @@
 class_name StatusEffect
 extends Resource
 
+@export var name: StringName = &"Status"
 @export var duration: int = 3
 @export var apply_chance: float = 0.5:
     get():
@@ -12,6 +13,7 @@ extends Resource
 @export var is_active: bool = false
 @export var particles: PackedScene
 @export var sound_effect: AudioStream
+@export var icon: Texture2D
 
 
 @abstract func queue(actor: Actor) -> void

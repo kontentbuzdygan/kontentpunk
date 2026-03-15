@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhloag1puhq1i"
-path="res://.godot/imported/healthbar.png-59bd1cc22184d8f0d1a940f5ee7db483.ctex"
+uid="uid://k4euuortnhh2"
+path="res://.godot/imported/blood_drop.png-00954cb0d66f602fbe15359e8a7e32f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/ui/healthbar.png"
-dest_files=["res://.godot/imported/healthbar.png-59bd1cc22184d8f0d1a940f5ee7db483.ctex"]
+source_file="res://textures/blood_drop.png"
+dest_files=["res://.godot/imported/blood_drop.png-00954cb0d66f602fbe15359e8a7e32f2.ctex"]
 
 [params]
 
