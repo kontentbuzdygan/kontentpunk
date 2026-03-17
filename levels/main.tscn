@@ -22,11 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://duar8b2qxma3q" path="res://objects/ui/ability_selector.tscn" id="9_woytj"]
 [ext_resource type="Resource" uid="uid://bhttik14ccisc" path="res://data/abilities/finger_gun_ability.tres" id="12_woytj"]
 [ext_resource type="Texture2D" uid="uid://dqufku313tmlp" path="res://textures/woman.png" id="13_05fi1"]
-[ext_resource type="AnimationLibrary" uid="uid://cyoxtcn08i3rn" path="res://animations/player.res" id="14_j7211"]
 [ext_resource type="Resource" uid="uid://cti48yfdi8rxc" path="res://data/abilities/cyber_heart_ability.tres" id="14_o6dmv"]
 [ext_resource type="PackedScene" uid="uid://c0tgnw77kquxo" path="res://objects/ui/loot_container.tscn" id="14_oe60c"]
 [ext_resource type="PackedScene" uid="uid://bg74xf63v45np" path="res://objects/ui/item_holder.tscn" id="14_xombn"]
-[ext_resource type="SpriteFrames" uid="uid://dkjqjo2lu0tt7" path="res://textures/girl.tres" id="15_s07ge"]
 [ext_resource type="Resource" uid="uid://cap856rdql0af" path="res://data/items/finger_gun.tres" id="15_xombn"]
 [ext_resource type="Resource" uid="uid://bkytu06rtkd5l" path="res://data/items/cyber_heart.tres" id="16_vydlj"]
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
@@ -46,6 +44,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
 [ext_resource type="AudioStream" uid="uid://nfkr7ik6cg2y" path="res://sounds/blade_001.ogg" id="31_duofn"]
 [ext_resource type="AudioStream" uid="uid://rlv7dfrqpx2i" path="res://sounds/blade_003.ogg" id="35_y60h0"]
+[ext_resource type="Texture2D" uid="uid://dhbkw0lulnmtc" path="res://textures/girl_spritesheet.png" id="40_xlu2f"]
 [ext_resource type="AudioStream" uid="uid://d1ek4xbyaehd7" path="res://sounds/robot_female_hurt.tres" id="41_gusra"]
 [ext_resource type="PackedScene" uid="uid://baghb6cp68bp5" path="res://objects/game/lootbag.tscn" id="42_2hoto"]
 [ext_resource type="AudioStream" uid="uid://blmxxh1jbfo7w" path="res://sounds/electric_damage.tres" id="44_jjbqq"]
@@ -91,6 +90,254 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6et1j")
 sources/1 = SubResource("TileSetAtlasSource_etqu2")
 sources/2 = SubResource("TileSetAtlasSource_vpyym")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g5y6o"]
+animation = &"hurt_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_raj2e"]
+animation = &"hurt_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_xlu2f"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_g5y6o")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_raj2e")
+blend_point_1/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xlu2f"]
+animation = &"idle_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_map8x"]
+animation = &"idle_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_map8x"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xlu2f")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_map8x")
+blend_point_1/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r708q"]
+animation = &"run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2m3c7"]
+animation = &"run_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_r708q"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_r708q")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_2m3c7")
+blend_point_1/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xlu2f"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_map8x"]
+advance_mode = 2
+advance_condition = &"is_running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r708q"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2m3c7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g5y6o"]
+advance_mode = 2
+advance_condition = &"is_hurt"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_map8x"]
+states/Start/position = Vector2(196, 106)
+states/hurt/node = SubResource("AnimationNodeBlendSpace2D_xlu2f")
+states/hurt/position = Vector2(580.0624, 228)
+states/idle/node = SubResource("AnimationNodeBlendSpace2D_map8x")
+states/idle/position = Vector2(393.06238, 106)
+states/run/node = SubResource("AnimationNodeBlendSpace2D_r708q")
+states/run/position = Vector2(580.0624, 53)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_xlu2f"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_map8x"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_r708q"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_2m3c7"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_g5y6o")]
+graph_offset = Vector2(-173.14085, 0)
+
+[sub_resource type="Animation" id="Animation_xlu2f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Path2D/PathFollow2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_r708q"]
+resource_name = "hurt_left"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_m7o5q"]
+resource_name = "hurt_right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Path2D/PathFollow2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_map8x"]
+resource_name = "idle_left"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_raj2e"]
+resource_name = "idle_right"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Path2D/PathFollow2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2m3c7"]
+resource_name = "run_left"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8, 11]
+}
+
+[sub_resource type="Animation" id="Animation_g5y6o"]
+resource_name = "run_right"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Path2D/PathFollow2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r708q"]
+_data = {
+&"RESET": SubResource("Animation_xlu2f"),
+&"hurt_left": SubResource("Animation_r708q"),
+&"hurt_right": SubResource("Animation_m7o5q"),
+&"idle_left": SubResource("Animation_map8x"),
+&"idle_right": SubResource("Animation_raj2e"),
+&"run_left": SubResource("Animation_2m3c7"),
+&"run_right": SubResource("Animation_g5y6o")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_xlu2f"]
+
+[sub_resource type="Curve2D" id="Curve2D_map8x"]
+
+[sub_resource type="Curve2D" id="Curve2D_r708q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3naf"]
 atlas = ExtResource("20_wk3pi")
@@ -379,21 +626,34 @@ move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("27_egc1g")
 hitmark_scene = ExtResource("48_map8x")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Player" unique_id=938099669]
-reset_on_save = false
-libraries/ = ExtResource("14_j7211")
-script = ExtResource("6_5k4jt")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Player" unique_id=1209261837]
-position = Vector2(0, -5)
-sprite_frames = ExtResource("15_s07ge")
-animation = &"idle"
-autoplay = "idle"
-
 [node name="StatusBar" parent="Grid/Player" unique_id=2080669779 instance=ExtResource("50_xlu2f")]
 
+[node name="AnimationTree" type="AnimationTree" parent="Grid/Player" unique_id=44885257]
+tree_root = SubResource("AnimationNodeStateMachine_map8x")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/is_hurt = false
+parameters/conditions/is_running = false
+parameters/hurt/blend_position = Vector2(0, 0)
+parameters/idle/blend_position = Vector2(0, 0)
+parameters/run/blend_position = Vector2(0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Grid/Player" unique_id=335358017]
+libraries/ = SubResource("AnimationLibrary_r708q")
+
+[node name="Path2D" type="Path2D" parent="Grid/Player" unique_id=583211386]
+curve = SubResource("Curve2D_xlu2f")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Grid/Player/Path2D" unique_id=928513333]
+rotates = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Grid/Player/Path2D/PathFollow2D" unique_id=1152667487]
+texture = ExtResource("40_xlu2f")
+hframes = 4
+vframes = 3
+
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
-position = Vector2(-112, -144)
+position = Vector2(-176, -176)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
 lootbag_scene = ExtResource("42_2hoto")
@@ -407,17 +667,22 @@ reset_on_save = false
 libraries/ = ExtResource("18_fd7wu")
 script = ExtResource("6_5k4jt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_1" unique_id=789686885]
+[node name="Healthbar" parent="Grid/Enemy_1" unique_id=1933015322 instance=ExtResource("48_eoee5")]
+value = 100.0
+
+[node name="StatusBar" parent="Grid/Enemy_1" unique_id=63683786 instance=ExtResource("50_xlu2f")]
+
+[node name="Path2D" type="Path2D" parent="Grid/Enemy_1" unique_id=762680416]
+curve = SubResource("Curve2D_map8x")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Grid/Enemy_1/Path2D" unique_id=1225805061]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_1/Path2D/PathFollow2D" unique_id=789686885]
 y_sort_enabled = true
 position = Vector2(0, -5)
 sprite_frames = ExtResource("27_o6dmv")
 animation = &"idle"
 autoplay = "idle"
-
-[node name="Healthbar" parent="Grid/Enemy_1" unique_id=1933015322 instance=ExtResource("48_eoee5")]
-value = 100.0
-
-[node name="StatusBar" parent="Grid/Enemy_1" unique_id=63683786 instance=ExtResource("50_xlu2f")]
 
 [node name="Enemy_2" type="Node2D" parent="Grid" unique_id=1444192590 groups=["occupies_tile"]]
 position = Vector2(-80, -144)
@@ -434,17 +699,22 @@ reset_on_save = false
 libraries/ = ExtResource("18_fd7wu")
 script = ExtResource("6_5k4jt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_2" unique_id=1279276901]
+[node name="Healthbar" parent="Grid/Enemy_2" unique_id=491146892 instance=ExtResource("48_eoee5")]
+value = 100.0
+
+[node name="StatusBar" parent="Grid/Enemy_2" unique_id=1677923491 instance=ExtResource("50_xlu2f")]
+
+[node name="Path2D" type="Path2D" parent="Grid/Enemy_2" unique_id=825694930]
+curve = SubResource("Curve2D_r708q")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Grid/Enemy_2/Path2D" unique_id=1451956169]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Enemy_2/Path2D/PathFollow2D" unique_id=1279276901]
 y_sort_enabled = true
 position = Vector2(0, -5)
 sprite_frames = ExtResource("28_o6dmv")
 animation = &"idle"
 autoplay = "idle"
-
-[node name="Healthbar" parent="Grid/Enemy_2" unique_id=491146892 instance=ExtResource("48_eoee5")]
-value = 100.0
-
-[node name="StatusBar" parent="Grid/Enemy_2" unique_id=1677923491 instance=ExtResource("50_xlu2f")]
 
 [node name="Obstacle_1" type="Node2D" parent="Grid" unique_id=1907316796 groups=["occupies_tile"]]
 position = Vector2(-16, -112)
