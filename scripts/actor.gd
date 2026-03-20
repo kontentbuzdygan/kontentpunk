@@ -12,7 +12,6 @@ extends Node2D
 
 var is_idle: bool = true
 var is_moving: bool = false
-var is_hurt: bool = false
 
 var _audio_stream_player: AudioStreamPlayer
 
@@ -25,7 +24,6 @@ signal health_changed
 
 
 func _ready() -> void:
-	animation_tree.active = true
 	_audio_stream_player = AudioStreamPlayer.new()
 	_audio_stream_player.bus = sound_effect_bus
 	add_child(_audio_stream_player)
@@ -78,16 +76,13 @@ func execute(action: CombatAction) -> void:
 
 
 func take_damage(value: int) -> void:
-	is_hurt = true
-	await animation_tree.animation_finished
-	is_hurt = false
 	print("%s took %d damage" % [self, value])
 	play_sound(hurt_sound, 0.1)
 	_show_hitmark(value)
+	animation_tree["parameters/playback"].travel(&"hurt")
+	await animation_tree.animation_finished
 
 	health_changed.emit()
-	#if grid_animation_player.has_animation(&"hurt"):
-	#	await grid_animation_player.play_and_wait(&"hurt")
 
 
 func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
@@ -137,16 +132,26 @@ func _show_hitmark(value: int):
 
 
 func execute_move(target_tile: Vector2i) -> void:
+	set_moving_state(Vector2(target_tile - get_current_tile()))
+
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "position", grid.map_to_local(target_tile), 0.5)
+	await tween.finished
+
+	set_idle_state()
+
+
+func set_moving_state(destination: Vector2) -> void:
 	is_moving = true
 	is_idle = false
-	var destination: Vector2 = Vector2(target_tile - get_current_tile())
+
 	animation_tree["parameters/idle/blend_position"] = destination
 	animation_tree["parameters/run/blend_position"] = destination
 	animation_tree["parameters/hurt/blend_position"] = destination
 
-	var tween = create_tween()
-	tween.tween_property(self, "position", grid.map_to_local(target_tile), 0.5)
-	await tween.finished
 
+func set_idle_state() -> void:
 	is_moving = false
 	is_idle = true
