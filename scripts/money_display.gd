@@ -1,7 +1,8 @@
 extends VBoxContainer
 
 @export var digit_flip_interval: float = 0.02
-@export var changing_font_color: Color
+@export var decreasing_font_color: Color
+@export var increasing_font_color: Color
 
 @onready var money: PlayerResource = PlayerState.get_instance().money
 
@@ -20,8 +21,14 @@ func _process(delta: float) -> void:
 		_t -= digit_flip_interval
 
 		if money.current != _value:
-			_value += sign(money.current - _value)
+			var difference = sign(money.current - _value)
+
+			_value += difference 
 			$Label.text = str(_value)
-			$Label.add_theme_color_override(&"font_color", changing_font_color)
+
+			if difference < 0:
+				$Label.add_theme_color_override(&"font_color", decreasing_font_color)
+			elif difference > 0:
+				$Label.add_theme_color_override(&"font_color", increasing_font_color)
 		else:
 			$Label.remove_theme_color_override(&"font_color")

@@ -5,7 +5,11 @@ extends Actor
 @export var health: int = 8
 @export var lootbag_scene: PackedScene
 @export var drops: Array[Item]
+@export var money_drop: int = 10
+@export var money_drop_label_scene: PackedScene
+
 @onready var loot_container = %LootContainer
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
 	super._ready()
@@ -15,9 +19,9 @@ func _ready() -> void:
 func _on_combat_action_ended(action: CombatAction) -> void:
 	if action is CombatAction.EndTurn:
 		_process_status_effects()
-		move_to(grid.get_random_tile())
-		var player_tile := grid.find_tile_with(Player)
-		CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
+		#move_to(grid.get_random_tile())
+		#var player_tile := grid.find_tile_with(Player)
+		#CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
 
 
 func execute(action: CombatAction) -> void:
@@ -33,6 +37,7 @@ func take_damage(value: int) -> void:
 
 	if health <= 0:
 		drop_loot()
+		await drop_money()
 		queue_free()
 
 
@@ -50,3 +55,15 @@ func drop_loot():
 	var drop_chances: Array[float] = []
 	drop_chances.assign(drops.map(func (item: Item): return item.drop_chance))
 	lootbag.loot.append(drops[rng.rand_weighted(drop_chances)])
+
+
+func drop_money():
+	sprite.visible = false
+	var money_drop_label: MoneyDropLabel = money_drop_label_scene.instantiate()
+	add_child(money_drop_label)
+
+	await money_drop_label.play_animation(money_drop)
+
+	PlayerState.get_instance().money.add(money_drop)
+	remove_child(money_drop_label)
+	money_drop_label.queue_free()

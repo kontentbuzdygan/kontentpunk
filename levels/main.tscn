@@ -51,6 +51,7 @@
 [ext_resource type="AudioStream" uid="uid://blmxxh1jbfo7w" path="res://sounds/electric_damage.tres" id="44_jjbqq"]
 [ext_resource type="PackedScene" uid="uid://bkv4l6mhxwm58" path="res://objects/ui/healthbar.tscn" id="48_eoee5"]
 [ext_resource type="PackedScene" uid="uid://ct0sa45hmid2m" path="res://objects/ui/hitmark.tscn" id="48_map8x"]
+[ext_resource type="PackedScene" uid="uid://jyunhahsf76r" path="res://objects/ui/money_drop_label.tscn" id="49_r708q"]
 [ext_resource type="PackedScene" uid="uid://cesvfmcl13lnc" path="res://objects/ui/status_bar.tscn" id="50_xlu2f"]
 
 [sub_resource type="Resource" id="Resource_jjbqq"]
@@ -148,7 +149,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 script = ExtResource("9_f1mgo")
-changing_font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+decreasing_font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
+increasing_font_color = Color(0.4113857, 0.40569255, 0.77344114, 1)
 
 [node name="Coin" type="Control" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay" unique_id=469727718]
 custom_minimum_size = Vector2(32, 32)
@@ -396,8 +398,11 @@ autoplay = "idle"
 position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
+health = 1
 lootbag_scene = ExtResource("42_2hoto")
 drops = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj"), ExtResource("15_xombn")])
+money_drop = 100
+money_drop_label_scene = ExtResource("49_r708q")
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("41_gusra")
 hitmark_scene = ExtResource("48_map8x")
@@ -423,8 +428,10 @@ value = 100.0
 position = Vector2(-80, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("35_y60h0")
+health = 3
 lootbag_scene = ExtResource("42_2hoto")
 drops = Array[ExtResource("29_gusra")]([ExtResource("15_xombn")])
+money_drop_label_scene = ExtResource("49_r708q")
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("44_jjbqq")
 hitmark_scene = ExtResource("48_map8x")

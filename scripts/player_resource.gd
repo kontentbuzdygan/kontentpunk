@@ -12,3 +12,8 @@ signal current_changed(value: int)
 func _set_current(value: int) -> void:
 	current = max(value, 0)
 	current_changed.emit(current)
+
+
+func add(value: int) -> void:
+	current += max(value, 0)
+	current_changed.emit(current)
