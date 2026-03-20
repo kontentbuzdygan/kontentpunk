@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://cr818sbu37pap"]
+
+[ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_7ac7h"]
+[ext_resource type="Script" path="res://scripts/money_drop_label.gd" id="1_x3fae"]
+[ext_resource type="Texture2D" uid="uid://bbxog2bae8plq" path="res://textures/coin_small.png" id="2_pcwf3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmwg7"]
+atlas = ExtResource("2_pcwf3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Animation" id="Animation_221iy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, -28)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_eyso8"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 5.098218),
+"update": 0,
+"values": [Vector2(-16, -28), Vector2(-16, -36)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 12.125715),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c15ht"]
+_data = {
+&"RESET": SubResource("Animation_221iy"),
+&"appear": SubResource("Animation_eyso8")
+}
+
+[node name="MoneyDropLabel" type="Control" unique_id=704451596]
+z_index = 999
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = -13.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_x3fae")
+
+[node name="Label" type="Label" parent="." unique_id=1368070396]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 25.0
+offset_bottom = 16.0
+size_flags_vertical = 8
+theme = ExtResource("1_7ac7h")
+text = "+20"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1262324274]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 43.0
+offset_bottom = 16.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_hmwg7")
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1320668093]
+libraries/ = SubResource("AnimationLibrary_c15ht")
+autoplay = &"RESET"

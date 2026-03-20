@@ -7,39 +7,28 @@ extends Node2D
 @export var hitmark_scene: PackedScene
 
 @onready var grid: Grid = find_parent("Grid")
-# @onready var grid_animation_player: GridAnimationPlayer = find_children("", "GridAnimationPlayer")[0]
 @onready var status_bar: StatusBar = find_children("StatusBar", "HFlowContainer")[0]
-@onready var path_2d: Path2D = find_children("", "Path2D")[0]
-@onready var path_follow_2d: PathFollow2D = find_children("", "PathFollow2D")[0]
+@onready var animation_tree: AnimationTree = $AnimationTree
+
+var is_idle: bool = true
+var is_moving: bool = false
+var is_hurt: bool = false
 
 var _audio_stream_player: AudioStreamPlayer
 
 var passive_status_effects: Array[StatusEffect] = []
 var active_status_effects: Array[StatusEffect] = []
-var is_moving: bool = false
 
 signal left_tile(tile: Vector2i)
 signal entered_tile(tile: Vector2i)
 signal health_changed
-signal finished_moving
 
 
 func _ready() -> void:
+	animation_tree.active = true
 	_audio_stream_player = AudioStreamPlayer.new()
 	_audio_stream_player.bus = sound_effect_bus
 	add_child(_audio_stream_player)
-
-
-func _process(delta: float) -> void:
-	if path_2d.curve.point_count:
-		path_follow_2d.progress_ratio += delta * 1
-		print(self.global_position)
-
-	if path_follow_2d.progress_ratio >= 0.9:
-		is_moving = false
-		path_2d.curve.clear_points()
-		finished_moving.emit()
-		set_process(false)
 
 
 func get_current_tile() -> Vector2i:
@@ -89,6 +78,9 @@ func execute(action: CombatAction) -> void:
 
 
 func take_damage(value: int) -> void:
+	is_hurt = true
+	await animation_tree.animation_finished
+	is_hurt = false
 	print("%s took %d damage" % [self, value])
 	play_sound(hurt_sound, 0.1)
 	_show_hitmark(value)
@@ -145,9 +137,16 @@ func _show_hitmark(value: int):
 
 
 func execute_move(target_tile: Vector2i) -> void:
-	path_2d.curve.add_point(Vector2i.ZERO)
-	path_2d.curve.add_point(grid.map_to_local(target_tile) - grid.map_to_local(get_current_tile()))
-	print(path_2d.curve.get_point_position(1))
 	is_moving = true
-	set_process(true)
-	await finished_moving
+	is_idle = false
+	var destination: Vector2 = Vector2(target_tile - get_current_tile())
+	animation_tree["parameters/idle/blend_position"] = destination
+	animation_tree["parameters/run/blend_position"] = destination
+	animation_tree["parameters/hurt/blend_position"] = destination
+
+	var tween = create_tween()
+	tween.tween_property(self, "position", grid.map_to_local(target_tile), 0.5)
+	await tween.finished
+
+	is_moving = false
+	is_idle = true
