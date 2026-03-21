@@ -97,9 +97,9 @@ z_index = 999
 layout_mode = 3
 anchors_preset = 0
 offset_left = -16.0
-offset_top = -28.0
+offset_top = -36.0
 offset_right = 28.0
-offset_bottom = -13.0
+offset_bottom = -21.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_x3fae")
@@ -111,6 +111,7 @@ offset_right = 25.0
 offset_bottom = 16.0
 size_flags_vertical = 8
 theme = ExtResource("1_7ac7h")
+theme_override_colors/font_color = Color(0.8901961, 0.654902, 0.16862746, 1)
 text = "+20"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1262324274]

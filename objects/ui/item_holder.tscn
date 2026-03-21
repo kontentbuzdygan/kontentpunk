@@ -67,6 +67,8 @@ resource_type = 2
 cost = 10
 icon_enabled = SubResource("AtlasTexture_ee4xc")
 icon_disabled = SubResource("AtlasTexture_lugg0")
+color_enabled = Color(0.8901961, 0.654902, 0.16862746, 1)
+color_disabled = Color(0.3019608, 0.1764706, 0.023529412, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1750800561]
 stream = ExtResource("4_7su2e")

@@ -8,11 +8,13 @@ extends VBoxContainer
 
 var _value: int
 var _t: float = 0.0
+var _normal_font_color: Color
 
 
 func _ready() -> void:
 	_value = money.current
 	$Label.text = str(_value)
+	_normal_font_color = $Label.get_theme_color(&"font_color")
 
 
 func _process(delta: float) -> void:
@@ -23,7 +25,7 @@ func _process(delta: float) -> void:
 		if money.current != _value:
 			var difference = sign(money.current - _value)
 
-			_value += difference 
+			_value += difference
 			$Label.text = str(_value)
 
 			if difference < 0:
@@ -31,4 +33,4 @@ func _process(delta: float) -> void:
 			elif difference > 0:
 				$Label.add_theme_color_override(&"font_color", increasing_font_color)
 		else:
-			$Label.remove_theme_color_override(&"font_color")
+			$Label.add_theme_color_override(&"font_color", _normal_font_color)

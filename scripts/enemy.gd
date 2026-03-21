@@ -59,11 +59,13 @@ func drop_loot():
 
 func drop_money():
 	sprite.visible = false
+
+	PlayerState.get_instance().money.add(money_drop)
+
 	var money_drop_label: MoneyDropLabel = money_drop_label_scene.instantiate()
 	add_child(money_drop_label)
 
 	await money_drop_label.play_animation(money_drop)
 
-	PlayerState.get_instance().money.add(money_drop)
 	remove_child(money_drop_label)
 	money_drop_label.queue_free()

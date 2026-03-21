@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bkfnk7qh7x1qu" path="res://textures/highlighted_tile.png" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://dd1fxp22x7nbq" path="res://scripts/grid.gd" id="3_m1504"]
 [ext_resource type="SpriteFrames" uid="uid://c6jsi8fbkxte" path="res://textures/circuit.tres" id="4_6yxbg"]
-[ext_resource type="Script" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
+[ext_resource type="Script" uid="uid://d2fxnw70e2fsv" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
 [ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="4_l412s"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Script" uid="uid://m8epw55rw05k" path="res://scripts/grid_animation_player.gd" id="6_5k4jt"]
@@ -33,7 +33,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://uuuiafbeg6ha" path="res://animations/enemy.res" id="18_fd7wu"]
 [ext_resource type="Script" uid="uid://h3ya5pngmnko" path="res://scripts/abilities_list.gd" id="19_en2ks"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
-[ext_resource type="Script" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
+[ext_resource type="Script" uid="uid://i47h4lyrxmuw" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
 [ext_resource type="Script" uid="uid://dcwdi8d5fb7y8" path="res://scripts/drop_area.gd" id="21_oe60c"]
 [ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="22_8a5tp"]
 [ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
@@ -41,7 +41,7 @@
 [ext_resource type="AudioStream" uid="uid://dnte3iopj5m20" path="res://sounds/woman_hurt_gore.tres" id="27_egc1g"]
 [ext_resource type="SpriteFrames" uid="uid://ds56y1m3mp6xh" path="res://textures/robot.tres" id="27_o6dmv"]
 [ext_resource type="SpriteFrames" uid="uid://cvbnmbat1kymb" path="res://textures/robot2.tres" id="28_o6dmv"]
-[ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="29_gusra"]
+[ext_resource type="Script" uid="uid://bbgc4dvto7fk6" path="res://scripts/item.gd" id="29_gusra"]
 [ext_resource type="Resource" uid="uid://d54xbg1h4ayv" path="res://data/items/razor.tres" id="29_gutiw"]
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
 [ext_resource type="AudioStream" uid="uid://nfkr7ik6cg2y" path="res://sounds/blade_001.ogg" id="31_duofn"]
@@ -116,6 +116,18 @@ stream = ExtResource("7_m6gxc")
 autoplay = true
 bus = &"Music"
 
+[node name="Layer_Background" type="CanvasLayer" parent="." unique_id=1978189837]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="Layer_Background" unique_id=1272775659]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2262g")
+stretch_mode = 2
+
 [node name="Layer_HUD" type="CanvasLayer" parent="." unique_id=484654902]
 
 [node name="MarginContainer" type="MarginContainer" parent="Layer_HUD" unique_id=602176283]
@@ -150,7 +162,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 script = ExtResource("9_f1mgo")
 decreasing_font_color = Color(0.827451, 0.15686275, 0.21176471, 1)
-increasing_font_color = Color(0.4113857, 0.40569255, 0.77344114, 1)
+increasing_font_color = Color(0.9529412, 0.92941177, 0.91764706, 1)
 
 [node name="Coin" type="Control" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay" unique_id=469727718]
 custom_minimum_size = Vector2(32, 32)
@@ -161,11 +173,13 @@ size_flags_vertical = 0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay/Coin" unique_id=861951769]
 sprite_frames = ExtResource("3_c7dyn")
 autoplay = "default"
+frame_progress = 0.72569394
 centered = false
 
 [node name="Label" type="Label" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay" unique_id=2052029344]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.8901961, 0.654902, 0.16862746, 1)
 text = "124 213"
 horizontal_alignment = 1
 
@@ -317,18 +331,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_gusra")
 script = ExtResource("21_oe60c")
 grid = NodePath("../../Grid")
 lootbag_scene = ExtResource("42_2hoto")
-
-[node name="Layer_Background" type="CanvasLayer" parent="." unique_id=1978189837]
-layer = -1
-
-[node name="Background" type="TextureRect" parent="Layer_Background" unique_id=1272775659]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_2262g")
-stretch_mode = 2
 
 [node name="Grid" type="TileMapLayer" parent="." unique_id=434431019]
 texture_repeat = 2
