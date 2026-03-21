@@ -46,7 +46,7 @@ func drop_loot():
 		return
 
 	var enemy_tile = get_current_tile()
-	var lootbag: Lootbag = grid.get_nodes_on_tile(enemy_tile, Lootbag).get(0)
+	var lootbag: Lootbag = grid.get_node_on_tile(enemy_tile, Lootbag)
 	if not lootbag:
 		lootbag = lootbag_scene.instantiate()
 		grid.add_child_on_tile(lootbag, enemy_tile)

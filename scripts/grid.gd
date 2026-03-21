@@ -50,6 +50,11 @@ func get_nodes_on_tile(tile: Vector2i, type: Variant = null) -> Array[Node2D]:
 	return found
 
 
+func get_node_on_tile(tile: Vector2i, type: Variant = null) -> Variant:
+	var nodes := get_nodes_on_tile(tile, type)
+	return null if nodes.is_empty() else nodes[0]
+
+
 func is_tile_occupied(tile: Vector2i) -> bool:
 	for node in get_nodes_on_tile(tile):
 		if node.is_in_group(&"occupies_tile"):

@@ -12,13 +12,20 @@ extends HBoxContainer
 
 @export var icon_enabled: Texture2D
 @export var icon_disabled: Texture2D
-@export var color_enabled: Color
-@export var color_disabled: Color
+@export var label_type_variation: StringName:
+	get:
+		return label_type_variation
+	set(value):
+		label_type_variation = value
+		if is_node_ready():
+			$Label.theme_type_variation = label_type_variation
 
 var _resource: PlayerResource
 
 
 func _ready() -> void:
+	$Label.theme_type_variation = label_type_variation
+
 	if not Engine.is_editor_hint():
 		_resource = PlayerState.get_instance().get_resource(resource_type)
 		_resource.current_changed.connect(update.unbind(1))
@@ -31,11 +38,11 @@ func update() -> void:
 
 	if current < cost:
 		$Icon.texture = icon_disabled
-		set_label_color(color_disabled)
+		set_label_color(&"font_color_disabled")
 	else:
 		$Icon.texture = icon_enabled
-		set_label_color(color_enabled)
+		set_label_color(&"font_color_active")
 
 
-func set_label_color(color: Color) -> void:
-	$Label.add_theme_color_override(&"font_color", color)
+func set_label_color(color_name: StringName) -> void:
+	$Label.add_theme_color_override(&"font_color", $Label.get_theme_color(color_name))

@@ -12,8 +12,7 @@ script = ExtResource("2_nfqef")
 resource_type = 1
 icon_enabled = ExtResource("3_jyylt")
 icon_disabled = ExtResource("4_bt6o7")
-color_enabled = Color(0.5294118, 0.10980392, 0.24313726, 1)
-color_disabled = Color(0.1882353, 0.1764706, 0.41568628, 1)
+label_type_variation = &"Label_Mana"
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1397426775]
 layout_mode = 2
@@ -26,6 +25,7 @@ stretch_mode = 3
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.1882353, 0.1764706, 0.41568628, 1)
+theme_type_variation = &"Label_Mana"
+theme_override_colors/font_color = Color(0, 0.24705882, 0.31764707, 1)
 text = "1"
 vertical_alignment = 1

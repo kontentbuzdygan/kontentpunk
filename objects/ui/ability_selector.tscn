@@ -21,6 +21,7 @@ script = ExtResource("2_kabsk")
 
 [node name="ManaCostDisplay" parent="." unique_id=1361968476 instance=ExtResource("4_kabsk")]
 layout_mode = 2
+label_type_variation = &"Label_Mana"
 
 [node name="Button" type="Button" parent="." unique_id=780142691]
 layout_mode = 2
