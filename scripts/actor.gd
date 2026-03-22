@@ -10,6 +10,8 @@ extends Node2D
 @onready var status_bar: StatusBar = find_children("StatusBar", "HFlowContainer")[0]
 @onready var animation_tree: AnimationTree = $AnimationTree
 
+var tween: Tween
+
 var is_idle: bool = true
 var is_moving: bool = false
 
@@ -132,24 +134,32 @@ func _show_hitmark(value: int):
 
 
 func execute_move(target_tile: Vector2i) -> void:
-	set_moving_state(Vector2(target_tile - get_current_tile()))
+	var direction: Vector2 = Vector2(target_tile - get_current_tile()).normalized()
+	set_moving_state(direction)
 
-	var tween = create_tween()
+	var relative_tile := target_tile - get_current_tile()
+	var distance = Utils.manhattan_length(relative_tile)
+	var time_per_tile = 0.22
+
+	if tween:
+		tween.kill()
+
+	tween = create_tween()
 	tween.set_trans(Tween.TRANS_BACK)
 	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(self, "position", grid.map_to_local(target_tile), 0.5)
+	tween.tween_property(self, "position", grid.map_to_local(target_tile), distance * time_per_tile)
 	await tween.finished
 
 	set_idle_state()
 
 
-func set_moving_state(destination: Vector2) -> void:
+func set_moving_state(direction: Vector2) -> void:
 	is_moving = true
 	is_idle = false
 
-	animation_tree["parameters/idle/blend_position"] = destination
-	animation_tree["parameters/run/blend_position"] = destination
-	animation_tree["parameters/hurt/blend_position"] = destination
+	animation_tree["parameters/idle/blend_position"] = direction
+	animation_tree["parameters/run/blend_position"] = direction
+	animation_tree["parameters/hurt/blend_position"] = direction
 
 
 func set_idle_state() -> void:
