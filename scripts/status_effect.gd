@@ -10,7 +10,7 @@ extends Resource
     set(value):
         apply_chance = clamp(value, 0.0, 1.0)
 
-@export var is_active: bool = false
+@export var is_active: bool = true
 @export var particles: PackedScene
 @export var sound_effect: AudioStream
 @export var icon: Texture2D

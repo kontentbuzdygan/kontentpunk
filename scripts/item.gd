@@ -20,6 +20,8 @@ enum Type { NONE = -1, HEAD, HEART, ARM, SPINE, LEG }
 		return drop_chance
 	set(value):
 		drop_chance = clamp(value, 0.0, 1.0)
+@export var penalties: Array[StatusEffect]
+var is_penalty_activated: bool = false
 
 signal icon_changed(icon: Texture2D)
 

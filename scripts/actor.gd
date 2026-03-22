@@ -104,11 +104,18 @@ func apply_status_effect(status_effect: StatusEffect) -> void:
 
 
 func _process_status_effects():
-	for status_effect in active_status_effects:
+	for status_effect in active_status_effects + passive_status_effects:
 		status_effect.queue(self)
 		if status_effect.duration == 0:
-			active_status_effects.remove_at(active_status_effects.find(status_effect))
-			status_bar.remove_status(status_effect.icon)
+			remove_status_effect(status_effect)
+
+
+func remove_status_effect(status_effect: StatusEffect):
+	if status_effect.is_active:
+		active_status_effects.remove_at(active_status_effects.find(status_effect))
+	else:
+		passive_status_effects.remove_at(passive_status_effects.find(status_effect))
+	status_bar.remove_status(status_effect.icon)
 
 
 func _emit_status_effect_particles(particles_scene: PackedScene) -> void:

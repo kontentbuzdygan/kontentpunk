@@ -23,6 +23,9 @@ func _ready() -> void:
 
 	_move_predicate = AxisAlignedTilePredicate.new()
 
+	var combat_state := CombatState.get_instance()
+	combat_state.queue_emptied.connect(_on_queue_emptied)
+
 
 func _on_tile_clicked(tile: Vector2i) -> void:
 	var relative_tile := tile - get_current_tile()
@@ -102,3 +105,23 @@ func clear_selected_ability() -> void:
 
 	if button:
 		button.set_pressed_no_signal(false)
+
+
+func _on_queue_emptied() -> void:
+	_process_status_effects()
+
+	var player_state = PlayerState.get_instance()
+	for item in player_state.get_items():
+		if item.penalties.is_empty():
+			continue
+
+		if player_state.money.current < item.money_cost:
+			_apply_penalties(item.penalties)
+			item.is_penalty_activated = true
+		else:
+			item.is_penalty_activated = false
+
+
+func _apply_penalties(penalties: Array[StatusEffect]):
+	for penalty in penalties:
+		penalty.queue(self)
