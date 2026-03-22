@@ -18,19 +18,19 @@ func update() -> void:
 		texture_rect.texture = status.icon
 		add_child(texture_rect)
 
-	if is_instance_of(actor, Player):
-		var items: Array[Item] = PlayerState.get_instance().get_items()
-		for item in items:
+	if not is_instance_of(actor, Player) || get_child_count() >= MAX_ICONS:
+		return
+
+	## Handle debuffs applied as penalties from items
+	var items: Array[Item] = PlayerState.get_instance().get_items()
+	for item in items:
+		if item.penalties.is_empty() || not item.is_penalty_activated:
+			continue
+
+		for penalty in item.penalties:
 			if get_child_count() >= MAX_ICONS:
 				break
 
-			if item.penalties.is_empty() || not item.is_penalty_activated:
-				continue
-
-			for penalty in item.penalties:
-				if get_child_count() >= MAX_ICONS:
-					break
-
-				var texture_rect = TextureRect.new()
-				texture_rect.texture = penalty.icon
-				add_child(texture_rect)
+			var texture_rect = TextureRect.new()
+			texture_rect.texture = penalty.icon
+			add_child(texture_rect)
