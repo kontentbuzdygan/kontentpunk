@@ -1,21 +1,36 @@
 class_name StatusBar
 extends HFlowContainer
 
-func add_status(icon: Texture2D):
-	var texture_rect = TextureRect.new()
-	texture_rect.texture = icon
-	texture_rect.visible = true if get_child_count() < 4 else false
-	add_child(texture_rect)
+const MAX_ICONS: int = 4
 
 
-func remove_status(icon: Texture2D):
+func update() -> void:
+	var actor: Actor = get_parent()
+	var actor_statuses = actor.active_status_effects + actor.passive_status_effects
 	for child in get_children():
-		if child is TextureRect and child.texture == icon:
-			remove_child(child)
-			child.queue_free()
-			break
+		remove_child(child)
+		child.queue_free()
 
-	## Show last status icon if there were > 4 status effects
-	var last_icon = get_child(3)
-	if last_icon:
-		last_icon.visible = true
+	for status in actor_statuses:
+		if get_child_count() >= MAX_ICONS:
+			break
+		var texture_rect = TextureRect.new()
+		texture_rect.texture = status.icon
+		add_child(texture_rect)
+
+	if is_instance_of(actor, Player):
+		var items: Array[Item] = PlayerState.get_instance().get_items()
+		for item in items:
+			if get_child_count() >= MAX_ICONS:
+				break
+
+			if item.penalties.is_empty() || not item.is_penalty_activated:
+				continue
+
+			for penalty in item.penalties:
+				if get_child_count() >= MAX_ICONS:
+					break
+
+				var texture_rect = TextureRect.new()
+				texture_rect.texture = penalty.icon
+				add_child(texture_rect)

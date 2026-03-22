@@ -341,7 +341,7 @@ script = ExtResource("3_m1504")
 
 [node name="Lootbag" parent="Grid" unique_id=828126499 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, -80)
-loot = Array[ExtResource("29_gusra")]([ExtResource("29_gutiw"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("15_xombn")])
+loot = Array[ExtResource("29_gusra")]([ExtResource("29_gutiw"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("29_gutiw")])
 
 [node name="Lootbag2" parent="Grid" unique_id=2099095446 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, -16)
@@ -430,7 +430,7 @@ value = 100.0
 position = Vector2(-80, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("35_y60h0")
-health = 3
+health = 5
 lootbag_scene = ExtResource("42_2hoto")
 drops = Array[ExtResource("29_gusra")]([ExtResource("15_xombn")])
 money_drop_label_scene = ExtResource("49_r708q")

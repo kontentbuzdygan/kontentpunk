@@ -23,8 +23,9 @@ func _ready() -> void:
 
 	_move_predicate = AxisAlignedTilePredicate.new()
 
-	var combat_state := CombatState.get_instance()
-	combat_state.queue_emptied.connect(_on_queue_emptied)
+	var player_state := PlayerState.get_instance()
+	player_state.turn_begin.connect(_on_turn_begin)
+	player_state.items_changed.connect(_on_items_changed)
 
 
 func _on_tile_clicked(tile: Vector2i) -> void:
@@ -107,7 +108,7 @@ func clear_selected_ability() -> void:
 		button.set_pressed_no_signal(false)
 
 
-func _on_queue_emptied() -> void:
+func _on_turn_begin() -> void:
 	_process_status_effects()
 
 	var player_state = PlayerState.get_instance()
@@ -120,8 +121,13 @@ func _on_queue_emptied() -> void:
 			item.is_penalty_activated = true
 		else:
 			item.is_penalty_activated = false
+	status_bar.update()
 
 
 func _apply_penalties(penalties: Array[StatusEffect]):
 	for penalty in penalties:
 		penalty.queue(self)
+
+
+func _on_items_changed(_items: Array[Item]) -> void:
+	status_bar.update()

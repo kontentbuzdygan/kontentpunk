@@ -9,6 +9,7 @@ var _items: Array[Item] = []
 var _at_turn_end: bool = false
 
 signal items_changed(items: Array[Item])
+signal turn_begin
 
 static var _instance: PlayerState
 
@@ -76,3 +77,4 @@ func _on_queue_emptied() -> void:
 			money.current -= item.money_cost
 
 		mana.refill()
+		turn_begin.emit()

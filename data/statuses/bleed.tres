@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BleedStatusEffect" format=3 uid="uid://60mje2mb5oh2"]
+
+[ext_resource type="Texture2D" uid="uid://bpknrxse3sg7i" path="res://textures/blood_drop_borderless.png" id="4_b8rmf"]
+[ext_resource type="PackedScene" path="res://objects/particles/blood_particles.tscn" id="5_l7yp2"]
+[ext_resource type="Script" uid="uid://bg1l528adesin" path="res://scripts/status_effect/bleed_status_effect.gd" id="6_cn2tg"]
+[ext_resource type="AudioStream" uid="uid://yutxxcly1yjl" path="res://sounds/blood.tres" id="7_2pnrw"]
+
+[resource]
+script = ExtResource("6_cn2tg")
+name = &"Bleed"
+apply_chance = 1.0
+particles = ExtResource("5_l7yp2")
+sound_effect = ExtResource("7_2pnrw")
+icon = ExtResource("4_b8rmf")
+metadata/_custom_type_script = "uid://bg1l528adesin"

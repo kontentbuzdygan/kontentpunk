@@ -95,12 +95,12 @@ func apply_status_effect(status_effect: StatusEffect) -> void:
 		existing_status_effect.assign(active_status_effects.filter(func (active_status): return active_status.name == status_effect.name))
 		if not existing_status_effect.size():
 			active_status_effects.append(status_effect)
-			status_bar.add_status(status_effect.icon)
 		else:
 			## If status effect is already applied to the actor, extend its duration
 			active_status_effects[active_status_effects.find(status_effect)].duration = status_effect.duration
 	else:
 		passive_status_effects.append(status_effect)
+	status_bar.update()
 
 
 func _process_status_effects():
@@ -115,7 +115,7 @@ func remove_status_effect(status_effect: StatusEffect):
 		active_status_effects.remove_at(active_status_effects.find(status_effect))
 	else:
 		passive_status_effects.remove_at(passive_status_effects.find(status_effect))
-	status_bar.remove_status(status_effect.icon)
+	status_bar.update()
 
 
 func _emit_status_effect_particles(particles_scene: PackedScene) -> void:

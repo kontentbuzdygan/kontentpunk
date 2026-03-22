@@ -1,13 +1,57 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://d54xbg1h4ayv"]
 
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_ksl5w"]
-[ext_resource type="Resource" uid="uid://chy5lmonjjx6a" path="res://data/abilities/razor_ability.tres" id="2_lorv0"]
 [ext_resource type="Texture2D" uid="uid://dogvacbuvy5w6" path="res://textures/razor.png" id="2_lv5w3"]
+[ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="2_ygtap"]
 [ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="2_yhqai"]
+[ext_resource type="Script" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="3_nakcv"]
+[ext_resource type="Script" uid="uid://crbgb4yfv0dl0" path="res://scripts/ability_effect/apply_status_effect_ability_effect.gd" id="4_hq6ai"]
+[ext_resource type="Texture2D" uid="uid://bpknrxse3sg7i" path="res://textures/blood_drop_borderless.png" id="5_crqan"]
+[ext_resource type="PackedScene" path="res://objects/particles/blood_particles.tscn" id="6_qkerx"]
+[ext_resource type="Script" uid="uid://bg1l528adesin" path="res://scripts/status_effect/bleed_status_effect.gd" id="7_g35as"]
+[ext_resource type="AudioStream" uid="uid://yutxxcly1yjl" path="res://sounds/blood.tres" id="8_f2xpo"]
+[ext_resource type="Texture2D" uid="uid://dqt3ixn8fk67q" path="res://textures/wound.png" id="9_762kh"]
+[ext_resource type="AudioStream" uid="uid://dvx2bh0ab6kdr" path="res://sounds/blade.tres" id="10_k15e6"]
+[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/axis_aligned_tile_predicate.gd" id="11_p5dlu"]
+[ext_resource type="Script" uid="uid://bxmdnbfwtcj5o" path="res://scripts/status_effect.gd" id="13_mphro"]
+[ext_resource type="Resource" uid="uid://60mje2mb5oh2" path="res://data/statuses/bleed.tres" id="14_nakcv"]
+
+[sub_resource type="Resource" id="Resource_g1mpa"]
+script = ExtResource("3_nakcv")
+
+[sub_resource type="Resource" id="Resource_x8db1"]
+script = ExtResource("7_g35as")
+name = &"Bleed"
+apply_chance = 1.0
+particles = ExtResource("6_qkerx")
+sound_effect = ExtResource("8_f2xpo")
+icon = ExtResource("5_crqan")
+metadata/_custom_type_script = "uid://bg1l528adesin"
+
+[sub_resource type="Resource" id="Resource_cgd6q"]
+script = ExtResource("4_hq6ai")
+status_effect = SubResource("Resource_x8db1")
+metadata/_custom_type_script = "uid://crbgb4yfv0dl0"
+
+[sub_resource type="Resource" id="Resource_m4oie"]
+script = ExtResource("11_p5dlu")
+max_distance = 1
+metadata/_custom_type_script = "uid://bu4fo1hd2keea"
+
+[sub_resource type="Resource" id="Resource_mi0jf"]
+script = ExtResource("1_ksl5w")
+name = "Slash"
+icon = ExtResource("9_762kh")
+sound_effect = ExtResource("10_k15e6")
+base_mana_cost = 1
+valid_tiles = SubResource("Resource_m4oie")
+effects = Array[ExtResource("2_ygtap")]([SubResource("Resource_g1mpa"), SubResource("Resource_cgd6q")])
+metadata/_custom_type_script = "uid://b1dxrqdiivtev"
 
 [resource]
 script = ExtResource("2_yhqai")
 icon = ExtResource("2_lv5w3")
 type = 2
-abilities = Array[ExtResource("1_ksl5w")]([ExtResource("2_lorv0")])
+abilities = Array[ExtResource("1_ksl5w")]([SubResource("Resource_mi0jf")])
+penalties = Array[ExtResource("13_mphro")]([ExtResource("14_nakcv")])
 metadata/_custom_type_script = "uid://disdpfm5m1k6t"

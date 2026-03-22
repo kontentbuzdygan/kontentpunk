@@ -4,9 +4,9 @@ extends StatusEffect
 @export var base_value: int = 1
 
 func _ready() -> void:
-    self.is_active = true
+	self.is_active = true
 
 
 func queue(actor: Actor) -> void:
-    CombatState.get_instance().queue_action(CombatAction.Bleed.new(actor, base_value, particles, sound_effect))
-    duration -= 1
+	CombatState.get_instance().queue_action(CombatAction.Bleed.new(actor, base_value, particles, sound_effect))
+	duration -= 1
