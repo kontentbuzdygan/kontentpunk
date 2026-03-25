@@ -7,8 +7,13 @@ extends Node2D
 @export var hitmark_scene: PackedScene
 
 @onready var grid: Grid = find_parent("Grid")
-@onready var grid_animation_player: GridAnimationPlayer = find_children("", "GridAnimationPlayer")[0]
 @onready var status_bar: StatusBar = find_children("StatusBar", "HFlowContainer")[0]
+@onready var animation_tree: AnimationTree = $AnimationTree
+
+var tween: Tween
+
+var is_idle: bool = true
+var is_moving: bool = false
 
 var _audio_stream_player: AudioStreamPlayer
 
@@ -46,7 +51,8 @@ func execute(action: CombatAction) -> void:
 	if action is CombatAction.Move:
 		left_tile.emit(get_current_tile())
 		play_sound(move_sound)
-		await grid_animation_player.move_to(action.target_tile)
+		# await grid_animation_player.move_to(action.target_tile)
+		await execute_move(action.target_tile)
 		entered_tile.emit(action.target_tile)
 		return
 
@@ -75,10 +81,10 @@ func take_damage(value: int) -> void:
 	print("%s took %d damage" % [self, value])
 	play_sound(hurt_sound, 0.1)
 	_show_hitmark(value)
+	animation_tree["parameters/playback"].travel(&"hurt")
+	health_changed.emit()
 
-	if grid_animation_player.has_animation(&"hurt"):
-		health_changed.emit()
-		await grid_animation_player.play_and_wait(&"hurt")
+	await animation_tree.animation_finished
 
 
 func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
@@ -132,3 +138,37 @@ func _show_hitmark(value: int):
 	var hitmark: Hitmark = hitmark_scene.duplicate().instantiate()
 	grid.add_child_on_tile(hitmark, self.get_current_tile())
 	hitmark.label.text = str(value)
+
+
+func execute_move(target_tile: Vector2i) -> void:
+	var direction: Vector2 = Vector2(target_tile - get_current_tile()).normalized()
+	set_moving_state(direction)
+
+	var relative_tile := target_tile - get_current_tile()
+	var distance = Utils.manhattan_length(relative_tile)
+	var time_per_tile = 0.22
+
+	if tween:
+		tween.kill()
+
+	tween = create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "position", grid.map_to_local(target_tile), distance * time_per_tile)
+	await tween.finished
+
+	set_idle_state()
+
+
+func set_moving_state(direction: Vector2) -> void:
+	is_moving = true
+	is_idle = false
+
+	animation_tree["parameters/idle/blend_position"] = direction
+	animation_tree["parameters/run/blend_position"] = direction
+	animation_tree["parameters/hurt/blend_position"] = direction
+
+
+func set_idle_state() -> void:
+	is_moving = false
+	is_idle = true
