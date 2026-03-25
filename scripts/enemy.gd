@@ -9,7 +9,7 @@ extends Actor
 @export var money_drop_label_scene: PackedScene
 
 @onready var loot_container = %LootContainer
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	super._ready()
@@ -19,9 +19,9 @@ func _ready() -> void:
 func _on_combat_action_ended(action: CombatAction) -> void:
 	if action is CombatAction.EndTurn:
 		_process_status_effects()
-		#move_to(grid.get_random_tile())
-		#var player_tile := grid.find_tile_with(Player)
-		#CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
+		move_to(grid.get_random_tile())
+		var player_tile := grid.find_tile_with(Player)
+		CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
 
 
 func execute(action: CombatAction) -> void:

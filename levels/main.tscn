@@ -48,6 +48,7 @@
 [ext_resource type="Texture2D" uid="uid://cj18507niyduo" path="res://textures/robot2-spritesheet.png" id="45_eoee5"]
 [ext_resource type="PackedScene" uid="uid://bkv4l6mhxwm58" path="res://objects/ui/healthbar.tscn" id="48_eoee5"]
 [ext_resource type="PackedScene" uid="uid://ct0sa45hmid2m" path="res://objects/ui/hitmark.tscn" id="48_map8x"]
+[ext_resource type="PackedScene" uid="uid://jyunhahsf76r" path="res://objects/ui/money_drop_label.tscn" id="49_r708q"]
 [ext_resource type="PackedScene" uid="uid://cesvfmcl13lnc" path="res://objects/ui/status_bar.tscn" id="50_xlu2f"]
 
 [sub_resource type="Resource" id="Resource_jjbqq"]
@@ -1074,6 +1075,7 @@ script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
 lootbag_scene = ExtResource("42_2hoto")
 drops = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj"), ExtResource("15_xombn")])
+money_drop_label_scene = ExtResource("49_r708q")
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("41_gusra")
 hitmark_scene = ExtResource("48_map8x")
@@ -1105,6 +1107,7 @@ script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("35_y60h0")
 lootbag_scene = ExtResource("42_2hoto")
 drops = Array[ExtResource("29_gusra")]([ExtResource("15_xombn")])
+money_drop_label_scene = ExtResource("49_r708q")
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("44_jjbqq")
 hitmark_scene = ExtResource("48_map8x")
