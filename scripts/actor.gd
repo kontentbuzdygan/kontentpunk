@@ -98,7 +98,12 @@ func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
 func apply_status_effect(status_effect: StatusEffect) -> void:
 	if status_effect.is_active:
 		var existing_status_effect: Array[StatusEffect] = []
-		existing_status_effect.assign(active_status_effects.filter(func (active_status): return active_status.name == status_effect.name))
+		existing_status_effect.assign(
+			active_status_effects.filter(
+				func (active_status: StatusEffect) -> bool: return active_status.name == status_effect.name
+			)
+		)
+
 		if not existing_status_effect.size():
 			active_status_effects.append(status_effect)
 		else:
@@ -109,14 +114,14 @@ func apply_status_effect(status_effect: StatusEffect) -> void:
 	status_bar.update()
 
 
-func _process_status_effects():
+func _process_status_effects() -> void:
 	for status_effect in active_status_effects + passive_status_effects:
 		status_effect.queue(self)
 		if status_effect.duration == 0:
 			remove_status_effect(status_effect)
 
 
-func remove_status_effect(status_effect: StatusEffect):
+func remove_status_effect(status_effect: StatusEffect) -> void:
 	if status_effect.is_active:
 		active_status_effects.remove_at(active_status_effects.find(status_effect))
 	else:
@@ -128,13 +133,13 @@ func _emit_status_effect_particles(particles_scene: PackedScene) -> void:
 	var particles: GPUParticles2D = particles_scene.instantiate()
 	add_child(particles)
 	particles.emitting = true
-	particles.finished.connect(func():
+	particles.finished.connect(func() -> void:
 		remove_child(particles)
 		particles.queue_free()
 	)
 
 
-func _show_hitmark(value: int):
+func _show_hitmark(value: int) -> void:
 	var hitmark: Hitmark = hitmark_scene.duplicate().instantiate()
 	grid.add_child_on_tile(hitmark, self.get_current_tile())
 	hitmark.label.text = str(value)
@@ -145,8 +150,8 @@ func execute_move(target_tile: Vector2i) -> void:
 	set_moving_state(direction)
 
 	var relative_tile := target_tile - get_current_tile()
-	var distance = Utils.manhattan_length(relative_tile)
-	var time_per_tile = 0.22
+	var distance := Utils.manhattan_length(relative_tile)
+	var time_per_tile := 0.22
 
 	if tween:
 		tween.kill()

@@ -111,7 +111,7 @@ func clear_selected_ability() -> void:
 func _on_turn_begin() -> void:
 	_process_status_effects()
 
-	var player_state = PlayerState.get_instance()
+	var player_state := PlayerState.get_instance()
 	for item in player_state.get_items():
 		if item.penalties.is_empty():
 			continue
@@ -124,7 +124,7 @@ func _on_turn_begin() -> void:
 	status_bar.update()
 
 
-func _apply_penalties(penalties: Array[StatusEffect]):
+func _apply_penalties(penalties: Array[StatusEffect]) -> void:
 	for penalty in penalties:
 		penalty.queue(self)
 

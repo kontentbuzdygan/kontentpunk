@@ -2,7 +2,7 @@ class_name Hitmark
 extends Control
 
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var label = $Label
+@onready var label: Label = $Label
 
 func show_hitmark(value: int) -> void:
 	label.text = str(value)

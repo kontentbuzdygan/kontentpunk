@@ -58,10 +58,10 @@ func _get_drag_data(at_position: Vector2) -> ItemHolder:
 	if not item:
 		return
 
-	var icon = TextureRect.new()
+	var icon := TextureRect.new()
 	icon.texture = item.icon
 
-	var wrapper = Control.new()
+	var wrapper := Control.new()
 	wrapper.add_child(icon)
 
 	icon.position = -at_position
@@ -92,7 +92,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	if source == self or type == Type.TEMPORARY and source.type == Type.TEMPORARY:
 		return
 
-	var temp = item
+	var temp := item
 	item = source.item
 	source.item = temp
 
@@ -102,7 +102,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	_update_children()
 
 
-func _update_children():
+func _update_children() -> void:
 	if not is_node_ready():
 		return
 
@@ -120,7 +120,7 @@ func _get_tooltip(_at_position: Vector2) -> String:
 	return item.name if item else ""
 
 
-func take_item():
+func take_item() -> void:
 	if type == Type.TEMPORARY:
 		var loot_container: LootContainer = find_parent("LootContainer")
 		loot_container.on_take_item(item)
