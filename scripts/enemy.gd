@@ -19,9 +19,13 @@ func _ready() -> void:
 func _on_combat_action_ended(action: CombatAction) -> void:
 	if action is CombatAction.EndTurn:
 		_process_status_effects()
-		move_to(grid.get_random_tile())
+
 		var player_tile := grid.find_tile_with(Player)
-		CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
+		var path_toward_player := grid.pathfinder.find_path(get_current_tile(), Vector2i(4, 4), grid)
+
+		if not path_toward_player.is_empty():
+			move_to(path_toward_player[0])
+			CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
 
 
 func execute(action: CombatAction) -> void:

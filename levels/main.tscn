@@ -51,6 +51,8 @@
 [ext_resource type="PackedScene" uid="uid://ct0sa45hmid2m" path="res://objects/ui/hitmark.tscn" id="48_map8x"]
 [ext_resource type="PackedScene" uid="uid://jyunhahsf76r" path="res://objects/ui/money_drop_label.tscn" id="49_r708q"]
 [ext_resource type="PackedScene" uid="uid://cesvfmcl13lnc" path="res://objects/ui/status_bar.tscn" id="50_xlu2f"]
+[ext_resource type="Texture2D" uid="uid://cyqh7wus6nh8r" path="res://textures/character_placeholder.png" id="51_map8x"]
+[ext_resource type="Script" uid="uid://cshiiyq2a3auo" path="res://scripts/pathfinder.gd" id="52_map8x"]
 
 [sub_resource type="Resource" id="Resource_jjbqq"]
 script = ExtResource("4_en2ks")
@@ -800,6 +802,15 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 atlas = ExtResource("20_wk3pi")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r708q"]
+texture = ExtResource("51_map8x")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_r708q"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_r708q")
+
 [node name="Main" type="Node2D" unique_id=1086544296]
 
 [node name="Config" parent="." unique_id=336289230 instance=ExtResource("1_vydlj")]
@@ -1036,12 +1047,13 @@ script = ExtResource("21_oe60c")
 grid = NodePath("../../Grid")
 lootbag_scene = ExtResource("42_2hoto")
 
-[node name="Grid" type="TileMapLayer" parent="." unique_id=434431019]
+[node name="Grid" type="TileMapLayer" parent="." unique_id=434431019 node_paths=PackedStringArray("pathfinder")]
 texture_repeat = 2
 position = Vector2(423, 191)
 tile_map_data = PackedByteArray("AAD/////AgACAAAAAAD//wAAAgACAAAAAAAAAAAAAgACAAAAAAAAAP//AgACAAAAAAAAAP7/AgACAAAAAAD///7/AgACAAAAAAD+//7/AgACAAAAAAD+////AgACAAAAAAD+/wAAAgACAAAAAAD+/wEAAgACAAAAAAD//wEAAgACAAAAAAAAAAEAAgACAAAAAAABAAEAAgACAAAAAAABAAAAAgACAAAAAAABAP//AgACAAAAAAABAP7/AgACAAAAAAD9//3/AgAAAAAAAAD+//3/AgAAAAAAAAD///3/AgAAAAAAAAAAAP3/AgAAAAAAAAABAP3/AgAAAAAAAAACAP3/AgAAAAAAAAACAP7/AgAAAAAAAAACAP//AgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAACAAIAAgAAAAAAAAABAAIAAgAAAAAAAAAAAAIAAgAAAAAAAAD//wIAAgAAAAAAAAD9/wEAAgAAAAAAAAD9/wAAAgAAAAAAAAD9////AgAAAAAAAAD9//7/AgAAAAAAAAD8//3/AgABAAAAAAD8//7/AgABAAAAAAD8////AgABAAAAAAD8/wAAAgABAAAAAAD8/wEAAgABAAAAAAD8/wIAAgABAAAAAAD8/wMAAgABAAAAAAD9/wMAAgABAAAAAAD+/wMAAgABAAAAAAD//wMAAgABAAAAAAAAAAMAAgABAAAAAAABAAMAAgABAAAAAAACAAMAAgABAAAAAAADAAMAAgABAAAAAAADAAIAAgABAAAAAAADAAEAAgABAAAAAAADAAAAAgABAAAAAAADAP//AgABAAAAAAADAP7/AgABAAAAAAADAP3/AgABAAAAAAADAPz/AgABAAAAAAACAPz/AgABAAAAAAABAPz/AgABAAAAAAAAAPz/AgABAAAAAAD///z/AgABAAAAAAD+//z/AgABAAAAAAD9//z/AgABAAAAAAD8//z/AgABAAAAAAD7//v/AgABAAAAAAD7//z/AgABAAAAAAD7//3/AgABAAAAAAD7//7/AgABAAAAAAD7////AgABAAAAAAD7/wAAAgABAAAAAAD7/wEAAgABAAAAAAD7/wIAAgABAAAAAAD7/wQAAgABAAAAAAD7/wMAAgABAAAAAAD8/wQAAgABAAAAAAD+/wQAAgABAAAAAAD9/wQAAgABAAAAAAD//wQAAgABAAAAAAAAAAQAAgABAAAAAAABAAQAAgABAAAAAAACAAQAAgABAAAAAAADAAQAAgABAAAAAAAEAAQAAgABAAAAAAAEAAMAAgABAAAAAAAEAAIAAgABAAAAAAAEAAEAAgABAAAAAAAEAAAAAgABAAAAAAAEAP//AgABAAAAAAAEAP7/AgABAAAAAAAEAP3/AgABAAAAAAAEAPz/AgABAAAAAAAEAPv/AgABAAAAAAD8//v/AgABAAAAAAADAPv/AgABAAAAAAACAPv/AgABAAAAAAABAPv/AgABAAAAAAAAAPv/AgABAAAAAAD///v/AgABAAAAAAD+//v/AgABAAAAAAD9//v/AgABAAAAAAD+/wIAAgAAAAAAAAD9/wIAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
+pathfinder = NodePath("../Pathfinder")
 
 [node name="Player" type="Node2D" parent="Grid" unique_id=510566155 node_paths=PackedStringArray("loot_container") groups=["occupies_tile"]]
 z_index = 999
@@ -1187,6 +1199,11 @@ position = Vector2(-48, -48)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Obstacle_3" unique_id=1889171506]
 sprite_frames = ExtResource("30_vpyym")
 autoplay = "default"
+
+[node name="Pathfinder" type="TileMapLayer" parent="." unique_id=949909494]
+position = Vector2(423, 191)
+tile_set = SubResource("TileSet_r708q")
+script = ExtResource("52_map8x")
 
 [connection signal="pressed" from="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Button_EndTurn" to="Grid/Player" method="_on_button_end_turn_pressed"]
 

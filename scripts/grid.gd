@@ -1,6 +1,8 @@
 class_name Grid
 extends TileMapLayer
 
+@export var pathfinder: Pathfinder
+
 var _last_active_tile: Vector2i = Vector2i.ZERO
 var active_tile: Vector2i = Vector2i.ZERO
 
@@ -61,6 +63,16 @@ func is_tile_occupied(tile: Vector2i) -> bool:
 			return true
 
 	return false
+
+
+func get_occupied_tiles() -> Array[Vector2i]:
+	var tiles: Array[Vector2i] = []
+
+	for node in get_children():
+		if node.is_in_group(&"occupies_tile"):
+			tiles.append(get_node_tile(node))
+
+	return tiles
 
 
 func get_random_tile() -> Vector2i:
