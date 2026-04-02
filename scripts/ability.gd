@@ -2,8 +2,6 @@
 class_name Ability
 extends Resource
 
-enum ManaCostScale { CONSTANT, ADD_DISTANCE }
-
 @export var name: String:
 	get:
 		return name
@@ -27,7 +25,7 @@ enum ManaCostScale { CONSTANT, ADD_DISTANCE }
 		base_mana_cost = value
 		emit_changed()
 
-@export var mana_cost_scale: ManaCostScale = ManaCostScale.CONSTANT
+@export var mana_cost_per_tile: int
 
 ## Matches all tiles if empty
 @export var valid_tiles: TilePredicate
@@ -42,13 +40,7 @@ func is_valid_tile(tile: Vector2i) -> bool:
 
 ## Returns the effective mana cost for the given tile coordinates, relative to the actor
 func get_mana_cost(tile: Vector2i) -> int:
-	match mana_cost_scale:
-		ManaCostScale.CONSTANT:
-			return base_mana_cost
-		ManaCostScale.ADD_DISTANCE:
-			return base_mana_cost * Utils.manhattan_length(tile)
-
-	return 0
+	return base_mana_cost + Utils.manhattan_length(tile) * mana_cost_per_tile
 
 
 func perform(actor: Actor, target_tile: Vector2i) -> void:

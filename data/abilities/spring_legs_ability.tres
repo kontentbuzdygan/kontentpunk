@@ -21,6 +21,7 @@ script = ExtResource("1_2syob")
 name = "Charged Leap"
 icon = ExtResource("1_dio6a")
 base_mana_cost = 2
+mana_cost_per_tile = 1
 valid_tiles = SubResource("Resource_8aibj")
 effects = Array[ExtResource("1_nvbf8")]([SubResource("Resource_nvbf8")])
 metadata/_custom_type_script = "uid://b1dxrqdiivtev"
