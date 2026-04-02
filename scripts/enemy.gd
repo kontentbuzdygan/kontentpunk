@@ -11,24 +11,34 @@ extends Actor
 @onready var loot_container: LootContainer = %LootContainer
 @onready var sprite: Sprite2D = $Sprite2D
 
-func _ready() -> void:
-	super._ready()
-	CombatState.get_instance().action_ended.connect(_on_combat_action_ended)
-
-
-func _on_combat_action_ended(action: CombatAction) -> void:
-	if action is CombatAction.EndTurn:
-		_process_status_effects()
-		move_to(grid.get_random_tile())
-		var player_tile := grid.find_tile_with(Player)
-		CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
-
 
 func execute(action: CombatAction) -> void:
 	if action is CombatAction.DealDamage:
 		play_sound(attack_sound)
 
 	await super.execute(action)
+
+
+func begin_turn() -> void:
+	_process_status_effects()
+
+	var player_tile := grid.find_tile_with(Player)
+	var path_toward_player := grid.pathfinder.find_path(
+		get_current_tile(), player_tile, grid, 3
+	)
+
+	for tile in path_toward_player:
+		move_to(tile)
+
+	var combat_state := CombatState.get_instance()
+
+	# TODO: Replace with actual ability checks & effects
+	if Utils.manhattan_length(player_tile - path_toward_player.back()) <= 1:
+		combat_state.queue_action(
+			CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1)
+		)
+
+	combat_state.queue_action(CombatAction.EndTurn.new(self))
 
 
 func take_damage(value: int) -> void:

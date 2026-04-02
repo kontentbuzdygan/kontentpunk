@@ -5,6 +5,8 @@ extends Node2D
 @export var move_sound: AudioStream
 @export var hurt_sound: AudioStream
 @export var hitmark_scene: PackedScene
+## Actors with lower values will before actors with higher values
+@export var turn_order: int
 
 @onready var grid: Grid = find_parent("Grid")
 @onready var status_bar: StatusBar = find_children("StatusBar", "HFlowContainer")[0]
@@ -26,6 +28,8 @@ signal health_changed
 
 
 func _ready() -> void:
+	CombatState.get_instance().add_actor(self)
+
 	_audio_stream_player = AudioStreamPlayer.new()
 	_audio_stream_player.bus = sound_effect_bus
 	add_child(_audio_stream_player)
@@ -46,6 +50,9 @@ func move_to(tile: Vector2i) -> bool:
 func execute(action: CombatAction) -> void:
 	## If enemy is already dead, don't wait on their action
 	if action.actor is Enemy and action.actor.health == 0:
+		return
+
+	if action is CombatAction.EndTurn:
 		return
 
 	if action is CombatAction.Move:
@@ -75,6 +82,10 @@ func execute(action: CombatAction) -> void:
 		return
 
 	assert(false, "invalid action %s for %s" % [action, self])
+
+
+func begin_turn() -> void:
+	pass
 
 
 func take_damage(value: int) -> void:

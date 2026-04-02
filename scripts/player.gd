@@ -20,7 +20,6 @@ func _ready() -> void:
 	entered_tile.connect(_on_entered_tile)
 
 	var player_state := PlayerState.get_instance()
-	player_state.turn_begin.connect(_on_turn_begin)
 	player_state.items_changed.connect(_on_items_changed)
 
 
@@ -71,6 +70,25 @@ func execute(action: CombatAction) -> void:
 	await super.execute(action)
 
 
+func begin_turn() -> void:
+	_process_status_effects()
+
+	var player_state = PlayerState.get_instance()
+	player_state.begin_turn()
+
+	for item in player_state.get_items():
+		if item.penalties.is_empty():
+			continue
+
+		if player_state.money.current < item.money_cost:
+			_apply_penalties(item.penalties)
+			item.is_penalty_activated = true
+		else:
+			item.is_penalty_activated = false
+
+	status_bar.update()
+
+
 func take_damage(value: int) -> void:
 	health.current -= value
 	await super.take_damage(value)
@@ -92,23 +110,7 @@ func clear_selected_ability() -> void:
 		button.set_pressed_no_signal(false)
 
 
-func _on_turn_begin() -> void:
-	_process_status_effects()
-
-	var player_state := PlayerState.get_instance()
-	for item in player_state.get_items():
-		if item.penalties.is_empty():
-			continue
-
-		if player_state.money.current < item.money_cost:
-			_apply_penalties(item.penalties)
-			item.is_penalty_activated = true
-		else:
-			item.is_penalty_activated = false
-	status_bar.update()
-
-
-func _apply_penalties(penalties: Array[StatusEffect]) -> void:
+func _apply_penalties(penalties: Array[StatusEffect]):
 	for penalty in penalties:
 		penalty.queue(self)
 
