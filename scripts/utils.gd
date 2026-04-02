@@ -1,7 +1,7 @@
 class_name Utils
 
 
-class OrthoLineCoordsIterator:
+class OrthoTilesIterator:
 	var current: Vector2i
 	var end: Vector2i
 
@@ -52,5 +52,5 @@ static func ortho_length(v: Vector2i) -> int:
 
 ## Returns an iterator that yields each tile in a straight line from `start` to
 ## `end`, where both `start` and `end` are exclusive
-static func walk_ortho_tiles(start: Vector2i, end: Vector2i) -> OrthoLineCoordsIterator:
-	return OrthoLineCoordsIterator.new(start, end)
+static func walk_ortho_tiles(start: Vector2i, end: Vector2i) -> OrthoTilesIterator:
+	return OrthoTilesIterator.new(start, end)
