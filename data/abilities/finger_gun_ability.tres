@@ -14,7 +14,7 @@ script = ExtResource("2_a3ue6")
 script = ExtResource("6_8llc7")
 min_distance = 2
 max_distance = 5
-metadata/_custom_type_script = "uid://bu4fo1hd2keea"
+target_tile = 2
 
 [resource]
 script = ExtResource("1_u8012")

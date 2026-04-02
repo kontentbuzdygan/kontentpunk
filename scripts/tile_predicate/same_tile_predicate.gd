@@ -3,5 +3,5 @@ extends TilePredicate
 ## Matches only the current tile
 
 
-func matches(tile: Vector2i) -> bool:
-	return tile == Vector2i.ZERO
+func matches(from: Vector2i, to: Vector2i, _grid: Grid) -> bool:
+	return from == to

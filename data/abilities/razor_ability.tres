@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://crbgb4yfv0dl0"
 [sub_resource type="Resource" id="Resource_m4oie"]
 script = ExtResource("8_g1mpa")
 max_distance = 1
-metadata/_custom_type_script = "uid://bu4fo1hd2keea"
+target_tile = 2
 
 [resource]
 script = ExtResource("2_nrqtg")

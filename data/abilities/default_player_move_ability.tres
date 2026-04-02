@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://b4iy183kb6jmc"
 
 [sub_resource type="Resource" id="Resource_evvoo"]
 script = ExtResource("4_0pbqi")
-metadata/_custom_type_script = "uid://bu4fo1hd2keea"
+target_tile = 1
 
 [resource]
 script = ExtResource("2_00x61")

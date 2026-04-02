@@ -32,15 +32,14 @@ extends Resource
 @export var effects: Array[AbilityEffect] = []
 
 
-## Tests if the ability can be performed on the given tile coordinates, relative
-## to the actor
-func is_valid_tile(tile: Vector2i) -> bool:
-	return not valid_tiles or valid_tiles.matches(tile)
+func is_valid_tile(actor: Actor, target_tile: Vector2i) -> bool:
+	var from := actor.get_current_tile()
+	return not valid_tiles or valid_tiles.matches(from, target_tile, actor.grid)
 
 
-## Returns the effective mana cost for the given tile coordinates, relative to the actor
-func get_mana_cost(tile: Vector2i) -> int:
-	return base_mana_cost + Utils.manhattan_length(tile) * mana_cost_per_tile
+func get_mana_cost(actor: Actor, target_tile: Vector2i) -> int:
+	var delta := target_tile - actor.get_current_tile()
+	return base_mana_cost + Utils.manhattan_length(delta) * mana_cost_per_tile
 
 
 func perform(actor: Actor, target_tile: Vector2i) -> void:
