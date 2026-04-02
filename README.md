@@ -1,3 +1,3 @@
 # kontentpunk
 
-![screenshot](screenshot.png)
+![screenshot](docs/screenshot.png)
