@@ -53,6 +53,7 @@
 [ext_resource type="PackedScene" uid="uid://cesvfmcl13lnc" path="res://objects/ui/status_bar.tscn" id="50_xlu2f"]
 [ext_resource type="Texture2D" uid="uid://cyqh7wus6nh8r" path="res://textures/character_placeholder.png" id="51_map8x"]
 [ext_resource type="Script" uid="uid://cshiiyq2a3auo" path="res://scripts/pathfinder.gd" id="52_map8x"]
+[ext_resource type="Texture2D" uid="uid://ieg3xl21k6mw" path="res://textures/enemy_placeholder.png" id="52_r708q"]
 
 [sub_resource type="Resource" id="Resource_jjbqq"]
 script = ExtResource("4_en2ks")
@@ -807,9 +808,15 @@ texture = ExtResource("51_map8x")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2m3c7"]
+texture = ExtResource("52_r708q")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_r708q"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_r708q")
+sources/1 = SubResource("TileSetAtlasSource_2m3c7")
 
 [node name="Main" type="Node2D" unique_id=1086544296]
 

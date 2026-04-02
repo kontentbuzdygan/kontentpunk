@@ -21,10 +21,12 @@ func _on_combat_action_ended(action: CombatAction) -> void:
 		_process_status_effects()
 
 		var player_tile := grid.find_tile_with(Player)
-		var path_toward_player := grid.pathfinder.find_path(get_current_tile(), Vector2i(4, 4), grid)
+		var path_toward_player := grid.pathfinder.find_path(get_current_tile(), player_tile, grid, 5)
 
-		if not path_toward_player.is_empty():
-			move_to(path_toward_player[0])
+		for tile in path_toward_player:
+			move_to(tile)
+
+		if Utils.manhattan_length(player_tile - path_toward_player.back()) <= 1:
 			CombatState.get_instance().queue_action(CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1))
 
 
