@@ -1,4 +1,4 @@
-class_name AxisAlignedTilePredicate
+class_name OrthoTilePredicate
 extends TilePredicate
 ## Matches distances along either of the XY axes
 

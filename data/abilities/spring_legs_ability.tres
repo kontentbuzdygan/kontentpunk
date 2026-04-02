@@ -4,14 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://xq4ofhus6c2l" path="res://textures/spring_legs.png" id="1_dio6a"]
 [ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_nvbf8"]
 [ext_resource type="Script" uid="uid://b4iy183kb6jmc" path="res://scripts/ability_effect/move_ability_effect.gd" id="2_s8xum"]
-[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/axis_aligned_tile_predicate.gd" id="3_c2nj4"]
+[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="5_nvbf8"]
 
 [sub_resource type="Resource" id="Resource_nvbf8"]
 script = ExtResource("2_s8xum")
 metadata/_custom_type_script = "uid://b4iy183kb6jmc"
 
 [sub_resource type="Resource" id="Resource_8aibj"]
-script = ExtResource("3_c2nj4")
+script = ExtResource("5_nvbf8")
 min_distance = 3
 max_distance = 3
 metadata/_custom_type_script = "uid://bu4fo1hd2keea"
@@ -21,6 +21,7 @@ script = ExtResource("1_2syob")
 name = "Charged Leap"
 icon = ExtResource("1_dio6a")
 base_mana_cost = 2
+mana_cost_per_tile = 1
 valid_tiles = SubResource("Resource_8aibj")
 effects = Array[ExtResource("1_nvbf8")]([SubResource("Resource_nvbf8")])
 metadata/_custom_type_script = "uid://b1dxrqdiivtev"

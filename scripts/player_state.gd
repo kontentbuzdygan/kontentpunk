@@ -4,6 +4,7 @@ extends Node
 @export var health: PlayerResource
 @export var mana: PlayerResource
 @export var money: PlayerResource
+@export var default_move_ability: Ability
 
 var _items: Array[Item] = []
 var _at_turn_end: bool = false

@@ -25,6 +25,8 @@ extends Resource
 		base_mana_cost = value
 		emit_changed()
 
+@export var mana_cost_per_tile: int
+
 ## Matches all tiles if empty
 @export var valid_tiles: TilePredicate
 @export var effects: Array[AbilityEffect] = []
@@ -34,6 +36,11 @@ extends Resource
 ## to the actor
 func is_valid_tile(tile: Vector2i) -> bool:
 	return not valid_tiles or valid_tiles.matches(tile)
+
+
+## Returns the effective mana cost for the given tile coordinates, relative to the actor
+func get_mana_cost(tile: Vector2i) -> int:
+	return base_mana_cost + Utils.manhattan_length(tile) * mana_cost_per_tile
 
 
 func perform(actor: Actor, target_tile: Vector2i) -> void:
