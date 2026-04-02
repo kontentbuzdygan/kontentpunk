@@ -25,11 +25,10 @@ func _ready() -> void:
 
 
 func _on_tile_clicked(tile: Vector2i) -> void:
-	var relative_tile := tile - get_current_tile()
 	var ability := get_selected_ability()
 
-	if ability.is_valid_tile(relative_tile):
-		var mana_cost := ability.get_mana_cost(relative_tile)
+	if ability.is_valid_tile(self, tile):
+		var mana_cost := ability.get_mana_cost(self, tile)
 
 		if mana.current >= mana_cost:
 			grid.hide_mana_cost()
@@ -39,11 +38,10 @@ func _on_tile_clicked(tile: Vector2i) -> void:
 
 
 func _on_tile_hovered(tile: Vector2i) -> void:
-	var relative_tile := tile - get_current_tile()
 	var ability := get_selected_ability()
 
-	if ability.is_valid_tile(relative_tile):
-		grid.show_mana_cost(ability.get_mana_cost(relative_tile))
+	if ability.is_valid_tile(self, tile):
+		grid.show_mana_cost(ability.get_mana_cost(self, tile))
 
 
 func _on_button_end_turn_pressed() -> void:
