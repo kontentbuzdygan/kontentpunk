@@ -8,7 +8,7 @@ extends Actor
 @export var money_drop: int = 10
 @export var money_drop_label_scene: PackedScene
 
-@onready var loot_container = %LootContainer
+@onready var loot_container: LootContainer = %LootContainer
 @onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
@@ -41,23 +41,23 @@ func take_damage(value: int) -> void:
 		queue_free()
 
 
-func drop_loot():
+func drop_loot() -> void:
 	if drops.size() == 0:
 		return
 
-	var enemy_tile = get_current_tile()
+	var enemy_tile := get_current_tile()
 	var lootbag: Lootbag = grid.get_node_on_tile(enemy_tile, Lootbag)
 	if not lootbag:
 		lootbag = lootbag_scene.instantiate()
 		grid.add_child_on_tile(lootbag, enemy_tile)
 
-	var rng = RandomNumberGenerator.new()
+	var rng := RandomNumberGenerator.new()
 	var drop_chances: Array[float] = []
-	drop_chances.assign(drops.map(func (item: Item): return item.drop_chance))
+	drop_chances.assign(drops.map(func (item: Item) -> float: return item.drop_chance))
 	lootbag.loot.append(drops[rng.rand_weighted(drop_chances)])
 
 
-func drop_money():
+func drop_money() -> void:
 	sprite.visible = false
 
 	PlayerState.get_instance().money.add(money_drop)

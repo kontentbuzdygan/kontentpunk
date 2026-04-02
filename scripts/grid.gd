@@ -84,6 +84,6 @@ func hide_mana_cost() -> void:
 	$Highlight/ManaCostDisplay.visible = false
 
 
-func add_child_on_tile(node: Node, tile: Vector2i):
+func add_child_on_tile(node: Node, tile: Vector2i) -> void:
 	self.add_child(node)
 	node.position = map_to_local(tile)

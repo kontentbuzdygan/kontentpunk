@@ -2,7 +2,7 @@ class_name LootContainer
 extends PanelContainer
 
 @export var item_holder_scene: PackedScene
-@onready var item_slot_container = %ItemSlotContainer
+@onready var item_slot_container: Node = %ItemSlotContainer
 
 var current_lootbag: Lootbag:
 	get():
@@ -26,11 +26,10 @@ func _ready() -> void:
 		push_error("ItemHolder missing from LootContainer")
 
 
-func clear_ui():
+func clear_ui() -> void:
 	self.visible = false
-	var children = item_slot_container.get_children()
 
-	for child in children:
+	for child in item_slot_container.get_children():
 		item_slot_container.remove_child(child)
 		child.queue_free()
 
@@ -42,11 +41,11 @@ func _process(_delta: float) -> void:
 		self.visible = false
 
 
-func on_take_item(item: Item):
+func on_take_item(item: Item) -> void:
 	if not current_lootbag:
 		return
 
-	var loot = current_lootbag.loot
+	var loot := current_lootbag.loot
 	if item in loot:
 		loot.remove_at(loot.find(item))
 
