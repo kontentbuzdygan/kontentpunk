@@ -6,7 +6,7 @@ class OrthoTilesIterator:
 	var end: Vector2i
 
 	func _init(start: Vector2i, end_: Vector2i) -> void:
-		assert(current.x == end.x || current.y == end.y, "not ortholinear")
+		assert(current.x == end.x or current.y == end.y, "not ortholinear")
 
 		current = start
 		end = end_
