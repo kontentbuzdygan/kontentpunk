@@ -23,7 +23,7 @@ func _on_maximum_changed(_value: int) -> void:
 
 
 func regenerate_icons() -> void:
-	for child in get_children(true).slice(resource.maximum):
+	for child: Node in get_children(true).slice(resource.maximum):
 		if child != icon:
 			child.queue_free()
 

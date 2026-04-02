@@ -7,14 +7,14 @@ extends Panel
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	if is_instance_of(data, ItemHolder):
-		var item_holder = (data as ItemHolder)
+		var item_holder := (data as ItemHolder)
 		return item_holder.type == ItemHolder.Type.EQUIPMENT
 	return false
 
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
-	var player_tile = grid.find_tile_with(Player)
-	var lootbags = grid.get_nodes_on_tile(player_tile, Lootbag)
+	var player_tile := grid.find_tile_with(Player)
+	var lootbags := grid.get_nodes_on_tile(player_tile, Lootbag)
 	var lootbag: Lootbag
 
 	if lootbags.is_empty():

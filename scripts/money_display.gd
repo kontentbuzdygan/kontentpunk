@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 		_t -= digit_flip_interval
 
 		if money.current != _value:
-			var difference = sign(money.current - _value)
+			var difference: int = sign(money.current - _value)
 
 			_value += difference
 			$Label.text = str(_value)
