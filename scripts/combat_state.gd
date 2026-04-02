@@ -2,11 +2,12 @@ class_name CombatState
 extends Node
 
 signal action_ended(action: CombatAction)
-signal queue_emptied
 
 var _queue: Array[Object] = []
 var _current_action: CombatAction = null
 var _stopped: bool = false
+var _turn_order: Array[Actor] = []
+var _current_turn: int = 0
 
 static var _instance: CombatState
 
@@ -35,8 +36,17 @@ func process_queue() -> void:
 
 		action_ended.emit(_current_action)
 
+		if _current_action is CombatAction.EndTurn:
+			_current_turn = (_current_turn + 1) % len(_turn_order)
+
+			while not is_instance_valid(_turn_order[_current_turn]):
+				_turn_order.remove_at(_current_turn)
+				_current_turn %= len(_turn_order)
+
+			# NOTE: Intentional await
+			await _turn_order[_current_turn].begin_turn()
+
 	_current_action = null
-	queue_emptied.emit()
 
 
 func is_in_progress() -> bool:
@@ -45,3 +55,12 @@ func is_in_progress() -> bool:
 
 func stop() -> void:
 	_stopped = true
+
+
+func add_actor(actor: Actor) -> void:
+	_turn_order.append(actor)
+	_turn_order.sort_custom(func(a: Actor) -> int: return a.turn_order)
+
+
+func end_turn(actor: Actor) -> void:
+	queue_action(CombatAction.EndTurn.new(actor))

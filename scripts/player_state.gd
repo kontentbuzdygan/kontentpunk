@@ -7,10 +7,8 @@ extends Node
 @export var default_move_ability: Ability
 
 var _items: Array[Item] = []
-var _at_turn_end: bool = false
 
 signal items_changed(items: Array[Item])
-signal turn_begin
 
 static var _instance: PlayerState
 
@@ -28,7 +26,6 @@ func _ready() -> void:
 
 	var combat_state := CombatState.get_instance()
 	combat_state.action_ended.connect(_on_action_ended)
-	combat_state.queue_emptied.connect(_on_queue_emptied)
 
 
 func get_resource(type: PlayerResource.Type) -> PlayerResource:
@@ -60,22 +57,15 @@ func remove_item(item: Item) -> void:
 	items_changed.emit(_items)
 
 
-func _on_action_ended(action: CombatAction) -> void:
-	if action is CombatAction.EndTurn:
-		_at_turn_end = true
-
+func _on_action_ended(_action: CombatAction) -> void:
 	if health.current <= 0:
 		CombatState.get_instance().stop()
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://objects/ui/game_over.tscn")
 
 
-func _on_queue_emptied() -> void:
-	if _at_turn_end:
-		_at_turn_end = false
+func begin_turn() -> void:
+	for item in _items:
+		money.current -= item.money_cost
 
-		for item in _items:
-			money.current -= item.money_cost
-
-		mana.refill()
-		turn_begin.emit()
+	mana.refill()

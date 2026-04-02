@@ -94,6 +94,21 @@ sources/0 = SubResource("TileSetAtlasSource_6et1j")
 sources/1 = SubResource("TileSetAtlasSource_etqu2")
 sources/2 = SubResource("TileSetAtlasSource_vpyym")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r708q"]
+texture = ExtResource("51_map8x")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2m3c7"]
+texture = ExtResource("52_r708q")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_r708q"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_r708q")
+sources/1 = SubResource("TileSetAtlasSource_2m3c7")
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g5y6o"]
 animation = &"hurt_left"
 
@@ -803,21 +818,6 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 atlas = ExtResource("20_wk3pi")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r708q"]
-texture = ExtResource("51_map8x")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2m3c7"]
-texture = ExtResource("52_r708q")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_r708q"]
-tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_r708q")
-sources/1 = SubResource("TileSetAtlasSource_2m3c7")
-
 [node name="Main" type="Node2D" unique_id=1086544296]
 
 [node name="Config" parent="." unique_id=336289230 instance=ExtResource("1_vydlj")]
@@ -1060,7 +1060,11 @@ position = Vector2(423, 191)
 tile_map_data = PackedByteArray("AAD/////AgACAAAAAAD//wAAAgACAAAAAAAAAAAAAgACAAAAAAAAAP//AgACAAAAAAAAAP7/AgACAAAAAAD///7/AgACAAAAAAD+//7/AgACAAAAAAD+////AgACAAAAAAD+/wAAAgACAAAAAAD+/wEAAgACAAAAAAD//wEAAgACAAAAAAAAAAEAAgACAAAAAAABAAEAAgACAAAAAAABAAAAAgACAAAAAAABAP//AgACAAAAAAABAP7/AgACAAAAAAD9//3/AgAAAAAAAAD+//3/AgAAAAAAAAD///3/AgAAAAAAAAAAAP3/AgAAAAAAAAABAP3/AgAAAAAAAAACAP3/AgAAAAAAAAACAP7/AgAAAAAAAAACAP//AgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAACAAIAAgAAAAAAAAABAAIAAgAAAAAAAAAAAAIAAgAAAAAAAAD//wIAAgAAAAAAAAD9/wEAAgAAAAAAAAD9/wAAAgAAAAAAAAD9////AgAAAAAAAAD9//7/AgAAAAAAAAD8//3/AgABAAAAAAD8//7/AgABAAAAAAD8////AgABAAAAAAD8/wAAAgABAAAAAAD8/wEAAgABAAAAAAD8/wIAAgABAAAAAAD8/wMAAgABAAAAAAD9/wMAAgABAAAAAAD+/wMAAgABAAAAAAD//wMAAgABAAAAAAAAAAMAAgABAAAAAAABAAMAAgABAAAAAAACAAMAAgABAAAAAAADAAMAAgABAAAAAAADAAIAAgABAAAAAAADAAEAAgABAAAAAAADAAAAAgABAAAAAAADAP//AgABAAAAAAADAP7/AgABAAAAAAADAP3/AgABAAAAAAADAPz/AgABAAAAAAACAPz/AgABAAAAAAABAPz/AgABAAAAAAAAAPz/AgABAAAAAAD///z/AgABAAAAAAD+//z/AgABAAAAAAD9//z/AgABAAAAAAD8//z/AgABAAAAAAD7//v/AgABAAAAAAD7//z/AgABAAAAAAD7//3/AgABAAAAAAD7//7/AgABAAAAAAD7////AgABAAAAAAD7/wAAAgABAAAAAAD7/wEAAgABAAAAAAD7/wIAAgABAAAAAAD7/wQAAgABAAAAAAD7/wMAAgABAAAAAAD8/wQAAgABAAAAAAD+/wQAAgABAAAAAAD9/wQAAgABAAAAAAD//wQAAgABAAAAAAAAAAQAAgABAAAAAAABAAQAAgABAAAAAAACAAQAAgABAAAAAAADAAQAAgABAAAAAAAEAAQAAgABAAAAAAAEAAMAAgABAAAAAAAEAAIAAgABAAAAAAAEAAEAAgABAAAAAAAEAAAAAgABAAAAAAAEAP//AgABAAAAAAAEAP7/AgABAAAAAAAEAP3/AgABAAAAAAAEAPz/AgABAAAAAAAEAPv/AgABAAAAAAD8//v/AgABAAAAAAADAPv/AgABAAAAAAACAPv/AgABAAAAAAABAPv/AgABAAAAAAAAAPv/AgABAAAAAAD///v/AgABAAAAAAD+//v/AgABAAAAAAD9//v/AgABAAAAAAD+/wIAAgAAAAAAAAD9/wIAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_etqu2")
 script = ExtResource("3_m1504")
-pathfinder = NodePath("../Pathfinder")
+pathfinder = NodePath("Pathfinder")
+
+[node name="Pathfinder" type="TileMapLayer" parent="Grid" unique_id=949909494]
+tile_set = SubResource("TileSet_r708q")
+script = ExtResource("52_map8x")
 
 [node name="Player" type="Node2D" parent="Grid" unique_id=510566155 node_paths=PackedStringArray("loot_container") groups=["occupies_tile"]]
 z_index = 999
@@ -1071,6 +1075,7 @@ loot_container = NodePath("../../Layer_HUD/MarginContainer/HBoxContainer/LeftPan
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("27_egc1g")
 hitmark_scene = ExtResource("48_map8x")
+turn_order = -1
 
 [node name="StatusBar" parent="Grid/Player" unique_id=2080669779 instance=ExtResource("50_xlu2f")]
 z_index = 999
@@ -1206,11 +1211,6 @@ position = Vector2(-48, -48)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/Obstacle_3" unique_id=1889171506]
 sprite_frames = ExtResource("30_vpyym")
 autoplay = "default"
-
-[node name="Pathfinder" type="TileMapLayer" parent="." unique_id=949909494]
-position = Vector2(423, 191)
-tile_set = SubResource("TileSet_r708q")
-script = ExtResource("52_map8x")
 
 [connection signal="pressed" from="Layer_HUD/MarginContainer/HBoxContainer/BottomPanel/Button_EndTurn" to="Grid/Player" method="_on_button_end_turn_pressed"]
 
