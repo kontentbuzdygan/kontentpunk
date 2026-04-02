@@ -60,7 +60,3 @@ func stop() -> void:
 func add_actor(actor: Actor) -> void:
 	_turn_order.append(actor)
 	_turn_order.sort_custom(func(a: Actor) -> int: return a.turn_order)
-
-
-func end_turn(actor: Actor) -> void:
-	queue_action(CombatAction.EndTurn.new(actor))
