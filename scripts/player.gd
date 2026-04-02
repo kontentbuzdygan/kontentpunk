@@ -10,8 +10,6 @@ const MANA_COST_NOT_ALLOWED: int = -1
 @onready var health: PlayerResource = PlayerState.get_instance().health
 @onready var mana: PlayerResource = PlayerState.get_instance().mana
 
-var _move_predicate: TilePredicate
-
 
 func _ready() -> void:
 	super._ready()
@@ -20,8 +18,6 @@ func _ready() -> void:
 
 	left_tile.connect(_on_left_tile)
 	entered_tile.connect(_on_entered_tile)
-
-	_move_predicate = AxisAlignedTilePredicate.new()
 
 	var player_state := PlayerState.get_instance()
 	player_state.turn_begin.connect(_on_turn_begin)
@@ -32,32 +28,22 @@ func _on_tile_clicked(tile: Vector2i) -> void:
 	var relative_tile := tile - get_current_tile()
 	var ability := get_selected_ability()
 
-	if ability:
-		if ability.is_valid_tile(relative_tile):
-			if mana.current >= ability.base_mana_cost:
-				grid.hide_mana_cost()
-				mana.current -= ability.base_mana_cost
-				ability.perform(self, tile)
-				clear_selected_ability()
-	else:
-		if _move_predicate.matches(relative_tile):
-			var distance := Utils.manhattan_length(relative_tile)
+	if ability.is_valid_tile(relative_tile):
+		var mana_cost := ability.get_mana_cost(relative_tile)
 
-			if mana.current >= distance and move_to(tile):
-				grid.hide_mana_cost()
-				mana.current -= distance
+		if mana.current >= mana_cost:
+			grid.hide_mana_cost()
+			mana.current -= mana_cost
+			ability.perform(self, tile)
+			clear_selected_ability()
 
 
 func _on_tile_hovered(tile: Vector2i) -> void:
 	var relative_tile := tile - get_current_tile()
 	var ability := get_selected_ability()
 
-	if ability:
-		if ability.is_valid_tile(relative_tile):
-			grid.show_mana_cost(ability.base_mana_cost)
-	else:
-		if _move_predicate.matches(relative_tile):
-			grid.show_mana_cost(Utils.manhattan_length(relative_tile))
+	if ability.is_valid_tile(relative_tile):
+		grid.show_mana_cost(ability.get_mana_cost(relative_tile))
 
 
 func _on_button_end_turn_pressed() -> void:
@@ -98,7 +84,7 @@ func get_selected_ability() -> Ability:
 	if button and button.owner is AbilitySelector:
 		return button.owner.ability
 	else:
-		return null
+		return PlayerState.get_instance().default_move_ability
 
 
 func clear_selected_ability() -> void:

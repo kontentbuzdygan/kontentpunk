@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://chy5lmonjjx6a"]
 
 [ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_iw0i1"]
-[ext_resource type="Script" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="2_n8fu2"]
+[ext_resource type="Script" uid="uid://b31wypt8wnub1" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="2_n8fu2"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="2_nrqtg"]
 [ext_resource type="Script" uid="uid://crbgb4yfv0dl0" path="res://scripts/ability_effect/apply_status_effect_ability_effect.gd" id="3_g1mpa"]
 [ext_resource type="Texture2D" uid="uid://dqt3ixn8fk67q" path="res://textures/wound.png" id="3_upf2f"]
 [ext_resource type="Resource" uid="uid://60mje2mb5oh2" path="res://data/statuses/bleed.tres" id="4_g1mpa"]
-[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/axis_aligned_tile_predicate.gd" id="5_0wq6l"]
 [ext_resource type="AudioStream" uid="uid://dvx2bh0ab6kdr" path="res://sounds/blade.tres" id="5_upf2f"]
+[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="8_g1mpa"]
 
 [sub_resource type="Resource" id="Resource_g1mpa"]
 script = ExtResource("2_n8fu2")
@@ -18,7 +18,7 @@ status_effect = ExtResource("4_g1mpa")
 metadata/_custom_type_script = "uid://crbgb4yfv0dl0"
 
 [sub_resource type="Resource" id="Resource_m4oie"]
-script = ExtResource("5_0wq6l")
+script = ExtResource("8_g1mpa")
 max_distance = 1
 metadata/_custom_type_script = "uid://bu4fo1hd2keea"
 

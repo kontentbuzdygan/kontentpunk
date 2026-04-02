@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://1krqqqc3kcjk"]
+
+[ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_nxnm4"]
+[ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="2_00x61"]
+[ext_resource type="Script" uid="uid://b4iy183kb6jmc" path="res://scripts/ability_effect/move_ability_effect.gd" id="2_evvoo"]
+[ext_resource type="AudioStream" uid="uid://brnn2jvwo0pk" path="res://sounds/swoosh.ogg" id="3_00x61"]
+[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="4_0pbqi"]
+
+[sub_resource type="Resource" id="Resource_lkk0q"]
+script = ExtResource("2_evvoo")
+metadata/_custom_type_script = "uid://b4iy183kb6jmc"
+
+[sub_resource type="Resource" id="Resource_evvoo"]
+script = ExtResource("4_0pbqi")
+metadata/_custom_type_script = "uid://bu4fo1hd2keea"
+
+[resource]
+script = ExtResource("2_00x61")
+name = "Move"
+sound_effect = ExtResource("3_00x61")
+base_mana_cost = 1
+mana_cost_scale = 1
+valid_tiles = SubResource("Resource_evvoo")
+effects = Array[ExtResource("1_nxnm4")]([SubResource("Resource_lkk0q")])
+metadata/_custom_type_script = "uid://b1dxrqdiivtev"
