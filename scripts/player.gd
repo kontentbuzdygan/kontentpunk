@@ -73,7 +73,7 @@ func execute(action: CombatAction) -> void:
 func begin_turn() -> void:
 	_process_status_effects()
 
-	var player_state = PlayerState.get_instance()
+	var player_state := PlayerState.get_instance()
 	player_state.begin_turn()
 
 	for item in player_state.get_items():
@@ -110,7 +110,11 @@ func clear_selected_ability() -> void:
 		button.set_pressed_no_signal(false)
 
 
-func _apply_penalties(penalties: Array[StatusEffect]):
+func _apply_penalties(penalties: Array[StatusEffect]) -> void:
+	## Don't add penalties to status effect array, because penalties can stack
+	## unlike regular debuffs.
+	## Also, this architecture creates tight coupling between equpped item and 
+	## its active penalty, without needing to mark debuffs applied from items.
 	for penalty in penalties:
 		penalty.queue(self)
 

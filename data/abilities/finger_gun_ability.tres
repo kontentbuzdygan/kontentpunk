@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="1_2xa8f"]
 [ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_al7v3"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_u8012"]
-[ext_resource type="Script" uid="uid://b31wypt8wnub1" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="2_a3ue6"]
+[ext_resource type="Script" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="2_a3ue6"]
 [ext_resource type="AudioStream" uid="uid://b48swpo6qhcti" path="res://sounds/gunshot_scifi.tres" id="5_8llc7"]
 [ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="6_8llc7"]
 

@@ -5,4 +5,4 @@ extends AbilityEffect
 
 func queue(actor: Actor, target_tile: Vector2i) -> void:
     if randf() <= status_effect.apply_chance:
-        CombatState.get_instance().queue_action(CombatAction.ApplyStatusEffect.new(actor, status_effect.duplicate(), target_tile))
+        CombatState.get_instance().queue_action(CombatAction.ApplyStatusEffect.new(actor, status_effect, target_tile))

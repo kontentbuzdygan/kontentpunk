@@ -11,11 +11,11 @@ func update() -> void:
 		remove_child(child)
 		child.queue_free()
 
-	for status in actor_statuses:
+	for status_wrapper in actor_statuses:
 		if get_child_count() >= MAX_ICONS:
 			break
 		var texture_rect := TextureRect.new()
-		texture_rect.texture = status.icon
+		texture_rect.texture = status_wrapper.status_effect.icon
 		add_child(texture_rect)
 
 	if not is_instance_of(actor, Player) || get_child_count() >= MAX_ICONS:

@@ -9,4 +9,3 @@ func _ready() -> void:
 
 func queue(actor: Actor) -> void:
 	CombatState.get_instance().queue_action(CombatAction.Bleed.new(actor, base_value, particles, sound_effect))
-	duration -= 1
