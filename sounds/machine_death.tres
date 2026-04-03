@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://dundt5y8qk01k"]
+
+[ext_resource type="AudioStream" uid="uid://gtogcq8271g3" path="res://sounds/machine_death_001.ogg" id="1_ev16u"]
+[ext_resource type="AudioStream" uid="uid://hy07vgvn0r22" path="res://sounds/machine_death_002.ogg" id="2_54sj0"]
+
+[resource]
+streams_count = 2
+stream_0/stream = ExtResource("1_ev16u")
+stream_1/stream = ExtResource("2_54sj0")

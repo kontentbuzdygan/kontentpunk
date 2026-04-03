@@ -1,6 +1,13 @@
 class_name Actor
 extends Node2D
 
+@export var is_alive: bool = true:
+	get:
+		return is_alive
+	set(value):
+		is_alive = value
+		visible = value
+
 @export var sound_effect_bus: StringName = &"Sound Effects"
 @export var move_sound: AudioStream
 @export var hurt_sound: AudioStream
