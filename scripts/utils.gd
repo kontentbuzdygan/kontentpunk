@@ -24,7 +24,7 @@ class OrthoTilesIterator:
 
 	func _iter_init(iter: Array) -> bool:
 		iter[0] = current
-		return true
+		return has_next()
 
 	func _iter_next(iter: Array) -> bool:
 		next()
