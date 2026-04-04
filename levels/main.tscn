@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
 [ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="4_l412s"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
-[ext_resource type="Resource" uid="uid://1krqqqc3kcjk" path="res://data/abilities/default_player_move_ability.tres" id="6_xlu2f"]
+[ext_resource type="Resource" uid="uid://lyxq4ugysl43" path="res://data/abilities/default_player_move_ability.tres" id="6_xlu2f"]
 [ext_resource type="AudioStream" uid="uid://d36wwav7sxy74" path="res://sounds/music_001.ogg" id="7_m6gxc"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
 [ext_resource type="Script" uid="uid://b5hn6p1wy7fqb" path="res://scripts/money_display.gd" id="9_f1mgo"]
@@ -41,6 +41,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bkn1c4h25sa7k" path="res://textures/obstacle_001.tres" id="30_vpyym"]
 [ext_resource type="AudioStream" uid="uid://nfkr7ik6cg2y" path="res://sounds/blade_001.ogg" id="31_duofn"]
 [ext_resource type="AudioStream" uid="uid://rlv7dfrqpx2i" path="res://sounds/blade_003.ogg" id="35_y60h0"]
+[ext_resource type="Script" uid="uid://bbuu5f8gg2b4x" path="res://scripts/status_effect_receiver.gd" id="39_g5y6o"]
 [ext_resource type="Texture2D" uid="uid://dhbkw0lulnmtc" path="res://textures/girl_spritesheet.png" id="40_xlu2f"]
 [ext_resource type="AudioStream" uid="uid://d1ek4xbyaehd7" path="res://sounds/robot_female_hurt.tres" id="41_gusra"]
 [ext_resource type="AudioStream" uid="uid://cjmg7ad1bexix" path="res://sounds/robot_female_death.tres" id="41_raj2e"]
@@ -54,7 +55,7 @@
 [ext_resource type="AudioStream" uid="uid://dundt5y8qk01k" path="res://sounds/machine_death.tres" id="50_m7o5q"]
 [ext_resource type="PackedScene" uid="uid://cesvfmcl13lnc" path="res://objects/ui/status_bar.tscn" id="50_xlu2f"]
 [ext_resource type="Texture2D" uid="uid://cyqh7wus6nh8r" path="res://textures/character_placeholder.png" id="51_map8x"]
-[ext_resource type="Script" uid="uid://cshiiyq2a3auo" path="res://scripts/pathfinder.gd" id="52_map8x"]
+[ext_resource type="Script" path="res://scripts/pathfinder.gd" id="52_map8x"]
 [ext_resource type="Texture2D" uid="uid://ieg3xl21k6mw" path="res://textures/enemy_placeholder.png" id="52_r708q"]
 
 [sub_resource type="Resource" id="Resource_jjbqq"]
@@ -920,6 +921,7 @@ sprite_frames = ExtResource("4_6yxbg")
 frame = 0
 
 [node name="Equipment" type="TextureRect" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=49324645]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 texture = ExtResource("13_05fi1")
@@ -1097,6 +1099,10 @@ texture = ExtResource("40_xlu2f")
 hframes = 4
 vframes = 3
 
+[node name="StatusEffectReceiver" type="Node2D" parent="Grid/Player" unique_id=233973687]
+script = ExtResource("39_g5y6o")
+metadata/_custom_type_script = "uid://bbuu5f8gg2b4x"
+
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
 position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
@@ -1131,6 +1137,10 @@ parameters/hurt/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/run/blend_position = Vector2(0, 0)
 
+[node name="StatusEffectReceiver" type="Node2D" parent="Grid/Enemy_1" unique_id=886324581]
+script = ExtResource("39_g5y6o")
+metadata/_custom_type_script = "uid://bbuu5f8gg2b4x"
+
 [node name="Enemy_2" type="Node2D" parent="Grid" unique_id=1444192590 groups=["occupies_tile"]]
 position = Vector2(-80, -144)
 script = ExtResource("8_jw1n3")
@@ -1164,6 +1174,10 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/hurt/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/run/blend_position = Vector2(0, 0)
+
+[node name="StatusEffectReceiver" type="Node2D" parent="Grid/Enemy_2" unique_id=141653070]
+script = ExtResource("39_g5y6o")
+metadata/_custom_type_script = "uid://bbuu5f8gg2b4x"
 
 [node name="Lootbag" parent="Grid" unique_id=828126499 instance=ExtResource("42_2hoto")]
 position = Vector2(-144, -80)

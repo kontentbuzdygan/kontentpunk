@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="3_ydspd"]
 [ext_resource type="AudioStream" uid="uid://cs0hqkhvcugwn" path="res://sounds/swap.tres" id="4_7su2e"]
 [ext_resource type="Texture2D" uid="uid://bbxog2bae8plq" path="res://textures/coin_small.png" id="4_cjyeq"]
+[ext_resource type="Script" uid="uid://bbuu5f8gg2b4x" path="res://scripts/status_effect_receiver.gd" id="7_ee4xc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ee4xc"]
 atlas = ExtResource("4_cjyeq")
@@ -72,3 +73,7 @@ label_type_variation = &"Label_Money"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1750800561]
 stream = ExtResource("4_7su2e")
 bus = &"UI"
+
+[node name="StatusEffectReceiver" type="Node2D" parent="." unique_id=267830066]
+script = ExtResource("7_ee4xc")
+metadata/_custom_type_script = "uid://bbuu5f8gg2b4x"

@@ -71,22 +71,22 @@ func execute(action: CombatAction) -> void:
 
 
 func begin_turn() -> void:
-	_process_status_effects()
-
 	var player_state := PlayerState.get_instance()
 	player_state.begin_turn()
 
-	for item in player_state.get_items():
+	for item_slot in player_state.get_item_slots():
+		var item := item_slot.item
 		if item.penalties.is_empty():
 			continue
 
 		if player_state.money.current < item.money_cost:
-			_apply_penalties(item.penalties)
-			item.is_penalty_activated = true
-		else:
-			item.is_penalty_activated = false
+			_apply_penalties(item.penalties, item_slot.item_holder.status_effect_receiver)
 
 	status_bar.update()
+
+	_process_status_effects()
+	for item_slot in player_state.get_item_slots():
+		item_slot.item_holder.status_effect_receiver._process_status_effects(self)
 
 
 func take_damage(value: int) -> void:
@@ -110,14 +110,10 @@ func clear_selected_ability() -> void:
 		button.set_pressed_no_signal(false)
 
 
-func _apply_penalties(penalties: Array[StatusEffect]) -> void:
-	## Don't add penalties to status effect array, because penalties can stack
-	## unlike regular debuffs.
-	## Also, this architecture creates tight coupling between equpped item and 
-	## its active penalty, without needing to mark debuffs applied from items.
+func _apply_penalties(penalties: Array[StatusEffect], receiver: StatusEffectReceiver) -> void:
 	for penalty in penalties:
-		penalty.queue(self)
+		receiver.apply_status_effect(penalty)
 
 
-func _on_items_changed(_items: Array[Item]) -> void:
+func _on_items_changed(_items: Array[ItemSlot]) -> void:
 	status_bar.update()

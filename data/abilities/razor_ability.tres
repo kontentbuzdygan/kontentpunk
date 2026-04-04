@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://60mje2mb5oh2" path="res://data/statuses/bleed.tres" id="4_j75ex"]
 [ext_resource type="Texture2D" uid="uid://dqt3ixn8fk67q" path="res://textures/wound.png" id="5_a63oj"]
 [ext_resource type="AudioStream" uid="uid://dvx2bh0ab6kdr" path="res://sounds/blade.tres" id="7_ix8i0"]
-[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="8_1u85m"]
+[ext_resource type="Script" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="8_1u85m"]
 
 [sub_resource type="Resource" id="Resource_apmfb"]
 script = ExtResource("2_a1rhy")

@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://1krqqqc3kcjk"]
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://lyxq4ugysl43"]
 
 [ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_nxnm4"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="2_00x61"]
 [ext_resource type="Script" uid="uid://b4iy183kb6jmc" path="res://scripts/ability_effect/move_ability_effect.gd" id="2_evvoo"]
 [ext_resource type="AudioStream" uid="uid://brnn2jvwo0pk" path="res://sounds/swoosh.ogg" id="3_00x61"]
-[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="4_0pbqi"]
+[ext_resource type="Script" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="4_0pbqi"]
 
 [sub_resource type="Resource" id="Resource_lkk0q"]
 script = ExtResource("2_evvoo")

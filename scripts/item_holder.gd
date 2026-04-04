@@ -30,13 +30,15 @@ enum Type { TEMPORARY, EQUIPMENT }
 		_on_item_changed(item)
 		_update_children()
 
+@onready var status_effect_receiver: StatusEffectReceiver = find_children("", "StatusEffectReceiver")[0]
+
 
 func _on_item_removed(old_item: Item) -> void:
 	if Engine.is_editor_hint() or not is_node_ready():
 		return
 
 	if type == Type.EQUIPMENT:
-		PlayerState.get_instance().remove_item(old_item)
+		PlayerState.get_instance().remove_item(old_item, self)
 
 
 func _on_item_changed(new_item: Item) -> void:
@@ -44,7 +46,7 @@ func _on_item_changed(new_item: Item) -> void:
 		return
 
 	if new_item and type == Type.EQUIPMENT:
-		PlayerState.get_instance().add_item(new_item)
+		PlayerState.get_instance().add_item(new_item, self)
 	elif not new_item and type == Type.TEMPORARY:
 		queue_free()
 		return

@@ -18,6 +18,7 @@ extends Node2D
 @onready var grid: Grid = find_parent("Grid")
 @onready var status_bar: StatusBar = find_children("StatusBar", "HFlowContainer")[0]
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var status_effect_receiver: StatusEffectReceiver = find_children("", "StatusEffectReceiver")[0]
 
 var tween: Tween
 
@@ -114,38 +115,12 @@ func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
 
 
 func apply_status_effect(status_effect: StatusEffect) -> void:
-	if status_effect.is_active:
-		var existing_status_effect: Array[StatusEffectDuration] = []
-		existing_status_effect.assign(
-			active_status_effects.filter(
-				func (active_status_wrapper: StatusEffectDuration) -> bool: return active_status_wrapper.status_effect == status_effect
-			)
-		)
-
-		if not existing_status_effect.size():
-			var status_wrapper := StatusEffectDuration.new(status_effect)
-			active_status_effects.append(status_wrapper)
-		else:
-			## If status effect is already applied to the actor, extend its duration
-			existing_status_effect[0].duration = status_effect.duration
-	else:
-		var status_wrapper := StatusEffectDuration.new(status_effect)
-		passive_status_effects.append(status_wrapper)
+	status_effect_receiver.apply_status_effect(status_effect)
 	status_bar.update()
 
 
 func _process_status_effects() -> void:
-	for status_wrapper in active_status_effects + passive_status_effects:
-		status_wrapper.queue(self)
-		if status_wrapper.duration == 0:
-			remove_status_effect(status_wrapper)
-
-
-func remove_status_effect(status_wrapper: StatusEffectDuration) -> void:
-	if status_wrapper.status_effect.is_active:
-		active_status_effects.remove_at(active_status_effects.find(status_wrapper))
-	else:
-		passive_status_effects.remove_at(passive_status_effects.find(status_wrapper))
+	status_effect_receiver._process_status_effects(self)
 	status_bar.update()
 
 
