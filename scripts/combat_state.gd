@@ -37,14 +37,7 @@ func process_queue() -> void:
 		action_ended.emit(_current_action)
 
 		if _current_action is CombatAction.EndTurn:
-			_current_turn = (_current_turn + 1) % len(_turn_order)
-
-			while not is_instance_valid(_turn_order[_current_turn]):
-				_turn_order.remove_at(_current_turn)
-				_current_turn %= len(_turn_order)
-
-			# NOTE: Intentional await
-			await _turn_order[_current_turn].begin_turn()
+			next_turn()
 
 	_current_action = null
 
@@ -60,3 +53,15 @@ func stop() -> void:
 func add_actor(actor: Actor) -> void:
 	_turn_order.append(actor)
 	_turn_order.sort_custom(func(a: Actor) -> int: return a.turn_order)
+
+
+func next_turn() -> void:
+	for i in range(len(_turn_order)):
+		_current_turn = (_current_turn + 1) % len(_turn_order)
+
+		if _turn_order[_current_turn].is_alive:
+			break
+
+	if _turn_order[_current_turn].is_alive:
+		# NOTE: Intentional await
+		await _turn_order[_current_turn].begin_turn()

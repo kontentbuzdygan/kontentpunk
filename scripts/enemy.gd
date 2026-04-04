@@ -2,6 +2,7 @@ class_name Enemy
 extends Actor
 
 @export var attack_sound: AudioStream
+@export var death_sound: AudioStream
 @export var health: int = 8
 @export var lootbag_scene: PackedScene
 @export var drops: Array[Item]
@@ -46,9 +47,11 @@ func take_damage(value: int) -> void:
 	await super.take_damage(value)
 
 	if health <= 0:
+		await get_tree().create_timer(0.5).timeout
+		play_sound(death_sound)
 		drop_loot()
 		await drop_money()
-		queue_free()
+		is_alive = false
 
 
 func drop_loot() -> void:

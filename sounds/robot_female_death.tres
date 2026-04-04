@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cjmg7ad1bexix"]
+
+[ext_resource type="AudioStream" uid="uid://d3d3d3oqico8e" path="res://sounds/robot_female_death_001.ogg" id="1_xgcnm"]
+[ext_resource type="AudioStream" uid="uid://ds6gxoy5o45uu" path="res://sounds/robot_female_death_002.ogg" id="2_corcp"]
+
+[resource]
+streams_count = 2
+stream_0/stream = ExtResource("1_xgcnm")
+stream_1/stream = ExtResource("2_corcp")
