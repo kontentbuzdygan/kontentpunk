@@ -34,10 +34,10 @@ func begin_turn() -> void:
 	var combat_state := CombatState.get_instance()
 
 	# TODO: Replace with actual ability checks & effects
-	# if Utils.manhattan_length(player_tile - path_toward_player.back()) <= 1:
-	# 	combat_state.queue_action(
-	# 		CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1)
-	# 	)
+	if Utils.manhattan_length(player_tile - path_toward_player.back()) <= 1:
+		combat_state.queue_action(
+			CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1)
+		)
 
 	combat_state.queue_action(CombatAction.EndTurn.new(self))
 

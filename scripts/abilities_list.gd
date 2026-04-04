@@ -15,9 +15,9 @@ func _update_abilites() -> void:
 	var money := PlayerState.get_instance().money.current
 	var abilities: Array[Ability] = []
 
-	for item_slot in PlayerState.get_instance().get_item_slots():
-		if money >= item_slot.item.money_cost:
-			for ability in item_slot.item.abilities:
+	for item in PlayerState.get_instance().get_items():
+		if money >= item.money_cost:
+			for ability in item.abilities:
 				if not abilities.has(ability):
 					abilities.append(ability)
 

@@ -38,7 +38,7 @@ func _on_item_removed(old_item: Item) -> void:
 		return
 
 	if type == Type.EQUIPMENT:
-		PlayerState.get_instance().remove_item(old_item, self)
+		PlayerState.get_instance().remove_item(old_item)
 
 
 func _on_item_changed(new_item: Item) -> void:
@@ -46,7 +46,9 @@ func _on_item_changed(new_item: Item) -> void:
 		return
 
 	if new_item and type == Type.EQUIPMENT:
-		PlayerState.get_instance().add_item(new_item, self)
+		## Apply penalties immediately if the item is unaffordable
+		_apply_penalties(new_item)
+		PlayerState.get_instance().add_item(new_item)
 	elif not new_item and type == Type.TEMPORARY:
 		queue_free()
 		return
@@ -126,3 +128,15 @@ func take_item() -> void:
 	if type == Type.TEMPORARY:
 		var loot_container: LootContainer = find_parent("LootContainer")
 		loot_container.on_take_item(item)
+
+
+func begin_turn(player: Player) -> void:
+	_apply_penalties(item)
+	status_effect_receiver._process_status_effects(player)
+
+
+func _apply_penalties(item_: Item) -> void:
+	var player_state := PlayerState.get_instance()
+	if item and player_state.money.current < item.money_cost:
+		for penalty in item_.penalties:
+			status_effect_receiver.apply_status_effect(penalty)

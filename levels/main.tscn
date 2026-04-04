@@ -921,13 +921,13 @@ sprite_frames = ExtResource("4_6yxbg")
 frame = 0
 
 [node name="Equipment" type="TextureRect" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD" unique_id=49324645]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 texture = ExtResource("13_05fi1")
 stretch_mode = 3
 
 [node name="Head" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=570677188 instance=ExtResource("14_xombn")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 59.0
 offset_top = 11.0
@@ -943,6 +943,7 @@ offset_right = 11.0
 offset_bottom = -43.0
 
 [node name="Heart" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=1456337609 instance=ExtResource("14_xombn")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 59.0
 offset_top = 56.0
@@ -959,6 +960,7 @@ offset_bottom = 13.0
 rotation = -1.5707964
 
 [node name="LArm" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=48775684 instance=ExtResource("14_xombn")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = -8.0
 offset_top = 52.0
@@ -968,6 +970,7 @@ type = 1
 item_type = 2
 
 [node name="RArm" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=850361375 instance=ExtResource("14_xombn")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 126.0
 offset_top = 52.0
@@ -977,6 +980,7 @@ type = 1
 item_type = 2
 
 [node name="Spine" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=65241761 instance=ExtResource("14_xombn")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 59.0
 offset_top = 101.0
@@ -993,6 +997,7 @@ offset_bottom = 12.999985
 rotation = -1.5707964
 
 [node name="LLeg" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=1558327849 instance=ExtResource("14_xombn")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 29.0
 offset_top = 148.0
@@ -1002,6 +1007,7 @@ type = 1
 item_type = 4
 
 [node name="RLeg" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/Equipment" unique_id=312628004 instance=ExtResource("14_xombn")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 89.0
 offset_top = 148.0

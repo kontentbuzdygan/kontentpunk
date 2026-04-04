@@ -21,12 +21,11 @@ func update() -> void:
 	if not is_instance_of(actor, Player) || get_child_count() >= MAX_ICONS:
 		return
 
+	var player: Player = actor as Player
 	## Handle debuffs applied as penalties from items
-	var item_slots: Array[ItemSlot] = PlayerState.get_instance().get_item_slots()
-	for item_slot in item_slots:
-		var penalties := item_slot.item_holder.status_effect_receiver.status_effects
-
-		for penalty in penalties:
+	var equipement_slots: Array[ItemHolder] = player.equipement_slots
+	for equipement_slot in equipement_slots:
+		for penalty in equipement_slot.status_effect_receiver.status_effects:
 			if get_child_count() >= MAX_ICONS:
 				break
 

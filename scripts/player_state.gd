@@ -6,9 +6,9 @@ extends Node
 @export var money: PlayerResource
 @export var default_move_ability: Ability
 
-var _items: Array[ItemSlot] = []
+var _items: Array[Item] = []
 
-signal items_changed(items: Array[ItemSlot])
+signal items_changed(items: Array[Item])
 
 static var _instance: PlayerState
 
@@ -41,20 +41,19 @@ func get_resource(type: PlayerResource.Type) -> PlayerResource:
 	return null
 
 
-func get_item_slots() -> Array[ItemSlot]:
+func get_items() -> Array[Item]:
 	return _items.duplicate()
 
 
-func add_item(item: Item, item_holder: ItemHolder) -> void:
+func add_item(item: Item) -> void:
 	print("equipped ", item)
-	var item_slot := ItemSlot.new(item, item_holder)
-	_items.append(item_slot)
+	_items.append(item)
 	items_changed.emit(_items)
 
 
-func remove_item(item: Item, item_holder: ItemHolder) -> void:
+func remove_item(item: Item) -> void:
 	print("unequipped ", item)
-	_items.assign(_items.filter(func (slot: ItemSlot) -> bool: return slot.item != item or slot.item_holder != item_holder))
+	_items.erase(item)
 	items_changed.emit(_items)
 
 
@@ -66,7 +65,7 @@ func _on_action_ended(_action: CombatAction) -> void:
 
 
 func begin_turn() -> void:
-	for item_slot in _items:
-		money.current -= item_slot.item.money_cost
-
+	for item in _items:
+		if money.current >= item.money_cost:
+			money.current -= item.money_cost
 	mana.refill()

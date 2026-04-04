@@ -9,6 +9,15 @@ const MANA_COST_NOT_ALLOWED: int = -1
 
 @onready var health: PlayerResource = PlayerState.get_instance().health
 @onready var mana: PlayerResource = PlayerState.get_instance().mana
+@onready var equipement_slots: Array[ItemHolder] = [
+	%Head,
+	%Heart,
+	%LArm,
+	%RArm,
+	%Spine,
+	%LLeg,
+	%RLeg,
+]
 
 
 func _ready() -> void:
@@ -74,19 +83,11 @@ func begin_turn() -> void:
 	var player_state := PlayerState.get_instance()
 	player_state.begin_turn()
 
-	for item_slot in player_state.get_item_slots():
-		var item := item_slot.item
-		if item.penalties.is_empty():
-			continue
-
-		if player_state.money.current < item.money_cost:
-			_apply_penalties(item.penalties, item_slot.item_holder.status_effect_receiver)
-
-	status_bar.update()
+	for equipement_slot in equipement_slots:
+		equipement_slot.begin_turn(self)
 
 	_process_status_effects()
-	for item_slot in player_state.get_item_slots():
-		item_slot.item_holder.status_effect_receiver._process_status_effects(self)
+	status_bar.update()
 
 
 func take_damage(value: int) -> void:
@@ -110,10 +111,5 @@ func clear_selected_ability() -> void:
 		button.set_pressed_no_signal(false)
 
 
-func _apply_penalties(penalties: Array[StatusEffect], receiver: StatusEffectReceiver) -> void:
-	for penalty in penalties:
-		receiver.apply_status_effect(penalty)
-
-
-func _on_items_changed(_items: Array[ItemSlot]) -> void:
+func _on_items_changed(_items: Array[Item]) -> void:
 	status_bar.update()
