@@ -9,19 +9,16 @@ const MANA_COST_NOT_ALLOWED: int = -1
 
 @onready var health: PlayerResource = PlayerState.get_instance().health
 @onready var mana: PlayerResource = PlayerState.get_instance().mana
-@onready var equipement_slots: Array[ItemHolder] = [
-	%Head,
-	%Heart,
-	%LArm,
-	%RArm,
-	%Spine,
-	%LLeg,
-	%RLeg,
-]
+
+var equipement_slots: Array[ItemHolder]
 
 
 func _ready() -> void:
 	super._ready()
+
+	var untyped_equipment_slots := %Equipment.find_children("", "ItemHolder")
+	equipement_slots.assign(untyped_equipment_slots)
+
 	grid.tile_clicked.connect(_on_tile_clicked)
 	grid.tile_hovered.connect(_on_tile_hovered)
 

@@ -46,8 +46,6 @@ func _on_item_changed(new_item: Item) -> void:
 		return
 
 	if new_item and type == Type.EQUIPMENT:
-		## Apply penalties immediately if the item is unaffordable
-		_apply_penalties(new_item)
 		PlayerState.get_instance().add_item(new_item)
 	elif not new_item and type == Type.TEMPORARY:
 		queue_free()
@@ -131,12 +129,17 @@ func take_item() -> void:
 
 
 func begin_turn(player: Player) -> void:
-	_apply_penalties(item)
+	if item:
+		_apply_penalties()
 	status_effect_receiver._process_status_effects(player)
 
 
-func _apply_penalties(item_: Item) -> void:
+func _apply_penalties() -> void:
 	var player_state := PlayerState.get_instance()
-	if item and player_state.money.current < item.money_cost:
-		for penalty in item_.penalties:
+	## TODO: we first substract money for items and then apply penalties.
+	## this is bad because if player paid for an item, they will still receive penalty.
+	## example: two items costing 51 while player have 100. after one turn, player payes
+	## 51 for the first item and can't afford the other, but will still receive two penalties.
+	if player_state.money.current < item.money_cost:
+		for penalty in item.penalties:
 			status_effect_receiver.apply_status_effect(penalty)
