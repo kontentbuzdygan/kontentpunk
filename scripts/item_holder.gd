@@ -30,6 +30,8 @@ enum Type { TEMPORARY, EQUIPMENT }
 		_on_item_changed(item)
 		_update_children()
 
+@onready var status_effect_receiver: StatusEffectReceiver = find_children("", "StatusEffectReceiver")[0]
+
 
 func _on_item_removed(old_item: Item) -> void:
 	if Engine.is_editor_hint() or not is_node_ready():
@@ -124,3 +126,20 @@ func take_item() -> void:
 	if type == Type.TEMPORARY:
 		var loot_container: LootContainer = find_parent("LootContainer")
 		loot_container.on_take_item(item)
+
+
+func begin_turn(player: Player) -> void:
+	if item:
+		_apply_penalties()
+	status_effect_receiver._process_status_effects(player)
+
+
+func _apply_penalties() -> void:
+	var player_state := PlayerState.get_instance()
+	## TODO: we first substract money for items and then apply penalties.
+	## this is bad because if player paid for an item, they will still receive penalty.
+	## example: two items costing 51 while player have 100. after one turn, player payes
+	## 51 for the first item and can't afford the other, but will still receive two penalties.
+	if player_state.money.current < item.money_cost:
+		for penalty in item.penalties:
+			status_effect_receiver.apply_status_effect(penalty)

@@ -18,6 +18,7 @@ extends Node2D
 @onready var grid: Grid = find_parent("Grid")
 @onready var status_bar: StatusBar = find_children("StatusBar", "HFlowContainer")[0]
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var status_effect_receiver: StatusEffectReceiver = find_children("", "StatusEffectReceiver")[0]
 
 var tween: Tween
 
@@ -26,8 +27,8 @@ var is_moving: bool = false
 
 var _audio_stream_player: AudioStreamPlayer
 
-var passive_status_effects: Array[StatusEffect] = []
-var active_status_effects: Array[StatusEffect] = []
+var passive_status_effects: Array[StatusEffectDuration] = []
+var active_status_effects: Array[StatusEffectDuration] = []
 
 signal left_tile(tile: Vector2i)
 signal entered_tile(tile: Vector2i)
@@ -114,36 +115,12 @@ func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
 
 
 func apply_status_effect(status_effect: StatusEffect) -> void:
-	if status_effect.is_active:
-		var existing_status_effect: Array[StatusEffect] = []
-		existing_status_effect.assign(
-			active_status_effects.filter(
-				func (active_status: StatusEffect) -> bool: return active_status.name == status_effect.name
-			)
-		)
-
-		if not existing_status_effect.size():
-			active_status_effects.append(status_effect)
-		else:
-			## If status effect is already applied to the actor, extend its duration
-			active_status_effects[active_status_effects.find(status_effect)].duration = status_effect.duration
-	else:
-		passive_status_effects.append(status_effect)
+	status_effect_receiver.apply_status_effect(status_effect)
 	status_bar.update()
 
 
 func _process_status_effects() -> void:
-	for status_effect in active_status_effects + passive_status_effects:
-		status_effect.queue(self)
-		if status_effect.duration == 0:
-			remove_status_effect(status_effect)
-
-
-func remove_status_effect(status_effect: StatusEffect) -> void:
-	if status_effect.is_active:
-		active_status_effects.remove_at(active_status_effects.find(status_effect))
-	else:
-		passive_status_effects.remove_at(passive_status_effects.find(status_effect))
+	status_effect_receiver._process_status_effects(self)
 	status_bar.update()
 
 
@@ -195,3 +172,16 @@ func set_moving_state(direction: Vector2) -> void:
 func set_idle_state() -> void:
 	is_moving = false
 	is_idle = true
+
+
+class StatusEffectDuration:
+	var status_effect: StatusEffect
+	var duration: int
+
+	func _init(status_effect_: StatusEffect) -> void:
+		status_effect = status_effect_
+		duration = status_effect.duration
+	
+	func queue(actor: Actor) -> void:
+		status_effect.queue(actor)
+		duration = max(duration - 1, 0)

@@ -10,9 +10,15 @@ const MANA_COST_NOT_ALLOWED: int = -1
 @onready var health: PlayerResource = PlayerState.get_instance().health
 @onready var mana: PlayerResource = PlayerState.get_instance().mana
 
+var equipement_slots: Array[ItemHolder]
+
 
 func _ready() -> void:
 	super._ready()
+
+	var untyped_equipment_slots := %Equipment.find_children("", "ItemHolder")
+	equipement_slots.assign(untyped_equipment_slots)
+
 	grid.tile_clicked.connect(_on_tile_clicked)
 	grid.tile_hovered.connect(_on_tile_hovered)
 
@@ -71,21 +77,13 @@ func execute(action: CombatAction) -> void:
 
 
 func begin_turn() -> void:
-	_process_status_effects()
-
-	var player_state = PlayerState.get_instance()
+	var player_state := PlayerState.get_instance()
 	player_state.begin_turn()
 
-	for item in player_state.get_items():
-		if item.penalties.is_empty():
-			continue
+	for equipement_slot in equipement_slots:
+		equipement_slot.begin_turn(self)
 
-		if player_state.money.current < item.money_cost:
-			_apply_penalties(item.penalties)
-			item.is_penalty_activated = true
-		else:
-			item.is_penalty_activated = false
-
+	_process_status_effects()
 	status_bar.update()
 
 
@@ -108,11 +106,6 @@ func clear_selected_ability() -> void:
 
 	if button:
 		button.set_pressed_no_signal(false)
-
-
-func _apply_penalties(penalties: Array[StatusEffect]):
-	for penalty in penalties:
-		penalty.queue(self)
 
 
 func _on_items_changed(_items: Array[Item]) -> void:

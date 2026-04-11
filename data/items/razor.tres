@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_ksl5w"]
 [ext_resource type="Texture2D" uid="uid://dogvacbuvy5w6" path="res://textures/razor.png" id="2_lv5w3"]
 [ext_resource type="Resource" uid="uid://cnf78d17urgpg" path="res://data/abilities/razor_ability.tres" id="2_t3th6"]
-[ext_resource type="Script" uid="uid://bbgc4dvto7fk6" path="res://scripts/item.gd" id="2_yhqai"]
+[ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="2_yhqai"]
 [ext_resource type="Script" uid="uid://bxmdnbfwtcj5o" path="res://scripts/status_effect.gd" id="13_mphro"]
 [ext_resource type="Resource" uid="uid://60mje2mb5oh2" path="res://data/statuses/bleed.tres" id="14_nakcv"]
 
@@ -12,4 +12,5 @@ script = ExtResource("2_yhqai")
 icon = ExtResource("2_lv5w3")
 type = 2
 abilities = Array[ExtResource("1_ksl5w")]([ExtResource("2_t3th6")])
+money_cost = 51
 penalties = Array[ExtResource("13_mphro")]([ExtResource("14_nakcv")])

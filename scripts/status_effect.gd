@@ -11,9 +11,11 @@ extends Resource
         apply_chance = clamp(value, 0.0, 1.0)
 
 @export var is_active: bool = true
+@export var is_penalty: bool = true
 @export var particles: PackedScene
 @export var sound_effect: AudioStream
 @export var icon: Texture2D
 
 
 @abstract func queue(actor: Actor) -> void
+@abstract func remove() -> void
