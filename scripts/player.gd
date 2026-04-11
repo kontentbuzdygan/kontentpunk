@@ -7,7 +7,7 @@ const MANA_COST_NOT_ALLOWED: int = -1
 @export var abilities_button_group: ButtonGroup
 @export var loot_container: LootContainer
 
-@onready var health: PlayerResource = PlayerState.get_instance().health
+@onready var health: LimitedPlayerResource = PlayerState.get_instance().health
 @onready var mana: PlayerResource = PlayerState.get_instance().mana
 
 var equipement_slots: Array[ItemHolder]
@@ -72,6 +72,15 @@ func execute(action: CombatAction) -> void:
 	if action is CombatAction.HealSelf:
 		health.current += action.value
 		return
+	
+	if action is CombatAction.CorruptHeart:
+		var instance: StatusEffectAnimationPlayer = action.animation.instantiate()
+		if action.value > 0:
+			await _play_status_animation(instance, &"apply", action.apply_sound_effect)
+		else:
+			await _play_status_animation(instance, &"remove", action.revert_sound_effect)
+		health.maximum -= action.value
+		return
 
 	await super.execute(action)
 
@@ -110,3 +119,11 @@ func clear_selected_ability() -> void:
 
 func _on_items_changed(_items: Array[Item]) -> void:
 	status_bar.update()
+
+
+func _play_status_animation(instance: StatusEffectAnimationPlayer, animation_name: StringName, stream: AudioStream) -> void:
+	add_child(instance)
+	instance.play_animation(animation_name)
+	await instance.play_sound(stream)
+	remove_child(instance)
+	instance.queue_free()

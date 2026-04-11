@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CorruptedHeartStatusEffect" format=3 uid="uid://l5g5cl7rsxsj"]
+
+[ext_resource type="Texture2D" uid="uid://ceafmg0l222e2" path="res://textures/corrupted-heart.png" id="1_aye23"]
+[ext_resource type="PackedScene" uid="uid://buuo5tcceevam" path="res://objects/game/corrupted_heart_animation.tscn" id="1_fl7ws"]
+[ext_resource type="Script" uid="uid://d0nhc7ritd54a" path="res://scripts/status_effect/corrupted_heart_status_effect.gd" id="1_rci6c"]
+[ext_resource type="AudioStream" uid="uid://d2rk0ndpvo2mn" path="res://sounds/reverting_heart_001.ogg" id="4_7b873"]
+[ext_resource type="AudioStream" uid="uid://dup0nnxbyxue2" path="res://sounds/breaking heart_001.ogg" id="4_h1ydo"]
+
+[resource]
+script = ExtResource("1_rci6c")
+name = &"Corrupted Heart"
+is_active = false
+animation = ExtResource("1_fl7ws")
+apply_sound_effect = ExtResource("4_h1ydo")
+revert_sound_effect = ExtResource("4_7b873")
+icon = ExtResource("1_aye23")
+metadata/_custom_type_script = "uid://d0nhc7ritd54a"

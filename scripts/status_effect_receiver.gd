@@ -28,7 +28,7 @@ func _process_status_effects(actor: Actor) -> void:
 	for status_wrapper in status_effects:
 		status_wrapper.queue(actor)
 		if status_wrapper.duration == 0:
-			status_wrapper.remove()
+			status_wrapper.remove(actor)
 			remove_status_effect(status_wrapper)
 
 
@@ -45,8 +45,8 @@ class StatusEffectDuration:
 		status_effect = status_effect_
 		duration = status_effect.duration
 
-	func remove() -> void:
-		status_effect.remove()
+	func remove(actor: Actor) -> void:
+		status_effect.remove(actor)
 	
 	@abstract
 	func queue(actor: Actor) -> void
