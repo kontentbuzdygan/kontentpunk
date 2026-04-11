@@ -65,7 +65,4 @@ func _on_action_ended(_action: CombatAction) -> void:
 
 
 func begin_turn() -> void:
-	for item in _items:
-		if money.current >= item.money_cost:
-			money.current -= item.money_cost
 	mana.refill()
