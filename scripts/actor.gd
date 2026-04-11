@@ -85,7 +85,7 @@ func execute(action: CombatAction) -> void:
 
 	if action is CombatAction.Bleed:
 		play_sound(action.sound_effect)
-		_emit_status_effect_particles(action.particles)
+		_emit_status_effect_particles(action.animation)
 		await action.actor.take_damage(action.value)
 		return
 
