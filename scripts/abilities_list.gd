@@ -4,18 +4,18 @@ extends HBoxContainer
 
 
 func _ready() -> void:
-	clear_abilities()
-	PlayerState.get_instance().items_changed.connect(_update_abilites.unbind(1))
-	PlayerState.get_instance().money.current_changed.connect(_update_abilites.unbind(1))
+	_update_abilites()
+	PlayerState.items_changed.connect(_update_abilites.unbind(1))
+	PlayerState.money.current_changed.connect(_update_abilites.unbind(1))
 
 
 func _update_abilites() -> void:
 	clear_abilities()
 
-	var money := PlayerState.get_instance().money.current
+	var money := PlayerState.money.current
 	var abilities: Array[Ability] = []
 
-	for item in PlayerState.get_instance().get_items():
+	for item in PlayerState.get_items():
 		if money >= item.money_cost:
 			for ability in item.abilities:
 				if not abilities.has(ability):

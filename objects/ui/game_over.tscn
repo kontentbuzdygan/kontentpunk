@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://bkssdys5ybjsa"]
 
 [ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_agwnj"]
-[ext_resource type="Script" path="res://scripts/game_over.gd" id="2_tpp0e"]
-[ext_resource type="PackedScene" uid="uid://dprhqfw61evv4" path="res://objects/config.tscn" id="3_lmb55"]
+[ext_resource type="Script" uid="uid://bd0657r6hubkt" path="res://scripts/game_over.gd" id="2_tpp0e"]
 [ext_resource type="AudioStream" uid="uid://c8c2cddfslxgq" path="res://sounds/death.ogg" id="3_tpp0e"]
 [ext_resource type="AudioStream" uid="uid://bpj31kwbjlo7g" path="res://sounds/music_002.ogg" id="5_qdanl"]
 
@@ -132,8 +131,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_agwnj")
 script = ExtResource("2_tpp0e")
-
-[node name="Config" parent="." unique_id=336289230 instance=ExtResource("3_lmb55")]
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1188386084]
 stream = ExtResource("3_tpp0e")

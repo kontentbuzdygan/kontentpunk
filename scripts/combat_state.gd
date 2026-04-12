@@ -2,6 +2,7 @@ class_name CombatState
 extends Node
 
 signal action_ended(action: CombatAction)
+signal game_ended
 
 var _queue: Array[Object] = []
 var _current_action: CombatAction = null
@@ -34,7 +35,13 @@ func process_queue() -> void:
 		_current_action = _queue.pop_front()
 		await _current_action.actor.execute(_current_action)
 
+		check_game_over()
 		action_ended.emit(_current_action)
+
+		var enemies := _turn_order.slice(1)
+		if enemies.all(func(enemy: Actor) -> bool: return not enemy.is_alive):
+			game_ended.emit()
+			SceneManager.goto_scene("res://levels/level_selector.tscn")
 
 		if _current_action is CombatAction.EndTurn:
 			next_turn()
@@ -65,3 +72,12 @@ func next_turn() -> void:
 	if _turn_order[_current_turn].is_alive:
 		# NOTE: Intentional await
 		await _turn_order[_current_turn].begin_turn()
+
+
+## check for game over here instead of PlayerState so that Autoload singleton
+## doesn't have to depend on a local node
+func check_game_over() -> void:
+	if PlayerState.health.current <= 0:
+		CombatState.get_instance().stop()
+		await get_tree().create_timer(0.5).timeout
+		SceneManager.goto_scene("res://objects/ui/game_over.tscn")

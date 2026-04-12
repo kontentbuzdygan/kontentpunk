@@ -66,14 +66,14 @@ func drop_loot() -> void:
 
 	var rng := RandomNumberGenerator.new()
 	var drop_chances: Array[float] = []
-	drop_chances.assign(drops.map(func (item: Item) -> float: return item.drop_chance))
+	drop_chances.assign(drops.map(func(item: Item) -> float: return item.drop_chance))
 	lootbag.loot.append(drops[rng.rand_weighted(drop_chances)])
 
 
 func drop_money() -> void:
 	sprite.visible = false
 
-	PlayerState.get_instance().money.add(money_drop)
+	PlayerState.money.add(money_drop)
 
 	var money_drop_label: MoneyDropLabel = money_drop_label_scene.instantiate()
 	add_child(money_drop_label)

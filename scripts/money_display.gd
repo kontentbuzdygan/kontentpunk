@@ -4,7 +4,7 @@ extends VBoxContainer
 @export var decreasing_font_color: Color
 @export var increasing_font_color: Color
 
-@onready var money: PlayerResource = PlayerState.get_instance().money
+@onready var money: PlayerResource = PlayerState.money
 
 var _value: int
 var _t: float = 0.0

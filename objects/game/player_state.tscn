@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dr87kffdskfvl"]
+
+[ext_resource type="Script" uid="uid://cn4ynus2a4xwg" path="res://scripts/player_state.gd" id="1_we28y"]
+[ext_resource type="Script" path="res://scripts/limited_player_resource.gd" id="2_0di6l"]
+[ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="3_vmnlr"]
+[ext_resource type="Resource" uid="uid://lyxq4ugysl43" path="res://data/abilities/default_player_move_ability.tres" id="4_vlqyn"]
+
+[sub_resource type="Resource" id="Resource_jjbqq"]
+script = ExtResource("2_0di6l")
+
+[sub_resource type="Resource" id="Resource_gusra"]
+script = ExtResource("2_0di6l")
+
+[sub_resource type="Resource" id="Resource_4c2mk"]
+script = ExtResource("3_vmnlr")
+current = 100
+metadata/_custom_type_script = "uid://dywwjhmsu8rif"
+
+[node name="PlayerState" type="Node" unique_id=1473789326]
+script = ExtResource("1_we28y")
+health = SubResource("Resource_jjbqq")
+mana = SubResource("Resource_gusra")
+money = SubResource("Resource_4c2mk")
+default_move_ability = ExtResource("4_vlqyn")
+metadata/_custom_type_script = "uid://cn4ynus2a4xwg"

@@ -27,7 +27,7 @@ func _ready() -> void:
 	$Label.theme_type_variation = label_type_variation
 
 	if not Engine.is_editor_hint():
-		_resource = PlayerState.get_instance().get_resource(resource_type)
+		_resource = PlayerState.get_resource(resource_type)
 		_resource.current_changed.connect(update.unbind(1))
 
 	update()

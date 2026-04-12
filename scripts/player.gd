@@ -6,9 +6,10 @@ const MANA_COST_NOT_ALLOWED: int = -1
 @export var end_turn_delay_seconds: float = 0.5
 @export var abilities_button_group: ButtonGroup
 @export var loot_container: LootContainer
+@export var god_mode: bool = false
 
-@onready var health: PlayerResource = PlayerState.get_instance().health
-@onready var mana: PlayerResource = PlayerState.get_instance().mana
+@onready var health: PlayerResource = PlayerState.health
+@onready var mana: PlayerResource = PlayerState.mana
 
 var equipement_slots: Array[ItemHolder]
 
@@ -25,8 +26,7 @@ func _ready() -> void:
 	left_tile.connect(_on_left_tile)
 	entered_tile.connect(_on_entered_tile)
 
-	var player_state := PlayerState.get_instance()
-	player_state.items_changed.connect(_on_items_changed)
+	PlayerState.items_changed.connect(_on_items_changed)
 
 
 func _on_tile_clicked(tile: Vector2i) -> void:
@@ -77,8 +77,7 @@ func execute(action: CombatAction) -> void:
 
 
 func begin_turn() -> void:
-	var player_state := PlayerState.get_instance()
-	player_state.begin_turn()
+	PlayerState.begin_turn()
 
 	for equipement_slot in equipement_slots:
 		equipement_slot.begin_turn(self)
@@ -88,7 +87,8 @@ func begin_turn() -> void:
 
 
 func take_damage(value: int) -> void:
-	health.current -= value
+	if not god_mode:
+		health.current -= value
 	await super.take_damage(value)
 
 
@@ -98,7 +98,7 @@ func get_selected_ability() -> Ability:
 	if button and button.owner is AbilitySelector:
 		return button.owner.ability
 	else:
-		return PlayerState.get_instance().default_move_ability
+		return PlayerState.default_move_ability
 
 
 func clear_selected_ability() -> void:
