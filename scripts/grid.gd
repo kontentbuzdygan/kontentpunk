@@ -45,7 +45,10 @@ func get_node_tile(node: Node2D) -> Vector2i:
 func get_nodes_on_tile(tile: Vector2i, type: Variant = null) -> Array[Node2D]:
 	var found: Array[Node2D] = []
 
-	for node in get_children():
+	## filter out enemies that are already dead
+	var nodes: Array[Node] = get_children().filter(func(node: Node) -> bool: return not is_instance_of(node, Enemy) or (node as Enemy).is_alive)
+
+	for node in nodes:
 		if node is Node2D and get_node_tile(node) == tile and (type == null or is_instance_of(node, type)):
 			found.append(node)
 
