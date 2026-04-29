@@ -2,7 +2,7 @@
 class_name ItemHolder
 extends Control
 
-enum Type { TEMPORARY, EQUIPMENT }
+enum Type {TEMPORARY, EQUIPMENT}
 
 @export var type: Type = Type.TEMPORARY
 @export var item_type: Item.Type = Item.Type.NONE
@@ -66,7 +66,7 @@ func _get_drag_data(at_position: Vector2) -> ItemHolder:
 	var wrapper := Control.new()
 	wrapper.add_child(icon)
 
-	icon.position = -at_position
+	icon.position = - at_position
 
 	set_drag_preview(wrapper)
 	return self
@@ -129,17 +129,18 @@ func take_item() -> void:
 
 
 func begin_turn(player: Player) -> void:
+	var player_state := PlayerState.get_instance()
 	if item:
-		_apply_penalties()
+		## don't apply penalty if player payed for the item in this turn
+		if player_state.money.current >= item.money_cost:
+			player_state.money.current -= item.money_cost
+		else:
+			_apply_penalties()
 	status_effect_receiver._process_status_effects(player)
 
 
 func _apply_penalties() -> void:
 	var player_state := PlayerState.get_instance()
-	## TODO: we first substract money for items and then apply penalties.
-	## this is bad because if player paid for an item, they will still receive penalty.
-	## example: two items costing 51 while player have 100. after one turn, player payes
-	## 51 for the first item and can't afford the other, but will still receive two penalties.
 	if player_state.money.current < item.money_cost:
 		for penalty in item.penalties:
 			status_effect_receiver.apply_status_effect(penalty)

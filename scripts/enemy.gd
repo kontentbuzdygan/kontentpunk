@@ -66,7 +66,7 @@ func drop_loot() -> void:
 
 	var rng := RandomNumberGenerator.new()
 	var drop_chances: Array[float] = []
-	drop_chances.assign(drops.map(func (item: Item) -> float: return item.drop_chance))
+	drop_chances.assign(drops.map(func(item: Item) -> float: return item.drop_chance))
 	lootbag.loot.append(drops[rng.rand_weighted(drop_chances)])
 
 
