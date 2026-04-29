@@ -52,6 +52,7 @@ func take_damage(value: int) -> void:
 		drop_loot()
 		await drop_money()
 		is_alive = false
+		remove_from_group(&"occupies_tile")
 
 
 func drop_loot() -> void:
