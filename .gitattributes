@@ -1,6 +1,12 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
 
+# GitHub metadata to clean up diffs
+*.uid linguist-generated
+*.tres linguist-generated
+*.tscn linguist-generated
+*.import linguist-generated
+
 # Git LFS Tracking (Assets)
 
 # 3D Models
