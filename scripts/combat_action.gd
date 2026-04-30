@@ -75,13 +75,11 @@ class Bleed:
 
 	var value: int
 	var animation: PackedScene
-	var sound_effect: AudioStream
 
-	func _init(actor_: Actor, value_: int, animation_: PackedScene, sound_effect_: AudioStream) -> void:
+	func _init(actor_: Actor, value_: int, animation_: PackedScene) -> void:
 		super._init(actor_)
 		value = value_
 		animation = animation_
-		sound_effect = sound_effect_
 
 	func _to_string() -> String:
 		return "<bleed dealt %d damage>" % value
@@ -92,15 +90,11 @@ class CorruptHeart:
 
 	var value: int
 	var animation: PackedScene
-	var apply_sound_effect: AudioStream
-	var revert_sound_effect: AudioStream
 
-	func _init(actor_: Actor, value_: int, animation_: PackedScene, apply_sound_effect_: AudioStream, revert_sound_effect_: AudioStream) -> void:
+	func _init(actor_: Actor, value_: int, animation_: PackedScene) -> void:
 		super._init(actor_)
 		value = value_
 		animation = animation_
-		apply_sound_effect = apply_sound_effect_
-		revert_sound_effect = revert_sound_effect_
 	
 	func _to_string() -> String:
 		return "<corrupted %d heart(s)>" % value

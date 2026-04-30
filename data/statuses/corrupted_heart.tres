@@ -14,4 +14,3 @@ animation = ExtResource("1_fl7ws")
 apply_sound_effect = ExtResource("4_h1ydo")
 revert_sound_effect = ExtResource("4_7b873")
 icon = ExtResource("1_aye23")
-metadata/_custom_type_script = "uid://d0nhc7ritd54a"

@@ -8,7 +8,7 @@ func _ready() -> void:
 
 
 func queue(actor: Actor) -> void:
-	CombatState.get_instance().queue_action(CombatAction.Bleed.new(actor, base_value, animation, apply_sound_effect))
+	CombatState.get_instance().queue_action(CombatAction.Bleed.new(actor, base_value, animation))
 
 
 func remove(_actor: Actor) -> void:

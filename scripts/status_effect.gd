@@ -12,8 +12,6 @@ extends Resource
 
 @export var is_active: bool = true
 @export var animation: PackedScene
-@export var apply_sound_effect: AudioStream
-@export var revert_sound_effect: AudioStream
 @export var icon: Texture2D
 
 

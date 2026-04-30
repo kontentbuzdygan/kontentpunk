@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://cnf78d17urgpg"]
 
 [ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_dsx4g"]
-[ext_resource type="Script" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="2_a1rhy"]
+[ext_resource type="Script" uid="uid://b31wypt8wnub1" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="2_a1rhy"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="2_mr411"]
 [ext_resource type="Script" uid="uid://crbgb4yfv0dl0" path="res://scripts/ability_effect/apply_status_effect_ability_effect.gd" id="3_qcqqg"]
 [ext_resource type="Resource" uid="uid://60mje2mb5oh2" path="res://data/statuses/bleed.tres" id="4_j75ex"]

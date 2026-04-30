@@ -76,9 +76,9 @@ func execute(action: CombatAction) -> void:
 	if action is CombatAction.CorruptHeart:
 		var instance: StatusEffectAnimationPlayer = action.animation.instantiate()
 		if action.value > 0:
-			await _play_status_animation(instance, &"apply", action.apply_sound_effect)
+			await _play_status_animation(instance, &"apply")
 		else:
-			await _play_status_animation(instance, &"remove", action.revert_sound_effect)
+			await _play_status_animation(instance, &"remove")
 		health.maximum -= action.value
 		return
 
@@ -121,9 +121,8 @@ func _on_items_changed(_items: Array[Item]) -> void:
 	status_bar.update()
 
 
-func _play_status_animation(instance: StatusEffectAnimationPlayer, animation_name: StringName, stream: AudioStream) -> void:
+func _play_status_animation(instance: StatusEffectAnimationPlayer, animation_name: StringName) -> void:
 	add_child(instance)
-	instance.play_animation(animation_name)
-	await instance.play_sound(stream)
+	await instance.play_animation(animation_name)
 	remove_child(instance)
 	instance.queue_free()
