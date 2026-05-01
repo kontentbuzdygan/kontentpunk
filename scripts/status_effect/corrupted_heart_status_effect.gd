@@ -1,11 +1,11 @@
 class_name CorruptedHeartStatusEffect
 extends StatusEffect
 
-@export var base_value := 1
+@export var affected_hearts := 1
 
 func queue(actor: Actor) -> void:
-	CombatState.get_instance().queue_action(CombatAction.CorruptHeart.new(actor, base_value, animation))
+	CombatState.get_instance().queue_action(CombatAction.CorruptHeart.new(actor, affected_hearts, animation))
 
 
 func remove(actor: Actor) -> void:
-	CombatState.get_instance().queue_action(CombatAction.CorruptHeart.new(actor, -base_value, animation))
+	CombatState.get_instance().queue_action(CombatAction.CorruptHeart.new(actor, -affected_hearts, animation))

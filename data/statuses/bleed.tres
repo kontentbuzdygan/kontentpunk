@@ -10,6 +10,5 @@ script = ExtResource("6_cn2tg")
 name = &"Bleed"
 apply_chance = 1.0
 animation = ExtResource("5_l7yp2")
-apply_sound_effect = ExtResource("7_2pnrw")
 icon = ExtResource("4_b8rmf")
 metadata/_custom_type_script = "uid://bg1l528adesin"

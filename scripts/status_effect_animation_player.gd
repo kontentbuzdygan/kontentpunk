@@ -7,9 +7,3 @@ extends Node2D
 func play_animation(animation_name: StringName) -> void:
 	animation_player.play(animation_name)
 	await animation_player.animation_finished
-
-
-func play_sound(stream: AudioStream) -> void:
-	audio_stream.stream = stream
-	audio_stream.play()
-	await audio_stream.finished
