@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dulxp0q4i2kyw"]
 
 [ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_342rx"]
-[ext_resource type="Script" uid="uid://dmo0nmqg8l5ft" path="res://scripts/level_tree.gd" id="1_srpct"]
+[ext_resource type="Script" uid="uid://bvjs6fny7fopo" path="res://scripts/level_tree.gd" id="1_srpct"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srpct"]
 bg_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
@@ -18,24 +18,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_srpct")
 
-[node name="LevelTree" type="Control" parent="CanvasLayer" unique_id=1156277275]
+[node name="LevelTree" type="Control" parent="CanvasLayer" unique_id=386546859]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 theme = ExtResource("1_342rx")
 script = ExtResource("1_srpct")
-depth = 8
-sort_iterations = 20
-metadata/_custom_type_script = "uid://dmo0nmqg8l5ft"
+metadata/_custom_type_script = "uid://bvjs6fny7fopo"
 
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer" unique_id=362289636]
-offset_left = 20.0
-offset_top = 18.0
-offset_right = 64.0
-offset_bottom = 42.0
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer" unique_id=1492756438]
+offset_left = 35.0
+offset_top = 24.0
+offset_right = 79.0
+offset_bottom = 48.0
 button_pressed = true
 text = "sort"
 

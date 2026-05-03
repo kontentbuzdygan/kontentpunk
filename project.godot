@@ -24,6 +24,7 @@ buses/default_bus_layout="uid://cmus8icempn1a"
 PlayerState="*uid://dr87kffdskfvl"
 Config="*uid://dprhqfw61evv4"
 SceneManager="*uid://bumcewvocbcfs"
+LevelManager="*uid://cc3iyhxtaqj36"
 
 [debug]
 
