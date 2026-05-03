@@ -1,15 +1,12 @@
 [gd_scene format=3 uid="uid://dulxp0q4i2kyw"]
 
-[ext_resource type="PackedScene" uid="uid://dprhqfw61evv4" path="res://objects/config.tscn" id="1_05nxa"]
 [ext_resource type="Theme" uid="uid://d2l5ex4qfxue4" path="res://hud.tres" id="1_342rx"]
-[ext_resource type="Script" uid="uid://ceuf61lcls50x" path="res://scripts/level_select_button.gd" id="1_srpct"]
+[ext_resource type="Script" uid="uid://dmo0nmqg8l5ft" path="res://scripts/level_tree.gd" id="1_srpct"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srpct"]
 bg_color = Color(0.039215688, 0.1254902, 0.18431373, 1)
 
 [node name="LevelSelector" type="Node2D" unique_id=1579736988]
-
-[node name="Config" parent="." unique_id=336289230 instance=ExtResource("1_05nxa")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1834474558]
 
@@ -21,51 +18,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_srpct")
 
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=1641865215]
+[node name="LevelTree" type="Control" parent="CanvasLayer" unique_id=1156277275]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=322551734]
-layout_mode = 0
-offset_left = 274.0
-offset_top = 430.0
-offset_right = 335.0
-offset_bottom = 455.0
 theme = ExtResource("1_342rx")
 script = ExtResource("1_srpct")
+depth = 8
+sort_iterations = 20
+metadata/_custom_type_script = "uid://dmo0nmqg8l5ft"
 
-[node name="Button2" type="Button" parent="CanvasLayer/Control" unique_id=112584839]
-layout_mode = 0
-offset_left = 186.0
-offset_top = 370.0
-offset_right = 247.0
-offset_bottom = 395.0
-theme = ExtResource("1_342rx")
-script = ExtResource("1_srpct")
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer" unique_id=362289636]
+offset_left = 20.0
+offset_top = 18.0
+offset_right = 64.0
+offset_bottom = 42.0
+button_pressed = true
+text = "sort"
 
-[node name="Button3" type="Button" parent="CanvasLayer/Control" unique_id=1654992787]
-layout_mode = 0
-offset_left = 275.0
-offset_top = 370.0
-offset_right = 336.0
-offset_bottom = 395.0
-theme = ExtResource("1_342rx")
-script = ExtResource("1_srpct")
-
-[node name="Button4" type="Button" parent="CanvasLayer/Control" unique_id=763102928]
-layout_mode = 0
-offset_left = 354.0
-offset_top = 369.0
-offset_right = 415.0
-offset_bottom = 394.0
-theme = ExtResource("1_342rx")
-script = ExtResource("1_srpct")
-
-[connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control/Button" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Button2" to="CanvasLayer/Control/Button2" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Button3" to="CanvasLayer/Control/Button3" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Button4" to="CanvasLayer/Control/Button4" method="_on_pressed"]
+[connection signal="toggled" from="CanvasLayer/CheckButton" to="CanvasLayer/LevelTree" method="_on_check_button_toggled"]
