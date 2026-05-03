@@ -9,7 +9,7 @@ func _ready() -> void:
 func create_buttons(tree: Array[Array]) -> void:
 	for level in tree:
 		for node in level as Array[LevelManager.LevelNode]:
-			node.button = LevelButton.new(node.index)
+			node.button = LevelButton.new(node)
 			add_child(node.button)
 
 
@@ -20,6 +20,13 @@ func draw_graph(tree_: Array[Array]) -> void:
 		for node_index in range(level.size()):
 			var node := level[node_index] as LevelManager.LevelNode
 			var button := node.button
+
+			if node == LevelManager.current_player_node:
+				button.button_pressed = true
+			elif node not in LevelManager.current_player_node.children:
+				button.disabled = true
+
+			## TODO: tree breaks when fullscreen
 			var x := (resolution[0] * (node_index + 1)) / (level.size() + 1)
 			var y := resolution[1] - (node.level + 1) * y_offset
 			button.position.x = x

@@ -10,6 +10,9 @@ extends TextureRect
 
 func _ready() -> void:
 	for item in PlayerState.get_items():
+		## TODO: assigning an item to item holder will add the same item to the player state,
+		## so remove it now, and it will be added again
+		PlayerState.remove_item(item)
 		## TODO: left and right holders will sometimes swap items
 		match item.type:
 			Item.Type.HEAD when head.item == null:

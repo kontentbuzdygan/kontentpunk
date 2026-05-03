@@ -11,9 +11,11 @@ var tail: LevelNode
 var unsorted_tree: Array[Array] = []
 var tree: Array[Array] = []
 var index: int = 0
+var current_player_node: LevelNode
 
 func _ready() -> void:
 	init_new_tree()
+	current_player_node = root
 
 
 func init_new_tree() -> void:
