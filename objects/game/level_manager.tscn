@@ -4,5 +4,5 @@
 
 [node name="LevelManager" type="Node" unique_id=298791502]
 script = ExtResource("1_j3o8q")
-depth = 8
+always_create_node = false
 metadata/_custom_type_script = "uid://dxtrwgv2sra1n"

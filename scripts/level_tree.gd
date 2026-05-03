@@ -1,6 +1,8 @@
 class_name LevelTree
 extends Control
 
+@export var y_offset := 80
+
 func _ready() -> void:
 	create_buttons(LevelManager.tree)
 	draw_graph(LevelManager.tree)
@@ -15,7 +17,6 @@ func create_buttons(tree: Array[Array]) -> void:
 
 func draw_graph(tree_: Array[Array]) -> void:
 	var resolution := get_window().size
-	var y_offset := 40
 	for level in tree_:
 		for node_index in range(level.size()):
 			var node := level[node_index] as LevelManager.LevelNode

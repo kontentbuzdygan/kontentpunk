@@ -4,13 +4,13 @@ extends Node
 @export var branches := 3
 @export var sort_iterations := 8
 @export var weights: Array[float] = [1.0, 1.0, 1.0]
+@export var always_create_node := true
 
 var all_nodes: Array[LevelNode] = []
 var root: LevelNode
 var tail: LevelNode
 var unsorted_tree: Array[Array] = []
 var tree: Array[Array] = []
-var index: int = 0
 var current_player_node: LevelNode
 
 func _ready() -> void:
@@ -23,7 +23,7 @@ func init_new_tree() -> void:
 	tail = create_level_node(depth + 2, null) # null, because we don't know the parent yet
 
 	for i in range(branches):
-		root.create_new_path(depth, tail)
+		root.create_new_path()
 	split_tree()
 	print("before")
 	print(tree)
@@ -40,8 +40,7 @@ func get_possible_children_nodes(level: int) -> Array[LevelNode]:
 
 
 func create_level_node(level: int, parent: LevelNode) -> LevelNode:
-	var new_node := LevelNode.new(index, level, weights, self)
-	index += 1
+	var new_node := LevelNode.new(all_nodes.size(), level, self)
 
 	## Don't allow for repeating parents
 	if parent and parent not in new_node.parents:
@@ -127,24 +126,22 @@ class LevelNode:
 	var level: int
 	var children: Array[LevelNode] = []
 	var parents: Array[LevelNode] = []
-	var weights: Array[float]
 	var manager: LevelManager
 	var button: LevelButton
 
-	func _init(index_: int, level_: int, weights_: Array[float], manager_: LevelManager) -> void:
+	func _init(index_: int, level_: int, manager_: LevelManager) -> void:
 		index = index_
 		level = level_
-		weights = weights_
 		manager = manager_
 
 
-	func add_new_node(depth: int, tail: LevelNode) -> void:
+	func add_new_node() -> void:
 		var child: LevelNode = manager.create_level_node(level + 1, self)
 
 		## Don't allow for repeating children
 		if child not in children:
 			children.append(child)
-		child.create_new_path(depth, tail)
+		child.create_new_path()
 
 
 	func add_new_edge(node: LevelNode) -> void:
@@ -154,42 +151,36 @@ class LevelNode:
 			node.parents.append(self)
 
 
-	func create_new_path(depth: int, tail: LevelNode) -> void:
-		if level > depth:
-			add_new_edge(tail)
+	func create_new_path() -> void:
+		if level > manager.depth:
+			add_new_edge(manager.tail)
 			return
 		
 		## If we are on a node that already was used to make a path,
 		## add new node to create more variety
-		if children:
-			add_new_node(depth, tail)
+		if children and manager.always_create_node:
+			add_new_node()
 			return
 		
 		var possible_children: Array[LevelNode] = manager.get_possible_children_nodes(level + 1)
 
 		## If no children, then just create new node
 		if not possible_children.size():
-			add_new_node(depth, tail)
+			add_new_node()
 			return
 		
 		var rng := RandomNumberGenerator.new()
-		var choice: Choice = Choice.values()[rng.rand_weighted(weights)]
+		var choice: Choice = Choice.values()[rng.rand_weighted(manager.weights)]
 		match choice:
 			Choice.CREATE_NODE:
-				add_new_node(depth, tail)
+				add_new_node()
 			Choice.CREATE_NODE_AND_EDGE:
 				add_new_edge(possible_children.pick_random())
-				add_new_node(depth, tail)
+				add_new_node()
 			Choice.CREATE_EDGE:
 				var child: LevelNode = possible_children.pick_random()
 				add_new_edge(child)
-				child.create_new_path(depth, tail)
-
-
-	func _on_button_press() -> void:
-		if not SceneManager.level_tree:
-			SceneManager.level_tree = manager.tree.duplicate_deep()
-		SceneManager.goto_scene("res://levels/main.tscn")
+				child.create_new_path()
 
 
 	func _to_string() -> String:
