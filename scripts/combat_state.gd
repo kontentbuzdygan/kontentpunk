@@ -52,7 +52,7 @@ func stop() -> void:
 
 func add_actor(actor: Actor) -> void:
 	_turn_order.append(actor)
-	_turn_order.sort_custom(func(a: Actor) -> int: return a.turn_order)
+	_turn_order.sort_custom(func(a: Actor, b: Actor) -> int: return a.turn_order < b.turn_order)
 
 
 func next_turn() -> void:
@@ -63,5 +63,5 @@ func next_turn() -> void:
 			break
 
 	if _turn_order[_current_turn].is_alive:
-		# NOTE: Intentional await
+		@warning_ignore("redundant_await")
 		await _turn_order[_current_turn].begin_turn()
