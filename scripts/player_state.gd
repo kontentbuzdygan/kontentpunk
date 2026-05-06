@@ -6,9 +6,7 @@ extends Node
 @export var money: PlayerResource
 @export var default_move_ability: Ability
 
-var _items: Array[Item] = []
-
-signal items_changed(items: Array[Item])
+@onready var inventory: Inventory = $Inventory
 
 static var _instance: PlayerState
 
@@ -39,22 +37,6 @@ func get_resource(type: PlayerResource.Type) -> PlayerResource:
 
 	assert(false, "missing player resource type")
 	return null
-
-
-func get_items() -> Array[Item]:
-	return _items.duplicate()
-
-
-func add_item(item: Item) -> void:
-	print("equipped ", item)
-	_items.append(item)
-	items_changed.emit(_items)
-
-
-func remove_item(item: Item) -> void:
-	print("unequipped ", item)
-	_items.erase(item)
-	items_changed.emit(_items)
 
 
 func _on_action_ended(_action: CombatAction) -> void:

@@ -11,6 +11,7 @@ extends Actor
 
 @onready var loot_container: LootContainer = %LootContainer
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var inventory: Inventory = $Inventory
 
 
 func execute(action: CombatAction) -> void:

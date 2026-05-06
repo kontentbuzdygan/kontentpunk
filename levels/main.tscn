@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="4_l412s"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Resource" uid="uid://lyxq4ugysl43" path="res://data/abilities/default_player_move_ability.tres" id="6_xlu2f"]
+[ext_resource type="Script" uid="uid://b4ndgwgu7403p" path="res://scripts/inventory.gd" id="7_66hhv"]
 [ext_resource type="AudioStream" uid="uid://d36wwav7sxy74" path="res://sounds/music_001.ogg" id="7_m6gxc"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
 [ext_resource type="Script" uid="uid://b5hn6p1wy7fqb" path="res://scripts/money_display.gd" id="9_f1mgo"]
@@ -835,6 +836,10 @@ mana = SubResource("Resource_gusra")
 money = SubResource("Resource_4c2mk")
 default_move_ability = ExtResource("6_xlu2f")
 metadata/_custom_type_script = "uid://cn4ynus2a4xwg"
+
+[node name="Inventory" type="Node" parent="PlayerState" unique_id=463174915]
+script = ExtResource("7_66hhv")
+metadata/_custom_type_script = "uid://b4ndgwgu7403p"
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1527025478]
 stream = ExtResource("7_m6gxc")

@@ -26,7 +26,7 @@ func _ready() -> void:
 	entered_tile.connect(_on_entered_tile)
 
 	var player_state := PlayerState.get_instance()
-	player_state.items_changed.connect(_on_items_changed)
+	player_state.inventory.changed.connect(_on_items_changed)
 
 
 func _on_tile_clicked(tile: Vector2i) -> void:
@@ -72,7 +72,7 @@ func execute(action: CombatAction) -> void:
 	if action is CombatAction.HealSelf:
 		health.current += action.value
 		return
-	
+
 	if action is CombatAction.CorruptHeart:
 		var instance: StatusEffectAnimationPlayer = action.animation.instantiate()
 		if action.value > 0:

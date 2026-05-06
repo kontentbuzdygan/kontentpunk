@@ -38,7 +38,7 @@ func _on_item_removed(old_item: Item) -> void:
 		return
 
 	if type == Type.EQUIPMENT:
-		PlayerState.get_instance().remove_item(old_item)
+		PlayerState.get_instance().inventory.remove(old_item)
 
 
 func _on_item_changed(new_item: Item) -> void:
@@ -46,7 +46,7 @@ func _on_item_changed(new_item: Item) -> void:
 		return
 
 	if new_item and type == Type.EQUIPMENT:
-		PlayerState.get_instance().add_item(new_item)
+		PlayerState.get_instance().inventory.add(new_item)
 	elif not new_item and type == Type.TEMPORARY:
 		queue_free()
 		return
