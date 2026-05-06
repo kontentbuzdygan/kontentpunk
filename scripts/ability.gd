@@ -29,7 +29,11 @@ extends Resource
 
 ## Matches all tiles if empty
 @export var valid_tiles: TilePredicate
-@export var effects: Array[AbilityEffect] = []
+
+@export var damage_value: int
+@export var healing_value: int
+@export var target_status_effect: StatusEffect
+@export var move_to_target: bool
 
 
 func is_valid_tile(actor: Actor, target_tile: Vector2i) -> bool:
@@ -46,8 +50,18 @@ func perform(actor: Actor, target_tile: Vector2i) -> void:
 	if sound_effect:
 		actor.play_sound(sound_effect)
 
-	for effect in effects:
-		effect.queue(actor, target_tile)
+	var combat_state := CombatState.get_instance()
+
+	if damage_value > 0:
+		combat_state.queue_action(CombatAction.DealDamage.new(actor, target_tile, damage_value))
+	if target_status_effect and randf() <= target_status_effect.apply_chance:
+		combat_state.queue_action(
+			CombatAction.ApplyStatusEffect.new(actor, target_status_effect, target_tile)
+		)
+	if healing_value > 0:
+		combat_state.queue_action(CombatAction.HealSelf.new(actor, healing_value))
+	if move_to_target:
+		combat_state.queue_action(CombatAction.Move.new(actor, target_tile))
 
 
 func _get_custom_preview_texture() -> Texture2D:
