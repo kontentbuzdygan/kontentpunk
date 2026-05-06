@@ -5,11 +5,9 @@ extends Actor
 @export var death_sound: AudioStream
 @export var health: int = 8
 @export var lootbag_scene: PackedScene
-@export var drops: Array[Item]
 @export var money_drop: int = 10
 @export var money_drop_label_scene: PackedScene
 
-@onready var loot_container: LootContainer = %LootContainer
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var inventory: Inventory = $Inventory
 
@@ -57,7 +55,7 @@ func take_damage(value: int) -> void:
 
 
 func drop_loot() -> void:
-	if drops.size() == 0:
+	if inventory.items.is_empty():
 		return
 
 	var enemy_tile := get_current_tile()
@@ -66,10 +64,9 @@ func drop_loot() -> void:
 		lootbag = lootbag_scene.instantiate()
 		grid.add_child_on_tile(lootbag, enemy_tile)
 
-	var rng := RandomNumberGenerator.new()
-	var drop_chances: Array[float] = []
-	drop_chances.assign(drops.map(func(item: Item) -> float: return item.drop_chance))
-	lootbag.loot.append(drops[rng.rand_weighted(drop_chances)])
+	var loot := inventory.get_random_loot()
+	print(self, " dropped ", loot)
+	lootbag.loot.append_array(loot)
 
 
 func drop_money() -> void:

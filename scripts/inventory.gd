@@ -43,3 +43,11 @@ func get_active_abilities() -> Array[Ability]:
 			if not abilities.has(ability):
 				abilities.append(ability)
 	return abilities
+
+
+func get_random_loot() -> Array[Item]:
+	var loot: Array[Item]
+	for item in _items:
+		if randf() < item.drop_chance:
+			loot.append(item)
+	return loot

@@ -13,5 +13,5 @@ name = "Cyber Heart"
 icon = ExtResource("1_p17no")
 type = 1
 abilities = Array[ExtResource("1_bx071")]([ExtResource("2_gth4e")])
-money_cost = 100
+money_cost = 20
 penalties = Array[ExtResource("4_gth4e")]([ExtResource("5_do11v")])
