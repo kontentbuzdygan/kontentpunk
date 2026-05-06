@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_r6jme"]
 [ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="1_u2xd1"]
 [ext_resource type="Resource" uid="uid://bhttik14ccisc" path="res://data/abilities/finger_gun_ability.tres" id="2_1nhs3"]
-[ext_resource type="Script" uid="uid://disdpfm5m1k6t" path="res://scripts/item.gd" id="2_h4c41"]
+[ext_resource type="Script" uid="uid://bbgc4dvto7fk6" path="res://scripts/item.gd" id="2_h4c41"]
+[ext_resource type="Script" uid="uid://bxmdnbfwtcj5o" path="res://scripts/status_effect.gd" id="4_1nhs3"]
 
 [resource]
 script = ExtResource("2_h4c41")
