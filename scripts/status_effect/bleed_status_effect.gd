@@ -1,14 +1,16 @@
 class_name BleedStatusEffect
 extends StatusEffect
 
-@export var base_value: int = 1
+@export var damage: int = 1
+
 
 func _ready() -> void:
 	self.is_active = true
 
 
-func queue(actor: Actor) -> void:
-	CombatState.get_instance().queue_action(CombatAction.Bleed.new(actor, base_value, animation))
+func apply(actor: Actor) -> void:
+	actor.emit_status_effect_particles(animation)
+	actor.take_damage(damage)
 
 
 func remove(_actor: Actor) -> void:

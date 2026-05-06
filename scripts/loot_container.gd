@@ -15,7 +15,6 @@ var current_lootbag: Lootbag:
 			return
 
 		for item in current_lootbag.loot:
-			print("Creating item holder")
 			var instance: ItemHolder = item_holder_scene.instantiate()
 			instance.item = item
 			item_slot_container.add_child(instance)
@@ -35,7 +34,7 @@ func clear_ui() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not CombatState.get_instance().is_in_progress() and current_lootbag:
+	if CombatState.is_waiting_for_player_input and current_lootbag:
 		self.visible = true
 	else:
 		self.visible = false

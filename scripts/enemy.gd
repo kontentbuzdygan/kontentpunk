@@ -1,44 +1,30 @@
 class_name Enemy
 extends Actor
 
-@export var attack_sound: AudioStream
 @export var death_sound: AudioStream
-@export var health: int = 8
+@export var max_health: int = 8
 @export var lootbag_scene: PackedScene
 @export var money_drop: int = 10
 @export var money_drop_label_scene: PackedScene
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var inventory: Inventory = $Inventory
+@onready var health: int = max_health
 
 
-func execute(action: CombatAction) -> void:
-	if action is CombatAction.DealDamage:
-		play_sound(attack_sound)
-
-	await super.execute(action)
-
-
-func begin_turn() -> void:
+func perform_turn() -> void:
 	_process_status_effects()
 
 	var player_tile := grid.find_tile_with(Player)
-	var path_toward_player := grid.pathfinder.find_path(
-		get_current_tile(), player_tile, grid, 3
-	)
+	var path_toward_player := grid.pathfinder.find_path(get_current_tile(), player_tile, grid, 3)
 
 	for tile in path_toward_player:
-		move_to(tile)
-
-	var combat_state := CombatState.get_instance()
+		await move_to(tile)
 
 	# TODO: Replace with actual ability checks & effects
 	if Utils.manhattan_length(player_tile - path_toward_player.back()) <= 1:
-		combat_state.queue_action(
-			CombatAction.DealDamage.new(self, player_tile, randi() % 2 + 1)
-		)
-
-	combat_state.queue_action(CombatAction.EndTurn.new(self))
+		var player: Player = grid.get_node_on_tile(player_tile, Player)
+		await player.take_damage(randi() % 2 + 1)
 
 
 func take_damage(value: int) -> void:
@@ -52,6 +38,10 @@ func take_damage(value: int) -> void:
 		await drop_money()
 		is_alive = false
 		remove_from_group(&"occupies_tile")
+
+
+func heal(value: int) -> void:
+	health = min(health + value, max_health)
 
 
 func drop_loot() -> void:

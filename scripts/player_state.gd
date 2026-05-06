@@ -22,8 +22,7 @@ func _ready() -> void:
 
 	_instance = self
 
-	var combat_state := CombatState.get_instance()
-	combat_state.action_ended.connect(_on_action_ended)
+	health.current_changed.connect(_on_health_changed)
 
 
 func get_resource(type: PlayerResource.Type) -> PlayerResource:
@@ -39,9 +38,9 @@ func get_resource(type: PlayerResource.Type) -> PlayerResource:
 	return null
 
 
-func _on_action_ended(_action: CombatAction) -> void:
-	if health.current <= 0:
-		CombatState.get_instance().stop()
+func _on_health_changed(value: int) -> void:
+	if value <= 0:
+		CombatState.stop()
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://objects/ui/game_over.tscn")
 

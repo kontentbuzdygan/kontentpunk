@@ -12,5 +12,5 @@ name = "Finger Gun"
 icon = ExtResource("1_u2xd1")
 type = 2
 abilities = Array[ExtResource("1_r6jme")]([ExtResource("2_1nhs3")])
-money_cost = 20
+money_cost = 10
 drop_chance = 0.5

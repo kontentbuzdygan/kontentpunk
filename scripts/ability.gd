@@ -50,18 +50,17 @@ func perform(actor: Actor, target_tile: Vector2i) -> void:
 	if sound_effect:
 		actor.play_sound(sound_effect)
 
-	var combat_state := CombatState.get_instance()
+	var target_actor: Actor = actor.grid.get_node_on_tile(target_tile, Actor)
 
-	if damage_value > 0:
-		combat_state.queue_action(CombatAction.DealDamage.new(actor, target_tile, damage_value))
-	if target_status_effect and randf() <= target_status_effect.apply_chance:
-		combat_state.queue_action(
-			CombatAction.ApplyStatusEffect.new(actor, target_status_effect, target_tile)
-		)
+	if target_actor and damage_value > 0:
+		await target_actor.take_damage(damage_value)
+	if target_actor and target_status_effect and randf() <= target_status_effect.apply_chance:
+		target_actor.apply_status_effect(target_status_effect)
+
 	if healing_value > 0:
-		combat_state.queue_action(CombatAction.HealSelf.new(actor, healing_value))
+		await actor.heal(healing_value)
 	if move_to_target:
-		combat_state.queue_action(CombatAction.Move.new(actor, target_tile))
+		await actor.move_to(target_tile)
 
 
 func _get_custom_preview_texture() -> Texture2D:

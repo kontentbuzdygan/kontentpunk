@@ -12,6 +12,8 @@ const MANA_COST_NOT_ALLOWED: int = -1
 
 var equipement_slots: Array[ItemHolder]
 
+signal _turn_ended
+
 
 func _ready() -> void:
 	super._ready()
@@ -38,8 +40,9 @@ func _on_tile_clicked(tile: Vector2i) -> void:
 		if mana.current >= mana_cost:
 			grid.hide_mana_cost()
 			mana.current -= mana_cost
-			ability.perform(self, tile)
-			clear_selected_ability()
+			CombatState.is_waiting_for_player_input = false
+			await ability.perform(self, tile)
+			CombatState.is_waiting_for_player_input = true
 
 
 func _on_tile_hovered(tile: Vector2i) -> void:
@@ -50,8 +53,11 @@ func _on_tile_hovered(tile: Vector2i) -> void:
 
 
 func _on_button_end_turn_pressed() -> void:
-	clear_selected_ability()
-	CombatState.get_instance().queue_action(CombatAction.EndTurn.new(self))
+	CombatState.is_waiting_for_player_input = false
+	if CombatState.is_running:
+		_turn_ended.emit()
+	else:
+		CombatState.call_deferred("run")
 
 
 func _on_left_tile(_tile: Vector2i) -> void:
@@ -64,28 +70,7 @@ func _on_entered_tile(tile: Vector2i) -> void:
 		break
 
 
-func execute(action: CombatAction) -> void:
-	if action is CombatAction.EndTurn:
-		await get_tree().create_timer(end_turn_delay_seconds).timeout
-		return
-
-	if action is CombatAction.HealSelf:
-		health.current += action.value
-		return
-
-	if action is CombatAction.CorruptHeart:
-		var instance: StatusEffectAnimationPlayer = action.animation.instantiate()
-		if action.value > 0:
-			await _play_status_animation(instance, &"apply")
-		else:
-			await _play_status_animation(instance, &"remove")
-		health.maximum -= action.value
-		return
-
-	await super.execute(action)
-
-
-func begin_turn() -> void:
+func perform_turn() -> void:
 	var player_state := PlayerState.get_instance()
 	player_state.begin_turn()
 
@@ -95,10 +80,18 @@ func begin_turn() -> void:
 	_process_status_effects()
 	status_bar.update()
 
+	CombatState.is_waiting_for_player_input = true
+
+	await _turn_ended
+
 
 func take_damage(value: int) -> void:
 	health.current -= value
 	await super.take_damage(value)
+
+
+func heal(value: int) -> void:
+	health.current += value
 
 
 func get_selected_ability() -> Ability:
@@ -119,10 +112,3 @@ func clear_selected_ability() -> void:
 
 func _on_items_changed(_items: Array[Item]) -> void:
 	status_bar.update()
-
-
-func _play_status_animation(instance: StatusEffectAnimationPlayer, animation_name: StringName) -> void:
-	add_child(instance)
-	await instance.play_animation(animation_name)
-	remove_child(instance)
-	instance.queue_free()
