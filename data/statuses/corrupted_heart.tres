@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CorruptedHeartStatusEffect" format=3 uid="uid://l5g5cl7rsxsj"]
+
+[ext_resource type="Texture2D" uid="uid://ceafmg0l222e2" path="res://textures/corrupted-heart.png" id="1_aye23"]
+[ext_resource type="PackedScene" uid="uid://buuo5tcceevam" path="res://objects/game/corrupted_heart_animation.tscn" id="1_fl7ws"]
+[ext_resource type="Script" uid="uid://d0nhc7ritd54a" path="res://scripts/status_effect/corrupted_heart_status_effect.gd" id="1_rci6c"]
+
+[resource]
+script = ExtResource("1_rci6c")
+name = &"Corrupted Heart"
+is_active = false
+animation = ExtResource("1_fl7ws")
+icon = ExtResource("1_aye23")

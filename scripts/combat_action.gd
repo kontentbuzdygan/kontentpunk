@@ -74,14 +74,27 @@ class Bleed:
 	extends CombatAction
 
 	var value: int
-	var particles: PackedScene
-	var sound_effect: AudioStream
+	var animation: PackedScene
 
-	func _init(actor_: Actor, value_: int, particles_: PackedScene, sound_effect_: AudioStream) -> void:
+	func _init(actor_: Actor, value_: int, animation_: PackedScene) -> void:
 		super._init(actor_)
 		value = value_
-		particles = particles_
-		sound_effect = sound_effect_
+		animation = animation_
 
 	func _to_string() -> String:
 		return "<bleed dealt %d damage>" % value
+
+
+class CorruptHeart:
+	extends CombatAction
+
+	var value: int
+	var animation: PackedScene
+
+	func _init(actor_: Actor, value_: int, animation_: PackedScene) -> void:
+		super._init(actor_)
+		value = value_
+		animation = animation_
+	
+	func _to_string() -> String:
+		return "<corrupted %d heart(s)>" % value

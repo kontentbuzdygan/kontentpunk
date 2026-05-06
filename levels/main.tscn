@@ -30,7 +30,7 @@
 [ext_resource type="Resource" uid="uid://cen8yvfeb4kwc" path="res://data/abilities/spring_legs_ability.tres" id="16_wk3pi"]
 [ext_resource type="Script" uid="uid://h3ya5pngmnko" path="res://scripts/abilities_list.gd" id="19_en2ks"]
 [ext_resource type="Texture2D" uid="uid://dte8dm6bid1e5" path="res://textures/tileset.png" id="20_wk3pi"]
-[ext_resource type="Script" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
+[ext_resource type="Script" uid="uid://i47h4lyrxmuw" path="res://scripts/button_end_turn.gd" id="21_4c2mk"]
 [ext_resource type="Script" uid="uid://dcwdi8d5fb7y8" path="res://scripts/drop_area.gd" id="21_oe60c"]
 [ext_resource type="PackedScene" uid="uid://b30mpyeohpbge" path="res://objects/ui/cost_display.tscn" id="22_8a5tp"]
 [ext_resource type="SpriteFrames" uid="uid://bf4bjkijj2c3m" path="res://textures/highlight.tres" id="22_i3naf"]
@@ -898,7 +898,6 @@ size_flags_vertical = 0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay/Coin" unique_id=861951769]
 sprite_frames = ExtResource("3_c7dyn")
 autoplay = "default"
-frame_progress = 0.72569394
 centered = false
 
 [node name="Label" type="Label" parent="Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/MoneyDisplay" unique_id=2052029344]
@@ -1107,7 +1106,7 @@ position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
 attack_sound = ExtResource("31_duofn")
 death_sound = ExtResource("41_raj2e")
-health = 1
+health = 2
 lootbag_scene = ExtResource("42_2hoto")
 drops = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj"), ExtResource("15_xombn")])
 money_drop_label_scene = ExtResource("49_r708q")
