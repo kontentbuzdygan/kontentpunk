@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://d2fxnw70e2fsv" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
 [ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="4_l412s"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
-[ext_resource type="Resource" uid="uid://lyxq4ugysl43" path="res://data/abilities/default_player_move_ability.tres" id="6_xlu2f"]
+[ext_resource type="Resource" uid="uid://lyxq4ugysl43" path="res://data/abilities/default_move_ability.tres" id="6_xlu2f"]
 [ext_resource type="Script" uid="uid://b4ndgwgu7403p" path="res://scripts/inventory.gd" id="7_66hhv"]
 [ext_resource type="AudioStream" uid="uid://d36wwav7sxy74" path="res://sounds/music_001.ogg" id="7_m6gxc"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
@@ -45,6 +45,8 @@
 [ext_resource type="AudioStream" uid="uid://cjmg7ad1bexix" path="res://sounds/robot_female_death.tres" id="41_raj2e"]
 [ext_resource type="PackedScene" uid="uid://baghb6cp68bp5" path="res://objects/game/lootbag.tscn" id="42_2hoto"]
 [ext_resource type="Texture2D" uid="uid://d4cg35r6s2sjo" path="res://textures/robot-spritesheet.png" id="42_oe60c"]
+[ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="43_m7o5q"]
+[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="44_66hhv"]
 [ext_resource type="AudioStream" uid="uid://blmxxh1jbfo7w" path="res://sounds/electric_damage.tres" id="44_jjbqq"]
 [ext_resource type="Texture2D" uid="uid://cj18507niyduo" path="res://textures/robot2-spritesheet.png" id="45_eoee5"]
 [ext_resource type="PackedScene" uid="uid://bkv4l6mhxwm58" path="res://objects/ui/healthbar.tscn" id="48_eoee5"]
@@ -377,6 +379,19 @@ _data = {
 &"run_left": SubResource("Animation_2m3c7"),
 &"run_right": SubResource("Animation_g5y6o")
 }
+
+[sub_resource type="Resource" id="Resource_evvoo"]
+script = ExtResource("44_66hhv")
+target_tile = 1
+
+[sub_resource type="Resource" id="Resource_vg6jq"]
+script = ExtResource("43_m7o5q")
+name = "Move"
+sound_effect = ExtResource("23_i3naf")
+mana_cost_per_tile = 1
+valid_tiles = SubResource("Resource_evvoo")
+move_to_target = true
+metadata/_custom_type_script = "uid://b1dxrqdiivtev"
 
 [sub_resource type="Animation" id="Animation_oe60c"]
 length = 0.001
@@ -1104,8 +1119,10 @@ script = ExtResource("39_g5y6o")
 position = Vector2(-112, -144)
 script = ExtResource("8_jw1n3")
 death_sound = ExtResource("41_raj2e")
+max_mana = 3
 lootbag_scene = ExtResource("42_2hoto")
 money_drop_label_scene = ExtResource("49_r708q")
+default_move_ability = SubResource("Resource_vg6jq")
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("41_gusra")
 hitmark_scene = ExtResource("48_map8x")
@@ -1136,15 +1153,17 @@ script = ExtResource("39_g5y6o")
 
 [node name="Inventory" type="Node" parent="Grid/Enemy_1" unique_id=518914766]
 script = ExtResource("7_66hhv")
-initial_items = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj"), ExtResource("15_xombn")])
+initial_items = Array[ExtResource("29_gusra")]([ExtResource("29_gutiw"), ExtResource("16_vydlj")])
 metadata/_custom_type_script = "uid://b4ndgwgu7403p"
 
 [node name="Enemy_2" type="Node2D" parent="Grid" unique_id=1444192590 groups=["occupies_tile"]]
 position = Vector2(-80, -144)
 script = ExtResource("8_jw1n3")
 death_sound = ExtResource("50_m7o5q")
+max_mana = 3
 lootbag_scene = ExtResource("42_2hoto")
 money_drop_label_scene = ExtResource("49_r708q")
+default_move_ability = ExtResource("6_xlu2f")
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("44_jjbqq")
 hitmark_scene = ExtResource("48_map8x")

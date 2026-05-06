@@ -41,12 +41,23 @@ func is_valid_tile(actor: Actor, target_tile: Vector2i) -> bool:
 	return not valid_tiles or valid_tiles.matches(from, target_tile, actor.grid)
 
 
+func get_closest_valid_tile(actor: Actor, target_tile: Vector2i, max_mana_cost: int) -> Vector2i:
+	if not valid_tiles:
+		return target_tile
+
+	var from := actor.get_current_tile()
+	var max_dist := (max_mana_cost - base_mana_cost) / mana_cost_per_tile
+	return valid_tiles.get_closest_match(from, target_tile, actor.grid, max_dist)
+
+
 func get_mana_cost(actor: Actor, target_tile: Vector2i) -> int:
 	var delta := target_tile - actor.get_current_tile()
 	return base_mana_cost + Utils.manhattan_length(delta) * mana_cost_per_tile
 
 
 func perform(actor: Actor, target_tile: Vector2i) -> void:
+	print(actor, " uses ", name, " on ", target_tile)
+
 	if sound_effect:
 		actor.play_sound(sound_effect)
 

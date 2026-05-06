@@ -3,28 +3,78 @@ extends Actor
 
 @export var death_sound: AudioStream
 @export var max_health: int = 8
+@export var max_mana: int = 5
 @export var lootbag_scene: PackedScene
 @export var money_drop: int = 10
 @export var money_drop_label_scene: PackedScene
+@export var default_move_ability: Ability
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var inventory: Inventory = $Inventory
 @onready var health: int = max_health
 
+var _mana: int
+
 
 func perform_turn() -> void:
 	_process_status_effects()
 
+	var abilities := inventory.get_active_abilities()
 	var player_tile := grid.find_tile_with(Player)
-	var path_toward_player := grid.pathfinder.find_path(get_current_tile(), player_tile, grid, 3)
 
-	for tile in path_toward_player:
-		await move_to(tile)
+	_mana = max_mana
 
-	# TODO: Replace with actual ability checks & effects
-	if Utils.manhattan_length(player_tile - path_toward_player.back()) <= 1:
-		var player: Player = grid.get_node_on_tile(player_tile, Player)
-		await player.take_damage(randi() % 2 + 1)
+	while await perform_best_ability(abilities, player_tile):
+		pass
+
+
+func perform_best_ability(abilities: Array[Ability], player_tile: Vector2i) -> bool:
+	for ability in abilities:
+		if ability.damage_value > 0 and ability.is_valid_tile(self, player_tile):
+			if await try_perform_ability(ability, player_tile):
+				return true
+
+	if health < max_health:
+		for ability in abilities:
+			if ability.healing_value > 0:
+				if await try_perform_ability(ability, get_current_tile()):
+					return true
+
+	return await try_move_toward(abilities, player_tile)
+
+
+func try_perform_ability(ability: Ability, target_tile: Vector2i) -> bool:
+	var mana_cost := ability.get_mana_cost(self, target_tile)
+	if mana_cost <= _mana:
+		_mana -= mana_cost
+		await ability.perform(self, target_tile)
+		return true
+	return false
+
+
+func try_move_toward(_abilities: Array[Ability], target_tile: Vector2i) -> bool:
+	var starting_tile := get_current_tile()
+
+	if Utils.manhattan_length(target_tile - starting_tile) <= 1:
+		return false
+
+	var path := grid.pathfinder.find_path(starting_tile, target_tile, grid)
+
+	if path.is_empty():
+		return false
+
+	# TOOD: Use custom movement abilities
+
+	for tile in path:
+		var constrained_tile := default_move_ability.get_closest_valid_tile(self, tile, _mana)
+		if constrained_tile != tile:
+			print(self, " wants to move to ", tile, " but can only reach ", constrained_tile)
+
+		if default_move_ability.is_valid_tile(self, constrained_tile):
+			if not await try_perform_ability(default_move_ability, constrained_tile):
+				return false
+
+	return true
 
 
 func take_damage(value: int) -> void:
