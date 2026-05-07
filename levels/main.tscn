@@ -10,8 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bkfnk7qh7x1qu" path="res://textures/highlighted_tile.png" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://dd1fxp22x7nbq" path="res://scripts/grid.gd" id="3_m1504"]
 [ext_resource type="SpriteFrames" uid="uid://c6jsi8fbkxte" path="res://textures/circuit.tres" id="4_6yxbg"]
-[ext_resource type="Script" uid="uid://d2fxnw70e2fsv" path="res://scripts/limited_player_resource.gd" id="4_en2ks"]
-[ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/player_resource.gd" id="4_l412s"]
+[ext_resource type="Script" uid="uid://d2fxnw70e2fsv" path="res://scripts/actor_resource_limited.gd" id="4_en2ks"]
+[ext_resource type="Script" uid="uid://dywwjhmsu8rif" path="res://scripts/actor_resource.gd" id="4_l412s"]
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Resource" uid="uid://lyxq4ugysl43" path="res://data/abilities/default_move_ability.tres" id="6_xlu2f"]
 [ext_resource type="Script" uid="uid://b4ndgwgu7403p" path="res://scripts/inventory.gd" id="7_66hhv"]
@@ -378,6 +378,14 @@ _data = {
 &"run_right": SubResource("Animation_g5y6o")
 }
 
+[sub_resource type="Resource" id="Resource_g5y6o"]
+script = ExtResource("4_en2ks")
+metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
+
+[sub_resource type="Resource" id="Resource_raj2e"]
+script = ExtResource("4_en2ks")
+metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
+
 [sub_resource type="Animation" id="Animation_oe60c"]
 length = 0.001
 tracks/0/type = "value"
@@ -596,6 +604,14 @@ states/run/node = SubResource("AnimationNodeBlendSpace2D_ab3qh")
 states/run/position = Vector2(570, 22.314194)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_map8x"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_r708q"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_66hhv"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_eoee5"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_gutiw")]
 graph_offset = Vector2(0, -77.70393)
+
+[sub_resource type="Resource" id="Resource_m7o5q"]
+script = ExtResource("4_en2ks")
+metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
+
+[sub_resource type="Resource" id="Resource_66hhv"]
+script = ExtResource("4_en2ks")
+metadata/_custom_type_script = "uid://d2fxnw70e2fsv"
 
 [sub_resource type="Animation" id="Animation_tbigj"]
 length = 0.001
@@ -1104,6 +1120,8 @@ script = ExtResource("39_g5y6o")
 position = Vector2(-48, 16)
 script = ExtResource("8_jw1n3")
 death_sound = ExtResource("41_raj2e")
+health = SubResource("Resource_g5y6o")
+mana = SubResource("Resource_raj2e")
 lootbag_scene = ExtResource("42_2hoto")
 money_drop_label_scene = ExtResource("49_r708q")
 default_move_ability = ExtResource("6_xlu2f")
@@ -1144,6 +1162,8 @@ metadata/_custom_type_script = "uid://b4ndgwgu7403p"
 position = Vector2(-16, -144)
 script = ExtResource("8_jw1n3")
 death_sound = ExtResource("50_m7o5q")
+health = SubResource("Resource_m7o5q")
+mana = SubResource("Resource_66hhv")
 lootbag_scene = ExtResource("42_2hoto")
 money_drop_label_scene = ExtResource("49_r708q")
 default_move_ability = ExtResource("6_xlu2f")

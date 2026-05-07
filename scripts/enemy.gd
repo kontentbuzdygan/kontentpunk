@@ -2,8 +2,8 @@ class_name Enemy
 extends Actor
 
 @export var death_sound: AudioStream
-@export var max_health: int = 8
-@export var max_mana: int = 5
+@export var health: ActorResourceLimited
+@export var mana: ActorResourceLimited
 @export var lootbag_scene: PackedScene
 @export var money_drop: int = 10
 @export var money_drop_label_scene: PackedScene
@@ -11,9 +11,6 @@ extends Actor
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var inventory: Inventory = $Inventory
-@onready var health: int = max_health
-
-var _mana: int
 
 
 func perform_turn() -> void:
@@ -22,7 +19,7 @@ func perform_turn() -> void:
 	var abilities := inventory.get_active_abilities()
 	var player_tile := grid.find_tile_with(Player)
 
-	_mana = max_mana
+	mana.refill()
 
 	while await perform_best_ability(abilities, player_tile):
 		pass
@@ -34,7 +31,7 @@ func perform_best_ability(abilities: Array[Ability], player_tile: Vector2i) -> b
 			if await try_perform_ability(ability, player_tile):
 				return true
 
-	if health < max_health:
+	if health.current < health.maximum:
 		for ability in abilities:
 			if ability.healing_value > 0:
 				if await try_perform_ability(ability, get_current_tile()):
@@ -45,8 +42,8 @@ func perform_best_ability(abilities: Array[Ability], player_tile: Vector2i) -> b
 
 func try_perform_ability(ability: Ability, target_tile: Vector2i) -> bool:
 	var mana_cost := ability.get_mana_cost(self, target_tile)
-	if mana_cost <= _mana:
-		_mana -= mana_cost
+	if mana_cost <= mana.current:
+		mana.current -= mana_cost
 		await ability.perform(self, target_tile)
 		return true
 	return false
@@ -70,7 +67,7 @@ func try_move_toward(_abilities: Array[Ability], target_tile: Vector2i) -> bool:
 	var moved := false
 
 	for tile in path:
-		var constrained_tile := default_move_ability.get_closest_valid_tile(self, tile, _mana)
+		var constrained_tile := default_move_ability.get_closest_valid_tile(self, tile, mana.current)
 		if constrained_tile != tile:
 			print(name, " wants to move to ", tile, " but can only reach ", constrained_tile)
 
@@ -85,10 +82,10 @@ func try_move_toward(_abilities: Array[Ability], target_tile: Vector2i) -> bool:
 
 
 func take_damage(value: int) -> void:
-	health = max(health - value, 0)
+	health.current -= value
 	await super.take_damage(value)
 
-	if health <= 0:
+	if health.current <= 0:
 		await get_tree().create_timer(0.5).timeout
 		play_sound(death_sound)
 		drop_loot()
@@ -98,7 +95,7 @@ func take_damage(value: int) -> void:
 
 
 func heal(value: int) -> void:
-	health = min(health + value, max_health)
+	health.current += value
 
 
 func drop_loot() -> void:

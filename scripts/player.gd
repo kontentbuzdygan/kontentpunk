@@ -7,8 +7,8 @@ const MANA_COST_NOT_ALLOWED: int = -1
 @export var abilities_button_group: ButtonGroup
 @export var loot_container: LootContainer
 
-@onready var health: LimitedPlayerResource = PlayerState.get_instance().health
-@onready var mana: PlayerResource = PlayerState.get_instance().mana
+@onready var health: ActorResourceLimited = PlayerState.get_instance().health
+@onready var mana: ActorResource = PlayerState.get_instance().mana
 
 var equipement_slots: Array[ItemHolder]
 

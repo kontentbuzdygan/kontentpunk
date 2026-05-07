@@ -1,9 +1,9 @@
 class_name PlayerState
 extends Node
 
-@export var health: PlayerResource
-@export var mana: PlayerResource
-@export var money: PlayerResource
+@export var health: ActorResource
+@export var mana: ActorResource
+@export var money: ActorResource
 @export var default_move_ability: Ability
 
 @onready var inventory: Inventory = $Inventory
@@ -25,13 +25,13 @@ func _ready() -> void:
 	health.current_changed.connect(_on_health_changed)
 
 
-func get_resource(type: PlayerResource.Type) -> PlayerResource:
+func get_resource(type: ActorResource.Type) -> ActorResource:
 	match type:
-		PlayerResource.Type.HEALTH:
+		ActorResource.Type.HEALTH:
 			return health
-		PlayerResource.Type.MANA:
+		ActorResource.Type.MANA:
 			return mana
-		PlayerResource.Type.MONEY:
+		ActorResource.Type.MONEY:
 			return money
 
 	assert(false, "missing player resource type")

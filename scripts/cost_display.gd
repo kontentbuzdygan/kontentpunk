@@ -1,7 +1,7 @@
 @tool
 extends HBoxContainer
 
-@export var resource_type: PlayerResource.Type
+@export var resource_type: ActorResource.Type
 @export var cost: int = 1:
 	get:
 		return cost
@@ -20,7 +20,7 @@ extends HBoxContainer
 		if is_node_ready():
 			$Label.theme_type_variation = label_type_variation
 
-var _resource: PlayerResource
+var _resource: ActorResource
 
 
 func _ready() -> void:

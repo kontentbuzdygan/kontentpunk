@@ -4,9 +4,10 @@ extends TextureProgressBar
 @onready var parent: Enemy = get_parent()
 
 func _ready() -> void:
-	parent.health_changed.connect(update)
-	update()
+	if parent.health:
+		parent.health.current_changed.connect(update)
+		update(parent.health.current)
 
 
-func update() -> void:
-	self.value = parent.health * 100 / parent.max_health
+func update(health: int) -> void:
+	self.value = health * 100 / parent.health.maximum

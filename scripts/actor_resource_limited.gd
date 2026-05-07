@@ -1,5 +1,5 @@
-class_name LimitedPlayerResource
-extends PlayerResource
+class_name ActorResourceLimited
+extends ActorResource
 
 @export var maximum: int = 5:
 	get:

@@ -1,4 +1,4 @@
-class_name PlayerResource
+class_name ActorResource
 extends Resource
 
 enum Type { HEALTH, MANA, MONEY }
