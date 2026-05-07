@@ -59,6 +59,7 @@ func take_damage(value: int) -> void:
 	health_changed.emit()
 
 	await animation_tree.animation_finished
+	await get_tree().create_timer(0.5).timeout
 
 
 func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
