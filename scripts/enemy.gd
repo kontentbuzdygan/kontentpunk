@@ -52,6 +52,8 @@ func try_perform_ability(ability: Ability, target_tile: Vector2i) -> bool:
 	return false
 
 
+## Returns a boolean indicating whether any move occured and whether the AI loop
+## should run again to check for new possibilities
 func try_move_toward(_abilities: Array[Ability], target_tile: Vector2i) -> bool:
 	var starting_tile := get_current_tile()
 
@@ -63,18 +65,23 @@ func try_move_toward(_abilities: Array[Ability], target_tile: Vector2i) -> bool:
 	if path.is_empty():
 		return false
 
-	# TOOD: Use custom movement abilities
+	# TODO: Use custom movement abilities
+
+	var moved := false
 
 	for tile in path:
 		var constrained_tile := default_move_ability.get_closest_valid_tile(self, tile, _mana)
 		if constrained_tile != tile:
-			print(self, " wants to move to ", tile, " but can only reach ", constrained_tile)
+			print(name, " wants to move to ", tile, " but can only reach ", constrained_tile)
 
 		if default_move_ability.is_valid_tile(self, constrained_tile):
-			if not await try_perform_ability(default_move_ability, constrained_tile):
-				return false
+			if await try_perform_ability(default_move_ability, constrained_tile):
+				moved = true
+				continue
 
-	return true
+		break
+
+	return moved
 
 
 func take_damage(value: int) -> void:
@@ -105,7 +112,7 @@ func drop_loot() -> void:
 		grid.add_child_on_tile(lootbag, enemy_tile)
 
 	var loot := inventory.get_random_loot()
-	print(self, " dropped ", loot)
+	print(name, " dropped ", loot)
 	lootbag.loot.append_array(loot)
 
 

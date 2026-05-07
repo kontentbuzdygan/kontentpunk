@@ -52,7 +52,7 @@ func perform_turn() -> void:
 
 
 func take_damage(value: int) -> void:
-	print("%s took %d damage" % [self, value])
+	print(name, " took ", value, " damage")
 	play_sound(hurt_sound, 0.1)
 	_show_hitmark(value)
 	animation_tree["parameters/playback"].travel(&"hurt")

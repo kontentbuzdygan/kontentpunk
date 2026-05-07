@@ -56,12 +56,12 @@ func get_mana_cost(actor: Actor, target_tile: Vector2i) -> int:
 
 
 func perform(actor: Actor, target_tile: Vector2i) -> void:
-	print(actor, " uses ", name, " on ", target_tile)
+	var target_actor: Actor = actor.grid.get_node_on_tile(target_tile, Actor)
+
+	print(actor.name, " uses ", name, " on", _target_name(actor, target_actor), " ", target_tile)
 
 	if sound_effect:
 		actor.play_sound(sound_effect)
-
-	var target_actor: Actor = actor.grid.get_node_on_tile(target_tile, Actor)
 
 	if target_actor and damage_value > 0:
 		await target_actor.take_damage(damage_value)
@@ -76,3 +76,12 @@ func perform(actor: Actor, target_tile: Vector2i) -> void:
 
 func _get_custom_preview_texture() -> Texture2D:
 	return icon
+
+
+func _target_name(caster: Actor, target: Actor) -> String:
+	if caster == target:
+		return " self"
+	elif target:
+		return " %s" % target.name
+	else:
+		return ""

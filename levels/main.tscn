@@ -45,8 +45,6 @@
 [ext_resource type="AudioStream" uid="uid://cjmg7ad1bexix" path="res://sounds/robot_female_death.tres" id="41_raj2e"]
 [ext_resource type="PackedScene" uid="uid://baghb6cp68bp5" path="res://objects/game/lootbag.tscn" id="42_2hoto"]
 [ext_resource type="Texture2D" uid="uid://d4cg35r6s2sjo" path="res://textures/robot-spritesheet.png" id="42_oe60c"]
-[ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="43_m7o5q"]
-[ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="44_66hhv"]
 [ext_resource type="AudioStream" uid="uid://blmxxh1jbfo7w" path="res://sounds/electric_damage.tres" id="44_jjbqq"]
 [ext_resource type="Texture2D" uid="uid://cj18507niyduo" path="res://textures/robot2-spritesheet.png" id="45_eoee5"]
 [ext_resource type="PackedScene" uid="uid://bkv4l6mhxwm58" path="res://objects/ui/healthbar.tscn" id="48_eoee5"]
@@ -379,19 +377,6 @@ _data = {
 &"run_left": SubResource("Animation_2m3c7"),
 &"run_right": SubResource("Animation_g5y6o")
 }
-
-[sub_resource type="Resource" id="Resource_evvoo"]
-script = ExtResource("44_66hhv")
-target_tile = 1
-
-[sub_resource type="Resource" id="Resource_vg6jq"]
-script = ExtResource("43_m7o5q")
-name = "Move"
-sound_effect = ExtResource("23_i3naf")
-mana_cost_per_tile = 1
-valid_tiles = SubResource("Resource_evvoo")
-move_to_target = true
-metadata/_custom_type_script = "uid://b1dxrqdiivtev"
 
 [sub_resource type="Animation" id="Animation_oe60c"]
 length = 0.001
@@ -1085,7 +1070,7 @@ script = ExtResource("52_map8x")
 
 [node name="Player" type="Node2D" parent="Grid" unique_id=510566155 node_paths=PackedStringArray("loot_container") groups=["occupies_tile"]]
 z_index = 999
-position = Vector2(-144, -144)
+position = Vector2(80, -48)
 script = ExtResource("5_etqu2")
 abilities_button_group = ExtResource("9_w23s1")
 loot_container = NodePath("../../Layer_HUD/MarginContainer/HBoxContainer/LeftPanel/HUD/LootContainer")
@@ -1116,13 +1101,12 @@ vframes = 3
 script = ExtResource("39_g5y6o")
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
-position = Vector2(-112, -144)
+position = Vector2(-48, 16)
 script = ExtResource("8_jw1n3")
 death_sound = ExtResource("41_raj2e")
-max_mana = 3
 lootbag_scene = ExtResource("42_2hoto")
 money_drop_label_scene = ExtResource("49_r708q")
-default_move_ability = SubResource("Resource_vg6jq")
+default_move_ability = ExtResource("6_xlu2f")
 move_sound = ExtResource("23_i3naf")
 hurt_sound = ExtResource("41_gusra")
 hitmark_scene = ExtResource("48_map8x")
@@ -1157,10 +1141,9 @@ initial_items = Array[ExtResource("29_gusra")]([ExtResource("29_gutiw"), ExtReso
 metadata/_custom_type_script = "uid://b4ndgwgu7403p"
 
 [node name="Enemy_2" type="Node2D" parent="Grid" unique_id=1444192590 groups=["occupies_tile"]]
-position = Vector2(-80, -144)
+position = Vector2(-16, -144)
 script = ExtResource("8_jw1n3")
 death_sound = ExtResource("50_m7o5q")
-max_mana = 3
 lootbag_scene = ExtResource("42_2hoto")
 money_drop_label_scene = ExtResource("49_r708q")
 default_move_ability = ExtResource("6_xlu2f")
@@ -1198,15 +1181,15 @@ initial_items = Array[ExtResource("29_gusra")]([ExtResource("15_xombn")])
 metadata/_custom_type_script = "uid://b4ndgwgu7403p"
 
 [node name="Lootbag" parent="Grid" unique_id=828126499 instance=ExtResource("42_2hoto")]
-position = Vector2(-144, -80)
+position = Vector2(144, -48)
 loot = Array[ExtResource("29_gusra")]([ExtResource("29_gutiw"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("15_xombn"), ExtResource("29_gutiw")])
 
 [node name="Lootbag2" parent="Grid" unique_id=2099095446 instance=ExtResource("42_2hoto")]
-position = Vector2(-144, -16)
+position = Vector2(112, 48)
 loot = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj"), ExtResource("15_xombn")])
 
 [node name="Lootbag3" parent="Grid" unique_id=229070522 instance=ExtResource("42_2hoto")]
-position = Vector2(-144, 16)
+position = Vector2(-112, -80)
 loot = Array[ExtResource("29_gusra")]([ExtResource("16_vydlj")])
 
 [node name="Highlight" type="Node2D" parent="Grid" unique_id=756878567]
