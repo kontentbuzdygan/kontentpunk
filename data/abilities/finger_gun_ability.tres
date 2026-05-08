@@ -17,6 +17,7 @@ name = "Hipfire"
 icon = ExtResource("1_2xa8f")
 sound_effect = ExtResource("5_8llc7")
 base_mana_cost = 1
+ai_max_uses_per_turn = 1
 valid_tiles = SubResource("Resource_al7v3")
 damage_value = 1
 metadata/_custom_type_script = "uid://b1dxrqdiivtev"

@@ -13,6 +13,7 @@ script = ExtResource("1_ae765")
 name = "Blood Pump Overclock"
 icon = ExtResource("1_whja6")
 base_mana_cost = 2
+ai_max_uses_per_turn = 1
 valid_tiles = SubResource("Resource_k0u5y")
 healing_value = 2
 metadata/_custom_type_script = "uid://b1dxrqdiivtev"

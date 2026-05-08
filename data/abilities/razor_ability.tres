@@ -18,6 +18,7 @@ name = "Slash"
 icon = ExtResource("5_a63oj")
 sound_effect = ExtResource("7_ix8i0")
 base_mana_cost = 1
+ai_max_uses_per_turn = 1
 valid_tiles = SubResource("Resource_6cyu8")
 damage_value = 1
 target_status_effect = ExtResource("4_j75ex")

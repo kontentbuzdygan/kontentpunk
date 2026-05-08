@@ -12,6 +12,8 @@ extends Actor
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var inventory: Inventory = $Inventory
 
+var _ability_uses: Dictionary[Ability, int]
+
 
 func perform_turn() -> void:
 	_process_status_effects()
@@ -20,6 +22,7 @@ func perform_turn() -> void:
 	var player_tile := grid.find_tile_with(Player)
 
 	mana.refill()
+	_ability_uses.clear()
 
 	while await perform_best_ability(abilities, player_tile):
 		pass
@@ -41,10 +44,15 @@ func perform_best_ability(abilities: Array[Ability], player_tile: Vector2i) -> b
 
 
 func try_perform_ability(ability: Ability, target_tile: Vector2i) -> bool:
+	var uses: int = _ability_uses.get(ability, 0)
+	if ability.ai_max_uses_per_turn != -1 and uses >= ability.ai_max_uses_per_turn:
+		return false
+
 	var mana_cost := ability.get_mana_cost(self, target_tile)
 	if mana_cost <= mana.current:
 		mana.current -= mana_cost
 		await ability.perform(self, target_tile)
+		_ability_uses[ability] = uses + 1
 		return true
 	return false
 

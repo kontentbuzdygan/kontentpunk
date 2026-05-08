@@ -26,6 +26,8 @@ extends Resource
 		emit_changed()
 
 @export var mana_cost_per_tile: int
+## How many times enemies can use this ability per turn, `-1` means no limit
+@export var ai_max_uses_per_turn: int = -1
 
 ## Matches all tiles if empty
 @export var valid_tiles: TilePredicate
