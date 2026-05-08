@@ -1113,7 +1113,7 @@ texture = ExtResource("40_xlu2f")
 hframes = 4
 vframes = 3
 
-[node name="StatusEffectReceiver" type="Node2D" parent="Grid/Player" unique_id=233973687]
+[node name="StatusEffectReceiver" type="Node" parent="Grid/Player" unique_id=1982705212]
 script = ExtResource("39_g5y6o")
 
 [node name="Enemy_1" type="Node2D" parent="Grid" unique_id=733480465 groups=["occupies_tile"]]
@@ -1150,7 +1150,7 @@ parameters/hurt/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/run/blend_position = Vector2(0, 0)
 
-[node name="StatusEffectReceiver" type="Node2D" parent="Grid/Enemy_1" unique_id=886324581]
+[node name="StatusEffectReceiver" type="Node" parent="Grid/Enemy_1" unique_id=30301360]
 script = ExtResource("39_g5y6o")
 
 [node name="Inventory" type="Node" parent="Grid/Enemy_1" unique_id=518914766]
@@ -1192,7 +1192,7 @@ parameters/hurt/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/run/blend_position = Vector2(0, 0)
 
-[node name="StatusEffectReceiver" type="Node2D" parent="Grid/Enemy_2" unique_id=141653070]
+[node name="StatusEffectReceiver" type="Node" parent="Grid/Enemy_2" unique_id=1682304706]
 script = ExtResource("39_g5y6o")
 
 [node name="Inventory" type="Node" parent="Grid/Enemy_2" unique_id=283273076]

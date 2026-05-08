@@ -35,6 +35,7 @@ extends Resource
 @export var damage_value: int
 @export var healing_value: int
 @export var target_status_effect: StatusEffect
+@export_range(0.0, 1.0) var target_status_effect_chance: float = 1.0
 @export var move_to_target: bool
 
 
@@ -67,7 +68,7 @@ func perform(actor: Actor, target_tile: Vector2i) -> void:
 
 	if target_actor and damage_value > 0:
 		await target_actor.take_damage(damage_value)
-	if target_actor and target_status_effect and randf() <= target_status_effect.apply_chance:
+	if target_actor and target_status_effect and randf() <= target_status_effect_chance:
 		target_actor.apply_status_effect(target_status_effect)
 
 	if healing_value > 0:
