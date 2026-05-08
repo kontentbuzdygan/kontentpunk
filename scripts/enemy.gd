@@ -16,7 +16,7 @@ var _ability_uses: Dictionary[Ability, int]
 
 
 func perform_turn() -> void:
-	_process_status_effects()
+	await _process_status_effects()
 
 	maybe_die()
 
@@ -92,9 +92,9 @@ func try_move_toward(_abilities: Array[Ability], target_tile: Vector2i) -> bool:
 	return moved
 
 
-func take_damage(value: int) -> void:
+func take_damage(value: int, source: String = "") -> void:
 	health.current -= value
-	await super.take_damage(value)
+	await super.take_damage(value, source)
 
 	maybe_die()
 

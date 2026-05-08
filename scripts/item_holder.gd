@@ -129,18 +129,13 @@ func take_item() -> void:
 
 
 func begin_turn(player: Player) -> void:
-	var player_state := PlayerState.get_instance()
 	if item:
-		## don't apply penalty if player payed for the item in this turn
+		var player_state := PlayerState.get_instance()
+		# Don't apply penalty if player paid for the item in this turn
 		if player_state.money.current >= item.money_cost:
 			player_state.money.current -= item.money_cost
-		else:
-			_apply_penalties()
-	status_effect_receiver.update(player)
+		elif player_state.money.current < item.money_cost:
+			for penalty in item.penalties:
+				status_effect_receiver.apply(player, penalty)
 
-
-func _apply_penalties() -> void:
-	var player_state := PlayerState.get_instance()
-	if player_state.money.current < item.money_cost:
-		for penalty in item.penalties:
-			status_effect_receiver.apply(penalty)
+	status_effect_receiver.on_turn(player)

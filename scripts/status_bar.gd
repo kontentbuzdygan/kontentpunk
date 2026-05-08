@@ -6,6 +6,7 @@ const MAX_STATUS_EFFECT_ICONS: int = 4
 
 func update() -> void:
 	for child in get_children():
+		remove_child(child)
 		child.queue_free()
 
 	var actor: Actor = get_parent()

@@ -48,8 +48,12 @@ func perform_turn() -> void:
 	pass
 
 
-func take_damage(value: int) -> void:
-	print(name, " took ", value, " damage")
+func take_damage(value: int, source: String = "") -> void:
+	if source:
+		print(name, " took ", value, " damage from ", source)
+	else:
+		print(name, " took ", value, " damage")
+
 	play_sound(hurt_sound, 0.1)
 	_show_hitmark(value)
 	animation_tree["parameters/playback"].travel(&"hurt")
@@ -67,14 +71,13 @@ func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
 	_audio_stream_player.play()
 
 
-func apply_status_effect(status_effect: StatusEffect) -> void:
-	print(name, " received ", status_effect.name, " for ", status_effect.duration_turns, " turns")
-	status_effect_receiver.apply(status_effect)
+func apply_status_effect(effect: StatusEffect) -> void:
+	status_effect_receiver.apply(self, effect)
 	status_bar.update()
 
 
 func _process_status_effects() -> void:
-	status_effect_receiver.update(self)
+	await status_effect_receiver.on_turn(self)
 	status_bar.update()
 
 

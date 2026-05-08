@@ -72,13 +72,15 @@ func _on_entered_tile(tile: Vector2i) -> void:
 
 
 func perform_turn() -> void:
+	print("--- PLAYER TURN ---")
+
 	var player_state := PlayerState.get_instance()
 	player_state.begin_turn()
 
 	for equipement_slot in equipement_slots:
 		equipement_slot.begin_turn(self)
 
-	_process_status_effects()
+	await _process_status_effects()
 	status_bar.update()
 
 	CombatState.is_waiting_for_player_input = true
@@ -86,9 +88,9 @@ func perform_turn() -> void:
 	await _turn_ended
 
 
-func take_damage(value: int) -> void:
+func take_damage(value: int, source: String = "") -> void:
 	health.current -= value
-	await super.take_damage(value)
+	await super.take_damage(value, source)
 
 
 func heal(value: int) -> void:

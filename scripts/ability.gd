@@ -67,7 +67,7 @@ func perform(actor: Actor, target_tile: Vector2i) -> void:
 		actor.play_sound(sound_effect)
 
 	if target_actor and damage_value > 0:
-		await target_actor.take_damage(damage_value)
+		await target_actor.take_damage(damage_value, actor.name)
 	if target_actor and target_status_effect and randf() <= target_status_effect_chance:
 		target_actor.apply_status_effect(target_status_effect)
 
