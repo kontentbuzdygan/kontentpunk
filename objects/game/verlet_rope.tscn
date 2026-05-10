@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://xu23si568xnj"]
+
+[ext_resource type="Script" uid="uid://gmttwv1ybr1y" path="res://scripts/verlet_rope.gd" id="1_ajuk1"]
+[ext_resource type="PackedScene" uid="uid://bnrt74w57odrn" path="res://objects/game/verlet_node.tscn" id="2_dy628"]
+
+[node name="VerletRope" type="Node2D" unique_id=1293670589]
+script = ExtResource("1_ajuk1")
+velvet_node_scene = ExtResource("2_dy628")
+length = 30
+nodes = 64
+
+[node name="Lines" type="Node2D" parent="." unique_id=561247566]
+
+[node name="Nodes" type="Node2D" parent="." unique_id=132512761]

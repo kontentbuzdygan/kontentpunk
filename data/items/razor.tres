@@ -12,5 +12,5 @@ script = ExtResource("2_yhqai")
 icon = ExtResource("2_lv5w3")
 type = 2
 abilities = Array[ExtResource("1_ksl5w")]([ExtResource("2_t3th6")])
-money_cost = 51
+money_cost = 0
 penalties = Array[ExtResource("13_mphro")]([ExtResource("14_nakcv")])
