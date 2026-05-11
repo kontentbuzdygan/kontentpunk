@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://vdismvaw0a4i" path="res://scripts/player.gd" id="5_etqu2"]
 [ext_resource type="Resource" uid="uid://lyxq4ugysl43" path="res://data/abilities/default_player_move_ability.tres" id="6_xlu2f"]
 [ext_resource type="AudioStream" uid="uid://d36wwav7sxy74" path="res://sounds/music_001.ogg" id="7_m6gxc"]
+[ext_resource type="Script" uid="uid://bghaddibpt6f1" path="res://addons/crt/crt.gd" id="8_66hhv"]
 [ext_resource type="Script" uid="uid://b43jcu5g32xkt" path="res://scripts/enemy.gd" id="8_jw1n3"]
 [ext_resource type="Script" uid="uid://b5hn6p1wy7fqb" path="res://scripts/money_display.gd" id="9_f1mgo"]
 [ext_resource type="ButtonGroup" uid="uid://dka7w7xrbpiki" path="res://objects/ui/abilities_button_group.tres" id="9_w23s1"]
@@ -1056,6 +1057,18 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_gusra")
 script = ExtResource("21_oe60c")
 grid = NodePath("../../Grid")
 lootbag_scene = ExtResource("42_2hoto")
+
+[node name="Layer_PostProcess" type="CanvasLayer" parent="." unique_id=1859801629]
+layer = 9999
+script = ExtResource("8_66hhv")
+resolution = Vector2(640, 480)
+scan_line_amount = 0.5
+scan_line_strength = -2.5
+warp_amount = 0.2
+noise_amount = 0.02
+vignette_amount = 0.7
+vignette_intensity = 0.5
+roll_line_amount = 0.1
 
 [node name="Grid" type="TileMapLayer" parent="." unique_id=434431019 node_paths=PackedStringArray("pathfinder")]
 texture_repeat = 2
