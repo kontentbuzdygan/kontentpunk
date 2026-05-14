@@ -79,12 +79,12 @@ func try_move_toward(_abilities: Array[Ability], target_tile: Vector2i) -> bool:
 		if constrained_tile != tile:
 			print(name, " wants to move to ", tile, " but can only reach ", constrained_tile)
 
-		if default_move_ability.is_valid_tile(self, constrained_tile):
-			if await try_perform_ability(default_move_ability, constrained_tile):
-				moved = true
-				continue
+		if not default_move_ability.is_valid_tile(self, constrained_tile):
+			break
+		if not await try_perform_ability(default_move_ability, constrained_tile):
+			break
 
-		break
+		moved = true
 
 	return moved
 
