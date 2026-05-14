@@ -2,18 +2,17 @@ extends Node
 
 var is_running: bool:
 	get:
-		return _is_running
+		return is_running
 
 var _turn_order: Array[Actor] = []
 var _current_turn: int = 0
 var is_waiting_for_player_input: bool = true
-var _is_running: bool = false
 
 func reset() -> void:
 	_turn_order = []
 	_current_turn = 0
 	is_waiting_for_player_input = true
-	_is_running = false
+	is_running = false
 
 
 func add_actor(actor: Actor) -> void:
@@ -22,8 +21,8 @@ func add_actor(actor: Actor) -> void:
 
 
 func run() -> void:
-	_is_running = true
-	while _is_running:
+	is_running = true
+	while is_running:
 		for i in range(len(_turn_order)):
 			_current_turn = (_current_turn + 1) % len(_turn_order)
 
@@ -36,4 +35,4 @@ func run() -> void:
 
 
 func stop() -> void:
-	_is_running = false
+	is_running = false
