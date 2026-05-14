@@ -18,6 +18,8 @@ var _ability_uses: Dictionary[Ability, int]
 func perform_turn() -> void:
 	_process_status_effects()
 
+	maybe_die()
+
 	var abilities := inventory.get_active_abilities()
 	var player_tile := grid.find_tile_with(Player)
 
@@ -25,7 +27,8 @@ func perform_turn() -> void:
 	_ability_uses.clear()
 
 	while await perform_best_ability(abilities, player_tile):
-		pass
+		# For the future, if any of the abilities cost health
+		maybe_die()
 
 
 func perform_best_ability(abilities: Array[Ability], player_tile: Vector2i) -> bool:
@@ -93,12 +96,19 @@ func take_damage(value: int) -> void:
 	health.current -= value
 	await super.take_damage(value)
 
-	if health.current <= 0:
-		play_sound(death_sound)
-		drop_loot()
-		await drop_money()
-		is_alive = false
-		remove_from_group(&"occupies_tile")
+	maybe_die()
+
+
+func maybe_die() -> void:
+	if health.current > 0:
+		return
+
+	await get_tree().create_timer(0.5).timeout
+	play_sound(death_sound)
+	drop_loot()
+	await drop_money()
+	is_alive = false
+	remove_from_group(&"occupies_tile")
 
 
 func heal(value: int) -> void:
