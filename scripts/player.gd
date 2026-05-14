@@ -42,6 +42,7 @@ func _on_tile_clicked(tile: Vector2i) -> void:
 			mana.current -= mana_cost
 			CombatState.is_waiting_for_player_input = false
 			await ability.perform(self, tile)
+			clear_selected_ability()
 			CombatState.is_waiting_for_player_input = true
 
 
