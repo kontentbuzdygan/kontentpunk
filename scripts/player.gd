@@ -57,7 +57,7 @@ func _on_button_end_turn_pressed() -> void:
 	if CombatState.is_running:
 		_turn_ended.emit()
 	else:
-		CombatState.call_deferred("run")
+		CombatState.run()
 
 
 func _on_left_tile(_tile: Vector2i) -> void:
