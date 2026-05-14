@@ -94,7 +94,6 @@ func take_damage(value: int) -> void:
 	await super.take_damage(value)
 
 	if health.current <= 0:
-		await get_tree().create_timer(0.5).timeout
 		play_sound(death_sound)
 		drop_loot()
 		await drop_money()
