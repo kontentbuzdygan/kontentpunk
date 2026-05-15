@@ -1,14 +1,9 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://bhttik14ccisc"]
 
 [ext_resource type="Texture2D" uid="uid://bpar5bssm4qgs" path="res://textures/finger_gun.png" id="1_2xa8f"]
-[ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_al7v3"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="1_u8012"]
-[ext_resource type="Script" uid="uid://b31wypt8wnub1" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="2_a3ue6"]
 [ext_resource type="AudioStream" uid="uid://b48swpo6qhcti" path="res://sounds/gunshot_scifi.tres" id="5_8llc7"]
 [ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="6_8llc7"]
-
-[sub_resource type="Resource" id="Resource_8llc7"]
-script = ExtResource("2_a3ue6")
 
 [sub_resource type="Resource" id="Resource_al7v3"]
 script = ExtResource("6_8llc7")
@@ -22,6 +17,7 @@ name = "Hipfire"
 icon = ExtResource("1_2xa8f")
 sound_effect = ExtResource("5_8llc7")
 base_mana_cost = 1
+ai_max_uses_per_turn = 1
 valid_tiles = SubResource("Resource_al7v3")
-effects = Array[ExtResource("1_al7v3")]([SubResource("Resource_8llc7")])
+damage_value = 1
 metadata/_custom_type_script = "uid://b1dxrqdiivtev"

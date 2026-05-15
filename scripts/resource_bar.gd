@@ -1,9 +1,9 @@
 extends HFlowContainer
 
-@export var resource_type: PlayerResource.Type
+@export var resource_type: ActorResource.Type
 
 @onready var icon: Node = $Icon
-@onready var resource: PlayerResource = PlayerState.get_instance().get_resource(resource_type)
+@onready var resource: ActorResource = PlayerState.get_instance().get_resource(resource_type)
 
 
 func _ready() -> void:

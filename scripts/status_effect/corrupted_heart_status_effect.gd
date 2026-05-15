@@ -1,11 +1,18 @@
 class_name CorruptedHeartStatusEffect
 extends StatusEffect
 
-@export var affected_hearts := 1
+@export var max_health_change := -1
 
-func queue(actor: Actor) -> void:
-	CombatState.get_instance().queue_action(CombatAction.CorruptHeart.new(actor, affected_hearts, animation))
+
+func apply(actor: Actor) -> void:
+	var animation_instance: StatusEffectAnimationPlayer = animation.instantiate()
+	if actor is Player:
+		await actor.play_status_animation(animation_instance, &"apply")
+		actor.health.maximum += max_health_change
 
 
 func remove(actor: Actor) -> void:
-	CombatState.get_instance().queue_action(CombatAction.CorruptHeart.new(actor, -affected_hearts, animation))
+	var animation_instance: StatusEffectAnimationPlayer = animation.instantiate()
+	if actor is Player:
+		await actor.play_status_animation(animation_instance, &"remove")
+		actor.health.maximum -= max_health_change

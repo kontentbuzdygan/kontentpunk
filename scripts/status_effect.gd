@@ -15,5 +15,5 @@ extends Resource
 @export var icon: Texture2D
 
 
-@abstract func queue(actor: Actor) -> void
+@abstract func apply(actor: Actor) -> void
 @abstract func remove(actor: Actor) -> void

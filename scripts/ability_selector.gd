@@ -53,4 +53,4 @@ func _process(_delta: float) -> void:
 	if mana < ability.base_mana_cost:
 		$Button.disabled = true
 	else:
-		$Button.disabled = CombatState.get_instance().is_in_progress()
+		$Button.disabled = not CombatState.is_waiting_for_player_input

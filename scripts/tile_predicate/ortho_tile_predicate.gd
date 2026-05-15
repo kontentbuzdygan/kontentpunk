@@ -2,7 +2,7 @@ class_name OrthoTilePredicate
 extends TilePredicate
 ## Matches distances in straight lines along either of the XY axes
 
-enum TargetTile { ANY, EMPTY, ENEMY }
+enum TargetTile { ANY, EMPTY, ACTOR }
 
 @export var min_distance: int = 1
 @export var max_distance: int = -1
@@ -27,8 +27,22 @@ func matches(from: Vector2i, to: Vector2i, grid: Grid) -> bool:
 		TargetTile.EMPTY:
 			if grid.is_tile_occupied(to):
 				return false
-		TargetTile.ENEMY:
-			if not grid.get_node_on_tile(to, Enemy):
+		TargetTile.ACTOR:
+			if not grid.get_node_on_tile(to, Actor):
 				return false
 
 	return true
+
+
+func get_closest_match(
+	from: Vector2i, to: Vector2i, _grid: Grid, override_max_distance: int = -1
+) -> Vector2i:
+	var dist := Utils.ortho_length(to - from)
+	var max_dist := max_distance if override_max_distance == -1 else override_max_distance
+
+	if max_dist == -1:
+		dist = max(dist, min_distance)
+	else:
+		dist = clamp(dist, min_distance, max_dist)
+
+	return from + (to - from).sign() * dist

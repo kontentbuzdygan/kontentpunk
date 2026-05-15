@@ -1,22 +1,10 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://cnf78d17urgpg"]
 
-[ext_resource type="Script" uid="uid://cokegxbnqh6qo" path="res://scripts/ability_effect.gd" id="1_dsx4g"]
-[ext_resource type="Script" uid="uid://b31wypt8wnub1" path="res://scripts/ability_effect/deal_damage_ability_effect.gd" id="2_a1rhy"]
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="2_mr411"]
-[ext_resource type="Script" uid="uid://crbgb4yfv0dl0" path="res://scripts/ability_effect/apply_status_effect_ability_effect.gd" id="3_qcqqg"]
 [ext_resource type="Resource" uid="uid://60mje2mb5oh2" path="res://data/statuses/bleed.tres" id="4_j75ex"]
 [ext_resource type="Texture2D" uid="uid://dqt3ixn8fk67q" path="res://textures/wound.png" id="5_a63oj"]
 [ext_resource type="AudioStream" uid="uid://dvx2bh0ab6kdr" path="res://sounds/blade.tres" id="7_ix8i0"]
 [ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="8_1u85m"]
-
-[sub_resource type="Resource" id="Resource_apmfb"]
-script = ExtResource("2_a1rhy")
-metadata/_custom_type_script = "uid://b31wypt8wnub1"
-
-[sub_resource type="Resource" id="Resource_qj30v"]
-script = ExtResource("3_qcqqg")
-status_effect = ExtResource("4_j75ex")
-metadata/_custom_type_script = "uid://crbgb4yfv0dl0"
 
 [sub_resource type="Resource" id="Resource_6cyu8"]
 script = ExtResource("8_1u85m")
@@ -30,6 +18,8 @@ name = "Slash"
 icon = ExtResource("5_a63oj")
 sound_effect = ExtResource("7_ix8i0")
 base_mana_cost = 1
+ai_max_uses_per_turn = 1
 valid_tiles = SubResource("Resource_6cyu8")
-effects = Array[ExtResource("1_dsx4g")]([SubResource("Resource_apmfb"), SubResource("Resource_qj30v")])
+damage_value = 1
+target_status_effect = ExtResource("4_j75ex")
 metadata/_custom_type_script = "uid://b1dxrqdiivtev"

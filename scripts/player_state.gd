@@ -1,14 +1,12 @@
 class_name PlayerState
 extends Node
 
-@export var health: PlayerResource
-@export var mana: PlayerResource
-@export var money: PlayerResource
+@export var health: ActorResource
+@export var mana: ActorResource
+@export var money: ActorResource
 @export var default_move_ability: Ability
 
-var _items: Array[Item] = []
-
-signal items_changed(items: Array[Item])
+@onready var inventory: Inventory = $Inventory
 
 static var _instance: PlayerState
 
@@ -24,42 +22,25 @@ func _ready() -> void:
 
 	_instance = self
 
-	var combat_state := CombatState.get_instance()
-	combat_state.action_ended.connect(_on_action_ended)
+	health.current_changed.connect(_on_health_changed)
 
 
-func get_resource(type: PlayerResource.Type) -> PlayerResource:
+func get_resource(type: ActorResource.Type) -> ActorResource:
 	match type:
-		PlayerResource.Type.HEALTH:
+		ActorResource.Type.HEALTH:
 			return health
-		PlayerResource.Type.MANA:
+		ActorResource.Type.MANA:
 			return mana
-		PlayerResource.Type.MONEY:
+		ActorResource.Type.MONEY:
 			return money
 
 	assert(false, "missing player resource type")
 	return null
 
 
-func get_items() -> Array[Item]:
-	return _items.duplicate()
-
-
-func add_item(item: Item) -> void:
-	print("equipped ", item)
-	_items.append(item)
-	items_changed.emit(_items)
-
-
-func remove_item(item: Item) -> void:
-	print("unequipped ", item)
-	_items.erase(item)
-	items_changed.emit(_items)
-
-
-func _on_action_ended(_action: CombatAction) -> void:
-	if health.current <= 0:
-		CombatState.get_instance().stop()
+func _on_health_changed(value: int) -> void:
+	if value <= 0:
+		CombatState.stop()
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://objects/ui/game_over.tscn")
 

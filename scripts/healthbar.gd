@@ -1,15 +1,13 @@
-@tool
 class_name Healthbar
 extends TextureProgressBar
 
 @onready var parent: Enemy = get_parent()
-var max_health: int = -1
 
 func _ready() -> void:
-	max_health = parent.health
-	parent.health_changed.connect(update)
-	update()
+	if parent.health:
+		parent.health.current_changed.connect(update)
+		update(parent.health.current)
 
 
-func update() -> void:
-	self.value = parent.health * 100 / self.max_health
+func update(health: int) -> void:
+	self.value = health * 100 / parent.health.maximum

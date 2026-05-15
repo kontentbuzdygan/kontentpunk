@@ -11,7 +11,7 @@ func _init() -> void:
 	_astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 
 
-func find_path(from: Vector2i, to: Vector2i, grid: Grid, max_length: int) -> Array[Vector2i]:
+func find_path(from: Vector2i, to: Vector2i, grid: Grid) -> Array[Vector2i]:
 	clear()
 
 	_astar.region = grid.get_used_rect()
@@ -30,7 +30,7 @@ func find_path(from: Vector2i, to: Vector2i, grid: Grid, max_length: int) -> Arr
 		for tile in path:
 			set_cell(tile, 1, Vector2i.ZERO)
 
-	path = normalize_path(path, max_length)
+	path = normalize_path(path)
 
 	if OS.is_debug_build():
 		for tile in path:
@@ -40,7 +40,7 @@ func find_path(from: Vector2i, to: Vector2i, grid: Grid, max_length: int) -> Arr
 
 
 ## Removes "collinear" jumps from the path and constraints it to the given length
-func normalize_path(path: Array[Vector2i], max_length: int) -> Array[Vector2i]:
+func normalize_path(path: Array[Vector2i]) -> Array[Vector2i]:
 	if len(path) < 2:
 		return path.duplicate()
 
@@ -51,11 +51,8 @@ func normalize_path(path: Array[Vector2i], max_length: int) -> Array[Vector2i]:
 		var next_tile := path[i + 1] if i < len(path) - 1 else path[i]
 		var direction := (next_tile - path[i]).sign()
 
-		if direction != last_direction or i >= max_length:
+		if direction != last_direction:
 			new_path.append(path[i])
-
-			if i >= max_length:
-				break
 
 		last_direction = direction
 

@@ -26,7 +26,7 @@ func apply_status_effect(status_effect: StatusEffect) -> void:
 
 func _process_status_effects(actor: Actor) -> void:
 	for status_wrapper in status_effects:
-		status_wrapper.queue(actor)
+		status_wrapper.apply(actor)
 		if status_wrapper.duration == 0:
 			status_wrapper.remove(actor)
 			remove_status_effect(status_wrapper)
@@ -47,9 +47,9 @@ class StatusEffectDuration:
 
 	func remove(actor: Actor) -> void:
 		status_effect.remove(actor)
-	
+
 	@abstract
-	func queue(actor: Actor) -> void
+	func apply(actor: Actor) -> void
 
 
 class OverTimeStatusEffect:
@@ -58,8 +58,8 @@ class OverTimeStatusEffect:
 	func _init(status_effect_: StatusEffect) -> void:
 		super._init(status_effect_)
 
-	func queue(actor: Actor) -> void:
-		status_effect.queue(actor)
+	func apply(actor: Actor) -> void:
+		status_effect.apply(actor)
 		duration = max(duration - 1, 0)
 
 
@@ -71,8 +71,8 @@ class PersistentOneshotStatusEffect:
 	func _init(status_effect_: StatusEffect) -> void:
 		super._init(status_effect_)
 
-	func queue(actor: Actor) -> void:
+	func apply(actor: Actor) -> void:
 		if not is_applied:
-			status_effect.queue(actor)
+			status_effect.apply(actor)
 			is_applied = true
 		duration = max(duration - 1, 0)

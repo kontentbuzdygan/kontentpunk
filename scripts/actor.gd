@@ -36,7 +36,7 @@ signal health_changed
 
 
 func _ready() -> void:
-	CombatState.get_instance().add_actor(self)
+	CombatState.add_actor(self)
 
 	_audio_stream_player = AudioStreamPlayer.new()
 	_audio_stream_player.bus = sound_effect_bus
@@ -47,62 +47,19 @@ func get_current_tile() -> Vector2i:
 	return grid.get_node_tile(self)
 
 
-func move_to(tile: Vector2i) -> bool:
-	if not grid.is_tile_occupied(tile):
-		CombatState.get_instance().queue_action(CombatAction.Move.new(self, tile))
-		return true
-
-	return false
-
-
-func execute(action: CombatAction) -> void:
-	## If enemy is already dead, don't wait on their action
-	if action.actor is Enemy and action.actor.health == 0:
-		return
-
-	if action is CombatAction.EndTurn:
-		return
-
-	if action is CombatAction.Move:
-		left_tile.emit(get_current_tile())
-		play_sound(move_sound)
-		# await grid_animation_player.move_to(action.target_tile)
-		await execute_move(action.target_tile)
-		entered_tile.emit(action.target_tile)
-		return
-
-	if action is CombatAction.DealDamage:
-		for node in grid.get_nodes_on_tile(action.target_tile):
-			if node is Actor:
-				await node.take_damage(action.value)
-		return
-
-	if action is CombatAction.ApplyStatusEffect:
-		for node in grid.get_nodes_on_tile(action.target_tile):
-			if node is Actor:
-				node.apply_status_effect(action.status_effect)
-		return
-
-	if action is CombatAction.Bleed:
-		_emit_status_effect_particles(action.animation)
-		await action.actor.take_damage(action.value)
-		return
-
-	assert(false, "invalid action %s for %s" % [action, self])
-
-
-func begin_turn() -> void:
+func perform_turn() -> void:
 	pass
 
 
 func take_damage(value: int) -> void:
-	print("%s took %d damage" % [self, value])
+	print(name, " took ", value, " damage")
 	play_sound(hurt_sound, 0.1)
 	_show_hitmark(value)
 	animation_tree["parameters/playback"].travel(&"hurt")
 	health_changed.emit()
 
 	await animation_tree.animation_finished
+	await get_tree().create_timer(0.5).timeout
 
 
 func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
@@ -123,7 +80,7 @@ func _process_status_effects() -> void:
 	status_bar.update()
 
 
-func _emit_status_effect_particles(particles_scene: PackedScene) -> void:
+func emit_status_effect_particles(particles_scene: PackedScene) -> void:
 	var particles: GPUParticles2D = particles_scene.instantiate()
 	add_child(particles)
 	particles.emitting = true
@@ -133,13 +90,26 @@ func _emit_status_effect_particles(particles_scene: PackedScene) -> void:
 	)
 
 
+func play_status_animation(instance: StatusEffectAnimationPlayer, animation_name: StringName) -> void:
+	add_child(instance)
+	await instance.play_animation(animation_name)
+	remove_child(instance)
+	instance.queue_free()
+
+
 func _show_hitmark(value: int) -> void:
 	var hitmark: Hitmark = hitmark_scene.duplicate().instantiate()
 	grid.add_child_on_tile(hitmark, self.get_current_tile())
 	hitmark.label.text = str(value)
 
 
-func execute_move(target_tile: Vector2i) -> void:
+func move_to(target_tile: Vector2i) -> bool:
+	if grid.is_tile_occupied(target_tile):
+		return false
+
+	left_tile.emit(get_current_tile())
+	play_sound(move_sound)
+
 	var direction: Vector2 = Vector2(target_tile - get_current_tile()).normalized()
 	set_moving_state(direction)
 
@@ -157,6 +127,10 @@ func execute_move(target_tile: Vector2i) -> void:
 	await tween.finished
 
 	set_idle_state()
+
+	entered_tile.emit(target_tile)
+
+	return true
 
 
 func set_moving_state(direction: Vector2) -> void:
@@ -180,7 +154,7 @@ class StatusEffectDuration:
 	func _init(status_effect_: StatusEffect) -> void:
 		status_effect = status_effect_
 		duration = status_effect.duration
-	
-	func queue(actor: Actor) -> void:
-		status_effect.queue(actor)
+
+	func apply(actor: Actor) -> void:
+		status_effect.apply(actor)
 		duration = max(duration - 1, 0)
