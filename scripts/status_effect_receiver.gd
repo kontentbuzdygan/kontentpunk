@@ -1,78 +1,42 @@
 class_name StatusEffectReceiver
-extends Node2D
+extends Node
 
-var status_effects: Array[StatusEffectDuration]
+var _active_status_effects: Array[AppliedStatusEffect]
 
-func apply_status_effect(status_effect: StatusEffect) -> void:
-	var existing_status_effect: Array[StatusEffectDuration] = []
-	existing_status_effect.assign(
-		status_effects.filter(
-			func (active_status_wrapper: StatusEffectDuration) -> bool: return active_status_wrapper.status_effect == status_effect
-		)
+
+func get_active_status_effects() -> Array[AppliedStatusEffect]:
+	return _active_status_effects.duplicate()
+
+
+func apply(actor: Actor, effect: StatusEffect) -> void:
+	var matching_effects: Array[AppliedStatusEffect] = _active_status_effects.filter(
+		func(e: AppliedStatusEffect) -> bool: return e.effect == effect
 	)
 
-	if existing_status_effect.is_empty():
-		var status_wrapper: StatusEffectDuration
-
-		if status_effect.is_active:
-			status_wrapper = OverTimeStatusEffect.new(status_effect)
-		else:
-			status_wrapper = PersistentOneshotStatusEffect.new(status_effect)
-		status_effects.append(status_wrapper)
+	if matching_effects.is_empty():
+		_active_status_effects.append(AppliedStatusEffect.new(effect))
+		effect.apply(actor)
+		print(get_parent().name, " received ", effect.name, " for ", effect.duration_turns, " turns")
 	else:
-		## If status effect is already applied to the actor, extend its duration
-		existing_status_effect[0].duration = status_effect.duration
+		matching_effects[0].duration_turns = effect.duration_turns
 
 
-func _process_status_effects(actor: Actor) -> void:
-	for status_wrapper in status_effects:
-		status_wrapper.apply(actor)
-		if status_wrapper.duration == 0:
-			status_wrapper.remove(actor)
-			remove_status_effect(status_wrapper)
+func on_turn(actor: Actor) -> void:
+	for effect in _active_status_effects:
+		await effect.effect.on_turn(actor)
+		effect.duration_turns -= 1
+
+		if effect.duration_turns == 0:
+			print(get_parent().name, "'s ", effect.effect.name, " ended")
+			effect.effect.remove(actor)
+			_active_status_effects.erase(effect)
 
 
-func remove_status_effect(status_wrapper: StatusEffectDuration) -> void:
-	status_effects.remove_at(status_effects.find(status_wrapper))
+class AppliedStatusEffect:
+	var effect: StatusEffect
+	var new: bool = true
+	var duration_turns: int
 
-
-@abstract
-class StatusEffectDuration:
-	var status_effect: StatusEffect
-	var duration: int
-
-	func _init(status_effect_: StatusEffect) -> void:
-		status_effect = status_effect_
-		duration = status_effect.duration
-
-	func remove(actor: Actor) -> void:
-		status_effect.remove(actor)
-
-	@abstract
-	func apply(actor: Actor) -> void
-
-
-class OverTimeStatusEffect:
-	extends StatusEffectDuration
-
-	func _init(status_effect_: StatusEffect) -> void:
-		super._init(status_effect_)
-
-	func apply(actor: Actor) -> void:
-		status_effect.apply(actor)
-		duration = max(duration - 1, 0)
-
-
-class PersistentOneshotStatusEffect:
-	extends StatusEffectDuration
-
-	var is_applied: bool = false
-
-	func _init(status_effect_: StatusEffect) -> void:
-		super._init(status_effect_)
-
-	func apply(actor: Actor) -> void:
-		if not is_applied:
-			status_effect.apply(actor)
-			is_applied = true
-		duration = max(duration - 1, 0)
+	func _init(effect_: StatusEffect) -> void:
+		effect = effect_
+		duration_turns = effect.duration_turns

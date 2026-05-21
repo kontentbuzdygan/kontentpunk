@@ -16,9 +16,9 @@ extends Node2D
 @export var turn_order: int
 
 @onready var grid: Grid = find_parent("Grid")
-@onready var status_bar: StatusBar = find_children("StatusBar", "HFlowContainer")[0]
+@onready var status_bar: StatusBar = $StatusBar
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var status_effect_receiver: StatusEffectReceiver = find_children("", "StatusEffectReceiver")[0]
+@onready var status_effect_receiver: StatusEffectReceiver = $StatusEffectReceiver
 
 var tween: Tween
 
@@ -26,9 +26,6 @@ var is_idle: bool = true
 var is_moving: bool = false
 
 var _audio_stream_player: AudioStreamPlayer
-
-var passive_status_effects: Array[StatusEffectDuration] = []
-var active_status_effects: Array[StatusEffectDuration] = []
 
 signal left_tile(tile: Vector2i)
 signal entered_tile(tile: Vector2i)
@@ -51,8 +48,12 @@ func perform_turn() -> void:
 	pass
 
 
-func take_damage(value: int) -> void:
-	print(name, " took ", value, " damage")
+func take_damage(value: int, source: String = "") -> void:
+	if source:
+		print(name, " took ", value, " damage from ", source)
+	else:
+		print(name, " took ", value, " damage")
+
 	play_sound(hurt_sound, 0.1)
 	_show_hitmark(value)
 	animation_tree["parameters/playback"].travel(&"hurt")
@@ -70,31 +71,14 @@ func play_sound(sound: AudioStream, delay: float = 0.0) -> void:
 	_audio_stream_player.play()
 
 
-func apply_status_effect(status_effect: StatusEffect) -> void:
-	status_effect_receiver.apply_status_effect(status_effect)
+func apply_status_effect(effect: StatusEffect) -> void:
+	status_effect_receiver.apply(self, effect)
 	status_bar.update()
 
 
 func _process_status_effects() -> void:
-	status_effect_receiver._process_status_effects(self)
+	await status_effect_receiver.on_turn(self)
 	status_bar.update()
-
-
-func emit_status_effect_particles(particles_scene: PackedScene) -> void:
-	var particles: GPUParticles2D = particles_scene.instantiate()
-	add_child(particles)
-	particles.emitting = true
-	particles.finished.connect(func() -> void:
-		remove_child(particles)
-		particles.queue_free()
-	)
-
-
-func play_status_animation(instance: StatusEffectAnimationPlayer, animation_name: StringName) -> void:
-	add_child(instance)
-	await instance.play_animation(animation_name)
-	remove_child(instance)
-	instance.queue_free()
 
 
 func _show_hitmark(value: int) -> void:
@@ -145,16 +129,3 @@ func set_moving_state(direction: Vector2) -> void:
 func set_idle_state() -> void:
 	is_moving = false
 	is_idle = true
-
-
-class StatusEffectDuration:
-	var status_effect: StatusEffect
-	var duration: int
-
-	func _init(status_effect_: StatusEffect) -> void:
-		status_effect = status_effect_
-		duration = status_effect.duration
-
-	func apply(actor: Actor) -> void:
-		status_effect.apply(actor)
-		duration = max(duration - 1, 0)

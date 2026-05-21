@@ -30,7 +30,7 @@ enum Type {TEMPORARY, EQUIPMENT}
 		_on_item_changed(item)
 		_update_children()
 
-@onready var status_effect_receiver: StatusEffectReceiver = find_children("", "StatusEffectReceiver")[0]
+@onready var status_effect_receiver: StatusEffectReceiver = $StatusEffectReceiver
 
 
 func _on_item_removed(old_item: Item) -> void:
@@ -129,18 +129,13 @@ func take_item() -> void:
 
 
 func begin_turn(player: Player) -> void:
-	var player_state := PlayerState.get_instance()
 	if item:
-		## don't apply penalty if player payed for the item in this turn
+		var player_state := PlayerState.get_instance()
+		# Don't apply penalty if player paid for the item in this turn
 		if player_state.money.current >= item.money_cost:
 			player_state.money.current -= item.money_cost
-		else:
-			_apply_penalties()
-	status_effect_receiver._process_status_effects(player)
+		elif player_state.money.current < item.money_cost:
+			for penalty in item.penalties:
+				status_effect_receiver.apply(player, penalty)
 
-
-func _apply_penalties() -> void:
-	var player_state := PlayerState.get_instance()
-	if player_state.money.current < item.money_cost:
-		for penalty in item.penalties:
-			status_effect_receiver.apply_status_effect(penalty)
+	status_effect_receiver.on_turn(player)

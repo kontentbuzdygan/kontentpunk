@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://cnf78d17urgpg"]
 
 [ext_resource type="Script" uid="uid://b1dxrqdiivtev" path="res://scripts/ability.gd" id="2_mr411"]
-[ext_resource type="Resource" uid="uid://60mje2mb5oh2" path="res://data/statuses/bleed.tres" id="4_j75ex"]
+[ext_resource type="Resource" uid="uid://60mje2mb5oh2" path="res://data/statuses/bleed.tres" id="4_n8fu2"]
 [ext_resource type="Texture2D" uid="uid://dqt3ixn8fk67q" path="res://textures/wound.png" id="5_a63oj"]
 [ext_resource type="AudioStream" uid="uid://dvx2bh0ab6kdr" path="res://sounds/blade.tres" id="7_ix8i0"]
 [ext_resource type="Script" uid="uid://bu4fo1hd2keea" path="res://scripts/tile_predicate/ortho_tile_predicate.gd" id="8_1u85m"]
@@ -21,5 +21,5 @@ base_mana_cost = 1
 ai_max_uses_per_turn = 1
 valid_tiles = SubResource("Resource_6cyu8")
 damage_value = 1
-target_status_effect = ExtResource("4_j75ex")
+target_status_effect = ExtResource("4_n8fu2")
 metadata/_custom_type_script = "uid://b1dxrqdiivtev"
