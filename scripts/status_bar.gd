@@ -17,7 +17,7 @@ func update() -> void:
 			_show_status_effects(slot.status_effect_receiver.get_active_status_effects())
 
 
-func _show_status_effects(effects: Array[StatusEffectReceiver.ActiveStatusEffect]) -> void:
+func _show_status_effects(effects: Array[StatusEffectReceiver.AppliedStatusEffect]) -> void:
 	for effect in effects:
 		if get_child_count() >= MAX_STATUS_EFFECT_ICONS:
 			break

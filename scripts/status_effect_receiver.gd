@@ -1,20 +1,20 @@
 class_name StatusEffectReceiver
 extends Node
 
-var _active_status_effects: Array[ActiveStatusEffect]
+var _active_status_effects: Array[AppliedStatusEffect]
 
 
-func get_active_status_effects() -> Array[ActiveStatusEffect]:
+func get_active_status_effects() -> Array[AppliedStatusEffect]:
 	return _active_status_effects.duplicate()
 
 
 func apply(actor: Actor, effect: StatusEffect) -> void:
-	var matching_effects: Array[ActiveStatusEffect] = _active_status_effects.filter(
-		func(e: ActiveStatusEffect) -> bool: return e.effect == effect
+	var matching_effects: Array[AppliedStatusEffect] = _active_status_effects.filter(
+		func(e: AppliedStatusEffect) -> bool: return e.effect == effect
 	)
 
 	if matching_effects.is_empty():
-		_active_status_effects.append(ActiveStatusEffect.new(effect))
+		_active_status_effects.append(AppliedStatusEffect.new(effect))
 		effect.apply(actor)
 		print(get_parent().name, " received ", effect.name, " for ", effect.duration_turns, " turns")
 	else:
@@ -32,7 +32,7 @@ func on_turn(actor: Actor) -> void:
 			_active_status_effects.erase(effect)
 
 
-class ActiveStatusEffect:
+class AppliedStatusEffect:
 	var effect: StatusEffect
 	var new: bool = true
 	var duration_turns: int
